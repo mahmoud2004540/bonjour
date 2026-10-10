@@ -1,6 +1,6 @@
 {
   "meta": { "title": "Bonjour — Learn French that you can actually use", "description": "A calm, adult French-learning space." },
-  "nav": { "home": "Home", "learn": "Learn", "practice": "Practice", "progress": "Progress", "resources": "Materials", "about": "About", "signIn": "Sign in", "getStarted": "Get started" },
+  "nav": { "home": "Home", "learn": "Learn", "practice": "Practice", "progress": "Progress", "resources": "Materials", "scenarios": "Scenarios", "about": "About", "signIn": "Sign in", "getStarted": "Get started" },
   "footer": { "about": "About", "scenarios": "Scenarios", "materials": "Materials", "privacy": "Privacy", "start": "Start", "tagline": "French you can use." },
   "privacy": { "title": "Privacy", "p1": "In local mode, your learning profile and notes stay on this device.", "p2": "Nothing is sent to a server until cloud accounts are configured.", "p3": "No third-party advertising tracker.", "p4": "If cloud mode is enabled later, the policy will be updated.", "home": "Home" },
   "settings": { "title": "Settings", "subtitle": "Control data stored on this device.", "localTitle": "Local learning data", "localBody": "Profile, progress, real-life notes and local events stay in your browser.", "clear": "Clear all local data", "confirm": "Delete all local learning data on this device?", "cleared": "Local data cleared.", "dashboard": "Dashboard", "home": "Home", "restart": "Start again" },

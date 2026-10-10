@@ -1,6 +1,6 @@
 {
   "meta": { "title": "Bonjour — Le français utilisable", "description": "Espace calme pour adultes." },
-  "nav": { "home": "Accueil", "learn": "Apprendre", "practice": "S'entraîner", "progress": "Progrès", "resources": "Supports", "about": "À propos", "signIn": "Connexion", "getStarted": "Commencer" },
+  "nav": { "home": "Accueil", "learn": "Apprendre", "practice": "S'entraîner", "progress": "Progrès", "resources": "Supports", "scenarios": "Scénarios", "about": "À propos", "signIn": "Connexion", "getStarted": "Commencer" },
   "footer": { "about": "À propos", "scenarios": "Scénarios", "materials": "Supports", "privacy": "Confidentialité", "start": "Commencer", "tagline": "Le français utilisable." },
   "privacy": { "title": "Confidentialité", "p1": "En mode local, vos données restent sur cet appareil.", "p2": "Rien n'est envoyé au serveur sans comptes cloud.", "p3": "Pas de traceur publicitaire.", "p4": "La politique sera mise à jour si le cloud est activé.", "home": "Accueil" },
   "settings": { "title": "Paramètres", "subtitle": "Données sur cet appareil.", "localTitle": "Données locales", "localBody": "Profil, progrès et notes restent dans le navigateur.", "clear": "Effacer les données locales", "confirm": "Supprimer toutes les données locales ?", "cleared": "Données effacées.", "dashboard": "Tableau de bord", "home": "Accueil", "restart": "Recommencer" },
