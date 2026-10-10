@@ -4,40 +4,44 @@
     "home": "Accueil", "learn": "Apprendre", "practice": "S'entraîner", "progress": "Progrès",
     "resources": "Supports", "about": "À propos", "signIn": "Connexion", "getStarted": "Commencer"
   },
-  "footer": { "about": "À propos", "materials": "Supports", "start": "Commencer", "tagline": "Le français utilisable." },
+  "footer": {
+    "about": "À propos", "scenarios": "Scénarios", "materials": "Supports",
+    "privacy": "Confidentialité", "start": "Commencer", "tagline": "Le français utilisable."
+  },
+  "privacy": {
+    "title": "Confidentialité",
+    "p1": "En mode local, votre profil reste sur cet appareil.",
+    "p2": "Rien n'est envoyé au serveur tant que les comptes cloud ne sont pas configurés.",
+    "p3": "Pas de traceur publicitaire tiers.",
+    "p4": "Si le mode cloud est activé, la politique sera mise à jour.",
+    "home": "Accueil"
+  },
   "about": {
     "title": "À propos de Bonjour",
-    "intro": "Plateforme calme pour adultes qui apprennent le français pour la vie réelle.",
+    "intro": "Plateforme calme pour adultes.",
     "whyTitle": "Pourquoi c'est différent",
     "whyBody": "Chaque étape est liée à un objectif can-do.",
     "howTitle": "Comment ça marche",
     "how1": "Situation réelle", "how2": "Langue nécessaire", "how3": "Pratique", "how4": "Démonstration", "how5": "Étape suivante",
     "honestTitle": "Ce que nous n'inventons pas",
-    "honestBody": "Pas de scores inventés. Les supports restent sur Bonjour.",
+    "honestBody": "Pas de scores inventés. Supports sur Bonjour.",
     "cta": "Commencer"
   },
   "scenarios": {
-    "title": "Scénarios",
-    "subtitle": "Situations de la vie réelle par niveau.",
-    "goalsCount": "{count} objectifs",
-    "start": "Commencer",
-    "home": "Accueil"
+    "title": "Scénarios", "subtitle": "Situations de la vie réelle.",
+    "goalsCount": "{count} objectifs", "start": "Commencer", "home": "Accueil"
   },
   "practice": {
     "title": "Revoir ce que vous avez montré",
     "subtitle": "Revenez sur les objectifs déjà démontrés.",
-    "empty": "Rien à revoir encore.",
-    "toDashboard": "Tableau de bord",
-    "review": "Repratiquer",
-    "back": "Retour"
+    "empty": "Rien à revoir encore.", "toDashboard": "Tableau de bord",
+    "review": "Repratiquer", "back": "Retour"
   },
   "landing": {
     "eyebrow": "Le français pour la vie réelle",
     "headline": "Apprenez le français que vous pouvez vraiment utiliser.",
-    "subheadline": "Un espace calme pour adultes.",
-    "welcomeNote": "Vous fixez le rythme.",
-    "ctaPrimary": "Commencer — une minute suffit",
-    "ctaSecondary": "Voir comment ça marche",
+    "subheadline": "Un espace calme pour adultes.", "welcomeNote": "Vous fixez le rythme.",
+    "ctaPrimary": "Commencer — une minute suffit", "ctaSecondary": "Voir comment ça marche",
     "feel1Title": "Prochaine étape claire", "feel1Body": "Vous savez quoi faire.",
     "feel2Title": "Situations réelles", "feel2Body": "Café, voyage, travail…",
     "feel3Title": "Progrès honnête", "feel3Body": "Ce que vous avez démontré.",
@@ -72,12 +76,12 @@
     "currentScenario": "Vous êtes dans", "allScenarios": "Scénarios", "completed": "Déjà montré",
     "upcoming": "Ensuite", "viewProgress": "Progrès", "viewResources": "Supports A1–C2",
     "viewRealLife": "Français dans la vraie vie", "viewPractice": "Revoir les objectifs",
-    "viewScenarios": "Tous les scénarios",
-    "encourage": "Les petits pas comptent.", "reset": "Réinitialiser"
+    "viewScenarios": "Tous les scénarios", "encourage": "Les petits pas comptent.", "reset": "Réinitialiser"
   },
   "learn": {
     "notFound": "Introuvable", "backToDashboard": "Tableau de bord", "writePlaceholder": "En français…",
     "selfAssessPrompt": "Pouvez-vous le faire ?", "yesICan": "Oui", "notYet": "Pas encore",
+    "checkUnderstanding": "Quand le sens est clair, continuez.", "understood": "Je comprends",
     "feedbackRecorded": "Noté.", "feedbackNote": "Auto-évaluation.", "continue": "Continuer",
     "finish": "Terminer", "exit": "Quitter", "doneTitle": "Bravo", "doneBody": "Étape terminée."
   },
