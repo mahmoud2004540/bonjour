@@ -1,6 +1,5 @@
 /**
- * Curriculum registry — single source of published content.
- * Content lifecycle: only published scenarios are exposed to learners.
+ * Curriculum registry — published content only reaches learners.
  */
 
 import type { Scenario, LearningGoal, Task } from "../types";
@@ -14,15 +13,45 @@ import {
   CAFE_GOALS,
   CAFE_TASKS,
 } from "./a1-au-cafe";
+import {
+  SCENARIO_COURSES,
+  COURSES_GOALS,
+  COURSES_TASKS,
+} from "./a1-courses";
+import {
+  SCENARIO_TRANSPORT,
+  TRANSPORT_GOALS,
+  TRANSPORT_TASKS,
+} from "./a1-transport";
+import {
+  SCENARIO_LOGEMENT,
+  LOGEMENT_GOALS,
+  LOGEMENT_TASKS,
+} from "./a1-logement";
 
 const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_FAIRE_CONNAISSANCE,
   SCENARIO_AU_CAFE,
+  SCENARIO_COURSES,
+  SCENARIO_TRANSPORT,
+  SCENARIO_LOGEMENT,
 ];
 
-const ALL_GOALS: LearningGoal[] = [...FC_GOALS, ...CAFE_GOALS];
+const ALL_GOALS: LearningGoal[] = [
+  ...FC_GOALS,
+  ...CAFE_GOALS,
+  ...COURSES_GOALS,
+  ...TRANSPORT_GOALS,
+  ...LOGEMENT_GOALS,
+];
 
-const ALL_TASKS: Task[] = [...FC_TASKS, ...CAFE_TASKS];
+const ALL_TASKS: Task[] = [
+  ...FC_TASKS,
+  ...CAFE_TASKS,
+  ...COURSES_TASKS,
+  ...TRANSPORT_TASKS,
+  ...LOGEMENT_TASKS,
+];
 
 export function getPublishedScenarios(): Scenario[] {
   return ALL_SCENARIOS.filter((s) => s.status === "published");
@@ -52,5 +81,4 @@ export function getAllGoalIds(): string[] {
   return ALL_GOALS.map((g) => g.id);
 }
 
-/** Re-export for generateStaticParams */
 export { ALL_GOALS as GOALS };
