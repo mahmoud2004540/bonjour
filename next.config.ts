@@ -5,6 +5,13 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: "export",
+  basePath: "/bonjour",
+  assetPrefix: "/bonjour",
+  images: {
+    unoptimized: true,
+  },
+  trailingSlash: true,
 };
 
 export default withNextIntl(nextConfig);

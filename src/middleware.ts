@@ -1,8 +1,7 @@
-import createMiddleware from "next-intl/middleware";
-import { routing } from "./i18n/routing";
-
-export default createMiddleware(routing);
-
-export const config = {
-  matcher: ["/", "/(en|fr|ar)/:path*"],
-};
+/**
+ * Middleware is disabled for static export (GitHub Pages).
+ * Locale routing is handled by the [locale] segment + generateStaticParams.
+ *
+ * When moving to Vercel/Node hosting, restore next-intl middleware here.
+ */
+export {};
