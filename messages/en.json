@@ -1,31 +1,41 @@
 {
   "meta": {
     "title": "Bonjour — Learn French that you can actually use",
-    "description": "A premium French-learning platform for adults."
+    "description": "A calm, adult French-learning space. Real situations, clear next steps, and progress you can feel."
   },
   "nav": {
     "home": "Home",
     "learn": "Learn",
     "practice": "Practice",
     "progress": "Progress",
-    "resources": "Resources",
+    "resources": "Materials",
     "signIn": "Sign in",
     "getStarted": "Get started"
   },
   "landing": {
     "eyebrow": "French for real life",
     "headline": "Learn French you can actually use.",
-    "subheadline": "Bonjour helps adults build real communicative ability — not just vocabulary lists.",
-    "ctaPrimary": "Start learning",
+    "subheadline": "A calm space for adults. No pressure games — just clear steps toward speaking French in real situations.",
+    "welcomeNote": "You set the pace. We show you the next useful thing to practise.",
+    "ctaPrimary": "Start — it only takes a minute",
     "ctaSecondary": "See how it works",
-    "differenceTitle": "Built differently",
-    "differenceBody": "Can-do goals, real tasks, evidence — not streaks or points.",
+    "feel1Title": "Clear next step",
+    "feel1Body": "You always know what to do now — not a pile of random lessons.",
+    "feel2Title": "Real situations",
+    "feel2Body": "Café, travel, work, housing… language tied to life, not abstract lists.",
+    "feel3Title": "Honest progress",
+    "feel3Body": "We only show what you have demonstrated. That makes success feel real.",
+    "differenceTitle": "Built for adults",
+    "differenceBody": "Serious design, respectful tone, and evidence-based progress — so learning feels useful, not childish.",
     "howTitle": "How learning works",
+    "howIntro": "Five calm steps. You can stop and come back anytime.",
     "howStep1": "Understand the real situation",
-    "howStep2": "Learn the language needed",
-    "howStep3": "Practice with support",
-    "howStep4": "Demonstrate what you can do",
-    "howStep5": "Move to the next clear step"
+    "howStep2": "Learn the language you need for it",
+    "howStep3": "Practise with support",
+    "howStep4": "Show what you can do",
+    "howStep5": "Move to the next clear step",
+    "footerTitle": "Ready when you are",
+    "footerBody": "Start with a short welcome. No long form, no guilt if you pause."
   },
   "common": {
     "loading": "Loading…",
@@ -37,96 +47,108 @@
   "onboarding": {
     "step": "Step {current} of {total}",
     "nameLabel": "Your name",
-    "namePlaceholder": "How should we call you?",
+    "namePlaceholder": "What should we call you?",
     "emailLabel": "Email",
     "emailPlaceholder": "you@example.com",
     "continue": "Continue",
     "back": "Back",
-    "startPlacement": "Start placement",
+    "startPlacement": "Start a short placement",
     "steps": {
-      "0": { "title": "Welcome", "description": "Tell us a little about yourself." },
-      "1": { "title": "Why are you learning French?", "description": "Select all that apply." },
-      "2": { "title": "Which situations matter most?", "description": "We focus practice on these contexts." }
+      "0": {
+        "title": "Welcome — glad you are here",
+        "description": "A few questions so we can personalise your path. Nothing is graded yet."
+      },
+      "1": {
+        "title": "Why French?",
+        "description": "Pick what matters to you. There is no wrong answer."
+      },
+      "2": {
+        "title": "Which situations matter most?",
+        "description": "We will prioritise practice you can use soon."
+      }
     }
   },
   "placement": {
-    "title": "Placement",
-    "subtitle": "We collect evidence of what you can already do.",
+    "title": "A short placement",
+    "subtitle": "Just a few questions so we understand where you are. No pass or fail — only information.",
     "progress": "Question {current} of {total}",
     "next": "Next",
     "finish": "See my profile",
-    "openPlaceholder": "Type your answer in French…"
+    "openPlaceholder": "Type in French if you can — or leave blank"
   },
   "profile": {
     "title": "Your learning profile",
-    "subtitle": "Based only on evidence collected so far.",
+    "subtitle": "Built only from what we observed. It will get clearer as you learn.",
     "startingPoint": "Estimated starting point",
     "levelEstimate": "Around {level}",
-    "levelUnknown": "Not enough evidence yet",
-    "levelNote": "Provisional estimate from a short assessment.",
+    "levelUnknown": "Still gathering evidence",
+    "levelNote": "A first estimate — not a permanent label.",
     "evidenceTitle": "Evidence by skill",
-    "evidenceNote": "Only what was observed.",
-    "goToDashboard": "Go to dashboard"
+    "evidenceNote": "« Not assessed » simply means we have not seen that skill yet.",
+    "goToDashboard": "Go to my dashboard"
   },
   "dashboard": {
     "greeting": "Hello, {name}",
-    "title": "What should you do now?",
-    "nextAction": "Next learning action",
+    "title": "Here is a good next step",
+    "nextAction": "Recommended for you",
     "start": "Start this goal",
-    "allDone": "You have demonstrated all current goals",
-    "allDoneBody": "More scenarios will be added.",
-    "currentScenario": "Current scenario",
+    "allDone": "Beautiful — you have shown all current goals",
+    "allDoneBody": "Explore the materials library, or check back when new scenarios appear.",
+    "currentScenario": "You are in",
     "allScenarios": "Available scenarios",
-    "completed": "Demonstrated so far",
-    "upcoming": "Coming next",
-    "viewProgress": "View progress",
+    "completed": "What you have already shown",
+    "upcoming": "Coming after that",
+    "viewProgress": "My progress",
     "viewResources": "Materials A1–C2",
-    "reset": "Reset my progress (demo)"
+    "encourage": "Small steps count. Coming back is already progress.",
+    "reset": "Reset progress (demo)"
   },
   "learn": {
-    "notFound": "This learning goal was not found.",
+    "notFound": "This goal was not found.",
     "backToDashboard": "Back to dashboard",
-    "writePlaceholder": "Write in French…",
-    "selfAssessPrompt": "Can you do this now?",
+    "writePlaceholder": "Write in French — imperfect is fine…",
+    "selfAssessPrompt": "Based on what you practised — can you do this now?",
     "yesICan": "Yes, I can",
-    "notYet": "Not yet",
-    "feedbackRecorded": "Self-assessment recorded.",
-    "feedbackNote": "Clearly labelled self-review.",
+    "notYet": "Not yet — that is okay",
+    "feedbackRecorded": "Noted. Honesty helps your path stay accurate.",
+    "feedbackNote": "This is a self-review, clearly labelled.",
     "continue": "Continue",
-    "finish": "Finish & return",
-    "exit": "Exit"
+    "finish": "Finish",
+    "exit": "Exit",
+    "doneTitle": "Well done",
+    "doneBody": "You completed this step. Your dashboard is ready with what comes next."
   },
   "progress": {
     "title": "Your progress",
-    "subtitle": "Only demonstrated abilities are shown.",
+    "subtitle": "Only abilities you have demonstrated. That is why this list feels meaningful.",
     "demonstrated": "What you have demonstrated",
-    "noneYet": "No goals demonstrated yet.",
+    "noneYet": "Nothing listed yet — your first goal is waiting on the dashboard.",
     "scenarioProgress": "{done} of {total} goals demonstrated",
-    "note": "Based on evidence you provided.",
+    "note": "Based on your evidence, including self-review where labelled.",
     "back": "Back to dashboard"
   },
   "resources": {
     "title": "Learning materials",
-    "subtitle": "Institutional-style FLE content hosted on Bonjour — dialogues, texts, vocabulary and exercises from A1 to C2.",
-    "inAppNote": "All content stays on your site. Pedagogy follows CEFR and action-oriented FLE standards (same family as major public broadcasters’ education offer). Listen uses browser speech (synthetic), not a studio recording.",
+    "subtitle": "Dialogues, texts, vocabulary and exercises on this site — from A1 to C2. Learn at your pace.",
+    "inAppNote": "Everything stays on Bonjour. Listen uses your browser voice (synthetic), not a studio recording.",
     "allLevels": "All levels",
-    "pick": "Choose a lesson on the left.",
+    "pick": "Pick a lesson — start anywhere that feels right.",
     "vocab": "Vocabulary",
-    "listen": "Listen (French)",
+    "listen": "Listen",
     "listenWord": "Listen",
     "ttsNote": "Browser speech — not a human studio recording",
     "answerPlaceholder": "Your answer…",
     "check": "Check",
-    "correct": "Correct.",
-    "tryAgain": "Not quite — try again.",
+    "correct": "Yes — well done.",
+    "tryAgain": "Not yet — try once more, no rush.",
     "empty": "No materials at this level yet.",
     "back": "Back to dashboard"
   },
   "auth": {
     "title": "Sign in",
     "subtitle": "Account access for Bonjour.",
-    "localMode": "Cloud auth is not configured. Local mode keeps data on this device.",
-    "continueLocal": "Continue in local mode",
+    "localMode": "Cloud sign-in is not set up yet. You can learn in local mode on this device.",
+    "continueLocal": "Continue learning",
     "supabaseReady": "Supabase is configured.",
     "backHome": "Back to home"
   }
