@@ -6,6 +6,7 @@ import { useRouter, Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getStoredProfile, clearLearner } from "@/application/learner-store";
+import { trackEvent } from "@/application/local-events";
 import {
   getPrimaryNextAction,
   getNextRecommendations,
@@ -35,6 +36,7 @@ export default function DashboardPage() {
       return;
     }
     setProfile(p);
+    trackEvent("dashboard_view");
   }, [router]);
 
   if (!profile) {
@@ -159,8 +161,14 @@ export default function DashboardPage() {
         <Link href="/resources">
           <Button variant="secondary" size="sm">{t("viewResources")}</Button>
         </Link>
+        <Link href="/practice">
+          <Button variant="secondary" size="sm">{t("viewPractice")}</Button>
+        </Link>
         <Link href="/real-life">
           <Button variant="secondary" size="sm">{t("viewRealLife")}</Button>
+        </Link>
+        <Link href="/scenarios">
+          <Button variant="secondary" size="sm">{t("viewScenarios")}</Button>
         </Link>
       </div>
 

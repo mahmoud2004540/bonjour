@@ -34,6 +34,21 @@
     "honestBody": "We do not invent mastery scores, hide weak skills, or send you to other websites for core learning. Materials stay on Bonjour.",
     "cta": "Start learning"
   },
+  "scenarios": {
+    "title": "Learning scenarios",
+    "subtitle": "Real-life situations organised by level. Start from onboarding to get a personal path.",
+    "goalsCount": "{count} goals",
+    "start": "Start path",
+    "home": "Home"
+  },
+  "practice": {
+    "title": "Review what you showed",
+    "subtitle": "Revisit goals you already demonstrated. No invented review scores — just honest practice again.",
+    "empty": "Nothing to review yet. Complete a goal from your dashboard first.",
+    "toDashboard": "Go to dashboard",
+    "review": "Practise again",
+    "back": "Back to dashboard"
+  },
   "landing": {
     "eyebrow": "French for real life",
     "headline": "Learn French you can actually use.",
@@ -114,6 +129,8 @@
     "viewProgress": "My progress",
     "viewResources": "Materials A1–C2",
     "viewRealLife": "I used French in real life",
+    "viewPractice": "Review completed goals",
+    "viewScenarios": "All scenarios",
     "encourage": "Small steps count. Coming back is already progress.",
     "reset": "Reset progress (demo)"
   },

@@ -4,23 +4,32 @@
     "home": "Accueil", "learn": "Apprendre", "practice": "S'entraîner", "progress": "Progrès",
     "resources": "Supports", "about": "À propos", "signIn": "Connexion", "getStarted": "Commencer"
   },
-  "footer": {
-    "about": "À propos", "materials": "Supports", "start": "Commencer", "tagline": "Le français utilisable."
-  },
+  "footer": { "about": "À propos", "materials": "Supports", "start": "Commencer", "tagline": "Le français utilisable." },
   "about": {
     "title": "À propos de Bonjour",
-    "intro": "Bonjour est une plateforme calme pour adultes qui apprennent le français pour la vie réelle.",
+    "intro": "Plateforme calme pour adultes qui apprennent le français pour la vie réelle.",
     "whyTitle": "Pourquoi c'est différent",
-    "whyBody": "Chaque étape est liée à un objectif can-do. Les progrès n'affichent que ce que vous avez démontré.",
+    "whyBody": "Chaque étape est liée à un objectif can-do.",
     "howTitle": "Comment ça marche",
-    "how1": "Comprendre la situation réelle",
-    "how2": "Apprendre la langue nécessaire",
-    "how3": "S'entraîner avec de l'aide",
-    "how4": "Montrer ce que vous savez faire",
-    "how5": "Passer à l'étape suivante",
+    "how1": "Situation réelle", "how2": "Langue nécessaire", "how3": "Pratique", "how4": "Démonstration", "how5": "Étape suivante",
     "honestTitle": "Ce que nous n'inventons pas",
-    "honestBody": "Pas de scores inventés, pas de renvoi vers d'autres sites pour l'essentiel. Les supports restent sur Bonjour.",
+    "honestBody": "Pas de scores inventés. Les supports restent sur Bonjour.",
     "cta": "Commencer"
+  },
+  "scenarios": {
+    "title": "Scénarios",
+    "subtitle": "Situations de la vie réelle par niveau.",
+    "goalsCount": "{count} objectifs",
+    "start": "Commencer",
+    "home": "Accueil"
+  },
+  "practice": {
+    "title": "Revoir ce que vous avez montré",
+    "subtitle": "Revenez sur les objectifs déjà démontrés.",
+    "empty": "Rien à revoir encore.",
+    "toDashboard": "Tableau de bord",
+    "review": "Repratiquer",
+    "back": "Retour"
   },
   "landing": {
     "eyebrow": "Le français pour la vie réelle",
@@ -29,14 +38,13 @@
     "welcomeNote": "Vous fixez le rythme.",
     "ctaPrimary": "Commencer — une minute suffit",
     "ctaSecondary": "Voir comment ça marche",
-    "feel1Title": "Prochaine étape claire", "feel1Body": "Vous savez quoi faire maintenant.",
+    "feel1Title": "Prochaine étape claire", "feel1Body": "Vous savez quoi faire.",
     "feel2Title": "Situations réelles", "feel2Body": "Café, voyage, travail…",
-    "feel3Title": "Progrès honnête", "feel3Body": "Uniquement ce que vous avez démontré.",
-    "differenceTitle": "Conçu pour les adultes", "differenceBody": "Design sérieux, ton respectueux.",
-    "howTitle": "Comment ça marche", "howIntro": "Cinq étapes calmes.",
-    "howStep1": "Situation réelle", "howStep2": "Langue nécessaire", "howStep3": "Pratique",
-    "howStep4": "Démonstration", "howStep5": "Étape suivante",
-    "footerTitle": "Quand vous êtes prêt", "footerBody": "Accueil court, sans culpabilité."
+    "feel3Title": "Progrès honnête", "feel3Body": "Ce que vous avez démontré.",
+    "differenceTitle": "Pour les adultes", "differenceBody": "Design sérieux.",
+    "howTitle": "Comment ça marche", "howIntro": "Cinq étapes.",
+    "howStep1": "Situation", "howStep2": "Langue", "howStep3": "Pratique", "howStep4": "Preuve", "howStep5": "Suite",
+    "footerTitle": "Quand vous êtes prêt", "footerBody": "Sans culpabilité."
   },
   "common": { "loading": "Chargement…", "error": "Erreur", "retry": "Réessayer", "continue": "Continuer", "back": "Retour" },
   "onboarding": {
@@ -63,7 +71,9 @@
     "start": "Commencer", "allDone": "Objectifs actuels démontrés", "allDoneBody": "Supports ou journal.",
     "currentScenario": "Vous êtes dans", "allScenarios": "Scénarios", "completed": "Déjà montré",
     "upcoming": "Ensuite", "viewProgress": "Progrès", "viewResources": "Supports A1–C2",
-    "viewRealLife": "Français dans la vraie vie", "encourage": "Les petits pas comptent.", "reset": "Réinitialiser"
+    "viewRealLife": "Français dans la vraie vie", "viewPractice": "Revoir les objectifs",
+    "viewScenarios": "Tous les scénarios",
+    "encourage": "Les petits pas comptent.", "reset": "Réinitialiser"
   },
   "learn": {
     "notFound": "Introuvable", "backToDashboard": "Tableau de bord", "writePlaceholder": "En français…",
