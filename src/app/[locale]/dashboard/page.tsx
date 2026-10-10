@@ -111,6 +111,7 @@ export default function DashboardPage() {
           {getPublishedScenarios().map((s) => (
             <li key={s.id} className="text-body-sm text-ink-700">
               {s.title[locale]}
+              <span className="text-caption text-ink-400 ms-2">{s.level}</span>
             </li>
           ))}
         </ul>
@@ -153,14 +154,13 @@ export default function DashboardPage() {
 
       <div className="flex flex-wrap gap-3 mb-8">
         <Link href="/progress">
-          <Button variant="secondary" size="sm">
-            {t("viewProgress")}
-          </Button>
+          <Button variant="secondary" size="sm">{t("viewProgress")}</Button>
         </Link>
         <Link href="/resources">
-          <Button variant="secondary" size="sm">
-            {t("viewResources")}
-          </Button>
+          <Button variant="secondary" size="sm">{t("viewResources")}</Button>
+        </Link>
+        <Link href="/real-life">
+          <Button variant="secondary" size="sm">{t("viewRealLife")}</Button>
         </Link>
       </div>
 

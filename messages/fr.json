@@ -1,155 +1,82 @@
 {
-  "meta": {
-    "title": "Bonjour — Le français que vous pouvez utiliser",
-    "description": "Un espace calme pour adultes. Situations réelles, prochaine étape claire."
-  },
+  "meta": { "title": "Bonjour — Le français utilisable", "description": "Espace calme pour adultes." },
   "nav": {
-    "home": "Accueil",
-    "learn": "Apprendre",
-    "practice": "S'entraîner",
-    "progress": "Progrès",
-    "resources": "Supports",
-    "signIn": "Connexion",
-    "getStarted": "Commencer"
+    "home": "Accueil", "learn": "Apprendre", "practice": "S'entraîner", "progress": "Progrès",
+    "resources": "Supports", "signIn": "Connexion", "getStarted": "Commencer"
   },
   "landing": {
     "eyebrow": "Le français pour la vie réelle",
     "headline": "Apprenez le français que vous pouvez vraiment utiliser.",
-    "subheadline": "Un espace calme pour adultes. Pas de jeux de pression — des étapes claires vers le français de tous les jours.",
-    "welcomeNote": "Vous fixez le rythme. Nous indiquons la prochaine chose utile à pratiquer.",
+    "subheadline": "Un espace calme pour adultes. Des étapes claires, pas de jeux de pression.",
+    "welcomeNote": "Vous fixez le rythme.",
     "ctaPrimary": "Commencer — une minute suffit",
     "ctaSecondary": "Voir comment ça marche",
-    "feel1Title": "Prochaine étape claire",
-    "feel1Body": "Vous savez toujours quoi faire maintenant — pas une pile de leçons au hasard.",
-    "feel2Title": "Situations réelles",
-    "feel2Body": "Café, voyage, travail, logement… la langue liée à la vie.",
-    "feel3Title": "Progrès honnête",
-    "feel3Body": "Nous n'affichons que ce que vous avez démontré. Le succès paraît réel.",
+    "feel1Title": "Prochaine étape claire", "feel1Body": "Vous savez quoi faire maintenant.",
+    "feel2Title": "Situations réelles", "feel2Body": "Café, voyage, travail…",
+    "feel3Title": "Progrès honnête", "feel3Body": "Uniquement ce que vous avez démontré.",
     "differenceTitle": "Conçu pour les adultes",
-    "differenceBody": "Design sérieux, ton respectueux, progrès fondé sur des preuves.",
-    "howTitle": "Comment ça marche",
-    "howIntro": "Cinq étapes calmes. Vous pouvez vous arrêter et revenir.",
-    "howStep1": "Comprendre la situation réelle",
-    "howStep2": "Apprendre la langue nécessaire",
-    "howStep3": "S'entraîner avec de l'aide",
-    "howStep4": "Montrer ce que vous savez faire",
-    "howStep5": "Passer à l'étape suivante",
-    "footerTitle": "Quand vous êtes prêt",
-    "footerBody": "Un accueil court. Pas de long formulaire, pas de culpabilité si vous pausez."
+    "differenceBody": "Design sérieux, ton respectueux.",
+    "howTitle": "Comment ça marche", "howIntro": "Cinq étapes calmes.",
+    "howStep1": "Situation réelle", "howStep2": "Langue nécessaire", "howStep3": "Pratique",
+    "howStep4": "Démonstration", "howStep5": "Étape suivante",
+    "footerTitle": "Quand vous êtes prêt", "footerBody": "Accueil court, sans culpabilité."
   },
-  "common": {
-    "loading": "Chargement…",
-    "error": "Une erreur s'est produite",
-    "retry": "Réessayer",
-    "continue": "Continuer",
-    "back": "Retour"
-  },
+  "common": { "loading": "Chargement…", "error": "Erreur", "retry": "Réessayer", "continue": "Continuer", "back": "Retour" },
   "onboarding": {
-    "step": "Étape {current} sur {total}",
-    "nameLabel": "Votre nom",
-    "namePlaceholder": "Comment devons-nous vous appeler ?",
-    "emailLabel": "E-mail",
-    "emailPlaceholder": "vous@exemple.com",
-    "continue": "Continuer",
-    "back": "Retour",
-    "startPlacement": "Commencer un court placement",
+    "step": "Étape {current} / {total}", "nameLabel": "Nom", "namePlaceholder": "Comment vous appeler ?",
+    "emailLabel": "E-mail", "emailPlaceholder": "vous@exemple.com", "continue": "Continuer", "back": "Retour",
+    "startPlacement": "Court placement",
     "steps": {
-      "0": {
-        "title": "Bienvenue — content de vous voir",
-        "description": "Quelques questions pour personnaliser le parcours. Rien n'est noté pour l'instant."
-      },
-      "1": {
-        "title": "Pourquoi le français ?",
-        "description": "Choisissez ce qui compte pour vous. Il n'y a pas de mauvaise réponse."
-      },
-      "2": {
-        "title": "Quelles situations comptent le plus ?",
-        "description": "Nous prioriserons une pratique utile rapidement."
-      }
+      "0": { "title": "Bienvenue", "description": "Quelques questions." },
+      "1": { "title": "Pourquoi le français ?", "description": "Ce qui compte pour vous." },
+      "2": { "title": "Situations prioritaires", "description": "Pratique utile rapidement." }
     }
   },
   "placement": {
-    "title": "Un court placement",
-    "subtitle": "Quelques questions pour comprendre où vous en êtes. Ni réussite ni échec.",
-    "progress": "Question {current} sur {total}",
-    "next": "Suivant",
-    "finish": "Voir mon profil",
-    "openPlaceholder": "En français si possible — ou laissez vide"
+    "title": "Court placement", "subtitle": "Ni réussite ni échec.", "progress": "Question {current} / {total}",
+    "next": "Suivant", "finish": "Voir le profil", "openPlaceholder": "En français si possible…"
   },
   "profile": {
-    "title": "Votre profil d'apprentissage",
-    "subtitle": "Construit uniquement à partir de ce que nous avons observé.",
-    "startingPoint": "Point de départ estimé",
-    "levelEstimate": "Environ {level}",
-    "levelUnknown": "Preuves encore en cours",
-    "levelNote": "Une première estimation — pas une étiquette définitive.",
-    "evidenceTitle": "Preuves par compétence",
-    "evidenceNote": "« Non évalué » signifie simplement : pas encore observé.",
-    "goToDashboard": "Aller à mon tableau de bord"
+    "title": "Profil d'apprentissage", "subtitle": "Preuves observées seulement.",
+    "startingPoint": "Point de départ", "levelEstimate": "Environ {level}", "levelUnknown": "Preuves en cours",
+    "levelNote": "Première estimation.", "evidenceTitle": "Preuves", "evidenceNote": "Non évalué = pas encore vu.",
+    "goToDashboard": "Tableau de bord"
   },
   "dashboard": {
-    "greeting": "Bonjour, {name}",
-    "title": "Voici une bonne prochaine étape",
-    "nextAction": "Recommandé pour vous",
-    "start": "Commencer cet objectif",
-    "allDone": "Bravo — tous les objectifs actuels sont démontrés",
-    "allDoneBody": "Explorez les supports, ou revenez quand de nouveaux scénarios apparaîtront.",
-    "currentScenario": "Vous êtes dans",
-    "allScenarios": "Scénarios disponibles",
-    "completed": "Ce que vous avez déjà montré",
-    "upcoming": "Ensuite",
-    "viewProgress": "Mes progrès",
-    "viewResources": "Supports A1–C2",
-    "encourage": "Les petits pas comptent. Revenir, c'est déjà progresser.",
-    "reset": "Réinitialiser (démo)"
+    "greeting": "Bonjour, {name}", "title": "Bonne prochaine étape", "nextAction": "Recommandé",
+    "start": "Commencer", "allDone": "Objectifs actuels démontrés", "allDoneBody": "Supports ou journal de vie réelle.",
+    "currentScenario": "Vous êtes dans", "allScenarios": "Scénarios", "completed": "Déjà montré",
+    "upcoming": "Ensuite", "viewProgress": "Progrès", "viewResources": "Supports A1–C2",
+    "viewRealLife": "J'ai utilisé le français dans la vraie vie",
+    "encourage": "Les petits pas comptent.", "reset": "Réinitialiser (démo)"
   },
   "learn": {
-    "notFound": "Objectif introuvable.",
-    "backToDashboard": "Tableau de bord",
-    "writePlaceholder": "Écrivez en français — l'imparfait est bienvenu…",
-    "selfAssessPrompt": "D'après la pratique — pouvez-vous le faire maintenant ?",
-    "yesICan": "Oui, je peux",
-    "notYet": "Pas encore — ce n'est pas grave",
-    "feedbackRecorded": "Noté. L'honnêteté garde le parcours juste.",
-    "feedbackNote": "Auto-évaluation clairement indiquée.",
-    "continue": "Continuer",
-    "finish": "Terminer",
-    "exit": "Quitter",
-    "doneTitle": "Bravo",
-    "doneBody": "Étape terminée. Le tableau de bord indique la suite."
+    "notFound": "Introuvable", "backToDashboard": "Tableau de bord", "writePlaceholder": "En français…",
+    "selfAssessPrompt": "Pouvez-vous le faire maintenant ?", "yesICan": "Oui", "notYet": "Pas encore",
+    "feedbackRecorded": "Noté.", "feedbackNote": "Auto-évaluation.", "continue": "Continuer",
+    "finish": "Terminer", "exit": "Quitter", "doneTitle": "Bravo", "doneBody": "Étape terminée."
   },
   "progress": {
-    "title": "Vos progrès",
-    "subtitle": "Uniquement ce que vous avez démontré — d'où le sentiment de sens.",
-    "demonstrated": "Ce que vous avez démontré",
-    "noneYet": "Rien encore — le premier objectif vous attend.",
-    "scenarioProgress": "{done} sur {total} objectifs démontrés",
-    "note": "Selon vos preuves.",
-    "back": "Retour"
+    "title": "Progrès", "subtitle": "Capacités démontrées.", "demonstrated": "Démontré", "noneYet": "Rien encore.",
+    "scenarioProgress": "{done} / {total}", "note": "Selon vos preuves.", "back": "Retour"
   },
   "resources": {
-    "title": "Supports d'apprentissage",
-    "subtitle": "Dialogues, textes, vocabulaire et exercices sur ce site — de A1 à C2.",
-    "inAppNote": "Tout reste sur Bonjour. « Écouter » = voix du navigateur (synthétique).",
-    "allLevels": "Tous les niveaux",
-    "pick": "Choisissez une leçon — commencez où vous voulez.",
-    "vocab": "Vocabulaire",
-    "listen": "Écouter",
-    "listenWord": "Écouter",
-    "ttsNote": "Voix du navigateur",
-    "answerPlaceholder": "Votre réponse…",
-    "check": "Vérifier",
-    "correct": "Oui — bien joué.",
-    "tryAgain": "Pas encore — réessayez sans pression.",
-    "empty": "Pas encore de contenu.",
-    "back": "Retour"
+    "title": "Supports", "subtitle": "Sur ce site, A1 à C2.", "inAppNote": "Tout reste sur Bonjour.",
+    "allLevels": "Tous niveaux", "pick": "Choisissez une leçon.", "vocab": "Vocabulaire",
+    "listen": "Écouter", "listenWord": "Écouter", "ttsNote": "Voix navigateur",
+    "answerPlaceholder": "Réponse…", "check": "Vérifier", "correct": "Oui — bien joué.",
+    "tryAgain": "Réessayez.", "empty": "Pas encore.", "back": "Retour"
+  },
+  "realLife": {
+    "title": "Français dans la vraie vie",
+    "subtitle": "Quand vous utilisez le français dehors, notez-le ici. Rien n'est inventé.",
+    "situation": "Situation", "situationPlaceholder": "café, magasin…",
+    "note": "Ce qui s'est passé", "notePlaceholder": "Qu'avez-vous dit ou compris ?",
+    "save": "Enregistrer", "listTitle": "Vos notes", "empty": "Aucune note encore.",
+    "defaultSituation": "Quotidien", "back": "Retour"
   },
   "auth": {
-    "title": "Connexion",
-    "subtitle": "Compte Bonjour.",
-    "localMode": "La connexion cloud n'est pas prête. Mode local disponible.",
-    "continueLocal": "Continuer à apprendre",
-    "supabaseReady": "Supabase prêt.",
-    "backHome": "Accueil"
+    "title": "Connexion", "subtitle": "Compte", "localMode": "Mode local disponible.",
+    "continueLocal": "Continuer", "supabaseReady": "Supabase prêt.", "backHome": "Accueil"
   }
 }
