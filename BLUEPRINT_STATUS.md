@@ -1,69 +1,57 @@
 # Bonjour 2.0 — Blueprint status
 
-Honest map against the product & technical blueprint.
-Updated as the platform grows. **No fake “done” claims.**
+Honest map against the product & technical blueprint.  
+**No fake “done” claims.**
+
+Live: https://mahmoud2004540.github.io/bonjour/en/
 
 ## Product journey
 
 | Step | Status |
 |------|--------|
-| Landing | Done |
-| Account / Auth | Local mode only — Supabase schema ready, needs keys |
+| Landing (warm, adult) | Done |
+| Account / Auth | Local mode — Supabase schema ready, needs keys |
 | Onboarding | Done |
-| Placement | Basic evidence collection — not full multi-version server-authoritative system |
+| Placement | **v1.1** multi-dimension evidence (vocab, grammar, reading, listening text-stand-in, open speaking) |
 | Learning profile | Done (evidence-based) |
 | Learning plan / next action | Deterministic engine Done |
-| Dashboard | Done |
-| Learn / Practice | Done (self-review labelled) |
-| Evidence | Self-review + placement observations |
-| Progress | Done (no invented mastery %) |
-| Real-life use tracking | Not built |
+| Dashboard | Done + encouragement |
+| Learn / Practice | Done + completion moment |
+| Evidence | Self-review + placement |
+| Progress | Done |
+| Materials A1–C2 (on-platform) | Done (expanded library) |
+| Real-life use log | **Done** (self-report journal) |
 
-## A1 curriculum scenarios (published)
+## Curriculum published
 
-1. Faire connaissance (introductions)
-2. Au café (ordering)
-3. Faire les courses (shopping)
-4. Se déplacer (transport)
-5. Le logement (housing)
-6. Santé (pharmacy / how you feel)
+**A1:** Faire connaissance · Au café · Courses · Transport · Logement · Santé  
+**A2:** Au restaurant (order meal + bill)
 
 ## Blueprint sections
 
 | # | Area | Status |
 |---|------|--------|
-| 1–4 | Overview, users, philosophy, journey | Implemented in product copy & flow |
-| 5 | Landing | Done |
-| 6 | Auth | Structure + schema; **not live without Supabase** |
-| 7 | Onboarding | Done |
-| 8 | Placement (full architecture) | Partial |
-| 9 | Profile | Done |
-| 10 | Curriculum engine | Registry + lifecycle helpers; authoring UI not built |
-| 11 | Learning engine | Deterministic recommendations Done |
-| 12–14 | Learning / lessons / practice | Done for published goals |
-| 15 | Speech | Types + capability flags; **no recording/scoring** |
-| 16 | Human review | Domain types only |
-| 17–18 | Progress / Dashboard | Done |
-| 19 | AI | **Not built** (AI-powered not AI-first — deferred until value is clear) |
-| 20 | i18n EN/FR/AR + RTL | Done; extensible config |
-| 21–25 | Design / motion / responsive / a11y | Strong foundation; full WCAG audit not done |
-| 26–28 | Architecture / data / security | Clean layers; RLS policies not enabled (no live DB) |
-| 29 | Testing | Not automated yet |
-| 30 | Authoring CMS | Not built |
-| 31 | Analytics | Not built |
-| 32 | Payments | Not built |
-| 33 | Admin | Not built |
-| 34–37 | Methodology / rules / DoD | Followed for shipped slices |
+| 1–5 | Overview / landing | Done |
+| 6 | Auth | Needs Supabase keys |
+| 7–9 | Onboarding / placement / profile | Strong partial → expanding |
+| 10–14 | Curriculum / learn | A1 + first A2 |
+| 15 | Speech | Browser TTS on materials only; no scoring |
+| 16 | Human review | Types only |
+| 17–18 | Progress / dashboard | Done |
+| 19 | AI | Not built |
+| 20 | i18n EN/FR/AR + RTL | Done |
+| 21–25 | Design / a11y | Foundation; full audit later |
+| 26–28 | Architecture / security | Clean layers; no live RLS |
+| 29 | Automated tests | Not yet |
+| 30–33 | CMS / analytics / payments / admin | Not built |
 | 38 | First vertical slice | **Done** |
-| 39 | Final goal | In progress via incremental scenarios |
+| 39 | Final product goal | In progress |
 
-## Blocked on external setup
+## Blocked on you / external
 
-- Supabase project + env keys → real auth & cloud data
-- Audio production → speech playback
-- Payment provider → subscriptions
-- AI provider keys → conversational practice (when justified)
+1. **Supabase** URL + anon key → real accounts  
+2. **Native audio files** → real listening/speech  
+3. **Stripe** → payments  
+4. **AI API** → only if it improves learning  
 
-## Live URL
-
-https://mahmoud2004540.github.io/bonjour/en/
+Until then we continue every slice that can ship honestly on-platform.

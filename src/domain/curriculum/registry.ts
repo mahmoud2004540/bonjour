@@ -17,6 +17,11 @@ import {
   LOGEMENT_TASKS,
 } from "./a1-logement";
 import { SCENARIO_SANTE, SANTE_GOALS, SANTE_TASKS } from "./a1-sante";
+import {
+  SCENARIO_RESTAURANT,
+  RESTAURANT_GOALS,
+  RESTAURANT_TASKS,
+} from "./a2-restaurant";
 
 const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_FAIRE_CONNAISSANCE,
@@ -25,6 +30,7 @@ const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_TRANSPORT,
   SCENARIO_LOGEMENT,
   SCENARIO_SANTE,
+  SCENARIO_RESTAURANT,
 ];
 
 const ALL_GOALS: LearningGoal[] = [
@@ -34,6 +40,7 @@ const ALL_GOALS: LearningGoal[] = [
   ...TRANSPORT_GOALS,
   ...LOGEMENT_GOALS,
   ...SANTE_GOALS,
+  ...RESTAURANT_GOALS,
 ];
 
 const ALL_TASKS: Task[] = [
@@ -43,6 +50,7 @@ const ALL_TASKS: Task[] = [
   ...TRANSPORT_TASKS,
   ...LOGEMENT_TASKS,
   ...SANTE_TASKS,
+  ...RESTAURANT_TASKS,
 ];
 
 export function getPublishedScenarios(): Scenario[] {

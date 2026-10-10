@@ -23,6 +23,7 @@ export default function LearnPage({
   const [taskIndex, setTaskIndex] = useState(0);
   const [response, setResponse] = useState("");
   const [showFeedback, setShowFeedback] = useState(false);
+  const [finished, setFinished] = useState(false);
 
   useEffect(() => {
     params.then((p) => setGoalId(p.goalId));
@@ -58,6 +59,18 @@ export default function LearnPage({
     );
   }
 
+  if (finished) {
+    return (
+      <div className="max-w-content mx-auto px-6 py-20 text-center">
+        <h1 className="text-title font-serif text-ink-950 mb-3">{t("doneTitle")}</h1>
+        <p className="text-body text-ink-600 mb-8 text-pretty">{t("doneBody")}</p>
+        <Link href="/dashboard">
+          <Button variant="accent">{t("backToDashboard")}</Button>
+        </Link>
+      </div>
+    );
+  }
+
   const task: Task = tasks[taskIndex];
   const isLast = taskIndex === tasks.length - 1;
   const isEvidence = task.type === "evidence";
@@ -68,7 +81,7 @@ export default function LearnPage({
       if (isEvidence || isProduction) {
         markGoalCompleted(goalId!);
       }
-      router.push("/dashboard");
+      setFinished(true);
     } else {
       setTaskIndex(taskIndex + 1);
       setResponse("");
