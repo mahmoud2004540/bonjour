@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Bonjour — Apprenez le français que vous pouvez vraiment utiliser",
-    "description": "Une plateforme premium d'apprentissage du français pour adultes."
+    "description": "Plateforme premium d'apprentissage du français pour adultes."
   },
   "nav": {
     "home": "Accueil",
@@ -15,11 +15,11 @@
   "landing": {
     "eyebrow": "Le français pour la vie réelle",
     "headline": "Apprenez le français que vous pouvez vraiment utiliser.",
-    "subheadline": "Bonjour aide les adultes à développer une vraie capacité communicative — pas seulement des listes de vocabulaire.",
+    "subheadline": "Bonjour aide les adultes à développer une vraie capacité communicative.",
     "ctaPrimary": "Commencer à apprendre",
     "ctaSecondary": "Voir comment ça marche",
     "differenceTitle": "Conçu autrement",
-    "differenceBody": "Nous nous concentrons sur des objectifs can-do, des tâches de la vie réelle, et des preuves de ce que vous pouvez réellement accomplir.",
+    "differenceBody": "Objectifs can-do, tâches réelles, preuves — pas de points ni de séries.",
     "howTitle": "Comment fonctionne l'apprentissage",
     "howStep1": "Comprendre la situation réelle",
     "howStep2": "Apprendre la langue nécessaire",
@@ -44,14 +44,14 @@
     "back": "Retour",
     "startPlacement": "Commencer le placement",
     "steps": {
-      "0": { "title": "Bienvenue", "description": "Parlez-nous un peu de vous pour personnaliser votre parcours." },
+      "0": { "title": "Bienvenue", "description": "Parlez-nous un peu de vous." },
       "1": { "title": "Pourquoi apprenez-vous le français ?", "description": "Sélectionnez tout ce qui s'applique." },
-      "2": { "title": "Quelles situations comptent le plus ?", "description": "Nous concentrerons la pratique sur les contextes dont vous avez besoin." }
+      "2": { "title": "Quelles situations comptent le plus ?", "description": "Nous concentrerons la pratique sur ces contextes." }
     }
   },
   "placement": {
     "title": "Placement",
-    "subtitle": "Nous collectons des preuves de ce que vous savez déjà faire. Il n'y a ni réussite ni échec.",
+    "subtitle": "Nous collectons des preuves de ce que vous savez déjà faire.",
     "progress": "Question {current} sur {total}",
     "next": "Suivant",
     "finish": "Voir mon profil",
@@ -59,70 +59,75 @@
   },
   "profile": {
     "title": "Votre profil d'apprentissage",
-    "subtitle": "Basé uniquement sur les preuves collectées jusqu'ici.",
+    "subtitle": "Basé uniquement sur les preuves collectées.",
     "startingPoint": "Point de départ estimé",
     "levelEstimate": "Environ {level}",
-    "levelUnknown": "Pas assez de preuves pour l'instant",
-    "levelNote": "Estimation provisoire à partir d'une courte évaluation.",
+    "levelUnknown": "Pas assez de preuves",
+    "levelNote": "Estimation provisoire.",
     "evidenceTitle": "Preuves par compétence",
-    "evidenceNote": "Les statuts reflètent uniquement ce qui a été observé.",
+    "evidenceNote": "Uniquement ce qui a été observé.",
     "goToDashboard": "Aller au tableau de bord"
   },
   "dashboard": {
     "greeting": "Bonjour, {name}",
     "title": "Que devez-vous faire maintenant ?",
-    "nextAction": "Prochaine action d'apprentissage",
+    "nextAction": "Prochaine action",
     "start": "Commencer cet objectif",
-    "allDone": "Vous avez démontré tous les objectifs actuels",
+    "allDone": "Tous les objectifs actuels sont démontrés",
     "allDoneBody": "D'autres scénarios seront ajoutés.",
     "currentScenario": "Scénario actuel",
     "allScenarios": "Scénarios disponibles",
     "completed": "Démontré jusqu'ici",
     "upcoming": "À venir",
     "viewProgress": "Voir les progrès",
-    "viewResources": "Ressources externes A1–C2",
-    "reset": "Réinitialiser ma progression (démo)"
+    "viewResources": "Supports A1–C2",
+    "reset": "Réinitialiser (démo)"
   },
   "learn": {
-    "notFound": "Cet objectif n'a pas été trouvé.",
+    "notFound": "Objectif introuvable.",
     "backToDashboard": "Retour au tableau de bord",
     "writePlaceholder": "Écrivez en français…",
-    "selfAssessPrompt": "D'après ce que vous avez pratiqué, pouvez-vous le faire maintenant ?",
+    "selfAssessPrompt": "Pouvez-vous le faire maintenant ?",
     "yesICan": "Oui, je peux",
     "notYet": "Pas encore",
-    "feedbackRecorded": "Votre auto-évaluation a été enregistrée.",
-    "feedbackNote": "Il s'agit d'une auto-évaluation, clairement indiquée.",
+    "feedbackRecorded": "Auto-évaluation enregistrée.",
+    "feedbackNote": "Auto-évaluation clairement indiquée.",
     "continue": "Continuer",
-    "finish": "Terminer et revenir",
+    "finish": "Terminer",
     "exit": "Quitter"
   },
   "progress": {
     "title": "Vos progrès",
-    "subtitle": "Seules les capacités démontrées sont affichées.",
+    "subtitle": "Capacités démontrées uniquement.",
     "demonstrated": "Ce que vous avez démontré",
-    "noneYet": "Aucun objectif démontré pour l'instant.",
-    "scenarioProgress": "{done} sur {total} objectifs démontrés",
-    "note": "Les progrès sont basés sur les preuves que vous avez fournies.",
-    "back": "Retour au tableau de bord"
+    "noneYet": "Rien pour l'instant.",
+    "scenarioProgress": "{done} sur {total}",
+    "note": "Basé sur vos preuves.",
+    "back": "Retour"
   },
   "resources": {
-    "title": "Ressources d'apprentissage",
-    "subtitle": "Liens sélectionnés vers des ressources gratuites de qualité, de A1 à C2, y compris des plateformes audio et vidéo officielles.",
-    "disclaimer": "Ces liens ouvrent des sites externes. Bonjour n'héberge pas leurs fichiers audio et ne prétend pas évaluer votre compréhension ici. Privilégiez les sources institutionnelles (TV5MONDE, RFI).",
+    "title": "Supports d'apprentissage",
+    "subtitle": "Textes, dialogues, vocabulaire et exercices sur ce site — de A1 à C2.",
+    "inAppNote": "Tout reste sur Bonjour. « Écouter » utilise la voix du navigateur (synthétique), pas un enregistrement studio.",
     "allLevels": "Tous les niveaux",
-    "audioOnly": "Audio / vidéo uniquement",
-    "includesAudio": "Inclut audio ou vidéo",
-    "free": "Gratuit",
-    "open": "Ouvrir la ressource",
-    "empty": "Aucune ressource pour ce filtre.",
+    "pick": "Choisissez une leçon à gauche.",
+    "vocab": "Vocabulaire",
+    "listen": "Écouter (français)",
+    "listenWord": "Écouter",
+    "ttsNote": "Voix du navigateur — pas un enregistrement humain",
+    "answerPlaceholder": "Votre réponse…",
+    "check": "Vérifier",
+    "correct": "Correct.",
+    "tryAgain": "Pas tout à fait — réessayez.",
+    "empty": "Pas encore de contenu à ce niveau.",
     "back": "Retour au tableau de bord"
   },
   "auth": {
     "title": "Connexion",
-    "subtitle": "Accès au compte Bonjour.",
-    "localMode": "L'authentification serveur n'est pas encore configurée. Vous pouvez continuer en mode local.",
+    "subtitle": "Accès au compte.",
+    "localMode": "Authentification serveur non configurée. Mode local disponible.",
     "continueLocal": "Continuer en mode local",
-    "supabaseReady": "Supabase est configuré.",
-    "backHome": "Retour à l'accueil"
+    "supabaseReady": "Supabase configuré.",
+    "backHome": "Accueil"
   }
 }

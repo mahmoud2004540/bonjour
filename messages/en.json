@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Bonjour — Learn French that you can actually use",
-    "description": "A premium French-learning platform for adults. Real-life situations, evidence-based progress, and clear next steps."
+    "description": "A premium French-learning platform for adults."
   },
   "nav": {
     "home": "Home",
@@ -44,18 +44,9 @@
     "back": "Back",
     "startPlacement": "Start placement",
     "steps": {
-      "0": {
-        "title": "Welcome",
-        "description": "Tell us a little about yourself so we can personalise your path."
-      },
-      "1": {
-        "title": "Why are you learning French?",
-        "description": "Select all that apply. This helps us prioritise real situations."
-      },
-      "2": {
-        "title": "Which situations matter most?",
-        "description": "We will focus practice on the contexts you actually need."
-      }
+      "0": { "title": "Welcome", "description": "Tell us a little about yourself so we can personalise your path." },
+      "1": { "title": "Why are you learning French?", "description": "Select all that apply." },
+      "2": { "title": "Which situations matter most?", "description": "We will focus practice on the contexts you actually need." }
     }
   },
   "placement": {
@@ -72,9 +63,9 @@
     "startingPoint": "Estimated starting point",
     "levelEstimate": "Around {level}",
     "levelUnknown": "Not enough evidence yet",
-    "levelNote": "This is a provisional estimate from a short assessment. It will be refined as you learn.",
+    "levelNote": "This is a provisional estimate from a short assessment.",
     "evidenceTitle": "Evidence by skill",
-    "evidenceNote": "Statuses reflect only what was observed. « Not assessed » means we have no evidence yet.",
+    "evidenceNote": "Statuses reflect only what was observed.",
     "goToDashboard": "Go to dashboard"
   },
   "dashboard": {
@@ -83,13 +74,13 @@
     "nextAction": "Next learning action",
     "start": "Start this goal",
     "allDone": "You have demonstrated all current goals",
-    "allDoneBody": "More scenarios will be added. For now, you can review what you have completed.",
+    "allDoneBody": "More scenarios will be added.",
     "currentScenario": "Current scenario",
     "allScenarios": "Available scenarios",
     "completed": "Demonstrated so far",
     "upcoming": "Coming next",
     "viewProgress": "View progress",
-    "viewResources": "External resources A1–C2",
+    "viewResources": "Materials A1–C2",
     "reset": "Reset my progress (demo)"
   },
   "learn": {
@@ -100,38 +91,43 @@
     "yesICan": "Yes, I can",
     "notYet": "Not yet",
     "feedbackRecorded": "Your self-assessment has been recorded.",
-    "feedbackNote": "This is a self-review. It is clearly labelled and is not an automated or expert evaluation.",
+    "feedbackNote": "This is a self-review, clearly labelled.",
     "continue": "Continue",
     "finish": "Finish & return",
     "exit": "Exit"
   },
   "progress": {
     "title": "Your progress",
-    "subtitle": "Only demonstrated abilities are shown. Nothing is invented.",
+    "subtitle": "Only demonstrated abilities are shown.",
     "demonstrated": "What you have demonstrated",
-    "noneYet": "No goals demonstrated yet. Start from the dashboard.",
+    "noneYet": "No goals demonstrated yet.",
     "scenarioProgress": "{done} of {total} goals demonstrated",
-    "note": "Progress is based on evidence you provided — including self-review where labelled as such.",
+    "note": "Progress is based on evidence you provided.",
     "back": "Back to dashboard"
   },
   "resources": {
-    "title": "Learning resources",
-    "subtitle": "Curated links to high-quality free French resources from A1 to C2, including official audio and video platforms.",
-    "disclaimer": "These open external websites. Bonjour does not host their audio or claim to evaluate your listening here. Prefer institutional sources (TV5MONDE, RFI).",
+    "title": "Learning materials",
+    "subtitle": "Texts, dialogues, vocabulary and exercises on this site — from A1 to C2.",
+    "inAppNote": "Everything below stays on Bonjour. Listen uses your browser’s voice (synthetic), not a studio recording.",
     "allLevels": "All levels",
-    "audioOnly": "Audio / video only",
-    "includesAudio": "Includes audio or video",
-    "free": "Free",
-    "open": "Open resource",
-    "empty": "No resources match this filter.",
+    "pick": "Choose a lesson on the left.",
+    "vocab": "Vocabulary",
+    "listen": "Listen (French)",
+    "listenWord": "Listen",
+    "ttsNote": "Browser speech — not a human recording",
+    "answerPlaceholder": "Your answer…",
+    "check": "Check",
+    "correct": "Correct.",
+    "tryAgain": "Not quite — try again.",
+    "empty": "No materials at this level yet.",
     "back": "Back to dashboard"
   },
   "auth": {
     "title": "Sign in",
     "subtitle": "Account access for Bonjour.",
-    "localMode": "Server authentication is not configured yet. You can continue in local mode — your progress stays on this device only.",
+    "localMode": "Server authentication is not configured yet. Continue in local mode.",
     "continueLocal": "Continue in local mode",
-    "supabaseReady": "Supabase is configured. Sign-in form will appear here.",
+    "supabaseReady": "Supabase is configured.",
     "backHome": "Back to home"
   }
 }

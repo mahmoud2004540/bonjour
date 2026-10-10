@@ -34,8 +34,8 @@ export default function ResourcesPage() {
   );
 
   const active = activeId
-    ? MATERIALS.find((m) => m.id === activeId) ?? null
-    : list[0] ?? null;
+    ? (MATERIALS.find((m) => m.id === activeId) ?? null)
+    : (list[0] ?? null);
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
@@ -91,7 +91,7 @@ export default function ResourcesPage() {
 
         <div>
           {active ? (
-            <MaterialView item={active} locale={locale} t={t} />
+            <MaterialView key={active.id} item={active} locale={locale} t={t} />
           ) : (
             <Card>
               <p className="text-body text-ink-500">{t("pick")}</p>
@@ -120,7 +120,7 @@ function MaterialView({
   const [result, setResult] = useState<"idle" | "ok" | "no">("idle");
 
   const support =
-    locale === "fr" ? item.bodyEn : locale === "ar" ? item.bodyAr : item.bodyEn;
+    locale === "ar" ? item.bodyAr : item.bodyEn;
 
   function check() {
     if (!item.exercise) return;
