@@ -2,12 +2,30 @@
   "meta": { "title": "بونجور — الفرنسية التي تستخدمها", "description": "مساحة هادئة للكبار." },
   "nav": {
     "home": "الرئيسية", "learn": "تعلّم", "practice": "تدرّب", "progress": "التقدّم",
-    "resources": "المواد", "signIn": "دخول", "getStarted": "ابدأ"
+    "resources": "المواد", "about": "عن المنصة", "signIn": "دخول", "getStarted": "ابدأ"
+  },
+  "footer": {
+    "about": "عن المنصة", "materials": "المواد", "start": "ابدأ", "tagline": "فرنسية تستخدمها."
+  },
+  "about": {
+    "title": "عن بونجور",
+    "intro": "بونجور منصة هادئة للكبار يتعلمون الفرنسية للحياة — عمل، سفر، مواقف يومية — بلا ملاحقة نقاط.",
+    "whyTitle": "لماذا مختلفة",
+    "whyBody": "كل خطوة مربوطة بهدف can-do. التقدّم يعرض فقط ما أثبتّه.",
+    "howTitle": "كيف يعمل التعلّم",
+    "how1": "فهم الموقف الحقيقي",
+    "how2": "تعلّم اللغة المطلوبة",
+    "how3": "التدرّب مع الدعم",
+    "how4": "أظهر ما تستطيع",
+    "how5": "الخطوة التالية الواضحة",
+    "honestTitle": "ما لا نختلقه",
+    "honestBody": "لا درجات وهمية، ولا تحويل لمواقع أخرى للتعلّم الأساسي. المواد على بونجور.",
+    "cta": "ابدأ التعلّم"
   },
   "landing": {
     "eyebrow": "الفرنسية للحياة", "headline": "تعلّم الفرنسية التي تستخدمها فعلاً.",
-    "subheadline": "مساحة هادئة للكبار. خطوات واضحة بلا ضغط.",
-    "welcomeNote": "أنت تحدّد الإيقاع.", "ctaPrimary": "ابدأ — دقيقة تكفي", "ctaSecondary": "كيف يعمل؟",
+    "subheadline": "مساحة هادئة للكبار.", "welcomeNote": "أنت تحدّد الإيقاع.",
+    "ctaPrimary": "ابدأ — دقيقة تكفي", "ctaSecondary": "كيف يعمل؟",
     "feel1Title": "خطوة واضحة", "feel1Body": "تعرف ماذا تفعل الآن.",
     "feel2Title": "مواقف حقيقية", "feel2Body": "مقهى، سفر، عمل…",
     "feel3Title": "تقدّم صادق", "feel3Body": "ما أثبتّه فقط.",
@@ -32,17 +50,16 @@
     "next": "التالي", "finish": "ملفي", "openPlaceholder": "بالفرنسية إن استطعت…"
   },
   "profile": {
-    "title": "الملف التعليمي", "subtitle": "ما لوحظ فقط.", "startingPoint": "البداية",
+    "title": "الملف", "subtitle": "ما لوحظ فقط.", "startingPoint": "البداية",
     "levelEstimate": "حوالي {level}", "levelUnknown": "نجمع أدلة", "levelNote": "تقدير أول",
     "evidenceTitle": "الأدلة", "evidenceNote": "لم يُقيَّم = لم نرَ بعد.", "goToDashboard": "لوحة التحكم"
   },
   "dashboard": {
     "greeting": "مرحبًا، {name}", "title": "خطوة جيدة تالية", "nextAction": "موصى به",
-    "start": "ابدأ", "allDone": "أثبتّ الأهداف الحالية", "allDoneBody": "المواد أو سجل الحياة الواقعية.",
+    "start": "ابدأ", "allDone": "أثبتّ الأهداف الحالية", "allDoneBody": "المواد أو سجل الحياة.",
     "currentScenario": "أنت في", "allScenarios": "السيناريوهات", "completed": "ما أظهرتَه",
     "upcoming": "بعد ذلك", "viewProgress": "التقدّم", "viewResources": "مواد A1–C2",
-    "viewRealLife": "استخدمت الفرنسية في الحياة",
-    "encourage": "الخطوات الصغيرة تُحسب.", "reset": "إعادة تعيين"
+    "viewRealLife": "استخدمت الفرنسية في الحياة", "encourage": "الخطوات الصغيرة تُحسب.", "reset": "إعادة تعيين"
   },
   "learn": {
     "notFound": "غير موجود", "backToDashboard": "لوحة التحكم", "writePlaceholder": "بالفرنسية…",
@@ -62,8 +79,7 @@
     "tryAgain": "حاول مرة أخرى", "empty": "لا مواد", "back": "رجوع"
   },
   "realLife": {
-    "title": "الفرنسية في الحياة",
-    "subtitle": "عندما تستخدم الفرنسية خارج التطبيق، سجّلها هنا. أنت تكتب فقط — لا شيء مُختلق.",
+    "title": "الفرنسية في الحياة", "subtitle": "سجّل هنا ما استخدمته خارج التطبيق.",
     "situation": "الموقف", "situationPlaceholder": "مقهى، متجر…",
     "note": "ماذا حدث", "notePlaceholder": "ماذا قلت أو فهمت؟",
     "save": "حفظ", "listTitle": "ملاحظاتك", "empty": "لا ملاحظات بعد.",

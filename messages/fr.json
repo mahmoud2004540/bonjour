@@ -2,20 +2,37 @@
   "meta": { "title": "Bonjour — Le français utilisable", "description": "Espace calme pour adultes." },
   "nav": {
     "home": "Accueil", "learn": "Apprendre", "practice": "S'entraîner", "progress": "Progrès",
-    "resources": "Supports", "signIn": "Connexion", "getStarted": "Commencer"
+    "resources": "Supports", "about": "À propos", "signIn": "Connexion", "getStarted": "Commencer"
+  },
+  "footer": {
+    "about": "À propos", "materials": "Supports", "start": "Commencer", "tagline": "Le français utilisable."
+  },
+  "about": {
+    "title": "À propos de Bonjour",
+    "intro": "Bonjour est une plateforme calme pour adultes qui apprennent le français pour la vie réelle.",
+    "whyTitle": "Pourquoi c'est différent",
+    "whyBody": "Chaque étape est liée à un objectif can-do. Les progrès n'affichent que ce que vous avez démontré.",
+    "howTitle": "Comment ça marche",
+    "how1": "Comprendre la situation réelle",
+    "how2": "Apprendre la langue nécessaire",
+    "how3": "S'entraîner avec de l'aide",
+    "how4": "Montrer ce que vous savez faire",
+    "how5": "Passer à l'étape suivante",
+    "honestTitle": "Ce que nous n'inventons pas",
+    "honestBody": "Pas de scores inventés, pas de renvoi vers d'autres sites pour l'essentiel. Les supports restent sur Bonjour.",
+    "cta": "Commencer"
   },
   "landing": {
     "eyebrow": "Le français pour la vie réelle",
     "headline": "Apprenez le français que vous pouvez vraiment utiliser.",
-    "subheadline": "Un espace calme pour adultes. Des étapes claires, pas de jeux de pression.",
+    "subheadline": "Un espace calme pour adultes.",
     "welcomeNote": "Vous fixez le rythme.",
     "ctaPrimary": "Commencer — une minute suffit",
     "ctaSecondary": "Voir comment ça marche",
     "feel1Title": "Prochaine étape claire", "feel1Body": "Vous savez quoi faire maintenant.",
     "feel2Title": "Situations réelles", "feel2Body": "Café, voyage, travail…",
     "feel3Title": "Progrès honnête", "feel3Body": "Uniquement ce que vous avez démontré.",
-    "differenceTitle": "Conçu pour les adultes",
-    "differenceBody": "Design sérieux, ton respectueux.",
+    "differenceTitle": "Conçu pour les adultes", "differenceBody": "Design sérieux, ton respectueux.",
     "howTitle": "Comment ça marche", "howIntro": "Cinq étapes calmes.",
     "howStep1": "Situation réelle", "howStep2": "Langue nécessaire", "howStep3": "Pratique",
     "howStep4": "Démonstration", "howStep5": "Étape suivante",
@@ -28,8 +45,8 @@
     "startPlacement": "Court placement",
     "steps": {
       "0": { "title": "Bienvenue", "description": "Quelques questions." },
-      "1": { "title": "Pourquoi le français ?", "description": "Ce qui compte pour vous." },
-      "2": { "title": "Situations prioritaires", "description": "Pratique utile rapidement." }
+      "1": { "title": "Pourquoi le français ?", "description": "Ce qui compte." },
+      "2": { "title": "Situations prioritaires", "description": "Pratique utile." }
     }
   },
   "placement": {
@@ -37,22 +54,20 @@
     "next": "Suivant", "finish": "Voir le profil", "openPlaceholder": "En français si possible…"
   },
   "profile": {
-    "title": "Profil d'apprentissage", "subtitle": "Preuves observées seulement.",
-    "startingPoint": "Point de départ", "levelEstimate": "Environ {level}", "levelUnknown": "Preuves en cours",
-    "levelNote": "Première estimation.", "evidenceTitle": "Preuves", "evidenceNote": "Non évalué = pas encore vu.",
-    "goToDashboard": "Tableau de bord"
+    "title": "Profil", "subtitle": "Preuves observées.", "startingPoint": "Point de départ",
+    "levelEstimate": "Environ {level}", "levelUnknown": "Preuves en cours", "levelNote": "Estimation.",
+    "evidenceTitle": "Preuves", "evidenceNote": "Non évalué = pas encore vu.", "goToDashboard": "Tableau de bord"
   },
   "dashboard": {
     "greeting": "Bonjour, {name}", "title": "Bonne prochaine étape", "nextAction": "Recommandé",
-    "start": "Commencer", "allDone": "Objectifs actuels démontrés", "allDoneBody": "Supports ou journal de vie réelle.",
+    "start": "Commencer", "allDone": "Objectifs actuels démontrés", "allDoneBody": "Supports ou journal.",
     "currentScenario": "Vous êtes dans", "allScenarios": "Scénarios", "completed": "Déjà montré",
     "upcoming": "Ensuite", "viewProgress": "Progrès", "viewResources": "Supports A1–C2",
-    "viewRealLife": "J'ai utilisé le français dans la vraie vie",
-    "encourage": "Les petits pas comptent.", "reset": "Réinitialiser (démo)"
+    "viewRealLife": "Français dans la vraie vie", "encourage": "Les petits pas comptent.", "reset": "Réinitialiser"
   },
   "learn": {
     "notFound": "Introuvable", "backToDashboard": "Tableau de bord", "writePlaceholder": "En français…",
-    "selfAssessPrompt": "Pouvez-vous le faire maintenant ?", "yesICan": "Oui", "notYet": "Pas encore",
+    "selfAssessPrompt": "Pouvez-vous le faire ?", "yesICan": "Oui", "notYet": "Pas encore",
     "feedbackRecorded": "Noté.", "feedbackNote": "Auto-évaluation.", "continue": "Continuer",
     "finish": "Terminer", "exit": "Quitter", "doneTitle": "Bravo", "doneBody": "Étape terminée."
   },
@@ -68,11 +83,10 @@
     "tryAgain": "Réessayez.", "empty": "Pas encore.", "back": "Retour"
   },
   "realLife": {
-    "title": "Français dans la vraie vie",
-    "subtitle": "Quand vous utilisez le français dehors, notez-le ici. Rien n'est inventé.",
+    "title": "Français dans la vraie vie", "subtitle": "Notez ici ce que vous avez utilisé dehors.",
     "situation": "Situation", "situationPlaceholder": "café, magasin…",
     "note": "Ce qui s'est passé", "notePlaceholder": "Qu'avez-vous dit ou compris ?",
-    "save": "Enregistrer", "listTitle": "Vos notes", "empty": "Aucune note encore.",
+    "save": "Enregistrer", "listTitle": "Vos notes", "empty": "Aucune note.",
     "defaultSituation": "Quotidien", "back": "Retour"
   },
   "auth": {

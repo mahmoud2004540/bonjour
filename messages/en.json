@@ -9,8 +9,30 @@
     "practice": "Practice",
     "progress": "Progress",
     "resources": "Materials",
+    "about": "About",
     "signIn": "Sign in",
     "getStarted": "Get started"
+  },
+  "footer": {
+    "about": "About",
+    "materials": "Materials",
+    "start": "Start",
+    "tagline": "French you can use."
+  },
+  "about": {
+    "title": "About Bonjour",
+    "intro": "Bonjour is a calm platform for adults learning French for real life — work, travel, daily situations — not for chasing points.",
+    "whyTitle": "Why it feels different",
+    "whyBody": "Every step is tied to a can-do goal: something you should be able to do in French. Progress only shows what you have demonstrated.",
+    "howTitle": "How learning works",
+    "how1": "Understand the real situation",
+    "how2": "Learn the language you need for it",
+    "how3": "Practise with support",
+    "how4": "Show what you can do",
+    "how5": "Move to the next clear step",
+    "honestTitle": "What we do not invent",
+    "honestBody": "We do not invent mastery scores, hide weak skills, or send you to other websites for core learning. Materials stay on Bonjour.",
+    "cta": "Start learning"
   },
   "landing": {
     "eyebrow": "French for real life",
@@ -75,7 +97,7 @@
     "levelUnknown": "Still gathering evidence",
     "levelNote": "A first estimate — not a permanent label.",
     "evidenceTitle": "Evidence by skill",
-    "evidenceNote": "« Not assessed » means we have not seen that skill yet.",
+    "evidenceNote": "Not assessed means we have not seen that skill yet.",
     "goToDashboard": "Go to my dashboard"
   },
   "dashboard": {
