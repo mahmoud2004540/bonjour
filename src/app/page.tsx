@@ -1,23 +1,21 @@
 /**
- * Static root redirect to default locale.
- * Works with `output: "export"` (no server redirect at runtime).
+ * Root → default locale (static-friendly redirect).
  */
 export default function RootPage() {
   return (
-    <html>
-      <head>
-        <meta httpEquiv="refresh" content="0; url=/bonjour/en/" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.location.replace('/bonjour/en/');`,
-          }}
-        />
-      </head>
-      <body>
-        <p>
-          <a href="/bonjour/en/">Continue to Bonjour</a>
-        </p>
-      </body>
-    </html>
+    <div style={{ fontFamily: "system-ui", padding: "2rem", textAlign: "center" }}>
+      <p>Redirecting…</p>
+      <p>
+        <a href="/bonjour/en/">Continue to Bonjour</a>
+      </p>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.location.replace('/bonjour/en/');`,
+        }}
+      />
+      <noscript>
+        <meta httpEquiv="refresh" content="0;url=/bonjour/en/" />
+      </noscript>
+    </div>
   );
 }

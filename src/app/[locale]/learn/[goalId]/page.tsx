@@ -6,7 +6,7 @@ import { useRouter, Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getStoredProfile, markGoalCompleted } from "@/application/learner-store";
-import { getGoalById, getTasksForGoal } from "@/domain/curriculum/a1-faire-connaissance";
+import { getGoalById, getTasksForGoal, GOALS } from "@/domain/curriculum/a1-faire-connaissance";
 import type { Task } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -85,7 +85,6 @@ export default function LearnPage({
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
-      {/* Progress */}
       <div className="mb-10">
         <p className="text-caption text-ink-400 mb-2">{goal.title[locale]}</p>
         <div className="flex gap-1.5 mb-5" aria-hidden="true">
