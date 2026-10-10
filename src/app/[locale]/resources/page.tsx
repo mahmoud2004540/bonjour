@@ -22,6 +22,7 @@ function speakFrench(text: string) {
   window.speechSynthesis.speak(u);
 }
 
+/** Resources page — 100% on-site. No external <a href>. */
 export default function ResourcesPage() {
   const t = useTranslations("resources");
   const locale = useLocale() as Locale;
@@ -119,8 +120,7 @@ function MaterialView({
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState<"idle" | "ok" | "no">("idle");
 
-  const support =
-    locale === "ar" ? item.bodyAr : item.bodyEn;
+  const support = locale === "ar" ? item.bodyAr : item.bodyEn;
 
   function check() {
     if (!item.exercise) return;
