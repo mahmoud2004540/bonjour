@@ -59,7 +59,8 @@ export default function DashboardPage() {
         <p className="text-caption text-ink-400 mb-1">
           {t("greeting", { name: profile.displayName })}
         </p>
-        <h1 className="text-title font-serif text-ink-950">{t("title")}</h1>
+        <h1 className="text-title font-serif text-ink-950 mb-3">{t("title")}</h1>
+        <p className="text-body-sm text-ink-500 text-pretty">{t("encourage")}</p>
       </div>
 
       <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
