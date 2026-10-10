@@ -24,6 +24,7 @@ import {
 } from "./a2-restaurant";
 import { SCENARIO_HOTEL, HOTEL_GOALS, HOTEL_TASKS } from "./a2-hotel";
 import { SCENARIO_PHONE, PHONE_GOALS, PHONE_TASKS } from "./a2-telephone";
+import { SCENARIO_RDV, RDV_GOALS, RDV_TASKS } from "./a2-rdv";
 
 const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_FAIRE_CONNAISSANCE,
@@ -35,6 +36,7 @@ const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_RESTAURANT,
   SCENARIO_HOTEL,
   SCENARIO_PHONE,
+  SCENARIO_RDV,
 ];
 
 const ALL_GOALS: LearningGoal[] = [
@@ -47,6 +49,7 @@ const ALL_GOALS: LearningGoal[] = [
   ...RESTAURANT_GOALS,
   ...HOTEL_GOALS,
   ...PHONE_GOALS,
+  ...RDV_GOALS,
 ];
 
 const ALL_TASKS: Task[] = [
@@ -59,6 +62,7 @@ const ALL_TASKS: Task[] = [
   ...RESTAURANT_TASKS,
   ...HOTEL_TASKS,
   ...PHONE_TASKS,
+  ...RDV_TASKS,
 ];
 
 export function getPublishedScenarios(): Scenario[] {
