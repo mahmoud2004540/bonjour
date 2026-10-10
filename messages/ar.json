@@ -1,108 +1,21 @@
 {
   "meta": { "title": "بونجور — الفرنسية التي تستخدمها", "description": "مساحة هادئة للكبار." },
-  "nav": {
-    "home": "الرئيسية", "learn": "تعلّم", "practice": "تدرّب", "progress": "التقدّم",
-    "resources": "المواد", "about": "عن المنصة", "signIn": "دخول", "getStarted": "ابدأ"
-  },
-  "footer": {
-    "about": "عن المنصة", "scenarios": "السيناريوهات", "materials": "المواد",
-    "privacy": "الخصوصية", "start": "ابدأ", "tagline": "فرنسية تستخدمها."
-  },
-  "privacy": {
-    "title": "الخصوصية",
-    "p1": "في الوضع المحلي، ملفك وملاحظاتك تبقى على هذا الجهاز.",
-    "p2": "لا نرسل التقدّم لخادم قبل تفعيل الحسابات السحابية.",
-    "p3": "لا يوجد تتبّع إعلاني من طرف ثالث.",
-    "p4": "عند تفعيل الوضع السحابي ستُحدَّث السياسة بوضوح.",
-    "home": "الرئيسية"
-  },
-  "about": {
-    "title": "عن بونجور",
-    "intro": "منصة هادئة للكبار يتعلمون الفرنسية للحياة.",
-    "whyTitle": "لماذا مختلفة",
-    "whyBody": "كل خطوة مربوطة بهدف can-do.",
-    "howTitle": "كيف يعمل التعلّم",
-    "how1": "فهم الموقف", "how2": "اللغة المطلوبة", "how3": "التدرّب", "how4": "أظهر ما تستطيع", "how5": "الخطوة التالية",
-    "honestTitle": "ما لا نختلقه",
-    "honestBody": "لا درجات وهمية. المواد على بونجور.",
-    "cta": "ابدأ التعلّم"
-  },
-  "scenarios": {
-    "title": "سيناريوهات التعلّم", "subtitle": "مواقف حياتية حسب المستوى.",
-    "goalsCount": "{count} أهداف", "start": "ابدأ المسار", "home": "الرئيسية"
-  },
-  "practice": {
-    "title": "راجع ما أثبتّه", "subtitle": "أعد التدرّب على أهداف أنهيتها.",
-    "empty": "لا شيء للمراجعة بعد.", "toDashboard": "لوحة التحكم",
-    "review": "تدرّب مرة أخرى", "back": "رجوع"
-  },
-  "landing": {
-    "eyebrow": "الفرنسية للحياة", "headline": "تعلّم الفرنسية التي تستخدمها فعلاً.",
-    "subheadline": "مساحة هادئة للكبار.", "welcomeNote": "أنت تحدّد الإيقاع.",
-    "ctaPrimary": "ابدأ — دقيقة تكفي", "ctaSecondary": "كيف يعمل؟",
-    "feel1Title": "خطوة واضحة", "feel1Body": "تعرف ماذا تفعل الآن.",
-    "feel2Title": "مواقف حقيقية", "feel2Body": "مقهى، سفر، عمل…",
-    "feel3Title": "تقدّم صادق", "feel3Body": "ما أثبتّه فقط.",
-    "differenceTitle": "للكبار", "differenceBody": "تصميم جاد.",
-    "howTitle": "كيف يعمل", "howIntro": "خمس خطوات.",
-    "howStep1": "الموقف", "howStep2": "اللغة", "howStep3": "تدرّب", "howStep4": "أثبت", "howStep5": "التالي",
-    "footerTitle": "جاهز عندما تكون", "footerBody": "بلا ضغط."
-  },
+  "nav": { "home": "الرئيسية", "learn": "تعلّم", "practice": "تدرّب", "progress": "التقدّم", "resources": "المواد", "about": "عن المنصة", "signIn": "دخول", "getStarted": "ابدأ" },
+  "footer": { "about": "عن المنصة", "scenarios": "السيناريوهات", "materials": "المواد", "privacy": "الخصوصية", "start": "ابدأ", "tagline": "فرنسية تستخدمها." },
+  "privacy": { "title": "الخصوصية", "p1": "في الوضع المحلي بياناتك على هذا الجهاز.", "p2": "لا إرسال لخادم قبل الحسابات السحابية.", "p3": "لا تتبّع إعلاني.", "p4": "ستُحدَّث السياسة عند تفعيل السحابة.", "home": "الرئيسية" },
+  "settings": { "title": "الإعدادات", "subtitle": "التحكم في بيانات هذا الجهاز.", "localTitle": "بيانات محلية", "localBody": "الملف والتقدّم والملاحظات في المتصفح.", "clear": "مسح كل البيانات المحلية", "confirm": "حذف كل بيانات التعلّم المحلية؟", "cleared": "تم المسح.", "dashboard": "لوحة التحكم", "home": "الرئيسية", "restart": "ابدأ من جديد" },
+  "about": { "title": "عن بونجور", "intro": "منصة هادئة للكبار.", "whyTitle": "لماذا مختلفة", "whyBody": "أهداف can-do وأدلة فقط.", "howTitle": "كيف يعمل", "how1": "الموقف", "how2": "اللغة", "how3": "تدرّب", "how4": "أثبت", "how5": "التالي", "honestTitle": "ما لا نختلقه", "honestBody": "المواد على بونجور.", "cta": "ابدأ" },
+  "scenarios": { "title": "السيناريوهات", "subtitle": "مواقف حياتية.", "goalsCount": "{count} أهداف", "start": "ابدأ", "home": "الرئيسية" },
+  "practice": { "title": "مراجعة", "subtitle": "أهداف مكتملة.", "empty": "لا شيء بعد.", "toDashboard": "لوحة التحكم", "review": "تدرّب", "back": "رجوع" },
+  "landing": { "eyebrow": "الفرنسية للحياة", "headline": "فرنسية تستخدمها فعلاً.", "subheadline": "للكبار.", "welcomeNote": "إيقاعك أنت.", "ctaPrimary": "ابدأ", "ctaSecondary": "كيف يعمل", "feel1Title": "خطوة واضحة", "feel1Body": "تعرف ماذا تفعل.", "feel2Title": "مواقف حقيقية", "feel2Body": "مقهى، سفر، عمل…", "feel3Title": "تقدّم صادق", "feel3Body": "ما أثبتّه.", "differenceTitle": "للكبار", "differenceBody": "تصميم جاد.", "howTitle": "المنهج", "howIntro": "خمس خطوات.", "howStep1": "الموقف", "howStep2": "اللغة", "howStep3": "تدرّب", "howStep4": "دليل", "howStep5": "التالي", "footerTitle": "جاهز متى شئت", "footerBody": "بلا ضغط." },
   "common": { "loading": "تحميل…", "error": "خطأ", "retry": "أعد", "continue": "متابعة", "back": "رجوع" },
-  "onboarding": {
-    "step": "{current} / {total}", "nameLabel": "الاسم", "namePlaceholder": "كيف نناديك؟",
-    "emailLabel": "البريد", "emailPlaceholder": "you@example.com", "continue": "متابعة", "back": "رجوع",
-    "startPlacement": "تقييم قصير",
-    "steps": {
-      "0": { "title": "مرحبًا", "description": "أسئلة قليلة." },
-      "1": { "title": "لماذا الفرنسية؟", "description": "ما يهمك." },
-      "2": { "title": "المواقف الأهم", "description": "نركّز عليها." }
-    }
-  },
-  "placement": {
-    "title": "تقييم قصير", "subtitle": "لا نجاح ولا رسوب.", "progress": "{current} / {total}",
-    "next": "التالي", "finish": "ملفي", "openPlaceholder": "بالفرنسية إن استطعت…"
-  },
-  "profile": {
-    "title": "الملف", "subtitle": "ما لوحظ فقط.", "startingPoint": "البداية",
-    "levelEstimate": "حوالي {level}", "levelUnknown": "نجمع أدلة", "levelNote": "تقدير أول",
-    "evidenceTitle": "الأدلة", "evidenceNote": "لم يُقيَّم = لم نرَ بعد.", "goToDashboard": "لوحة التحكم"
-  },
-  "dashboard": {
-    "greeting": "مرحبًا، {name}", "title": "خطوة جيدة تالية", "nextAction": "موصى به",
-    "start": "ابدأ", "allDone": "أثبتّ الأهداف الحالية", "allDoneBody": "المواد أو سجل الحياة.",
-    "currentScenario": "أنت في", "allScenarios": "السيناريوهات", "completed": "ما أظهرتَه",
-    "upcoming": "بعد ذلك", "viewProgress": "التقدّم", "viewResources": "مواد A1–C2",
-    "viewRealLife": "استخدمت الفرنسية في الحياة", "viewPractice": "راجع الأهداف المكتملة",
-    "viewScenarios": "كل السيناريوهات", "encourage": "الخطوات الصغيرة تُحسب.", "reset": "إعادة تعيين"
-  },
-  "learn": {
-    "notFound": "غير موجود", "backToDashboard": "لوحة التحكم", "writePlaceholder": "بالفرنسية…",
-    "selfAssessPrompt": "هل تستطيع الآن؟", "yesICan": "نعم", "notYet": "ليس بعد",
-    "checkUnderstanding": "عندما يتضح المعنى، تابع.", "understood": "فهمت",
-    "feedbackRecorded": "تم.", "feedbackNote": "تقييم ذاتي.", "continue": "متابعة",
-    "finish": "إنهاء", "exit": "خروج", "doneTitle": "أحسنت", "doneBody": "أنهيت الخطوة."
-  },
-  "progress": {
-    "title": "التقدّم", "subtitle": "المُثبت فقط", "demonstrated": "ما أثبتّه", "noneYet": "لا شيء بعد",
-    "scenarioProgress": "{done} / {total}", "note": "حسب أدلتك", "back": "رجوع"
-  },
-  "resources": {
-    "title": "المواد", "subtitle": "على الموقع من A1 إلى C2", "inAppNote": "كل شيء على بونجور",
-    "allLevels": "كل المستويات", "pick": "اختر درسًا", "vocab": "مفردات",
-    "listen": "استمع", "listenWord": "استمع", "ttsNote": "صوت المتصفح",
-    "answerPlaceholder": "إجابتك…", "check": "تحقق", "correct": "نعم — أحسنت",
-    "tryAgain": "حاول مرة أخرى", "empty": "لا مواد", "back": "رجوع"
-  },
-  "realLife": {
-    "title": "الفرنسية في الحياة", "subtitle": "سجّل هنا ما استخدمته خارج التطبيق.",
-    "situation": "الموقف", "situationPlaceholder": "مقهى، متجر…",
-    "note": "ماذا حدث", "notePlaceholder": "ماذا قلت أو فهمت؟",
-    "save": "حفظ", "listTitle": "ملاحظاتك", "empty": "لا ملاحظات بعد.",
-    "defaultSituation": "يومي", "back": "رجوع"
-  },
-  "auth": {
-    "title": "دخول", "subtitle": "الحساب", "localMode": "الوضع المحلي متاح",
-    "continueLocal": "متابعة التعلّم", "supabaseReady": "Supabase جاهز", "backHome": "الرئيسية"
-  }
+  "onboarding": { "step": "{current} / {total}", "nameLabel": "الاسم", "namePlaceholder": "اسمك", "emailLabel": "البريد", "emailPlaceholder": "you@example.com", "continue": "متابعة", "back": "رجوع", "startPlacement": "تقييم", "steps": { "0": { "title": "مرحبًا", "description": "أسئلة قليلة." }, "1": { "title": "لماذا الفرنسية؟", "description": "ما يهمك." }, "2": { "title": "المواقف", "description": "الأولويات." } } },
+  "placement": { "title": "تقييم", "subtitle": "بلا رسوب.", "progress": "{current} / {total}", "next": "التالي", "finish": "الملف", "openPlaceholder": "بالفرنسية…" },
+  "profile": { "title": "الملف", "subtitle": "ما لوحظ.", "startingPoint": "البداية", "levelEstimate": "حوالي {level}", "levelUnknown": "جارٍ", "levelNote": "تقدير.", "evidenceTitle": "أدلة", "evidenceNote": "لم يُقيَّم.", "goToDashboard": "لوحة التحكم" },
+  "dashboard": { "greeting": "مرحبًا، {name}", "title": "خطوة تالية", "nextAction": "موصى به", "start": "ابدأ", "allDone": "أثبتّ الأهداف الحالية", "allDoneBody": "مواد أو سجل حياة.", "currentScenario": "السيناريو", "allScenarios": "السيناريوهات", "completed": "ما أظهرته", "upcoming": "بعدها", "viewProgress": "التقدّم", "viewResources": "المواد", "viewRealLife": "في الحياة", "viewPractice": "مراجعة", "viewScenarios": "كل السيناريوهات", "encourage": "خطوات صغيرة.", "reset": "إعادة تعيين" },
+  "learn": { "notFound": "غير موجود", "backToDashboard": "رجوع", "writePlaceholder": "بالفرنسية…", "selfAssessPrompt": "هل تستطيع؟", "yesICan": "نعم", "notYet": "ليس بعد", "checkUnderstanding": "عندما يتضح المعنى…", "understood": "فهمت", "feedbackRecorded": "تم.", "feedbackNote": "ذاتي.", "continue": "متابعة", "finish": "إنهاء", "exit": "خروج", "doneTitle": "أحسنت", "doneBody": "انتهت الخطوة." },
+  "progress": { "title": "التقدّم", "subtitle": "المُثبت فقط.", "demonstrated": "مُثبت", "noneYet": "لا شيء.", "scenarioProgress": "{done} / {total}", "note": "حسب الأدلة.", "back": "رجوع" },
+  "resources": { "title": "المواد", "subtitle": "على الموقع A1–C2.", "inAppNote": "على بونجور.", "allLevels": "المستويات", "pick": "اختر", "vocab": "مفردات", "listen": "استمع", "listenWord": "استمع", "ttsNote": "صوت المتصفح", "answerPlaceholder": "إجابة…", "check": "تحقق", "correct": "نعم.", "tryAgain": "حاول.", "empty": "فارغ.", "back": "رجوع" },
+  "realLife": { "title": "في الحياة", "subtitle": "ملاحظات خارج التطبيق.", "situation": "الموقف", "situationPlaceholder": "مقهى…", "note": "ماذا حدث", "notePlaceholder": "ماذا قلت؟", "save": "حفظ", "listTitle": "ملاحظات", "empty": "لا شيء.", "defaultSituation": "يومي", "back": "رجوع" },
+  "auth": { "title": "دخول", "subtitle": "الحساب", "localMode": "الوضع المحلي متاح.", "continueLocal": "متابعة", "supabaseReady": "Supabase جاهز", "backHome": "الرئيسية" }
 }
