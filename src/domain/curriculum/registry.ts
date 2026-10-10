@@ -1,23 +1,11 @@
-/**
- * Curriculum registry — published content only reaches learners.
- */
-
 import type { Scenario, LearningGoal, Task } from "../types";
 import {
   SCENARIO_FAIRE_CONNAISSANCE,
   GOALS as FC_GOALS,
   TASKS as FC_TASKS,
 } from "./a1-faire-connaissance";
-import {
-  SCENARIO_AU_CAFE,
-  CAFE_GOALS,
-  CAFE_TASKS,
-} from "./a1-au-cafe";
-import {
-  SCENARIO_COURSES,
-  COURSES_GOALS,
-  COURSES_TASKS,
-} from "./a1-courses";
+import { SCENARIO_AU_CAFE, CAFE_GOALS, CAFE_TASKS } from "./a1-au-cafe";
+import { SCENARIO_COURSES, COURSES_GOALS, COURSES_TASKS } from "./a1-courses";
 import {
   SCENARIO_TRANSPORT,
   TRANSPORT_GOALS,
@@ -28,6 +16,7 @@ import {
   LOGEMENT_GOALS,
   LOGEMENT_TASKS,
 } from "./a1-logement";
+import { SCENARIO_SANTE, SANTE_GOALS, SANTE_TASKS } from "./a1-sante";
 
 const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_FAIRE_CONNAISSANCE,
@@ -35,6 +24,7 @@ const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_COURSES,
   SCENARIO_TRANSPORT,
   SCENARIO_LOGEMENT,
+  SCENARIO_SANTE,
 ];
 
 const ALL_GOALS: LearningGoal[] = [
@@ -43,6 +33,7 @@ const ALL_GOALS: LearningGoal[] = [
   ...COURSES_GOALS,
   ...TRANSPORT_GOALS,
   ...LOGEMENT_GOALS,
+  ...SANTE_GOALS,
 ];
 
 const ALL_TASKS: Task[] = [
@@ -51,6 +42,7 @@ const ALL_TASKS: Task[] = [
   ...COURSES_TASKS,
   ...TRANSPORT_TASKS,
   ...LOGEMENT_TASKS,
+  ...SANTE_TASKS,
 ];
 
 export function getPublishedScenarios(): Scenario[] {
