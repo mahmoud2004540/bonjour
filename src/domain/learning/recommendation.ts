@@ -12,11 +12,25 @@ const SITUATION_TO_SCENARIOS: Record<string, string[]> = {
   housing: ["a1-logement", "a2-hotel"],
   meeting: ["a1-faire-connaissance", "a2-telephone"],
   travel: ["a1-transport", "a2-hotel", "a2-restaurant"],
-  work: ["b1-travail", "a2-telephone", "a2-rdv", "b2-opinion", "c1-argument"],
+  work: [
+    "b1-travail",
+    "a2-telephone",
+    "a2-rdv",
+    "b2-opinion",
+    "c1-argument",
+    "c2-nuance",
+  ],
   daily: ["a1-au-cafe", "a1-courses", "a1-transport"],
-  admin: ["a2-rdv", "a1-logement", "b1-service"],
+  admin: ["a2-rdv", "a1-logement", "b1-service", "c2-nuance"],
   social: ["a1-faire-connaissance", "a2-restaurant", "b2-opinion"],
-  integration: ["a1-logement", "a1-sante", "a2-rdv", "b1-travail", "b2-opinion"],
+  integration: [
+    "a1-logement",
+    "a1-sante",
+    "a2-rdv",
+    "b1-travail",
+    "b2-opinion",
+    "c2-nuance",
+  ],
 };
 
 function preferenceBoost(profile: LearnerProfile, scenarioId: string): number {
