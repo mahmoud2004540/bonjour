@@ -1,9 +1,23 @@
-import { redirect } from "next/navigation";
-
 /**
- * Root path redirects to the default locale.
- * With basePath=/bonjour this serves https://…/bonjour/ → /bonjour/en/
+ * Static root redirect to default locale.
+ * Works with `output: "export"` (no server redirect at runtime).
  */
 export default function RootPage() {
-  redirect("/en");
+  return (
+    <html>
+      <head>
+        <meta httpEquiv="refresh" content="0; url=/bonjour/en/" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.location.replace('/bonjour/en/');`,
+          }}
+        />
+      </head>
+      <body>
+        <p>
+          <a href="/bonjour/en/">Continue to Bonjour</a>
+        </p>
+      </body>
+    </html>
+  );
 }

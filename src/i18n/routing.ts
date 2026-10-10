@@ -6,6 +6,8 @@ export const routing = defineRouting({
   locales: [...locales],
   defaultLocale,
   localePrefix: "always",
+  // No locale detection middleware on static hosting
+  localeDetection: false,
 });
 
 export const { Link, redirect, usePathname, useRouter, getPathname } =
