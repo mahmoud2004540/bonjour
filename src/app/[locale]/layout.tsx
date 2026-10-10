@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { isRtl, isValidLocale } from "@/i18n/config";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 type Props = {
   children: React.ReactNode;
@@ -28,8 +29,17 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <NextIntlClientProvider messages={messages}>
       <div dir={dir} lang={locale} className="min-h-screen flex flex-col bg-surface">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:start-2 focus:z-[100] focus:bg-ink-950 focus:text-white focus:px-3 focus:py-2 focus:rounded-lg"
+        >
+          Skip to content
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+        <Footer />
       </div>
     </NextIntlClientProvider>
   );

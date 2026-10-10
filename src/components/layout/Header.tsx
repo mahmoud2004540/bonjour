@@ -17,8 +17,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-100/70 bg-surface/85 backdrop-blur-md">
-      <div className="max-w-wide mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
+      <div className="max-w-wide mx-auto px-6 h-16 flex items-center justify-between gap-3">
         <Link
           href="/"
           className="font-serif text-[1.35rem] tracking-tight text-ink-950 hover:text-ink-700 transition-colors duration-200"
@@ -26,8 +25,20 @@ export function Header() {
           Bonjour
         </Link>
 
-        <nav className="flex items-center gap-5" aria-label="Main">
-          {/* Language switcher — extensible via config */}
+        <nav className="flex items-center gap-3 sm:gap-5" aria-label="Main">
+          <Link
+            href="/resources"
+            className="text-sm font-medium text-ink-500 hover:text-ink-900 transition-colors hidden md:inline"
+          >
+            {t("resources")}
+          </Link>
+          <Link
+            href="/about"
+            className="text-sm font-medium text-ink-500 hover:text-ink-900 transition-colors hidden md:inline"
+          >
+            {t("about")}
+          </Link>
+
           <div
             className="flex items-center gap-0.5 rounded-lg bg-ink-50 p-0.5"
             role="group"
