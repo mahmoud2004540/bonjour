@@ -6,7 +6,7 @@ import { useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { createLearner, updatePreferences } from "@/application/learner-store";
-import type { Locale } from "@/domain/types";
+import type { Locale } from "@/i18n/config";
 
 const OBJECTIVES = [
   { id: "daily", en: "Daily life", fr: "Vie quotidienne", ar: "الحياة اليومية" },
@@ -51,51 +51,59 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="max-w-lg mx-auto px-6 py-16">
+    <div className="max-w-content mx-auto px-6 py-16 md:py-20">
       <div className="mb-10">
-        <p className="text-caption text-ink-500 mb-2">
+        <p className="text-caption text-ink-400 mb-2 tabular-nums">
           {t("step", { current: step + 1, total: 3 })}
         </p>
         <h1 className="text-title font-serif text-ink-950">{t(`steps.${step}.title`)}</h1>
-        <p className="text-body text-ink-600 mt-2">{t(`steps.${step}.description`)}</p>
+        <p className="text-body text-ink-550 text-ink-600 mt-2 text-pretty">
+          {t(`steps.${step}.description`)}
+        </p>
       </div>
 
       <Card>
         {step === 0 && (
           <div className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-ink-700 mb-1.5">{t("nameLabel")}</label>
+              <label className="block text-sm font-medium text-ink-700 mb-1.5">
+                {t("nameLabel")}
+              </label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full h-11 px-4 rounded-xl border border-ink-200 bg-surface focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent"
+                className="input-field"
                 placeholder={t("namePlaceholder")}
+                autoComplete="name"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink-700 mb-1.5">{t("emailLabel")}</label>
+              <label className="block text-sm font-medium text-ink-700 mb-1.5">
+                {t("emailLabel")}
+              </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full h-11 px-4 rounded-xl border border-ink-200 bg-surface focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent"
+                className="input-field"
                 placeholder={t("emailPlaceholder")}
+                autoComplete="email"
               />
             </div>
           </div>
         )}
 
         {step === 1 && (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {OBJECTIVES.map((obj) => (
               <button
                 key={obj.id}
                 onClick={() => toggle(objectives, obj.id, setObjectives)}
-                className={`w-full text-start px-4 py-3 rounded-xl border transition-all ${
+                className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all duration-150 ${
                   objectives.includes(obj.id)
                     ? "border-accent-500 bg-accent-50 text-ink-950"
-                    : "border-ink-200 hover:border-ink-300 text-ink-700"
+                    : "border-ink-150 border-ink-200 hover:border-ink-300 text-ink-700"
                 }`}
               >
                 {obj[locale]}
@@ -105,12 +113,12 @@ export default function OnboardingPage() {
         )}
 
         {step === 2 && (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {SITUATIONS.map((sit) => (
               <button
                 key={sit.id}
                 onClick={() => toggle(situations, sit.id, setSituations)}
-                className={`w-full text-start px-4 py-3 rounded-xl border transition-all ${
+                className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all duration-150 ${
                   situations.includes(sit.id)
                     ? "border-accent-500 bg-accent-50 text-ink-950"
                     : "border-ink-200 hover:border-ink-300 text-ink-700"

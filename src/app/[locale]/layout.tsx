@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { isRtl, isValidLocale } from "@/i18n/config";
 import { Header } from "@/components/layout/Header";
 
 type Props = {
@@ -16,17 +17,17 @@ export function generateStaticParams() {
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as any)) {
+  if (!isValidLocale(locale)) {
     notFound();
   }
 
   setRequestLocale(locale);
   const messages = await getMessages();
-  const isRtl = locale === "ar";
+  const dir = isRtl(locale) ? "rtl" : "ltr";
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <div dir={isRtl ? "rtl" : "ltr"} className="min-h-screen flex flex-col">
+      <div dir={dir} lang={locale} className="min-h-screen flex flex-col bg-surface">
         <Header />
         <main className="flex-1">{children}</main>
       </div>

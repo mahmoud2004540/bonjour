@@ -5,24 +5,42 @@
 @layer base {
   :root {
     --background: 250 249 247;
-    --foreground: 33 31 27;
+    --foreground: 36 34 29;
+    --surface: 250 249 247;
+    --surface-elevated: 255 255 255;
+    --border: 235 233 228;
   }
 
   .dark {
-    --background: 33 31 27;
+    --background: 36 34 29;
     --foreground: 250 249 247;
+    --surface: 36 34 29;
+    --surface-elevated: 52 49 43;
+    --border: 78 73 63;
   }
 
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     @apply bg-surface text-ink-950 antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
 
-  /* Respect reduced motion */
+  /* Selection */
+  ::selection {
+    @apply bg-accent-100 text-ink-950;
+  }
+
+  /* Focus visible for keyboard users */
+  :focus-visible {
+    @apply outline-none;
+  }
+
+  /* Respect reduced motion — required by blueprint */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -35,8 +53,52 @@
   }
 }
 
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center h-11 px-6 rounded-xl
+           bg-ink-950 text-surface font-medium text-body
+           transition-all duration-200 ease-out-expo
+           hover:bg-ink-800
+           focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center h-11 px-6 rounded-xl
+           bg-accent-600 text-white font-medium text-body
+           transition-all duration-200 ease-out-expo
+           hover:bg-accent-700
+           focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center h-11 px-6 rounded-xl
+           border border-ink-200 text-ink-800 font-medium text-body
+           transition-all duration-200 ease-out-expo
+           hover:bg-ink-50 hover:border-ink-300
+           focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .input-field {
+    @apply w-full h-11 px-4 rounded-xl border border-ink-200 bg-surface-elevated
+           text-body text-ink-950 placeholder:text-ink-400
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent;
+  }
+
+  .card {
+    @apply bg-surface-elevated border border-ink-100 rounded-2xl shadow-card p-6;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
   }
 }
