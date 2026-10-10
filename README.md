@@ -10,52 +10,80 @@ Action-oriented learning:
 
 **Can-Do Goal → Concept → Skill → Task → Evidence → Next Learning Action**
 
-## Current Status — Vertical Slice Complete
+## Design Direction
 
-The first end-to-end learning path is working:
+**Premium Editorial** — calm, intelligent, trustworthy, human.
 
-1. **Landing** → clear value proposition
-2. **Onboarding** → name, goals, situations
-3. **Placement** → evidence collection across skills (no fake scores)
-4. **Learning Profile** → only shows observed evidence
-5. **Dashboard** → answers “What should I do now?”
-6. **A1 Scenario** — *Faire connaissance*
-7. **Practice + Evidence** → self-assessment clearly labelled
-8. **Deterministic recommendations** → explainable next actions
+Not a children’s game. Not Duolingo. Not generic SaaS.
 
-### Locales
-- English
-- French
-- Arabic (full RTL)
+### Design System
+- Editorial color palette (ink + accent)
+- Serif display + clean sans body
+- Purposeful motion (respects `prefers-reduced-motion`)
+- Light mode (dark mode foundation ready)
+- Full RTL support for Arabic
+- Responsive: mobile → tablet → desktop
 
-### Architecture
-- Domain logic is pure TypeScript (no UI imports)
-- Application layer handles persistence (currently localStorage, ready for Supabase)
-- No invented mastery, streaks, or CEFR claims beyond observed evidence
+## Internationalization
 
-## Tech Stack
+Currently supported:
 
-- Next.js 15 (App Router) + React 19 + TypeScript
-- Tailwind CSS + Design Tokens
-- next-intl (en / fr / ar)
+| Code | Language | Direction |
+|------|----------|-----------|
+| `en` | English  | LTR       |
+| `fr` | French   | LTR       |
+| `ar` | Arabic   | RTL       |
+
+### Adding a new language later
+
+1. Add the locale code in `src/i18n/config.ts`
+2. Create `messages/{locale}.json`
+3. If RTL → add it to `rtlLocales`
+4. Add display labels in `localeNames` / `localeShortNames`
+
+Routing and middleware pick it up automatically.
+
+## Vertical Slice (Working)
+
+1. Landing
+2. Onboarding
+3. Placement (evidence collection — no fake scores)
+4. Learning Profile (only observed evidence)
+5. Dashboard (“What should I do now?”)
+6. A1 Scenario — *Faire connaissance*
+7. Practice + Evidence (self-review clearly labelled)
+8. Deterministic next-action recommendations
+
+## Architecture
+
+```
+src/
+  domain/          ← pure business logic (no UI imports)
+  application/     ← use-cases + persistence
+  components/      ← UI
+  i18n/            ← locale config (extensible)
+  app/             ← Next.js routes
+```
 
 ## Run locally
 
 ```bash
+git clone https://github.com/mahmoud2004540/bonjour.git
+cd bonjour
 npm install
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
 
-## Next phases (from blueprint)
+## Next phases
 
 - Real authentication (Supabase)
-- Database + Row-level security
+- Database + RLS
 - Expanded A1 curriculum
-- Speech / pronunciation subsystem
+- Speech subsystem
 - Human review workflow
-- AI features where they add real educational value
+- AI where it adds real educational value
 
 ## License
 

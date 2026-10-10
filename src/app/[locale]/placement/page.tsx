@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { PLACEMENT_QUESTIONS } from "@/domain/placement/questions";
 import { finalizePlacement, getStoredProfile } from "@/application/learner-store";
-import type { PlacementObservation, Locale } from "@/domain/types";
+import type { PlacementObservation } from "@/domain/types";
+import type { Locale } from "@/i18n/config";
 
 export default function PlacementPage() {
   const t = useTranslations("placement");
@@ -15,8 +16,7 @@ export default function PlacementPage() {
   const router = useRouter();
 
   const [current, setCurrent] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string | number>>({
-  });
+  const [answers, setAnswers] = useState<Record<string, string | number>>({});
   const [openText, setOpenText] = useState("");
 
   useEffect(() => {
@@ -36,14 +36,14 @@ export default function PlacementPage() {
   }
 
   function handleNext() {
+    const nextAnswers = { ...answers };
     if (question.type === "open") {
-      setAnswers({ ...answers, [question.id]: openText });
+      nextAnswers[question.id] = openText;
     }
 
     if (isLast) {
-      // Build observations from answers
       const observations: PlacementObservation[] = PLACEMENT_QUESTIONS.map((q) => {
-        const answer = answers[q.id] ?? (q.type === "open" ? openText : -1);
+        const answer = nextAnswers[q.id] ?? (q.type === "open" ? openText : -1);
         let isCorrect: boolean | null = null;
 
         if (q.type === "multiple_choice" && typeof answer === "number") {
@@ -62,6 +62,7 @@ export default function PlacementPage() {
       finalizePlacement(observations);
       router.push("/profile");
     } else {
+      setAnswers(nextAnswers);
       setCurrent(current + 1);
       setOpenText("");
     }
@@ -73,17 +74,17 @@ export default function PlacementPage() {
       : answers[question.id] !== undefined;
 
   return (
-    <div className="max-w-lg mx-auto px-6 py-16">
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-caption text-ink-500">
+    <div className="max-w-content mx-auto px-6 py-16 md:py-20">
+      <div className="mb-10">
+        <div className="flex items-center justify-between mb-5">
+          <p className="text-caption text-ink-400 tabular-nums">
             {t("progress", { current: current + 1, total: PLACEMENT_QUESTIONS.length })}
           </p>
-          <div className="flex gap-1">
+          <div className="flex gap-1.5" aria-hidden="true">
             {PLACEMENT_QUESTIONS.map((_, i) => (
               <div
                 key={i}
-                className={`h-1.5 w-6 rounded-full ${
+                className={`h-1 w-7 rounded-full transition-colors duration-300 ${
                   i <= current ? "bg-ink-950" : "bg-ink-200"
                 }`}
               />
@@ -91,19 +92,21 @@ export default function PlacementPage() {
           </div>
         </div>
         <h1 className="text-title font-serif text-ink-950">{t("title")}</h1>
-        <p className="text-body text-ink-600 mt-2">{t("subtitle")}</p>
+        <p className="text-body text-ink-600 mt-2 text-pretty">{t("subtitle")}</p>
       </div>
 
       <Card>
-        <p className="text-body-lg text-ink-900 mb-6">{question.prompt[locale]}</p>
+        <p className="text-body-lg text-ink-900 mb-7 text-pretty">
+          {question.prompt[locale]}
+        </p>
 
         {question.type === "multiple_choice" && question.options && (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {question.options[locale].map((opt, idx) => (
               <button
                 key={idx}
                 onClick={() => selectOption(idx)}
-                className={`w-full text-start px-4 py-3 rounded-xl border transition-all ${
+                className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all duration-150 ${
                   answers[question.id] === idx
                     ? "border-accent-500 bg-accent-50 text-ink-950"
                     : "border-ink-200 hover:border-ink-300 text-ink-700"
@@ -120,7 +123,7 @@ export default function PlacementPage() {
             value={openText}
             onChange={(e) => setOpenText(e.target.value)}
             rows={4}
-            className="w-full px-4 py-3 rounded-xl border border-ink-200 bg-surface focus:outline-none focus:ring-2 focus:ring-accent-500 resize-none"
+            className="w-full px-4 py-3 rounded-xl border border-ink-200 bg-surface-elevated text-body text-ink-950 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent resize-none transition-all duration-200"
             placeholder={t("openPlaceholder")}
           />
         )}
