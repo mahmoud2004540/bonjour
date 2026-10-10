@@ -1,14 +1,19 @@
 /**
  * On-platform FLE materials (A1–C2).
  * Hosted entirely on Bonjour — no external redirects.
- * Pedagogy aligned with institutional FLE practice (CEFR, action-oriented,
- * real situations) similar in spirit to TV5MONDE / RFI approaches.
+ * Pedagogy: CEFR + action-oriented FLE (institutional quality).
  * Original educational text — not copied from third-party sites.
  */
 
 import type { CefrLevel } from "../types";
+import { MATERIALS_EXTRA } from "./materials-extra";
 
-export type MaterialKind = "text" | "vocabulary" | "exercise" | "dialogue" | "listening";
+export type MaterialKind =
+  | "text"
+  | "vocabulary"
+  | "exercise"
+  | "dialogue"
+  | "listening";
 
 export interface MaterialItem {
   id: string;
@@ -27,8 +32,7 @@ export interface MaterialItem {
   };
 }
 
-export const MATERIALS: MaterialItem[] = [
-  // ── A1 ───────────────────────────────────────────────
+const MATERIALS_CORE: MaterialItem[] = [
   {
     id: "a1-greetings",
     level: "A1",
@@ -114,7 +118,8 @@ export const MATERIALS: MaterialItem[] = [
     level: "A1",
     kind: "exercise",
     title: { en: "Telling the time", fr: "L'heure", ar: "الوقت" },
-    bodyFr: "Il est huit heures. Il est midi. Il est trois heures et demie. Il est dix heures moins le quart.",
+    bodyFr:
+      "Il est huit heures. Il est midi. Il est trois heures et demie. Il est dix heures moins le quart.",
     bodyEn: "Basic clock expressions.",
     bodyAr: "تعبيرات الساعة الأساسية.",
     exercise: {
@@ -124,8 +129,6 @@ export const MATERIALS: MaterialItem[] = [
       answers: ["midi", "il est midi"],
     },
   },
-
-  // ── A2 ───────────────────────────────────────────────
   {
     id: "a2-routine",
     level: "A2",
@@ -198,8 +201,6 @@ export const MATERIALS: MaterialItem[] = [
       { fr: "le médecin", en: "the doctor", ar: "الطبيب" },
     ],
   },
-
-  // ── B1 ───────────────────────────────────────────────
   {
     id: "b1-opinion",
     level: "B1",
@@ -245,7 +246,8 @@ export const MATERIALS: MaterialItem[] = [
     level: "B1",
     kind: "exercise",
     title: { en: "Conditions with si", fr: "La condition avec si", ar: "الشرط مع si" },
-    bodyFr: "Si j'ai le temps, je viendrai. Si tu veux, on peut se voir ce week-end.",
+    bodyFr:
+      "Si j'ai le temps, je viendrai. Si tu veux, on peut se voir ce week-end.",
     bodyEn: "Real conditions in the present / future.",
     bodyAr: "شروط حقيقية في الحاضر/المستقبل.",
     exercise: {
@@ -255,8 +257,6 @@ export const MATERIALS: MaterialItem[] = [
       answers: ["si"],
     },
   },
-
-  // ── B2 ───────────────────────────────────────────────
   {
     id: "b2-argument",
     level: "B2",
@@ -303,8 +303,6 @@ export const MATERIALS: MaterialItem[] = [
       answers: ["bien"],
     },
   },
-
-  // ── C1 ───────────────────────────────────────────────
   {
     id: "c1-hedging",
     level: "C1",
@@ -346,8 +344,6 @@ export const MATERIALS: MaterialItem[] = [
       answers: ["nominal"],
     },
   },
-
-  // ── C2 ───────────────────────────────────────────────
   {
     id: "c2-style",
     level: "C2",
@@ -384,6 +380,11 @@ export const MATERIALS: MaterialItem[] = [
     bodyEn: "Read implication and restrained irony in formal French.",
     bodyAr: "افهم الضمني والسخرية المتحفظة في الفرنسية الرسمية.",
   },
+];
+
+export const MATERIALS: MaterialItem[] = [
+  ...MATERIALS_CORE,
+  ...MATERIALS_EXTRA,
 ];
 
 export function getMaterialsByLevel(level: CefrLevel): MaterialItem[] {
