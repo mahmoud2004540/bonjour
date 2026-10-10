@@ -1,8 +1,6 @@
 /**
  * On-platform FLE materials (A1–C2).
  * Hosted entirely on Bonjour — no external redirects.
- * Pedagogy: CEFR + action-oriented FLE (institutional quality).
- * Original educational text — not copied from third-party sites.
  */
 
 import type { CefrLevel } from "../types";
@@ -123,8 +121,8 @@ const MATERIALS_CORE: MaterialItem[] = [
     bodyEn: "Basic clock expressions.",
     bodyAr: "تعبيرات الساعة الأساسية.",
     exercise: {
-      promptEn: "How do you say « It is noon » in French?",
-      promptFr: « Midi » : Il est …",
+      promptEn: "How do you say 'It is noon' in French?",
+      promptFr: "Midi : Il est …",
       promptAr: "كيف تقول الظهر؟ Il est …",
       answers: ["midi", "il est midi"],
     },
@@ -251,7 +249,7 @@ const MATERIALS_CORE: MaterialItem[] = [
     bodyEn: "Real conditions in the present / future.",
     bodyAr: "شروط حقيقية في الحاضر/المستقبل.",
     exercise: {
-      promptEn: "The French word for « if » is:",
+      promptEn: "The French word for 'if' is:",
       promptFr: "Le mot de condition :",
       promptAr: "كلمة الشرط بالفرنسية:",
       answers: ["si"],
@@ -364,9 +362,9 @@ const MATERIALS_CORE: MaterialItem[] = [
     bodyEn: "Match register to situation.",
     bodyAr: "طابق مستوى اللغة مع الموقف.",
     exercise: {
-      promptEn: "« Cela me paraît judicieux » is which register?",
-      promptFr: « Cela me paraît judicieux » : quel registre ?",
-      promptAr: « Cela me paraît judicieux » أي مستوى؟",
+      promptEn: "'Cela me paraît judicieux' is which register?",
+      promptFr: "Cela me paraît judicieux : quel registre ?",
+      promptAr: "Cela me paraît judicieux أي مستوى؟",
       answers: ["soutenu"],
     },
   },
