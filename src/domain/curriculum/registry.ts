@@ -26,6 +26,7 @@ import { SCENARIO_HOTEL, HOTEL_GOALS, HOTEL_TASKS } from "./a2-hotel";
 import { SCENARIO_PHONE, PHONE_GOALS, PHONE_TASKS } from "./a2-telephone";
 import { SCENARIO_RDV, RDV_GOALS, RDV_TASKS } from "./a2-rdv";
 import { SCENARIO_TRAVAIL, TRAVAIL_GOALS, TRAVAIL_TASKS } from "./b1-travail";
+import { SCENARIO_SERVICE, SERVICE_GOALS, SERVICE_TASKS } from "./b1-service";
 
 const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_FAIRE_CONNAISSANCE,
@@ -39,6 +40,7 @@ const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_PHONE,
   SCENARIO_RDV,
   SCENARIO_TRAVAIL,
+  SCENARIO_SERVICE,
 ];
 
 const ALL_GOALS: LearningGoal[] = [
@@ -53,6 +55,7 @@ const ALL_GOALS: LearningGoal[] = [
   ...PHONE_GOALS,
   ...RDV_GOALS,
   ...TRAVAIL_GOALS,
+  ...SERVICE_GOALS,
 ];
 
 const ALL_TASKS: Task[] = [
@@ -67,6 +70,7 @@ const ALL_TASKS: Task[] = [
   ...PHONE_TASKS,
   ...RDV_TASKS,
   ...TRAVAIL_TASKS,
+  ...SERVICE_TASKS,
 ];
 
 export function getPublishedScenarios(): Scenario[] {
@@ -97,7 +101,6 @@ export function getAllGoalIds(): string[] {
   return ALL_GOALS.map((g) => g.id);
 }
 
-/** Integrity check: prerequisites must reference existing goals. */
 export function validateCurriculumIntegrity(): string[] {
   const ids = new Set(getAllGoalIds());
   const issues: string[] = [];

@@ -6,6 +6,7 @@ import { useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { createLearner, updatePreferences } from "@/application/learner-store";
+import { trackEvent } from "@/application/local-events";
 import type { Locale } from "@/i18n/config";
 
 const OBJECTIVES = [
@@ -22,6 +23,8 @@ const SITUATIONS = [
   { id: "healthcare", en: "Healthcare", fr: "Santé", ar: "الرعاية الصحية" },
   { id: "housing", en: "Housing", fr: "Logement", ar: "السكن" },
   { id: "meeting", en: "Meeting people", fr: "Rencontrer des gens", ar: "مقابلة الناس" },
+  { id: "travel", en: "Travel & transport", fr: "Voyage et transports", ar: "السفر والمواصلات" },
+  { id: "work", en: "Workplace", fr: "Lieu de travail", ar: "مكان العمل" },
 ];
 
 export default function OnboardingPage() {
@@ -47,6 +50,7 @@ export default function OnboardingPage() {
       availability: "",
       preferredStyle: "",
     });
+    trackEvent("onboarding_complete");
     router.push("/placement");
   }
 
@@ -57,7 +61,7 @@ export default function OnboardingPage() {
           {t("step", { current: step + 1, total: 3 })}
         </p>
         <h1 className="text-title font-serif text-ink-950">{t(`steps.${step}.title`)}</h1>
-        <p className="text-body text-ink-550 text-ink-600 mt-2 text-pretty">
+        <p className="text-body text-ink-600 mt-2 text-pretty">
           {t(`steps.${step}.description`)}
         </p>
       </div>
@@ -99,11 +103,12 @@ export default function OnboardingPage() {
             {OBJECTIVES.map((obj) => (
               <button
                 key={obj.id}
+                type="button"
                 onClick={() => toggle(objectives, obj.id, setObjectives)}
                 className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all duration-150 ${
                   objectives.includes(obj.id)
                     ? "border-accent-500 bg-accent-50 text-ink-950"
-                    : "border-ink-150 border-ink-200 hover:border-ink-300 text-ink-700"
+                    : "border-ink-200 hover:border-ink-300 text-ink-700"
                 }`}
               >
                 {obj[locale]}
@@ -117,6 +122,7 @@ export default function OnboardingPage() {
             {SITUATIONS.map((sit) => (
               <button
                 key={sit.id}
+                type="button"
                 onClick={() => toggle(situations, sit.id, setSituations)}
                 className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all duration-150 ${
                   situations.includes(sit.id)
