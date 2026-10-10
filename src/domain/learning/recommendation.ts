@@ -4,14 +4,15 @@
  */
 
 import type { LearnerProfile, Recommendation, Locale } from "../types";
-import { GOALS, getGoalById } from "../curriculum/a1-faire-connaissance";
+import { getAllGoals, getGoalById } from "../curriculum/registry";
 
 export function getNextRecommendations(
   profile: LearnerProfile
 ): Recommendation[] {
   const recommendations: Recommendation[] = [];
+  const goals = getAllGoals();
 
-  for (const goal of GOALS) {
+  for (const goal of goals) {
     if (profile.completedGoals.includes(goal.id)) continue;
 
     const prereqsMet = goal.prerequisites.every((p) =>
@@ -26,7 +27,6 @@ export function getNextRecommendations(
       ar: `موصى به لأنك لم تُثبت بعد: « ${goal.canDoStatement.ar} »`,
     };
 
-    // Higher priority for goals with no prerequisites (starting points)
     const priority = goal.prerequisites.length === 0 ? 10 : 5;
 
     recommendations.push({
@@ -50,8 +50,5 @@ export function explainRecommendation(
   recommendation: Recommendation,
   locale: Locale
 ): string {
-  const goal = getGoalById(recommendation.goalId);
-  if (!goal) return recommendation.reason[locale];
-
   return recommendation.reason[locale];
 }
