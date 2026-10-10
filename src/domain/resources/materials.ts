@@ -1,368 +1,388 @@
 /**
- * In-platform learning materials (A1–C2).
- * Content lives on Bonjour — no external site required.
- * Audio: browser TTS only when available; clearly not native recordings.
+ * On-platform FLE materials (A1–C2).
+ * Hosted entirely on Bonjour — no external redirects.
+ * Pedagogy aligned with institutional FLE practice (CEFR, action-oriented,
+ * real situations) similar in spirit to TV5MONDE / RFI approaches.
+ * Original educational text — not copied from third-party sites.
  */
 
 import type { CefrLevel } from "../types";
 
-export type MaterialKind = "text" | "vocabulary" | "exercise" | "dialogue";
+export type MaterialKind = "text" | "vocabulary" | "exercise" | "dialogue" | "listening";
 
 export interface MaterialItem {
   id: string;
   level: CefrLevel;
   kind: MaterialKind;
   title: { en: string; fr: string; ar: string };
-  /** Main learning content (French where appropriate) */
   bodyFr: string;
-  /** Support / translation / instruction */
   bodyEn: string;
   bodyAr: string;
-  /** Optional vocabulary pairs FR → meaning */
   vocabulary?: { fr: string; en: string; ar: string }[];
-  /** Optional exercise */
   exercise?: {
     promptEn: string;
     promptFr: string;
     promptAr: string;
-    /** Acceptable answers (lowercase normalized match) */
     answers: string[];
   };
 }
 
 export const MATERIALS: MaterialItem[] = [
-  // ═══════════════ A1 ═══════════════
+  // ── A1 ───────────────────────────────────────────────
   {
     id: "a1-greetings",
     level: "A1",
     kind: "dialogue",
-    title: {
-      en: "Greetings",
-      fr: "Les salutations",
-      ar: "التحيات",
-    },
+    title: { en: "Greetings", fr: "Les salutations", ar: "التحيات" },
     bodyFr:
-      "— Bonjour !\n— Bonjour ! Comment allez-vous ?\n— Bien, merci. Et vous ?\n— Très bien, merci.\n— Au revoir !\n— Au revoir ! À bientôt !",
-    bodyEn:
-      "A simple formal greeting exchange. Use « Bonjour » during the day, « Bonsoir » in the evening.",
-    bodyAr:
-      "حوار تحية رسمي بسيط. استخدم « Bonjour » في النهار و« Bonsoir » مساءً.",
+      "— Bonjour, madame !\n— Bonjour ! Comment allez-vous ?\n— Bien, merci. Et vous ?\n— Très bien, merci.\n— Au revoir !\n— Au revoir, à bientôt !",
+    bodyEn: "Formal daytime greetings. Use Bonsoir in the evening.",
+    bodyAr: "تحيات رسمية في النهار. استخدم Bonsoir مساءً.",
     vocabulary: [
-      { fr: "Bonjour", en: "Hello / Good morning", ar: "مرحبًا / صباح الخير" },
+      { fr: "Bonjour", en: "Hello / Good day", ar: "مرحبًا" },
       { fr: "Bonsoir", en: "Good evening", ar: "مساء الخير" },
+      { fr: "Comment allez-vous ?", en: "How are you? (formal)", ar: "كيف حالك؟ (رسمي)" },
       { fr: "Au revoir", en: "Goodbye", ar: "إلى اللقاء" },
-      { fr: "Merci", en: "Thank you", ar: "شكرًا" },
       { fr: "À bientôt", en: "See you soon", ar: "إلى اللقاء قريبًا" },
     ],
   },
   {
-    id: "a1-introduce",
+    id: "a1-identity",
     level: "A1",
     kind: "text",
-    title: {
-      en: "Introduce yourself",
-      fr: "Se présenter",
-      ar: "تقديم النفس",
-    },
+    title: { en: "Identity", fr: "L'identité", ar: "الهوية" },
     bodyFr:
-      "Je m'appelle Samir.\nJ'habite à Lyon.\nJe suis étudiant.\nJe parle arabe et un peu français.",
-    bodyEn: "Model text for a basic self-introduction.",
-    bodyAr: "نص نموذجي لتقديم النفس بشكل أساسي.",
+      "Je m'appelle Leila.\nJ'ai vingt-huit ans.\nJ'habite à Marseille.\nJe suis professeure.\nJe parle arabe et français.",
+    bodyEn: "Name, age, city, job, languages — core A1 can-do.",
+    bodyAr: "الاسم، العمر، المدينة، العمل، اللغات — أساس A1.",
     vocabulary: [
       { fr: "Je m'appelle…", en: "My name is…", ar: "اسمي…" },
+      { fr: "J'ai … ans", en: "I am … years old", ar: "عمري … سنة" },
       { fr: "J'habite à…", en: "I live in…", ar: "أسكن في…" },
-      { fr: "Je suis…", en: "I am…", ar: "أنا…" },
-      { fr: "Je parle…", en: "I speak…", ar: "أتحدث…" },
+      { fr: "Je suis…", en: "I am… (job/identity)", ar: "أنا…" },
     ],
     exercise: {
-      promptEn: "Write in French: My name is… (use Je m'appelle)",
-      promptFr: "Écrivez : Je m'appelle…",
-      promptAr: "اكتب بالفرنسية: اسمي… (استخدم Je m'appelle)",
-      answers: ["je m'appelle", "je mappelle"],
+      promptEn: "Write the start of: My name is… → Je …",
+      promptFr: "Complétez : Je … Leila.",
+      promptAr: "أكمل: Je … Leila.",
+      answers: ["m'appelle", "mappelle"],
     },
   },
   {
     id: "a1-cafe",
     level: "A1",
     kind: "dialogue",
-    title: {
-      en: "At the café",
-      fr: "Au café",
-      ar: "في المقهى",
-    },
+    title: { en: "At the café", fr: "Au café", ar: "في المقهى" },
     bodyFr:
-      "— Bonjour, vous désirez ?\n— Un café, s'il vous plaît.\n— Avec du sucre ?\n— Non, merci.\n— C'est combien ?\n— Deux euros.\n— Merci !",
-    bodyEn: "Ordering a coffee politely.",
-    bodyAr: "طلب قهوة بأدب.",
+      "— Bonjour, vous désirez ?\n— Un thé, s'il vous plaît.\n— Avec du sucre ?\n— Oui, un peu.\n— Ça fait deux euros.\n— Voici. Merci !\n— Je vous en prie.",
+    bodyEn: "Order a drink and pay politely.",
+    bodyAr: "اطلب مشروبًا وادفع بأدب.",
     vocabulary: [
-      { fr: "Un café", en: "A coffee", ar: "قهوة" },
-      { fr: "S'il vous plaît", en: "Please (formal)", ar: "من فضلك" },
-      { fr: "C'est combien ?", en: "How much is it?", ar: "بكم؟" },
+      { fr: "Vous désirez ?", en: "What would you like?", ar: "ماذا ترغب؟" },
+      { fr: "S'il vous plaît", en: "Please", ar: "من فضلك" },
+      { fr: "Ça fait…", en: "That comes to…", ar: "المبلغ…" },
+      { fr: "Je vous en prie", en: "You're welcome", ar: "العفو" },
+    ],
+  },
+  {
+    id: "a1-shop",
+    level: "A1",
+    kind: "dialogue",
+    title: { en: "At the shop", fr: "Au magasin", ar: "في المتجر" },
+    bodyFr:
+      "— Bonjour, je voudrais du pain, s'il vous plaît.\n— Une baguette ?\n— Oui. Et trois pommes.\n— Ça fait quatre euros cinquante.\n— Merci. Au revoir !",
+    bodyEn: "Ask for food items and quantities.",
+    bodyAr: "اطلب أصنافًا وكميات.",
+    vocabulary: [
+      { fr: "Je voudrais…", en: "I would like…", ar: "أريد…" },
+      { fr: "du pain", en: "some bread", ar: "خبز" },
+      { fr: "une baguette", en: "a baguette", ar: "باغيت" },
     ],
   },
   {
     id: "a1-numbers",
     level: "A1",
     kind: "vocabulary",
-    title: {
-      en: "Numbers 1–10",
-      fr: "Les nombres 1–10",
-      ar: "الأرقام 1–10",
+    title: { en: "Numbers 1–20", fr: "Nombres 1–20", ar: "الأرقام 1–20" },
+    bodyFr:
+      "1 un · 2 deux · 3 trois · 4 quatre · 5 cinq · 6 six · 7 sept · 8 huit · 9 neuf · 10 dix\n11 onze · 12 douze · 13 treize · 14 quatorze · 15 quinze · 16 seize · 17 dix-sept · 18 dix-huit · 19 dix-neuf · 20 vingt",
+    bodyEn: "Numbers for prices, time and quantities.",
+    bodyAr: "أرقام للأسعار والوقت والكميات.",
+  },
+  {
+    id: "a1-time",
+    level: "A1",
+    kind: "exercise",
+    title: { en: "Telling the time", fr: "L'heure", ar: "الوقت" },
+    bodyFr: "Il est huit heures. Il est midi. Il est trois heures et demie. Il est dix heures moins le quart.",
+    bodyEn: "Basic clock expressions.",
+    bodyAr: "تعبيرات الساعة الأساسية.",
+    exercise: {
+      promptEn: "How do you say « It is noon » in French?",
+      promptFr: « Midi » : Il est …",
+      promptAr: "كيف تقول الظهر؟ Il est …",
+      answers: ["midi", "il est midi"],
     },
-    bodyFr: "un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix",
-    bodyEn: "Essential numbers for prices and quantities.",
-    bodyAr: "أرقام أساسية للأسعار والكميات.",
-    vocabulary: [
-      { fr: "un / une", en: "one", ar: "واحد" },
-      { fr: "deux", en: "two", ar: "اثنان" },
-      { fr: "trois", en: "three", ar: "ثلاثة" },
-      { fr: "quatre", en: "four", ar: "أربعة" },
-      { fr: "cinq", en: "five", ar: "خمسة" },
-      { fr: "dix", en: "ten", ar: "عشرة" },
-    ],
   },
 
-  // ═══════════════ A2 ═══════════════
+  // ── A2 ───────────────────────────────────────────────
   {
-    id: "a2-daily",
+    id: "a2-routine",
     level: "A2",
     kind: "text",
-    title: {
-      en: "A simple day",
-      fr: "Une journée simple",
-      ar: "يوم بسيط",
-    },
+    title: { en: "Daily routine", fr: "La routine quotidienne", ar: "الروتين اليومي" },
     bodyFr:
-      "Le matin, je me lève à sept heures. Je prends le petit-déjeuner, puis je vais au travail en métro. Le soir, je rentre à la maison, je dîne et je regarde un film.",
-    bodyEn: "Describe a routine day with common verbs.",
-    bodyAr: "وصف يوم روتيني بأفعال شائعة.",
+      "D'habitude, je me lève à 7 heures. Je prends une douche, puis je bois un café. Je vais au travail en bus. Le soir, je prépare le dîner et je regarde les informations.",
+    bodyEn: "Describe habits with present tense and sequence.",
+    bodyAr: "صف عاداتك بالحاضر والتسلسل.",
     vocabulary: [
+      { fr: "D'habitude", en: "Usually", ar: "عادةً" },
       { fr: "se lever", en: "to get up", ar: "يستيقظ" },
-      { fr: "le petit-déjeuner", en: "breakfast", ar: "الإفطار" },
-      { fr: "le métro", en: "the metro", ar: "المترو" },
-      { fr: "rentrer", en: "to go home / return", ar: "يعود" },
+      { fr: "puis", en: "then", ar: "ثم" },
     ],
   },
   {
     id: "a2-directions",
     level: "A2",
     kind: "dialogue",
-    title: {
-      en: "Asking the way",
-      fr: "Demander son chemin",
-      ar: "السؤال عن الطريق",
-    },
+    title: { en: "Directions", fr: "Les directions", ar: "الاتجاهات" },
     bodyFr:
-      "— Excusez-moi, où est la gare ?\n— La gare ? Tout droit, puis à gauche.\n— C'est loin ?\n— Non, cinq minutes à pied.\n— Merci beaucoup !",
-    bodyEn: "Ask for and understand simple directions.",
-    bodyAr: "اسأل وافهم اتجاهات بسيطة.",
+      "— Excusez-moi, pour aller à la pharmacie ?\n— C'est tout droit, après le feu rouge, à droite.\n— C'est loin ?\n— Non, environ cinq minutes à pied.\n— Merci beaucoup !",
+    bodyEn: "Ask for and follow simple street directions.",
+    bodyAr: "اسأل واتبع اتجاهات بسيطة.",
     vocabulary: [
-      { fr: "tout droit", en: "straight ahead", ar: "على طول" },
-      { fr: "à gauche", en: "to the left", ar: "يسارًا" },
-      { fr: "à droite", en: "to the right", ar: "يمينًا" },
-      { fr: "à pied", en: "on foot", ar: "مشيًا" },
+      { fr: "tout droit", en: "straight on", ar: "على طول" },
+      { fr: "à droite", en: "right", ar: "يمين" },
+      { fr: "à gauche", en: "left", ar: "يسار" },
+      { fr: "le feu rouge", en: "the traffic light", ar: "إشارة المرور" },
     ],
   },
   {
-    id: "a2-past",
+    id: "a2-passe",
     level: "A2",
     kind: "exercise",
-    title: {
-      en: "Yesterday (passé composé)",
-      fr: "Hier (passé composé)",
-      ar: "أمس (الماضي المركب)",
-    },
-    bodyFr: "Hier, j'ai mangé au restaurant. J'ai vu un film. Je suis allé(e) au parc.",
-    bodyEn: "Simple past actions with avoir / être.",
-    bodyAr: "أحداث ماضية بسيطة مع avoir / être.",
+    title: { en: "Past events", fr: "Le passé composé", ar: "الماضي المركب" },
+    bodyFr:
+      "Hier, j'ai travaillé jusqu'à 18 heures. Ensuite, j'ai dîné avec des amis. Nous sommes allés au cinéma.",
+    bodyEn: "Passé composé with avoir and être.",
+    bodyAr: "الماضي المركب مع avoir و être.",
     exercise: {
-      promptEn: "Complete: Hier, j'___ mangé une pizza. (ai / suis)",
-      promptFr: "Complétez : Hier, j'___ mangé une pizza.",
-      promptAr: "أكمل: Hier, j'___ mangé une pizza.",
+      promptEn: "Hier, j'___ mangé une salade. (ai / suis)",
+      promptFr: "Hier, j'___ mangé une salade.",
+      promptAr: "Hier, j'___ mangé une salade.",
       answers: ["ai"],
     },
   },
+  {
+    id: "a2-invitation",
+    level: "A2",
+    kind: "dialogue",
+    title: { en: "Invitation", fr: "L'invitation", ar: "الدعوة" },
+    bodyFr:
+      "— Tu es libre samedi soir ?\n— Oui, pourquoi ?\n— On organise un dîner chez moi. Tu veux venir ?\n— Avec plaisir ! À quelle heure ?\n— Vers 20 heures.\n— Parfait, à samedi !",
+    bodyEn: "Invite someone and set a time (informal tu).",
+    bodyAr: "ادعُ شخصًا وحدد وقتًا (صيغة tu).",
+  },
+  {
+    id: "a2-health",
+    level: "A2",
+    kind: "vocabulary",
+    title: { en: "Feeling unwell", fr: "Ne pas se sentir bien", ar: "الشعور بالمرض" },
+    bodyFr:
+      "J'ai mal à la tête. J'ai mal au dos. Je suis fatigué(e). Je suis enrhumé(e). Je dois aller chez le médecin.",
+    bodyEn: "Basic health complaints.",
+    bodyAr: "شكاوى صحية بسيطة.",
+    vocabulary: [
+      { fr: "J'ai mal à…", en: "My … hurts", ar: "يؤلمني…" },
+      { fr: "fatigué(e)", en: "tired", ar: "متعب" },
+      { fr: "le médecin", en: "the doctor", ar: "الطبيب" },
+    ],
+  },
 
-  // ═══════════════ B1 ═══════════════
+  // ── B1 ───────────────────────────────────────────────
   {
     id: "b1-opinion",
     level: "B1",
     kind: "text",
-    title: {
-      en: "Giving an opinion",
-      fr: "Donner son avis",
-      ar: "إبداء الرأي",
-    },
+    title: { en: "Giving opinions", fr: "Donner son avis", ar: "إبداء الرأي" },
     bodyFr:
-      "À mon avis, apprendre une langue demande de la régularité. Je trouve que pratiquer un peu chaque jour est plus efficace que de longues sessions rares. En revanche, il ne faut pas avoir peur de faire des erreurs.",
-    bodyEn: "Express and justify a simple opinion.",
-    bodyAr: "عبّر عن رأي بسيط وبرّره.",
+      "À mon avis, apprendre une langue demande de la régularité. Je trouve que quinze minutes par jour valent mieux qu'une longue session une fois par semaine. En revanche, il ne faut pas négliger la pratique orale.",
+    bodyEn: "State and justify an opinion with connectors.",
+    bodyAr: "عبّر عن رأي وبرّره بروابط.",
     vocabulary: [
       { fr: "À mon avis", en: "In my opinion", ar: "في رأيي" },
-      { fr: "Je trouve que", en: "I think that", ar: "أعتقد أن" },
-      { fr: "En revanche", en: "On the other hand", ar: "في المقابل" },
+      { fr: "Je trouve que", en: "I find that", ar: "أرى أن" },
+      { fr: "En revanche", en: "However", ar: "في المقابل" },
     ],
   },
   {
     id: "b1-story",
     level: "B1",
     kind: "text",
-    title: {
-      en: "Tell a short story",
-      fr: "Raconter une histoire courte",
-      ar: "سرد قصة قصيرة",
-    },
+    title: { en: "Narrating an incident", fr: "Raconter un incident", ar: "سرد حادثة" },
     bodyFr:
-      "La semaine dernière, j'ai manqué mon train. J'étais en retard parce que le métro était bloqué. Finalement, j'ai pris un taxi et je suis arrivé juste à temps pour la réunion.",
-    bodyEn: "Narrate a past event with sequence markers.",
-    bodyAr: "اسرد حدثًا ماضيًا مع أدوات التسلسل.",
+      "La semaine dernière, j'ai manqué mon train. Le métro était en retard à cause d'un incident technique. J'ai finalement pris un taxi pour ne pas arriver en retard à mon rendez-vous.",
+    bodyEn: "Tell a past story with cause and result.",
+    bodyAr: "اسرد قصة ماضية مع السبب والنتيجة.",
     vocabulary: [
-      { fr: "La semaine dernière", en: "Last week", ar: "الأسبوع الماضي" },
-      { fr: "parce que", en: "because", ar: "لأن" },
-      { fr: "Finalement", en: "Finally / In the end", ar: "في النهاية" },
+      { fr: "à cause de", en: "because of", ar: "بسبب" },
+      { fr: "finalement", en: "in the end", ar: "في النهاية" },
+      { fr: "un rendez-vous", en: "an appointment", ar: "موعد" },
     ],
   },
   {
-    id: "b1-hypothesis",
+    id: "b1-housing",
+    level: "B1",
+    kind: "dialogue",
+    title: { en: "Looking for a flat", fr: "Chercher un appartement", ar: "البحث عن شقة" },
+    bodyFr:
+      "— Bonjour, je téléphone pour l'annonce de l'appartement.\n— Oui, il est toujours disponible.\n— Il fait quelle surface ?\n— Quarante-cinq mètres carrés, avec un balcon.\n— Est-ce que je peux le visiter demain ?\n— Bien sûr, vers 17 heures.",
+    bodyEn: "Phone enquiry about a rental.",
+    bodyAr: "استفسار هاتفي عن إيجار.",
+  },
+  {
+    id: "b1-si",
     level: "B1",
     kind: "exercise",
-    title: {
-      en: "If… (condition)",
-      fr: "Si… (condition)",
-      ar: "إذا… (شرط)",
-    },
-    bodyFr: "Si j'ai le temps, je vais au cinéma. Si tu viens, on pourra dîner ensemble.",
-    bodyEn: "Basic conditional structures.",
-    bodyAr: "تراكيب شرطية أساسية.",
+    title: { en: "Conditions with si", fr: "La condition avec si", ar: "الشرط مع si" },
+    bodyFr: "Si j'ai le temps, je viendrai. Si tu veux, on peut se voir ce week-end.",
+    bodyEn: "Real conditions in the present / future.",
+    bodyAr: "شروط حقيقية في الحاضر/المستقبل.",
     exercise: {
-      promptEn: "Type the French word for « if » used in conditions:",
-      promptFr: "Le mot pour introduire une condition :",
-      promptAr: "اكتب كلمة « إذا » بالفرنسية:",
+      promptEn: "The French word for « if » is:",
+      promptFr: "Le mot de condition :",
+      promptAr: "كلمة الشرط بالفرنسية:",
       answers: ["si"],
     },
   },
 
-  // ═══════════════ B2 ═══════════════
+  // ── B2 ───────────────────────────────────────────────
   {
     id: "b2-argument",
     level: "B2",
     kind: "text",
-    title: {
-      en: "Structured argument",
-      fr: "Argument structuré",
-      ar: "حجة منظمة",
-    },
+    title: { en: "Balanced argument", fr: "Argument équilibré", ar: "حجة متوازنة" },
     bodyFr:
-      "D'une part, le télétravail offre plus de flexibilité. D'autre part, il peut réduire les échanges informels au sein des équipes. Ainsi, il convient de trouver un équilibre entre présence au bureau et travail à distance.",
-    bodyEn: "Connectors for balanced argumentation.",
-    bodyAr: "روابط للحجاج المتوازن.",
+      "D'une part, le télétravail augmente la flexibilité. D'autre part, il peut affaiblir la cohésion d'équipe. Il convient donc de combiner jours sur site et jours à distance selon les besoins du projet.",
+    bodyEn: "Two-sided argument with a measured conclusion.",
+    bodyAr: "حجة من وجهتين مع خاتمة متزنة.",
     vocabulary: [
       { fr: "D'une part", en: "On the one hand", ar: "من جهة" },
       { fr: "D'autre part", en: "On the other hand", ar: "من جهة أخرى" },
-      { fr: "Ainsi", en: "Thus / Therefore", ar: "وهكذا" },
-      { fr: "il convient de", en: "it is appropriate to", ar: "ينبغي" },
+      { fr: "Il convient de", en: "It is appropriate to", ar: "ينبغي" },
     ],
   },
   {
-    id: "b2-news",
+    id: "b2-media",
     level: "B2",
     kind: "text",
-    title: {
-      en: "Reading a short news-style text",
-      fr: "Lire un texte de type actualité",
-      ar: "قراءة نص بأسلوب إخباري",
-    },
+    title: { en: "Media-style paragraph", fr: "Paragraphe de type presse", ar: "فقرة بأسلوب صحفي" },
     bodyFr:
-      "Selon les derniers chiffres, la fréquentation des bibliothèques municipales a augmenté de quinze pour cent. Les responsables soulignent le rôle des ateliers gratuits et des horaires élargis dans cette progression.",
-    bodyEn: "Understand reported information and cause.",
-    bodyAr: "افهم معلومات منقولة والسبب.",
+      "Selon une enquête récente, la fréquentation des bibliothèques a progressé de près de quinze pour cent. Les responsables attribuent cette hausse aux ateliers gratuits et à l'extension des horaires d'ouverture.",
+    bodyEn: "Report figures and explanations in a neutral tone.",
+    bodyAr: "اعرض أرقامًا وتفسيرات بنبرة محايدة.",
     vocabulary: [
       { fr: "Selon", en: "According to", ar: "وفقًا لـ" },
-      { fr: "souligner", en: "to emphasize", ar: "يؤكد / يبرز" },
-      { fr: "progression", en: "increase / progress", ar: "تقدّم / زيادة" },
+      { fr: "attribuer à", en: "to attribute to", ar: "يعزو إلى" },
+      { fr: "la hausse", en: "the increase", ar: "الارتفاع" },
     ],
   },
-
-  // ═══════════════ C1 ═══════════════
   {
-    id: "c1-nuance",
+    id: "b2-concession",
+    level: "B2",
+    kind: "exercise",
+    title: { en: "Concession", fr: "La concession", ar: "الاستدراك" },
+    bodyFr:
+      "Bien que le projet soit ambitieux, le calendrier reste réaliste. Même si les moyens sont limités, l'équipe progresse.",
+    bodyEn: "Bien que / Même si for nuanced positions.",
+    bodyAr: "Bien que / Même si للمواقف الدقيقة.",
+    exercise: {
+      promptEn: "Complete: ___ que ce soit difficile, on continue. (Bien)",
+      promptFr: "___ que ce soit difficile, on continue.",
+      promptAr: "___ que ce soit difficile, on continue.",
+      answers: ["bien"],
+    },
+  },
+
+  // ── C1 ───────────────────────────────────────────────
+  {
+    id: "c1-hedging",
     level: "C1",
     kind: "text",
-    title: {
-      en: "Nuance and hedging",
-      fr: "Nuance et prudence",
-      ar: "التلطيف والتحفظ",
-    },
+    title: { en: "Academic caution", fr: "Prudence académique", ar: "الحذر الأكاديمي" },
     bodyFr:
-      "Il semblerait que les habitudes de consommation évoluent plus rapidement qu'on ne le pensait. Cela dit, il serait hasardeux d'en tirer des conclusions définitives sans données longitudinales.",
-    bodyEn: "Academic / formal hedging language.",
-    bodyAr: "لغة التحفظ الرسمية والأكاديمية.",
+      "Il semblerait que les pratiques numériques évoluent plus vite qu'on ne l'anticipait. Cela dit, il serait prématuré d'en tirer des conclusions définitives sans données longitudinales.",
+    bodyEn: "Hedge claims; avoid overstatement.",
+    bodyAr: "لطّف الادعاءات؛ تجنب المبالغة.",
     vocabulary: [
       { fr: "Il semblerait que", en: "It would seem that", ar: "يبدو أن" },
-      { fr: "Cela dit", en: "That said",
-        ar: "ومع ذلك" },
-      { fr: "hasardeux", en: "risky / hazardous", ar: "محفوف بالمخاطر" },
+      { fr: "Cela dit", en: "That said", ar: "ومع ذلك" },
+      { fr: "prématuré", en: "premature", ar: "مبكر جدًا" },
     ],
   },
   {
     id: "c1-synthesis",
     level: "C1",
     kind: "text",
-    title: {
-      en: "Synthesis paragraph",
-      fr: "Paragraphe de synthèse",
-      ar: "فقرة تلخيص",
-    },
+    title: { en: "Synthesis", fr: "Synthèse", ar: "تلخيص تحليلي" },
     bodyFr:
-      "En somme, si les outils numériques facilitent l'accès aux ressources, ils ne dispensent pas l'apprenant d'un engagement actif. La régularité, le feedback et l'exposition à des documents authentiques demeurent des leviers essentiels.",
-    bodyEn: "Concluding synthesis with formal register.",
-    bodyAr: "تلخيص ختامي بسجل لغوي رسمي.",
-    vocabulary: [
-      { fr: "En somme", en: "In short / To sum up", ar: "باختصار" },
-      { fr: "dispenser de", en: "to exempt from", ar: "يغني عن" },
-      { fr: "leviers", en: "levers / drivers", ar: "عوامل / روافع" },
-    ],
+      "En somme, si l'accès aux ressources en ligne s'est démocratisé, la progression linguistique dépend encore d'un engagement actif : régularité, rétroaction et confrontation à des documents authentiques.",
+    bodyEn: "Synthesize causes without listing them flatly.",
+    bodyAr: "لخّص الأسباب دون سرد سطحي.",
+  },
+  {
+    id: "c1-nominal",
+    level: "C1",
+    kind: "exercise",
+    title: { en: "Nominal style", fr: "Style nominal", ar: "الأسلوب الاسمي" },
+    bodyFr:
+      "Verbal : On a décidé de reporter la réunion.\nNominal : La décision de report de la réunion a été prise.",
+    bodyEn: "Shift from verbal to nominal phrasing (formal written French).",
+    bodyAr: "الانتقال من صيغة فعلية إلى اسمية (كتابة رسمية).",
+    exercise: {
+      promptEn: "In formal writing, prefer often a more … style. (nominal / verbal)",
+      promptFr: "En écrit soutenu, on privilégie souvent le style …",
+      promptAr: "في الكتابة الرسمية يُفضَّل الأسلوب …",
+      answers: ["nominal"],
+    },
   },
 
-  // ═══════════════ C2 ═══════════════
+  // ── C2 ───────────────────────────────────────────────
   {
     id: "c2-style",
     level: "C2",
     kind: "text",
-    title: {
-      en: "Stylistic precision",
-      fr: "Précision stylistique",
-      ar: "دقة أسلوبية",
-    },
+    title: { en: "Stylistic density", fr: "Densité stylistique", ar: "كثافة أسلوبية" },
     bodyFr:
-      "Loin de se réduire à un simple véhicule d'information, la langue configure en partie la manière dont nous structurons l'expérience. Cette perspective, sans verser dans un déterminisme absolu, invite à une attention renouvelée aux choix lexicaux et syntaxiques.",
-    bodyEn: "Near-native formal prose for advanced reading.",
-    bodyAr: "نثر رسمي متقدم قريب من مستوى الناطق.",
-    vocabulary: [
-      { fr: "Loin de…", en: "Far from…", ar: "بعيدًا عن…" },
-      { fr: "versant dans", en: "slipping into", ar: "الانزلاق إلى" },
-      { fr: "déterminisme", en: "determinism", ar: "الحتمية" },
-    ],
+      "Loin de se réduire à un simple canal d'information, la langue participe à la configuration de l'expérience. Sans céder à un déterminisme absolu, cette perspective invite à scruter les choix lexicaux et syntaxiques avec une attention accrue.",
+    bodyEn: "Near-native formal prose; complex subordination.",
+    bodyAr: "نثر رسمي قريب من الناطق؛ تراكيب معقدة.",
   },
   {
-    id: "c2-register",
+    id: "c2-registers",
     level: "C2",
     kind: "exercise",
-    title: {
-      en: "Register awareness",
-      fr: "Conscience des registres",
-      ar: "الوعي بمستويات اللغة",
-    },
+    title: { en: "Registers", fr: "Les registres", ar: "مستويات اللغة" },
     bodyFr:
-      "Familier : « C'est cool. »\nCourant : « C'est bien. »\nSoutenu : « Cela me paraît judicieux. »",
-    bodyEn: "Match formality to context.",
-    bodyAr: "طابق مستوى الرسمية مع السياق.",
+      "Familier : C'est cool.\nCourant : C'est bien.\nSoutenu : Cela me paraît judicieux.",
+    bodyEn: "Match register to situation.",
+    bodyAr: "طابق مستوى اللغة مع الموقف.",
     exercise: {
-      promptEn: "Which register is « Cela me paraît judicieux »? (familier / courant / soutenu)",
-      promptFr: « Cela me paraît judicieux » est : familier / courant / soutenu ?",
-      promptAr: « Cela me paraît judicieux » أي مستوى؟ (familier / courant / soutenu)",
+      promptEn: "« Cela me paraît judicieux » is which register?",
+      promptFr: « Cela me paraît judicieux » : quel registre ?",
+      promptAr: « Cela me paraît judicieux » أي مستوى؟",
       answers: ["soutenu"],
     },
+  },
+  {
+    id: "c2-irony",
+    level: "C2",
+    kind: "text",
+    title: { en: "Tone and implication", fr: "Ton et implicite", ar: "النبرة والضمني" },
+    bodyFr:
+      "On ne saurait trop recommander la prudence face aux annonces trop enthousiastes. L'expérience suggère que les promesses les plus séduisantes méritent souvent un examen critique.",
+    bodyEn: "Read implication and restrained irony in formal French.",
+    bodyAr: "افهم الضمني والسخرية المتحفظة في الفرنسية الرسمية.",
   },
 ];
 

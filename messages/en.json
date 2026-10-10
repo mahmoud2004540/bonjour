@@ -15,11 +15,11 @@
   "landing": {
     "eyebrow": "French for real life",
     "headline": "Learn French you can actually use.",
-    "subheadline": "Bonjour helps adults build real communicative ability — not just vocabulary lists. Every step is tied to something you can do in French.",
+    "subheadline": "Bonjour helps adults build real communicative ability — not just vocabulary lists.",
     "ctaPrimary": "Start learning",
     "ctaSecondary": "See how it works",
     "differenceTitle": "Built differently",
-    "differenceBody": "We focus on can-do goals, real-life tasks, and evidence of what you can actually perform — not streaks or points.",
+    "differenceBody": "Can-do goals, real tasks, evidence — not streaks or points.",
     "howTitle": "How learning works",
     "howStep1": "Understand the real situation",
     "howStep2": "Learn the language needed",
@@ -44,14 +44,14 @@
     "back": "Back",
     "startPlacement": "Start placement",
     "steps": {
-      "0": { "title": "Welcome", "description": "Tell us a little about yourself so we can personalise your path." },
+      "0": { "title": "Welcome", "description": "Tell us a little about yourself." },
       "1": { "title": "Why are you learning French?", "description": "Select all that apply." },
-      "2": { "title": "Which situations matter most?", "description": "We will focus practice on the contexts you actually need." }
+      "2": { "title": "Which situations matter most?", "description": "We focus practice on these contexts." }
     }
   },
   "placement": {
     "title": "Placement",
-    "subtitle": "We collect evidence of what you can already do. There is no pass or fail.",
+    "subtitle": "We collect evidence of what you can already do.",
     "progress": "Question {current} of {total}",
     "next": "Next",
     "finish": "See my profile",
@@ -59,13 +59,13 @@
   },
   "profile": {
     "title": "Your learning profile",
-    "subtitle": "Based only on the evidence collected so far. Nothing is invented.",
+    "subtitle": "Based only on evidence collected so far.",
     "startingPoint": "Estimated starting point",
     "levelEstimate": "Around {level}",
     "levelUnknown": "Not enough evidence yet",
-    "levelNote": "This is a provisional estimate from a short assessment.",
+    "levelNote": "Provisional estimate from a short assessment.",
     "evidenceTitle": "Evidence by skill",
-    "evidenceNote": "Statuses reflect only what was observed.",
+    "evidenceNote": "Only what was observed.",
     "goToDashboard": "Go to dashboard"
   },
   "dashboard": {
@@ -87,11 +87,11 @@
     "notFound": "This learning goal was not found.",
     "backToDashboard": "Back to dashboard",
     "writePlaceholder": "Write in French…",
-    "selfAssessPrompt": "Based on what you practised, can you do this now?",
+    "selfAssessPrompt": "Can you do this now?",
     "yesICan": "Yes, I can",
     "notYet": "Not yet",
-    "feedbackRecorded": "Your self-assessment has been recorded.",
-    "feedbackNote": "This is a self-review, clearly labelled.",
+    "feedbackRecorded": "Self-assessment recorded.",
+    "feedbackNote": "Clearly labelled self-review.",
     "continue": "Continue",
     "finish": "Finish & return",
     "exit": "Exit"
@@ -102,19 +102,19 @@
     "demonstrated": "What you have demonstrated",
     "noneYet": "No goals demonstrated yet.",
     "scenarioProgress": "{done} of {total} goals demonstrated",
-    "note": "Progress is based on evidence you provided.",
+    "note": "Based on evidence you provided.",
     "back": "Back to dashboard"
   },
   "resources": {
     "title": "Learning materials",
-    "subtitle": "Texts, dialogues, vocabulary and exercises on this site — from A1 to C2.",
-    "inAppNote": "Everything below stays on Bonjour. Listen uses your browser’s voice (synthetic), not a studio recording.",
+    "subtitle": "Institutional-style FLE content hosted on Bonjour — dialogues, texts, vocabulary and exercises from A1 to C2.",
+    "inAppNote": "All content stays on your site. Pedagogy follows CEFR and action-oriented FLE standards (same family as major public broadcasters’ education offer). Listen uses browser speech (synthetic), not a studio recording.",
     "allLevels": "All levels",
     "pick": "Choose a lesson on the left.",
     "vocab": "Vocabulary",
     "listen": "Listen (French)",
     "listenWord": "Listen",
-    "ttsNote": "Browser speech — not a human recording",
+    "ttsNote": "Browser speech — not a human studio recording",
     "answerPlaceholder": "Your answer…",
     "check": "Check",
     "correct": "Correct.",
@@ -125,7 +125,7 @@
   "auth": {
     "title": "Sign in",
     "subtitle": "Account access for Bonjour.",
-    "localMode": "Server authentication is not configured yet. Continue in local mode.",
+    "localMode": "Cloud auth is not configured. Local mode keeps data on this device.",
     "continueLocal": "Continue in local mode",
     "supabaseReady": "Supabase is configured.",
     "backHome": "Back to home"
