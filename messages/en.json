@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "title": "Bonjour — Learn French that you can actually use",
+    "description": "A premium French-learning platform for adults. Real-life situations, evidence-based progress, and clear next steps."
+  },
+  "nav": {
+    "home": "Home",
+    "learn": "Learn",
+    "practice": "Practice",
+    "progress": "Progress",
+    "signIn": "Sign in",
+    "getStarted": "Get started"
+  },
+  "landing": {
+    "eyebrow": "French for real life",
+    "headline": "Learn French you can actually use.",
+    "subheadline": "Bonjour helps adults build real communicative ability — not just vocabulary lists. Every step is tied to something you can do in French.",
+    "ctaPrimary": "Start learning",
+    "ctaSecondary": "See how it works",
+    "differenceTitle": "Built differently",
+    "differenceBody": "We focus on can-do goals, real-life tasks, and evidence of what you can actually perform — not streaks or points.",
+    "howTitle": "How learning works",
+    "howStep1": "Understand the real situation",
+    "howStep2": "Learn the language needed",
+    "howStep3": "Practice with support",
+    "howStep4": "Demonstrate what you can do",
+    "howStep5": "Move to the next clear step"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "continue": "Continue",
+    "back": "Back"
+  }
+}

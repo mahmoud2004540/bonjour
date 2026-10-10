@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "title": "Bonjour — Apprenez le français que vous pouvez vraiment utiliser",
+    "description": "Une plateforme premium d'apprentissage du français pour adultes. Situations réelles, progrès fondés sur des preuves, et prochaines étapes claires."
+  },
+  "nav": {
+    "home": "Accueil",
+    "learn": "Apprendre",
+    "practice": "S'entraîner",
+    "progress": "Progrès",
+    "signIn": "Se connecter",
+    "getStarted": "Commencer"
+  },
+  "landing": {
+    "eyebrow": "Le français pour la vie réelle",
+    "headline": "Apprenez le français que vous pouvez vraiment utiliser.",
+    "subheadline": "Bonjour aide les adultes à développer une vraie capacité communicative — pas seulement des listes de vocabulaire. Chaque étape est liée à quelque chose que vous pouvez faire en français.",
+    "ctaPrimary": "Commencer à apprendre",
+    "ctaSecondary": "Voir comment ça marche",
+    "differenceTitle": "Conçu autrement",
+    "differenceBody": "Nous nous concentrons sur des objectifs can-do, des tâches de la vie réelle, et des preuves de ce que vous pouvez réellement accomplir — pas des séries ou des points.",
+    "howTitle": "Comment fonctionne l'apprentissage",
+    "howStep1": "Comprendre la situation réelle",
+    "howStep2": "Apprendre la langue nécessaire",
+    "howStep3": "S'entraîner avec de l'aide",
+    "howStep4": "Démontrer ce que vous savez faire",
+    "howStep5": "Passer à l'étape suivante claire"
+  },
+  "common": {
+    "loading": "Chargement…",
+    "error": "Une erreur s'est produite",
+    "retry": "Réessayer",
+    "continue": "Continuer",
+    "back": "Retour"
+  }
+}
