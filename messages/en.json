@@ -32,5 +32,73 @@
     "retry": "Try again",
     "continue": "Continue",
     "back": "Back"
+  },
+  "onboarding": {
+    "step": "Step {current} of {total}",
+    "nameLabel": "Your name",
+    "namePlaceholder": "How should we call you?",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "continue": "Continue",
+    "back": "Back",
+    "startPlacement": "Start placement",
+    "steps": {
+      "0": {
+        "title": "Welcome",
+        "description": "Tell us a little about yourself so we can personalise your path."
+      },
+      "1": {
+        "title": "Why are you learning French?",
+        "description": "Select all that apply. This helps us prioritise real situations."
+      },
+      "2": {
+        "title": "Which situations matter most?",
+        "description": "We will focus practice on the contexts you actually need."
+      }
+    }
+  },
+  "placement": {
+    "title": "Placement",
+    "subtitle": "We collect evidence of what you can already do. There is no pass or fail.",
+    "progress": "Question {current} of {total}",
+    "next": "Next",
+    "finish": "See my profile",
+    "openPlaceholder": "Type your answer in French…"
+  },
+  "profile": {
+    "title": "Your learning profile",
+    "subtitle": "Based only on the evidence collected so far. Nothing is invented.",
+    "startingPoint": "Estimated starting point",
+    "levelEstimate": "Around {level}",
+    "levelUnknown": "Not enough evidence yet",
+    "levelNote": "This is a provisional estimate from a short assessment. It will be refined as you learn.",
+    "evidenceTitle": "Evidence by skill",
+    "evidenceNote": "Statuses reflect only what was observed. « Not assessed » means we have no evidence yet.",
+    "goToDashboard": "Go to dashboard"
+  },
+  "dashboard": {
+    "greeting": "Hello, {name}",
+    "title": "What should you do now?",
+    "nextAction": "Next learning action",
+    "start": "Start this goal",
+    "allDone": "You have demonstrated all current goals",
+    "allDoneBody": "More scenarios will be added. For now, you can review what you have completed.",
+    "currentScenario": "Current scenario",
+    "completed": "Demonstrated so far",
+    "upcoming": "Coming next",
+    "reset": "Reset my progress (demo)"
+  },
+  "learn": {
+    "notFound": "This learning goal was not found.",
+    "backToDashboard": "Back to dashboard",
+    "writePlaceholder": "Write in French…",
+    "selfAssessPrompt": "Based on what you practised, can you do this now?",
+    "yesICan": "Yes, I can",
+    "notYet": "Not yet",
+    "feedbackRecorded": "Your self-assessment has been recorded.",
+    "feedbackNote": "This is a self-review. It is clearly labelled and is not an automated or expert evaluation.",
+    "continue": "Continue",
+    "finish": "Finish & return",
+    "exit": "Exit"
   }
 }

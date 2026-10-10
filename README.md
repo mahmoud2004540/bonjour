@@ -10,40 +10,52 @@ Action-oriented learning:
 
 **Can-Do Goal → Concept → Skill → Task → Evidence → Next Learning Action**
 
-## Tech Stack (Foundation)
+## Current Status — Vertical Slice Complete
 
-- **Frontend**: Next.js 15 (App Router) + React + TypeScript
-- **Styling**: Tailwind CSS + Design Tokens
-- **i18n**: English / French / Arabic (full RTL support)
-- **Architecture**: Clean separation of UI / Application / Domain
+The first end-to-end learning path is working:
 
-## Current Phase
+1. **Landing** → clear value proposition
+2. **Onboarding** → name, goals, situations
+3. **Placement** → evidence collection across skills (no fake scores)
+4. **Learning Profile** → only shows observed evidence
+5. **Dashboard** → answers “What should I do now?”
+6. **A1 Scenario** — *Faire connaissance*
+7. **Practice + Evidence** → self-assessment clearly labelled
+8. **Deterministic recommendations** → explainable next actions
 
-**Phase 1 — Foundation**
+### Locales
+- English
+- French
+- Arabic (full RTL)
 
-- [x] Project structure
-- [x] Design system tokens
-- [x] Internationalization (en/fr/ar + RTL)
-- [x] Application shell
-- [ ] Authentication
-- [ ] Database foundation
-- [ ] Placement system
+### Architecture
+- Domain logic is pure TypeScript (no UI imports)
+- Application layer handles persistence (currently localStorage, ready for Supabase)
+- No invented mastery, streaks, or CEFR claims beyond observed evidence
 
-## Development Principles
+## Tech Stack
 
-- No fake functionality
-- No invented educational data
-- No fake AI claims
-- Domain logic never lives in UI components
-- Incremental delivery with checkpoints
-- Evidence over scores
+- Next.js 15 (App Router) + React 19 + TypeScript
+- Tailwind CSS + Design Tokens
+- next-intl (en / fr / ar)
 
-## Local Development
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000)
+
+## Next phases (from blueprint)
+
+- Real authentication (Supabase)
+- Database + Row-level security
+- Expanded A1 curriculum
+- Speech / pronunciation subsystem
+- Human review workflow
+- AI features where they add real educational value
 
 ## License
 
