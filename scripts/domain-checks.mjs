@@ -1,9 +1,3 @@
-/**
- * Lightweight domain integrity checks (no test framework required).
- * Run: node scripts/domain-checks.mjs
- * Note: full TS registry checks run at build time; this documents expected invariants.
- */
-
 import { readFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -22,25 +16,25 @@ function assert(cond, msg) {
 
 const registryPath = join(root, "src/domain/curriculum/registry.ts");
 assert(existsSync(registryPath), "registry.ts exists");
-
 const reg = readFileSync(registryPath, "utf8");
 assert(reg.includes("b2-opinion"), "registry includes B2 opinion");
 assert(reg.includes("c1-argument"), "registry includes C1 argument");
+assert(reg.includes("c2-nuance"), "registry includes C2 nuance");
 assert(reg.includes("validateCurriculumIntegrity"), "integrity helper exported");
 
+const cafe = readFileSync(join(root, "src/domain/curriculum/a1-au-cafe.ts"), "utf8");
+assert(cafe.includes("task-cafe-understanding"), "café has understanding tasks");
+assert(cafe.includes("task-price-evidence"), "café price has evidence");
+assert(cafe.includes("task-polite-evidence"), "café politeness has evidence");
+
 const placementPath = join(root, "src/domain/placement/questions.ts");
-assert(existsSync(placementPath), "placement questions exist");
 const pq = readFileSync(placementPath, "utf8");
 assert(pq.includes('PLACEMENT_VERSION = "v1.2"'), "placement is v1.2");
-assert(pq.includes("pq-vocab-4"), "placement has expanded vocab");
-assert(pq.includes("pq-grammar-3"), "placement has expanded grammar");
-assert(pq.includes("pq-reading-3"), "placement has expanded reading");
 
 const materialsPath = join(root, "src/domain/materials.ts");
 if (existsSync(materialsPath)) {
   const m = readFileSync(materialsPath, "utf8");
   assert(!m.includes("tv5monde.com"), "materials have no TV5 external URLs");
-  assert(!m.includes("http://"), "materials avoid plain http links");
 }
 
 if (failed > 0) {

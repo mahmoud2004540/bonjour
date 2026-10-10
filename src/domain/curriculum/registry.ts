@@ -33,6 +33,7 @@ import {
   ARGUMENT_GOALS,
   ARGUMENT_TASKS,
 } from "./c1-argument";
+import { SCENARIO_NUANCE, NUANCE_GOALS, NUANCE_TASKS } from "./c2-nuance";
 
 const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_FAIRE_CONNAISSANCE,
@@ -49,6 +50,7 @@ const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_SERVICE,
   SCENARIO_OPINION,
   SCENARIO_ARGUMENT,
+  SCENARIO_NUANCE,
 ];
 
 const ALL_GOALS: LearningGoal[] = [
@@ -66,6 +68,7 @@ const ALL_GOALS: LearningGoal[] = [
   ...SERVICE_GOALS,
   ...OPINION_GOALS,
   ...ARGUMENT_GOALS,
+  ...NUANCE_GOALS,
 ];
 
 const ALL_TASKS: Task[] = [
@@ -83,6 +86,7 @@ const ALL_TASKS: Task[] = [
   ...SERVICE_TASKS,
   ...OPINION_TASKS,
   ...ARGUMENT_TASKS,
+  ...NUANCE_TASKS,
 ];
 
 export function getPublishedScenarios(): Scenario[] {

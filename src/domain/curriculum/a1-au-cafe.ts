@@ -1,6 +1,6 @@
 /**
  * A1 Scenario: Au café — ordering and basic interaction.
- * Published curriculum content.
+ * Full task chain: input → understanding → controlled → supported → evidence
  */
 
 import type { Scenario, LearningGoal, Task } from "../types";
@@ -18,11 +18,7 @@ export const SCENARIO_AU_CAFE: Scenario = {
     ar: "اطلب مشروبًا وتفاعل بأدب في مقهى.",
   },
   level: "A1",
-  goals: [
-    "goal-order-drink",
-    "goal-ask-price",
-    "goal-say-please-thanks",
-  ],
+  goals: ["goal-order-drink", "goal-ask-price", "goal-say-please-thanks"],
   status: "published",
 };
 
@@ -93,6 +89,7 @@ export const CAFE_GOALS: LearningGoal[] = [
 ];
 
 export const CAFE_TASKS: Task[] = [
+  // —— Order drink ——
   {
     id: "task-cafe-context",
     goalId: "goal-order-drink",
@@ -107,6 +104,33 @@ export const CAFE_TASKS: Task[] = [
       en: "Useful phrases:\n\n• Un café, s'il vous plaît.\n• Un thé, s'il vous plaît.\n• Une eau, s'il vous plaît.\n• Je voudrais un café.",
       fr: "Phrases utiles :\n\n• Un café, s'il vous plaît.\n• Un thé, s'il vous plaît.\n• Une eau, s'il vous plaît.\n• Je voudrais un café.",
       ar: "عبارات مفيدة:\n\n• Un café, s'il vous plaît.\n• Un thé, s'il vous plaît.\n• Une eau, s'il vous plaît.\n• Je voudrais un café.",
+    },
+  },
+  {
+    id: "task-cafe-understanding",
+    goalId: "goal-order-drink",
+    type: "understanding",
+    title: { en: "Understanding", fr: "Compréhension", ar: "الفهم" },
+    prompt: {
+      en: "What does « Je voudrais un thé » mean?",
+      fr: "Que signifie « Je voudrais un thé » ?",
+      ar: "ماذا تعني « Je voudrais un thé »؟",
+    },
+    content: {
+      en: "I would like a tea.",
+      fr: "Je voudrais un thé.",
+      ar: "أريد شايًا (بصيغة مهذبة).",
+    },
+  },
+  {
+    id: "task-cafe-controlled",
+    goalId: "goal-order-drink",
+    type: "controlled",
+    title: { en: "Practice", fr: "Entraînement", ar: "تدريب" },
+    prompt: {
+      en: "Complete: Un ______, s'il vous plaît. (coffee)",
+      fr: "Complétez : Un ______, s'il vous plaît. (café)",
+      ar: "أكمل: Un ______, s'il vous plaît. (قهوة)",
     },
   },
   {
@@ -132,6 +156,7 @@ export const CAFE_TASKS: Task[] = [
       ar: "هل تستطيع طلب مشروب بالفرنسية الآن؟",
     },
   },
+  // —— Ask price ——
   {
     id: "task-price-input",
     goalId: "goal-ask-price",
@@ -149,6 +174,33 @@ export const CAFE_TASKS: Task[] = [
     },
   },
   {
+    id: "task-price-understanding",
+    goalId: "goal-ask-price",
+    type: "understanding",
+    title: { en: "Understanding", fr: "Compréhension", ar: "الفهم" },
+    prompt: {
+      en: "« C'est combien ? » asks about…",
+      fr: "« C'est combien ? » demande…",
+      ar: "« C'est combien ? » تسأل عن…",
+    },
+    content: {
+      en: "The price / how much something costs.",
+      fr: "Le prix / combien cela coûte.",
+      ar: "السعر / كم يكلف الشيء.",
+    },
+  },
+  {
+    id: "task-price-controlled",
+    goalId: "goal-ask-price",
+    type: "controlled",
+    title: { en: "Practice", fr: "Entraînement", ar: "تدريب" },
+    prompt: {
+      en: "Complete: C'est ______ ? (how much)",
+      fr: "Complétez : C'est ______ ?",
+      ar: "أكمل: C'est ______ ؟",
+    },
+  },
+  {
     id: "task-price-production",
     goalId: "goal-ask-price",
     type: "supported",
@@ -160,6 +212,18 @@ export const CAFE_TASKS: Task[] = [
     },
     expectedEvidence: "Learner produces C'est combien or similar.",
   },
+  {
+    id: "task-price-evidence",
+    goalId: "goal-ask-price",
+    type: "evidence",
+    title: { en: "Evidence", fr: "Preuve", ar: "الدليل" },
+    prompt: {
+      en: "Can you ask the price in French right now?",
+      fr: "Pouvez-vous demander le prix en français maintenant ?",
+      ar: "هل تستطيع السؤال عن السعر بالفرنسية الآن؟",
+    },
+  },
+  // —— Politeness ——
   {
     id: "task-polite-input",
     goalId: "goal-say-please-thanks",
@@ -177,6 +241,22 @@ export const CAFE_TASKS: Task[] = [
     },
   },
   {
+    id: "task-polite-understanding",
+    goalId: "goal-say-please-thanks",
+    type: "understanding",
+    title: { en: "Understanding", fr: "Compréhension", ar: "الفهم" },
+    prompt: {
+      en: "When do you say « Merci »?",
+      fr: "Quand dit-on « Merci » ?",
+      ar: "متى تقول « Merci »؟",
+    },
+    content: {
+      en: "To thank someone (after receiving something or help).",
+      fr: "Pour remercier quelqu'un.",
+      ar: "لشكر شخص (بعد خدمة أو مساعدة).",
+    },
+  },
+  {
     id: "task-polite-production",
     goalId: "goal-say-please-thanks",
     type: "supported",
@@ -187,5 +267,16 @@ export const CAFE_TASKS: Task[] = [
       ar: "اكتب طلبًا مهذبًا كاملاً يتضمن من فضلك وشكرًا.",
     },
     expectedEvidence: "Learner uses s'il vous plaît and merci in context.",
+  },
+  {
+    id: "task-polite-evidence",
+    goalId: "goal-say-please-thanks",
+    type: "evidence",
+    title: { en: "Evidence", fr: "Preuve", ar: "الدليل" },
+    prompt: {
+      en: "Can you use please and thank you when ordering in French now?",
+      fr: "Pouvez-vous utiliser s'il vous plaît et merci maintenant ?",
+      ar: "هل تستطيع استخدام من فضلك وشكرًا عند الطلب الآن؟",
+    },
   },
 ];
