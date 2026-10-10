@@ -8,6 +8,7 @@
     "learn": "Learn",
     "practice": "Practice",
     "progress": "Progress",
+    "resources": "Resources",
     "signIn": "Sign in",
     "getStarted": "Get started"
   },
@@ -88,6 +89,7 @@
     "completed": "Demonstrated so far",
     "upcoming": "Coming next",
     "viewProgress": "View progress",
+    "viewResources": "External resources A1–C2",
     "reset": "Reset my progress (demo)"
   },
   "learn": {
@@ -110,6 +112,18 @@
     "noneYet": "No goals demonstrated yet. Start from the dashboard.",
     "scenarioProgress": "{done} of {total} goals demonstrated",
     "note": "Progress is based on evidence you provided — including self-review where labelled as such.",
+    "back": "Back to dashboard"
+  },
+  "resources": {
+    "title": "Learning resources",
+    "subtitle": "Curated links to high-quality free French resources from A1 to C2, including official audio and video platforms.",
+    "disclaimer": "These open external websites. Bonjour does not host their audio or claim to evaluate your listening here. Prefer institutional sources (TV5MONDE, RFI).",
+    "allLevels": "All levels",
+    "audioOnly": "Audio / video only",
+    "includesAudio": "Includes audio or video",
+    "free": "Free",
+    "open": "Open resource",
+    "empty": "No resources match this filter.",
     "back": "Back to dashboard"
   },
   "auth": {

@@ -150,10 +150,15 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      <div className="flex flex-wrap gap-4 mb-8">
+      <div className="flex flex-wrap gap-3 mb-8">
         <Link href="/progress">
           <Button variant="secondary" size="sm">
             {t("viewProgress")}
+          </Button>
+        </Link>
+        <Link href="/resources">
+          <Button variant="secondary" size="sm">
+            {t("viewResources")}
           </Button>
         </Link>
       </div>

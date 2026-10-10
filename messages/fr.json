@@ -8,6 +8,7 @@
     "learn": "Apprendre",
     "practice": "S'entraîner",
     "progress": "Progrès",
+    "resources": "Ressources",
     "signIn": "Se connecter",
     "getStarted": "Commencer"
   },
@@ -79,6 +80,7 @@
     "completed": "Démontré jusqu'ici",
     "upcoming": "À venir",
     "viewProgress": "Voir les progrès",
+    "viewResources": "Ressources externes A1–C2",
     "reset": "Réinitialiser ma progression (démo)"
   },
   "learn": {
@@ -101,6 +103,18 @@
     "noneYet": "Aucun objectif démontré pour l'instant.",
     "scenarioProgress": "{done} sur {total} objectifs démontrés",
     "note": "Les progrès sont basés sur les preuves que vous avez fournies.",
+    "back": "Retour au tableau de bord"
+  },
+  "resources": {
+    "title": "Ressources d'apprentissage",
+    "subtitle": "Liens sélectionnés vers des ressources gratuites de qualité, de A1 à C2, y compris des plateformes audio et vidéo officielles.",
+    "disclaimer": "Ces liens ouvrent des sites externes. Bonjour n'héberge pas leurs fichiers audio et ne prétend pas évaluer votre compréhension ici. Privilégiez les sources institutionnelles (TV5MONDE, RFI).",
+    "allLevels": "Tous les niveaux",
+    "audioOnly": "Audio / vidéo uniquement",
+    "includesAudio": "Inclut audio ou vidéo",
+    "free": "Gratuit",
+    "open": "Ouvrir la ressource",
+    "empty": "Aucune ressource pour ce filtre.",
     "back": "Retour au tableau de bord"
   },
   "auth": {
