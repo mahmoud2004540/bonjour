@@ -6,6 +6,7 @@ import { useRouter, Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getStoredProfile, markGoalCompleted } from "@/application/learner-store";
+import { trackEvent } from "@/application/local-events";
 import { getGoalById, getTasksForGoal } from "@/domain/curriculum/registry";
 import type { Task } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
@@ -74,12 +75,17 @@ export default function LearnPage({
   const task: Task = tasks[taskIndex];
   const isLast = taskIndex === tasks.length - 1;
   const isEvidence = task.type === "evidence";
-  const isProduction = task.type === "supported" || task.type === "independent";
+  const isProduction =
+    task.type === "supported" ||
+    task.type === "independent" ||
+    task.type === "controlled";
+  const isUnderstanding = task.type === "understanding";
 
   function handleContinue() {
     if (isLast) {
       if (isEvidence || isProduction) {
         markGoalCompleted(goalId!);
+        trackEvent("goal_completed", { goalId: goalId! });
       }
       setFinished(true);
     } else {
@@ -92,6 +98,7 @@ export default function LearnPage({
   function handleSelfAssess(demonstrated: boolean) {
     if (demonstrated) {
       markGoalCompleted(goalId!);
+      trackEvent("goal_self_demonstrated", { goalId: goalId! });
     }
     setShowFeedback(true);
   }
@@ -122,13 +129,22 @@ export default function LearnPage({
           </div>
         )}
 
+        {isUnderstanding && !showFeedback && (
+          <div className="mb-5">
+            <p className="text-body-sm text-ink-500 mb-3">{t("checkUnderstanding")}</p>
+            <Button variant="secondary" onClick={() => setShowFeedback(true)}>
+              {t("understood")}
+            </Button>
+          </div>
+        )}
+
         {(isProduction || isEvidence) && !showFeedback && (
           <>
             {isProduction && (
               <textarea
                 value={response}
                 onChange={(e) => setResponse(e.target.value)}
-                rows={3}
+                rows={4}
                 className="w-full px-4 py-3 rounded-xl border border-ink-200 bg-surface-elevated text-body text-ink-950 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent resize-none mb-5 transition-all duration-200"
                 placeholder={t("writePlaceholder")}
               />
@@ -162,14 +178,15 @@ export default function LearnPage({
             <Button variant="ghost">{t("exit")}</Button>
           </Link>
 
-          {(!isEvidence || showFeedback) && (
-            <Button
-              onClick={handleContinue}
-              disabled={isProduction && !response.trim() && !showFeedback}
-            >
-              {isLast ? t("finish") : t("continue")}
-            </Button>
-          )}
+          {(!isEvidence || showFeedback) &&
+            (!isUnderstanding || showFeedback) && (
+              <Button
+                onClick={handleContinue}
+                disabled={isProduction && !response.trim() && !showFeedback}
+              >
+                {isLast ? t("finish") : t("continue")}
+              </Button>
+            )}
         </div>
       </Card>
 

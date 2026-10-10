@@ -14,8 +14,14 @@ export function Footer() {
           <Link href="/about" className="hover:text-ink-900 transition-colors">
             {t("about")}
           </Link>
+          <Link href="/scenarios" className="hover:text-ink-900 transition-colors">
+            {t("scenarios")}
+          </Link>
           <Link href="/resources" className="hover:text-ink-900 transition-colors">
             {t("materials")}
+          </Link>
+          <Link href="/privacy" className="hover:text-ink-900 transition-colors">
+            {t("privacy")}
           </Link>
           <Link href="/onboarding" className="hover:text-ink-900 transition-colors">
             {t("start")}

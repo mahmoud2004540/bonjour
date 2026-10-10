@@ -25,6 +25,7 @@ import {
 import { SCENARIO_HOTEL, HOTEL_GOALS, HOTEL_TASKS } from "./a2-hotel";
 import { SCENARIO_PHONE, PHONE_GOALS, PHONE_TASKS } from "./a2-telephone";
 import { SCENARIO_RDV, RDV_GOALS, RDV_TASKS } from "./a2-rdv";
+import { SCENARIO_TRAVAIL, TRAVAIL_GOALS, TRAVAIL_TASKS } from "./b1-travail";
 
 const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_FAIRE_CONNAISSANCE,
@@ -37,6 +38,7 @@ const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_HOTEL,
   SCENARIO_PHONE,
   SCENARIO_RDV,
+  SCENARIO_TRAVAIL,
 ];
 
 const ALL_GOALS: LearningGoal[] = [
@@ -50,6 +52,7 @@ const ALL_GOALS: LearningGoal[] = [
   ...HOTEL_GOALS,
   ...PHONE_GOALS,
   ...RDV_GOALS,
+  ...TRAVAIL_GOALS,
 ];
 
 const ALL_TASKS: Task[] = [
@@ -63,6 +66,7 @@ const ALL_TASKS: Task[] = [
   ...HOTEL_TASKS,
   ...PHONE_TASKS,
   ...RDV_TASKS,
+  ...TRAVAIL_TASKS,
 ];
 
 export function getPublishedScenarios(): Scenario[] {
@@ -91,6 +95,18 @@ export function getTasksForGoal(goalId: string): Task[] {
 
 export function getAllGoalIds(): string[] {
   return ALL_GOALS.map((g) => g.id);
+}
+
+/** Integrity check: prerequisites must reference existing goals. */
+export function validateCurriculumIntegrity(): string[] {
+  const ids = new Set(getAllGoalIds());
+  const issues: string[] = [];
+  for (const g of ALL_GOALS) {
+    for (const p of g.prerequisites) {
+      if (!ids.has(p)) issues.push(`${g.id} missing prereq ${p}`);
+    }
+  }
+  return issues;
 }
 
 export { ALL_GOALS as GOALS };

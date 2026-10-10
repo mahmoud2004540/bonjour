@@ -1,31 +1,41 @@
 # Bonjour 2.0 — Blueprint status
 
-**No fake done claims.**  
 Live: https://mahmoud2004540.github.io/bonjour/ar/
 
-## Shipped on-platform
+## Done on-platform (honest)
 
-- Landing, onboarding, placement v1.1, profile, dashboard
-- Learn flow + completion moment + self-evidence
-- Progress, materials A1–C2 (no external redirects)
-- Real-life use log
-- About, footer, skip-link, EN/FR/AR + RTL
-- Scenarios catalogue page
-- Practice review (revisit completed goals)
-- Local event log (device only — not third-party analytics)
+- Landing, about, privacy, 404
+- Onboarding → placement v1.1 → profile → dashboard
+- Deterministic next-action engine + prerequisites integrity helper
+- Learn flow (input / understanding / production / evidence) + completion
+- Practice review of completed goals
+- Progress (evidence only)
+- Materials A1–C2 on-site (no external redirects)
+- Real-life use journal
+- Scenarios catalogue
+- EN / FR / AR + RTL, footer, skip-link
+- Local device events (not third-party analytics)
 
 ## Curriculum published
 
-**A1:** introductions, café, shopping, transport, housing, health  
-**A2:** restaurant, hotel, phone, appointments
+| Level | Scenarios |
+|-------|-----------|
+| A1 | Introductions, café, shopping, transport, housing, health |
+| A2 | Restaurant, hotel, phone, appointments |
+| B1 | Work email + meeting |
 
-## Blocked without external setup
+## Not done — requires external setup
 
-| Feature | Needs |
-|---------|--------|
-| Cloud auth & sync | Supabase keys |
-| Real audio / speech score | Audio assets + policy |
-| Payments | Stripe |
-| AI conversation | API + clear learning value |
-| Admin CMS | Separate phase |
-| Full automated test CI | Expand tooling |
+| Item | Blocker |
+|------|---------|
+| Real accounts + cloud sync | Supabase URL + anon key |
+| Studio listening audio | Audio production |
+| Speech scoring | Recording pipeline + policy |
+| Payments / subscriptions | Stripe |
+| AI practice | API + pedagogical justification |
+| Admin authoring CMS | Separate product phase |
+| Third-party analytics | Privacy + provider |
+| Full automated test CI | Tooling expansion |
+
+**Definition of done from the blueprint is applied to shipped slices only.**
+  No feature claims cloud, AI, or speech scoring until those systems exist.
