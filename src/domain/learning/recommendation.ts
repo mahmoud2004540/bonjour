@@ -1,24 +1,22 @@
 /**
  * Deterministic recommendation engine.
- * Uses evidence + learner preferences (situations / objectives).
- * Never invents mastery scores.
+ * Evidence + preferences. No invented mastery scores.
  */
 
 import type { LearnerProfile, Recommendation, Locale } from "../types";
-import { getAllGoals, getGoalById } from "../curriculum/registry";
+import { getAllGoals } from "../curriculum/registry";
 
-/** Map onboarding preferences → scenario ids for gentle priority boost. */
 const SITUATION_TO_SCENARIOS: Record<string, string[]> = {
   shopping: ["a1-courses", "a1-au-cafe", "a2-restaurant"],
   healthcare: ["a1-sante", "a2-rdv"],
   housing: ["a1-logement", "a2-hotel"],
   meeting: ["a1-faire-connaissance", "a2-telephone"],
   travel: ["a1-transport", "a2-hotel", "a2-restaurant"],
-  work: ["b1-travail", "a2-telephone", "a2-rdv"],
+  work: ["b1-travail", "a2-telephone", "a2-rdv", "b2-opinion", "c1-argument"],
   daily: ["a1-au-cafe", "a1-courses", "a1-transport"],
   admin: ["a2-rdv", "a1-logement", "b1-service"],
-  social: ["a1-faire-connaissance", "a2-restaurant"],
-  integration: ["a1-logement", "a1-sante", "a2-rdv", "b1-travail"],
+  social: ["a1-faire-connaissance", "a2-restaurant", "b2-opinion"],
+  integration: ["a1-logement", "a1-sante", "a2-rdv", "b1-travail", "b2-opinion"],
 };
 
 function preferenceBoost(profile: LearnerProfile, scenarioId: string): number {
@@ -80,8 +78,7 @@ export function getNextRecommendations(
 export function getPrimaryNextAction(
   profile: LearnerProfile
 ): Recommendation | null {
-  const recs = getNextRecommendations(profile);
-  return recs[0] ?? null;
+  return getNextRecommendations(profile)[0] ?? null;
 }
 
 export function explainRecommendation(

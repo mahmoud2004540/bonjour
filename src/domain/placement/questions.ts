@@ -1,7 +1,7 @@
 /**
- * Placement assessment questions (version 1.1).
- * Collects evidence across dimensions — no invented scores.
- * Blueprint §8: multi-dimension evidence, no pass/fail.
+ * Placement assessment questions (version 1.2).
+ * Multi-dimension evidence — no pass/fail, no invented scores.
+ * Listening items are text stand-ins until real audio exists.
  */
 
 import type { SkillDimension } from "../types";
@@ -15,7 +15,7 @@ export interface PlacementQuestion {
   correctIndex?: number;
 }
 
-export const PLACEMENT_VERSION = "v1.1";
+export const PLACEMENT_VERSION = "v1.2";
 
 export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
   {
@@ -67,6 +67,22 @@ export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
     correctIndex: 2,
   },
   {
+    id: "pq-vocab-4",
+    dimension: "vocabulary",
+    type: "multiple_choice",
+    prompt: {
+      en: "What does « Au revoir » mean?",
+      fr: "Que signifie « Au revoir » ?",
+      ar: "ماذا تعني « Au revoir »؟",
+    },
+    options: {
+      en: ["Hello", "Please", "Goodbye", "Excuse me"],
+      fr: ["Bonjour", "S'il vous plaît", "Au revoir", "Pardon"],
+      ar: ["مرحبًا", "من فضلك", "وداعًا", "عفوًا"],
+    },
+    correctIndex: 2,
+  },
+  {
     id: "pq-grammar-1",
     dimension: "grammar",
     type: "multiple_choice",
@@ -114,6 +130,22 @@ export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
     correctIndex: 1,
   },
   {
+    id: "pq-grammar-3",
+    dimension: "grammar",
+    type: "multiple_choice",
+    prompt: {
+      en: "Which is correct for « I want a coffee »?",
+      fr: "Quelle forme pour « Je veux un café » ?",
+      ar: "أي صيغة صحيحة لـ « أريد قهوة »؟",
+    },
+    options: {
+      en: ["Je vouloir un café", "Je veux un café", "Je voulez un café", "Moi veux un café"],
+      fr: ["Je vouloir un café", "Je veux un café", "Je voulez un café", "Moi veux un café"],
+      ar: ["Je vouloir un café", "Je veux un café", "Je voulez un café", "Moi veux un café"],
+    },
+    correctIndex: 1,
+  },
+  {
     id: "pq-reading-1",
     dimension: "reading",
     type: "multiple_choice",
@@ -142,6 +174,22 @@ export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
       en: ["The bill", "A coffee", "Directions", "A table"],
       fr: ["L'addition", "Un café", "Le chemin", "Une table"],
       ar: ["الفاتورة", "قهوة", "الاتجاه", "طاولة"],
+    },
+    correctIndex: 1,
+  },
+  {
+    id: "pq-reading-3",
+    dimension: "reading",
+    type: "multiple_choice",
+    prompt: {
+      en: "Read: « Où est la gare, s'il vous plaît ? » The speaker is asking about…",
+      fr: "Lisez : « Où est la gare, s'il vous plaît ? »",
+      ar: "اقرأ: « Où est la gare, s'il vous plaît ? »",
+    },
+    options: {
+      en: ["The price", "The train station", "The time", "A hotel"],
+      fr: ["Le prix", "La gare", "L'heure", "Un hôtel"],
+      ar: ["السعر", "المحطة", "الوقت", "فندق"],
     },
     correctIndex: 1,
   },

@@ -27,6 +27,12 @@ import { SCENARIO_PHONE, PHONE_GOALS, PHONE_TASKS } from "./a2-telephone";
 import { SCENARIO_RDV, RDV_GOALS, RDV_TASKS } from "./a2-rdv";
 import { SCENARIO_TRAVAIL, TRAVAIL_GOALS, TRAVAIL_TASKS } from "./b1-travail";
 import { SCENARIO_SERVICE, SERVICE_GOALS, SERVICE_TASKS } from "./b1-service";
+import { SCENARIO_OPINION, OPINION_GOALS, OPINION_TASKS } from "./b2-opinion";
+import {
+  SCENARIO_ARGUMENT,
+  ARGUMENT_GOALS,
+  ARGUMENT_TASKS,
+} from "./c1-argument";
 
 const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_FAIRE_CONNAISSANCE,
@@ -41,6 +47,8 @@ const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_RDV,
   SCENARIO_TRAVAIL,
   SCENARIO_SERVICE,
+  SCENARIO_OPINION,
+  SCENARIO_ARGUMENT,
 ];
 
 const ALL_GOALS: LearningGoal[] = [
@@ -56,6 +64,8 @@ const ALL_GOALS: LearningGoal[] = [
   ...RDV_GOALS,
   ...TRAVAIL_GOALS,
   ...SERVICE_GOALS,
+  ...OPINION_GOALS,
+  ...ARGUMENT_GOALS,
 ];
 
 const ALL_TASKS: Task[] = [
@@ -71,6 +81,8 @@ const ALL_TASKS: Task[] = [
   ...RDV_TASKS,
   ...TRAVAIL_TASKS,
   ...SERVICE_TASKS,
+  ...OPINION_TASKS,
+  ...ARGUMENT_TASKS,
 ];
 
 export function getPublishedScenarios(): Scenario[] {
@@ -108,6 +120,12 @@ export function validateCurriculumIntegrity(): string[] {
     for (const p of g.prerequisites) {
       if (!ids.has(p)) issues.push(`${g.id} missing prereq ${p}`);
     }
+    if (!ALL_SCENARIOS.some((s) => s.id === g.scenarioId)) {
+      issues.push(`${g.id} unknown scenario ${g.scenarioId}`);
+    }
+  }
+  for (const t of ALL_TASKS) {
+    if (!ids.has(t.goalId)) issues.push(`task ${t.id} unknown goal ${t.goalId}`);
   }
   return issues;
 }

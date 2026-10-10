@@ -27,6 +27,12 @@ export function Header() {
 
         <nav className="flex items-center gap-3 sm:gap-5" aria-label="Main">
           <Link
+            href="/scenarios"
+            className="text-sm font-medium text-ink-500 hover:text-ink-900 transition-colors hidden lg:inline"
+          >
+            {t("scenarios")}
+          </Link>
+          <Link
             href="/resources"
             className="text-sm font-medium text-ink-500 hover:text-ink-900 transition-colors hidden md:inline"
           >
@@ -47,14 +53,16 @@ export function Header() {
             {locales.map((code) => (
               <button
                 key={code}
+                type="button"
                 onClick={() => switchLocale(code)}
                 className={cn(
-                  "px-2.5 py-1 text-[0.7rem] font-semibold rounded-md transition-all duration-150",
+                  "px-2.5 py-1 text-[0.7rem] font-semibold rounded-md transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500",
                   locale === code
                     ? "bg-surface-elevated text-ink-950 shadow-soft"
                     : "text-ink-400 hover:text-ink-700"
                 )}
                 aria-label={localeShortNames[code]}
+                aria-pressed={locale === code}
                 aria-current={locale === code ? "true" : undefined}
               >
                 {localeShortNames[code]}

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:domain": "node scripts/domain-checks.mjs"
   },
   "dependencies": {
     "next": "^15.1.0",
