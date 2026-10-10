@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Bonjour — Apprenez le français que vous pouvez vraiment utiliser",
-    "description": "Une plateforme premium d'apprentissage du français pour adultes. Situations réelles, progrès fondés sur des preuves, et prochaines étapes claires."
+    "description": "Une plateforme premium d'apprentissage du français pour adultes."
   },
   "nav": {
     "home": "Accueil",
@@ -14,11 +14,11 @@
   "landing": {
     "eyebrow": "Le français pour la vie réelle",
     "headline": "Apprenez le français que vous pouvez vraiment utiliser.",
-    "subheadline": "Bonjour aide les adultes à développer une vraie capacité communicative — pas seulement des listes de vocabulaire. Chaque étape est liée à quelque chose que vous pouvez faire en français.",
+    "subheadline": "Bonjour aide les adultes à développer une vraie capacité communicative — pas seulement des listes de vocabulaire.",
     "ctaPrimary": "Commencer à apprendre",
     "ctaSecondary": "Voir comment ça marche",
     "differenceTitle": "Conçu autrement",
-    "differenceBody": "Nous nous concentrons sur des objectifs can-do, des tâches de la vie réelle, et des preuves de ce que vous pouvez réellement accomplir — pas des séries ou des points.",
+    "differenceBody": "Nous nous concentrons sur des objectifs can-do, des tâches de la vie réelle, et des preuves de ce que vous pouvez réellement accomplir.",
     "howTitle": "Comment fonctionne l'apprentissage",
     "howStep1": "Comprendre la situation réelle",
     "howStep2": "Apprendre la langue nécessaire",
@@ -43,18 +43,9 @@
     "back": "Retour",
     "startPlacement": "Commencer le placement",
     "steps": {
-      "0": {
-        "title": "Bienvenue",
-        "description": "Parlez-nous un peu de vous pour personnaliser votre parcours."
-      },
-      "1": {
-        "title": "Pourquoi apprenez-vous le français ?",
-        "description": "Sélectionnez tout ce qui s'applique. Cela nous aide à prioriser les situations réelles."
-      },
-      "2": {
-        "title": "Quelles situations comptent le plus ?",
-        "description": "Nous concentrerons la pratique sur les contextes dont vous avez réellement besoin."
-      }
+      "0": { "title": "Bienvenue", "description": "Parlez-nous un peu de vous pour personnaliser votre parcours." },
+      "1": { "title": "Pourquoi apprenez-vous le français ?", "description": "Sélectionnez tout ce qui s'applique." },
+      "2": { "title": "Quelles situations comptent le plus ?", "description": "Nous concentrerons la pratique sur les contextes dont vous avez besoin." }
     }
   },
   "placement": {
@@ -67,13 +58,13 @@
   },
   "profile": {
     "title": "Votre profil d'apprentissage",
-    "subtitle": "Basé uniquement sur les preuves collectées jusqu'ici. Rien n'est inventé.",
+    "subtitle": "Basé uniquement sur les preuves collectées jusqu'ici.",
     "startingPoint": "Point de départ estimé",
     "levelEstimate": "Environ {level}",
     "levelUnknown": "Pas assez de preuves pour l'instant",
-    "levelNote": "Il s'agit d'une estimation provisoire à partir d'une courte évaluation. Elle sera affinée au fur et à mesure.",
+    "levelNote": "Estimation provisoire à partir d'une courte évaluation.",
     "evidenceTitle": "Preuves par compétence",
-    "evidenceNote": "Les statuts reflètent uniquement ce qui a été observé. « Non évalué » signifie que nous n'avons pas encore de preuve.",
+    "evidenceNote": "Les statuts reflètent uniquement ce qui a été observé.",
     "goToDashboard": "Aller au tableau de bord"
   },
   "dashboard": {
@@ -82,23 +73,42 @@
     "nextAction": "Prochaine action d'apprentissage",
     "start": "Commencer cet objectif",
     "allDone": "Vous avez démontré tous les objectifs actuels",
-    "allDoneBody": "D'autres scénarios seront ajoutés. Pour l'instant, vous pouvez revoir ce que vous avez accompli.",
+    "allDoneBody": "D'autres scénarios seront ajoutés.",
     "currentScenario": "Scénario actuel",
+    "allScenarios": "Scénarios disponibles",
     "completed": "Démontré jusqu'ici",
     "upcoming": "À venir",
+    "viewProgress": "Voir les progrès",
     "reset": "Réinitialiser ma progression (démo)"
   },
   "learn": {
-    "notFound": "Cet objectif d'apprentissage n'a pas été trouvé.",
+    "notFound": "Cet objectif n'a pas été trouvé.",
     "backToDashboard": "Retour au tableau de bord",
     "writePlaceholder": "Écrivez en français…",
     "selfAssessPrompt": "D'après ce que vous avez pratiqué, pouvez-vous le faire maintenant ?",
     "yesICan": "Oui, je peux",
     "notYet": "Pas encore",
     "feedbackRecorded": "Votre auto-évaluation a été enregistrée.",
-    "feedbackNote": "Il s'agit d'une auto-évaluation. Elle est clairement indiquée et n'est pas une évaluation automatisée ou experte.",
+    "feedbackNote": "Il s'agit d'une auto-évaluation, clairement indiquée.",
     "continue": "Continuer",
     "finish": "Terminer et revenir",
     "exit": "Quitter"
+  },
+  "progress": {
+    "title": "Vos progrès",
+    "subtitle": "Seules les capacités démontrées sont affichées.",
+    "demonstrated": "Ce que vous avez démontré",
+    "noneYet": "Aucun objectif démontré pour l'instant.",
+    "scenarioProgress": "{done} sur {total} objectifs démontrés",
+    "note": "Les progrès sont basés sur les preuves que vous avez fournies.",
+    "back": "Retour au tableau de bord"
+  },
+  "auth": {
+    "title": "Connexion",
+    "subtitle": "Accès au compte Bonjour.",
+    "localMode": "L'authentification serveur n'est pas encore configurée. Vous pouvez continuer en mode local.",
+    "continueLocal": "Continuer en mode local",
+    "supabaseReady": "Supabase est configuré.",
+    "backHome": "Retour à l'accueil"
   }
 }

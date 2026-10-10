@@ -6,8 +6,15 @@ import { useRouter, Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getStoredProfile, clearLearner } from "@/application/learner-store";
-import { getPrimaryNextAction, getNextRecommendations } from "@/domain/learning/recommendation";
-import { getGoalById, SCENARIO_FAIRE_CONNAISSANCE } from "@/domain/curriculum/a1-faire-connaissance";
+import {
+  getPrimaryNextAction,
+  getNextRecommendations,
+} from "@/domain/learning/recommendation";
+import {
+  getGoalById,
+  getScenarioById,
+  getPublishedScenarios,
+} from "@/domain/curriculum/registry";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -42,6 +49,9 @@ export default function DashboardPage() {
   const primary = getPrimaryNextAction(profile);
   const allRecs = getNextRecommendations(profile);
   const primaryGoal = primary ? getGoalById(primary.goalId) : null;
+  const primaryScenario = primaryGoal
+    ? getScenarioById(primaryGoal.scenarioId)
+    : null;
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
@@ -52,7 +62,6 @@ export default function DashboardPage() {
         <h1 className="text-title font-serif text-ink-950">{t("title")}</h1>
       </div>
 
-      {/* Primary next action */}
       <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
         <p className="text-overline text-accent-700 uppercase mb-4">
           {t("nextAction")}
@@ -75,24 +84,37 @@ export default function DashboardPage() {
           </>
         ) : (
           <>
-            <h2 className="text-title-sm font-serif text-ink-950 mb-2">{t("allDone")}</h2>
+            <h2 className="text-title-sm font-serif text-ink-950 mb-2">
+              {t("allDone")}
+            </h2>
             <p className="text-body text-ink-600">{t("allDoneBody")}</p>
           </>
         )}
       </Card>
 
-      {/* Scenario context */}
+      {primaryScenario && (
+        <Card className="mb-6">
+          <h3 className="text-caption text-ink-400 mb-2">{t("currentScenario")}</h3>
+          <p className="text-body-lg font-medium text-ink-950">
+            {primaryScenario.title[locale]}
+          </p>
+          <p className="text-body-sm text-ink-600 mt-1">
+            {primaryScenario.description[locale]}
+          </p>
+        </Card>
+      )}
+
       <Card className="mb-6">
-        <h3 className="text-caption text-ink-400 mb-2">{t("currentScenario")}</h3>
-        <p className="text-body-lg font-medium text-ink-950">
-          {SCENARIO_FAIRE_CONNAISSANCE.title[locale]}
-        </p>
-        <p className="text-body-sm text-ink-550 text-ink-600 mt-1">
-          {SCENARIO_FAIRE_CONNAISSANCE.description[locale]}
-        </p>
+        <h3 className="text-caption text-ink-400 mb-3">{t("allScenarios")}</h3>
+        <ul className="space-y-2">
+          {getPublishedScenarios().map((s) => (
+            <li key={s.id} className="text-body-sm text-ink-700">
+              {s.title[locale]}
+            </li>
+          ))}
+        </ul>
       </Card>
 
-      {/* Completed goals */}
       {profile.completedGoals.length > 0 && (
         <Card className="mb-6">
           <h3 className="text-caption text-ink-400 mb-4">{t("completed")}</h3>
@@ -112,12 +134,11 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      {/* Upcoming */}
       {allRecs.length > 1 && (
         <Card className="mb-6">
           <h3 className="text-caption text-ink-400 mb-3">{t("upcoming")}</h3>
           <ul className="space-y-2.5">
-            {allRecs.slice(1).map((rec) => {
+            {allRecs.slice(1, 6).map((rec) => {
               const g = getGoalById(rec.goalId);
               return g ? (
                 <li key={rec.goalId} className="text-body-sm text-ink-500">
@@ -128,6 +149,14 @@ export default function DashboardPage() {
           </ul>
         </Card>
       )}
+
+      <div className="flex flex-wrap gap-4 mb-8">
+        <Link href="/progress">
+          <Button variant="secondary" size="sm">
+            {t("viewProgress")}
+          </Button>
+        </Link>
+      </div>
 
       <div className="pt-8 border-t border-ink-100">
         <button

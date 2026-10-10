@@ -1,90 +1,50 @@
 # Bonjour 2.0
 
-A modern, premium French-learning platform for adults.
+Premium French-learning platform for adults.
 
 > Can the learner do something in French today that they could not do before?
 
-## Core Philosophy
+## Live demo
 
-Action-oriented learning:
+https://mahmoud2004540.github.io/bonjour/en/
 
-**Can-Do Goal → Concept → Skill → Task → Evidence → Next Learning Action**
+## What works now
 
-## Design Direction
+- Landing (EN / FR / AR + RTL)
+- Onboarding → Placement → Profile → Dashboard
+- A1 scenarios: **Faire connaissance**, **Au café**
+- Deterministic next-action recommendations
+- Progress page (evidence only)
+- Curriculum registry (extensible)
+- Speech domain types (no fake evaluation)
+- Supabase schema + client stub (inactive until keys)
+- Local persistence (device only)
 
-**Premium Editorial** — calm, intelligent, trustworthy, human.
+## What is not claimed as working
 
-Not a children’s game. Not Duolingo. Not generic SaaS.
+- Server authentication (needs Supabase keys)
+- Speech recording / automatic pronunciation scoring
+- AI features
+- Payments
+- Human review workflow UI
 
-### Design System
-- Editorial color palette (ink + accent)
-- Serif display + clean sans body
-- Purposeful motion (respects `prefers-reduced-motion`)
-- Light mode (dark mode foundation ready)
-- Full RTL support for Arabic
-- Responsive: mobile → tablet → desktop
+## Stack
 
-## Internationalization
+Next.js 15 · TypeScript · Tailwind · next-intl · Static export (GitHub Pages)
 
-Currently supported:
+## Add a language
 
-| Code | Language | Direction |
-|------|----------|-----------|
-| `en` | English  | LTR       |
-| `fr` | French   | LTR       |
-| `ar` | Arabic   | RTL       |
+1. `src/i18n/config.ts`
+2. `messages/{locale}.json`
+3. RTL list if needed
 
-### Adding a new language later
+## Supabase (next)
 
-1. Add the locale code in `src/i18n/config.ts`
-2. Create `messages/{locale}.json`
-3. If RTL → add it to `rtlLocales`
-4. Add display labels in `localeNames` / `localeShortNames`
+1. Create project
+2. Run `src/infrastructure/supabase/schema.sql`
+3. Set env vars from `.env.example`
+4. Wire `@supabase/supabase-js` in `client.ts`
 
-Routing and middleware pick it up automatically.
+## Blueprint phases remaining
 
-## Vertical Slice (Working)
-
-1. Landing
-2. Onboarding
-3. Placement (evidence collection — no fake scores)
-4. Learning Profile (only observed evidence)
-5. Dashboard (“What should I do now?”)
-6. A1 Scenario — *Faire connaissance*
-7. Practice + Evidence (self-review clearly labelled)
-8. Deterministic next-action recommendations
-
-## Architecture
-
-```
-src/
-  domain/          ← pure business logic (no UI imports)
-  application/     ← use-cases + persistence
-  components/      ← UI
-  i18n/            ← locale config (extensible)
-  app/             ← Next.js routes
-```
-
-## Run locally
-
-```bash
-git clone https://github.com/mahmoud2004540/bonjour.git
-cd bonjour
-npm install
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000)
-
-## Next phases
-
-- Real authentication (Supabase)
-- Database + RLS
-- Expanded A1 curriculum
-- Speech subsystem
-- Human review workflow
-- AI where it adds real educational value
-
-## License
-
-Private — All rights reserved.
+Auth · fuller placement · more A1 · speech assets · human review · AI where valuable · production hardening

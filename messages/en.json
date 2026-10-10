@@ -84,8 +84,10 @@
     "allDone": "You have demonstrated all current goals",
     "allDoneBody": "More scenarios will be added. For now, you can review what you have completed.",
     "currentScenario": "Current scenario",
+    "allScenarios": "Available scenarios",
     "completed": "Demonstrated so far",
     "upcoming": "Coming next",
+    "viewProgress": "View progress",
     "reset": "Reset my progress (demo)"
   },
   "learn": {
@@ -100,5 +102,22 @@
     "continue": "Continue",
     "finish": "Finish & return",
     "exit": "Exit"
+  },
+  "progress": {
+    "title": "Your progress",
+    "subtitle": "Only demonstrated abilities are shown. Nothing is invented.",
+    "demonstrated": "What you have demonstrated",
+    "noneYet": "No goals demonstrated yet. Start from the dashboard.",
+    "scenarioProgress": "{done} of {total} goals demonstrated",
+    "note": "Progress is based on evidence you provided — including self-review where labelled as such.",
+    "back": "Back to dashboard"
+  },
+  "auth": {
+    "title": "Sign in",
+    "subtitle": "Account access for Bonjour.",
+    "localMode": "Server authentication is not configured yet. You can continue in local mode — your progress stays on this device only.",
+    "continueLocal": "Continue in local mode",
+    "supabaseReady": "Supabase is configured. Sign-in form will appear here.",
+    "backHome": "Back to home"
   }
 }

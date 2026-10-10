@@ -6,7 +6,7 @@ import { useRouter, Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getStoredProfile, markGoalCompleted } from "@/application/learner-store";
-import { getGoalById, getTasksForGoal, GOALS } from "@/domain/curriculum/a1-faire-connaissance";
+import { getGoalById, getTasksForGoal } from "@/domain/curriculum/registry";
 import type { Task } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 

@@ -1,9 +1,6 @@
 import { locales } from "@/i18n/config";
-import { GOALS } from "@/domain/curriculum/a1-faire-connaissance";
+import { GOALS } from "@/domain/curriculum/registry";
 
-/**
- * Required for `output: "export"` — pre-render every goal × locale.
- */
 export function generateStaticParams() {
   const params: { locale: string; goalId: string }[] = [];
   for (const locale of locales) {
