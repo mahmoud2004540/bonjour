@@ -1,9 +1,12 @@
 /**
- * Core domain types for Bonjour 2.0
+ * Core domain types — Bonjour / AI Language Academy
  * Pure TypeScript — no framework dependencies.
  */
 
 export type Locale = "en" | "fr" | "ar";
+
+/** Language the user is learning (independent of UI locale). */
+export type TargetLanguage = "fr" | "en" | "de" | "it" | "es";
 
 export type CefrLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2" | "unknown";
 
@@ -12,7 +15,8 @@ export type SkillDimension =
   | "reading"
   | "vocabulary"
   | "grammar"
-  | "speaking";
+  | "speaking"
+  | "writing";
 
 export type EvidenceStatus = "demonstrated" | "partial" | "not_yet" | "unknown";
 
@@ -22,11 +26,19 @@ export type LearningGoalStatus =
   | "demonstrated"
   | "needs_review";
 
+export type VocabStatus = "new" | "learning" | "needs_revision" | "mastered";
+
 export interface LearnerPreferences {
   objectives: string[];
   situations: string[];
   availability: string;
   preferredStyle: string;
+  /** Minutes per day the learner plans to study */
+  dailyMinutes?: number;
+  /** Target language code */
+  targetLanguage?: TargetLanguage;
+  /** Preferred skill focus */
+  focusSkills?: SkillDimension[];
 }
 
 export interface SkillEvidence {
@@ -48,13 +60,17 @@ export interface LearnerProfile {
   skillEvidence: SkillEvidence[];
   completedGoals: string[];
   currentPriorities: string[];
+  /** Local gamification — never invent server-side ranks */
+  xp?: number;
+  streakDays?: number;
+  lastStudyDate?: string;
 }
 
 export interface PlacementObservation {
   dimension: SkillDimension;
   questionId: string;
   response: string;
-  isCorrect: boolean | null; // null = open / speaking, needs review
+  isCorrect: boolean | null;
   observedAt: string;
 }
 
@@ -76,6 +92,8 @@ export interface LearningGoal {
   canDoStatement: Record<Locale, string>;
   level: CefrLevel;
   prerequisites: string[];
+  /** Optional: which target language this goal belongs to (default fr) */
+  targetLanguage?: TargetLanguage;
 }
 
 export interface Scenario {
@@ -83,14 +101,21 @@ export interface Scenario {
   title: Record<Locale, string>;
   description: Record<Locale, string>;
   level: CefrLevel;
-  goals: string[]; // goal ids
+  goals: string[];
   status: "draft" | "published";
+  targetLanguage?: TargetLanguage;
 }
 
 export interface Task {
   id: string;
   goalId: string;
-  type: "input" | "understanding" | "controlled" | "supported" | "independent" | "evidence";
+  type:
+    | "input"
+    | "understanding"
+    | "controlled"
+    | "supported"
+    | "independent"
+    | "evidence";
   title: Record<Locale, string>;
   prompt: Record<Locale, string>;
   content?: Record<Locale, string>;
@@ -112,4 +137,30 @@ export interface Recommendation {
   goalId: string;
   reason: Record<Locale, string>;
   priority: number;
+}
+
+export interface VocabItem {
+  id: string;
+  targetLanguage: TargetLanguage;
+  term: string;
+  translation: Record<Locale, string>;
+  example?: string;
+  level: CefrLevel;
+  status: VocabStatus;
+  ease: number;
+  intervalDays: number;
+  nextReviewAt: string;
+  correctCount: number;
+  wrongCount: number;
+  createdAt: string;
+}
+
+export interface GrammarTopic {
+  id: string;
+  targetLanguage: TargetLanguage;
+  level: CefrLevel;
+  title: Record<Locale, string>;
+  summary: Record<Locale, string>;
+  examples: { fr?: string; en?: string; de?: string; it?: string; es?: string; gloss: Record<Locale, string> }[];
+  commonMistakes: Record<Locale, string>;
 }
