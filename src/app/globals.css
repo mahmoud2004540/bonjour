@@ -19,11 +19,31 @@
 
   body {
     @apply bg-surface text-ink-950 antialiased;
-    font-feature-settings: "kern" 1, "liga" 1;
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
     background-image:
       radial-gradient(ellipse 120% 80% at 100% -20%, rgba(224, 106, 84, 0.06), transparent 50%),
       radial-gradient(ellipse 80% 60% at -10% 40%, rgba(36, 34, 29, 0.03), transparent 45%);
     background-attachment: fixed;
+  }
+
+  /* Arabic: prioritize IBM Plex + Noto Naskh */
+  [dir="rtl"] body {
+    font-family: var(--font-arabic-sans), var(--font-sans), system-ui, sans-serif;
+    letter-spacing: 0;
+  }
+
+  [dir="rtl"] .font-serif,
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3 {
+    font-family: var(--font-arabic-serif), var(--font-serif), serif;
+  }
+
+  /* Latin serif utility still works under LTR */
+  [dir="ltr"] .font-serif {
+    font-family: var(--font-serif), Georgia, serif;
+    font-optical-sizing: auto;
   }
 
   ::selection {

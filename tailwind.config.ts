@@ -10,10 +10,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        /*
-         * Premium Editorial Palette
-         * Calm, trustworthy, human — never playful or SaaS-generic.
-         */
         ink: {
           25: "#fbfbfa",
           50: "#f6f5f2",
@@ -61,35 +57,64 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        serif: ["var(--font-serif)", "Georgia", "serif"],
+        sans: [
+          "var(--font-sans)",
+          "var(--font-arabic-sans)",
+          "system-ui",
+          "sans-serif",
+        ],
+        serif: [
+          "var(--font-serif)",
+          "var(--font-arabic-serif)",
+          "Georgia",
+          "serif",
+        ],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       fontSize: {
-        "display-xl": ["3.75rem", { lineHeight: "1.08", letterSpacing: "-0.03em", fontWeight: "400" }],
-        "display": ["2.75rem", { lineHeight: "1.12", letterSpacing: "-0.025em", fontWeight: "400" }],
-        "display-sm": ["2.25rem", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "400" }],
-        "title": ["1.625rem", { lineHeight: "1.3", letterSpacing: "-0.015em", fontWeight: "500" }],
-        "title-sm": ["1.25rem", { lineHeight: "1.4", letterSpacing: "-0.01em", fontWeight: "500" }],
+        "display-xl": [
+          "3.75rem",
+          { lineHeight: "1.08", letterSpacing: "-0.03em", fontWeight: "500" },
+        ],
+        display: [
+          "2.75rem",
+          { lineHeight: "1.12", letterSpacing: "-0.025em", fontWeight: "500" },
+        ],
+        "display-sm": [
+          "2.25rem",
+          { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "500" },
+        ],
+        title: [
+          "1.625rem",
+          { lineHeight: "1.3", letterSpacing: "-0.015em", fontWeight: "500" },
+        ],
+        "title-sm": [
+          "1.25rem",
+          { lineHeight: "1.4", letterSpacing: "-0.01em", fontWeight: "500" },
+        ],
         "body-lg": ["1.125rem", { lineHeight: "1.7", fontWeight: "400" }],
-        "body": ["1rem", { lineHeight: "1.7", fontWeight: "400" }],
-        "body-sm": ["0.9375rem", { lineHeight: "1.6", fontWeight: "400" }],
-        "caption": ["0.8125rem", { lineHeight: "1.5", fontWeight: "500" }],
-        "overline": ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.06em", fontWeight: "600" }],
+        body: ["1rem", { lineHeight: "1.7", fontWeight: "400" }],
+        "body-sm": ["0.9375rem", { lineHeight: "1.65", fontWeight: "400" }],
+        caption: ["0.8125rem", { lineHeight: "1.5", fontWeight: "500" }],
+        overline: [
+          "0.75rem",
+          { lineHeight: "1.4", letterSpacing: "0.06em", fontWeight: "600" },
+        ],
       },
       borderRadius: {
-        "sm": "0.375rem",
-        "md": "0.5rem",
-        "lg": "0.75rem",
-        "xl": "1rem",
+        sm: "0.375rem",
+        md: "0.5rem",
+        lg: "0.75rem",
+        xl: "1rem",
         "2xl": "1.25rem",
         "3xl": "1.5rem",
       },
       boxShadow: {
-        "soft": "0 1px 3px rgba(36, 34, 29, 0.04), 0 1px 2px rgba(36, 34, 29, 0.03)",
-        "card": "0 2px 8px -2px rgba(36, 34, 29, 0.05), 0 1px 3px rgba(36, 34, 29, 0.03)",
-        "elevated": "0 8px 30px -8px rgba(36, 34, 29, 0.08), 0 2px 8px -2px rgba(36, 34, 29, 0.04)",
-        "focus": "0 0 0 3px rgba(224, 106, 84, 0.28)",
+        soft: "0 1px 3px rgba(36, 34, 29, 0.04), 0 1px 2px rgba(36, 34, 29, 0.03)",
+        card: "0 2px 8px -2px rgba(36, 34, 29, 0.05), 0 1px 3px rgba(36, 34, 29, 0.03)",
+        elevated:
+          "0 8px 30px -8px rgba(36, 34, 29, 0.08), 0 2px 8px -2px rgba(36, 34, 29, 0.04)",
+        focus: "0 0 0 3px rgba(224, 106, 84, 0.28)",
         "focus-ink": "0 0 0 3px rgba(36, 34, 29, 0.12)",
       },
       spacing: {
@@ -107,8 +132,8 @@ const config: Config = {
         "in-out-soft": "cubic-bezier(0.4, 0, 0.2, 1)",
       },
       maxWidth: {
-        "content": "42rem",
-        "wide": "64rem",
+        content: "42rem",
+        wide: "64rem",
       },
     },
   },

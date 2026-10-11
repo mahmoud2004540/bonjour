@@ -1,30 +1,55 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Source_Serif_4 } from "next/font/google";
+import {
+  DM_Sans,
+  Fraunces,
+  IBM_Plex_Sans_Arabic,
+  Noto_Naskh_Arabic,
+  JetBrains_Mono,
+} from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
+/** Clean modern body for Latin (EN/FR) */
+const dmSans = DM_Sans({
   variable: "--font-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const sourceSerif = Source_Serif_4({
+/** Distinctive editorial headlines for Latin */
+const fraunces = Fraunces({
   variable: "--font-serif",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+/** Excellent Arabic UI body */
+const ibmArabic = IBM_Plex_Sans_Arabic({
+  variable: "--font-arabic-sans",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+/** Elegant Arabic headings */
+const notoNaskh = Noto_Naskh_Arabic({
+  variable: "--font-arabic-serif",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Bonjour — Learn French you can actually use",
+  title: "Bonjour — Languages you can actually use",
   description:
-    "A premium French-learning platform for adults. Real-life situations, evidence-based progress, and clear next steps.",
+    "A calm adult language academy. Real situations, honest progress, clear next steps.",
 };
 
 export default function RootLayout({
@@ -35,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${sourceSerif.variable} ${geistMono.variable} font-sans`}
+        className={`${dmSans.variable} ${fraunces.variable} ${ibmArabic.variable} ${notoNaskh.variable} ${jetbrainsMono.variable} font-sans`}
       >
         {children}
       </body>
