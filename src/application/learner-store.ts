@@ -1,6 +1,5 @@
 /**
- * Application service for learner state.
- * localStorage now — designed for Supabase later.
+ * Learner state — localStorage (Supabase-ready later).
  */
 
 import type {
@@ -82,6 +81,25 @@ export function updatePreferences(
   const profile = getStoredProfile();
   if (!profile) return null;
   profile.preferences = { ...profile.preferences, ...preferences };
+  saveProfile(profile);
+  return profile;
+}
+
+/** Skip placement for true beginners — honest empty evidence */
+export function startAsBeginner(): LearnerProfile | null {
+  const profile = getStoredProfile();
+  if (!profile) return null;
+  const lang = profile.preferences.targetLanguage ?? "fr";
+  profile.placementCompleted = true;
+  profile.estimatedStartingLevel = "A1";
+  profile.skillEvidence = [
+    { dimension: "vocabulary", status: "unknown" },
+    { dimension: "grammar", status: "unknown" },
+    { dimension: "reading", status: "unknown" },
+    { dimension: "listening", status: "unknown" },
+    { dimension: "speaking", status: "unknown" },
+  ];
+  profile.currentPriorities = [FIRST_GOAL[lang] ?? "goal-introduce-self"];
   saveProfile(profile);
   return profile;
 }
