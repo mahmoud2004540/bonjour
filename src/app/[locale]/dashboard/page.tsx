@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getStoredProfile, clearLearner } from "@/application/learner-store";
 import { trackEvent } from "@/application/local-events";
+import { getDailyProgress } from "@/application/motivation-store";
+import { getDueVocab } from "@/application/vocab-store";
 import {
   getPrimaryNextAction,
   getNextRecommendations,
@@ -24,6 +26,8 @@ export default function DashboardPage() {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
+  const [dueCount, setDueCount] = useState(0);
+  const [daily, setDaily] = useState({ minutes: 0, goal: 15 });
 
   useEffect(() => {
     const p = getStoredProfile();
@@ -36,6 +40,9 @@ export default function DashboardPage() {
       return;
     }
     setProfile(p);
+    setDueCount(getDueVocab(50).length);
+    const d = getDailyProgress();
+    setDaily({ minutes: d.minutes, goal: d.goal });
     trackEvent("dashboard_view");
   }, [router]);
 
@@ -57,13 +64,43 @@ export default function DashboardPage() {
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
-      <div className="mb-12">
+      <div className="mb-10">
         <p className="text-caption text-ink-400 mb-1">
           {t("greeting", { name: profile.displayName })}
         </p>
         <h1 className="text-title font-serif text-ink-950 mb-3">{t("title")}</h1>
         <p className="text-body-sm text-ink-500 text-pretty">{t("encourage")}</p>
       </div>
+
+      <div className="grid sm:grid-cols-3 gap-3 mb-8">
+        <Card>
+          <p className="text-caption text-ink-400">{t("xp")}</p>
+          <p className="text-title-sm font-serif text-ink-950">{profile.xp ?? 0}</p>
+        </Card>
+        <Card>
+          <p className="text-caption text-ink-400">{t("streak")}</p>
+          <p className="text-title-sm font-serif text-ink-950">
+            {profile.streakDays ?? 0}
+          </p>
+        </Card>
+        <Card>
+          <p className="text-caption text-ink-400">{t("dailyGoal")}</p>
+          <p className="text-title-sm font-serif text-ink-950">
+            {daily.minutes}/{daily.goal} min
+          </p>
+        </Card>
+      </div>
+
+      {dueCount > 0 && (
+        <Card className="mb-6">
+          <p className="text-body text-ink-800 mb-3">
+            {t("vocabDue", { count: dueCount })}
+          </p>
+          <Link href="/vocabulary">
+            <Button variant="secondary" size="sm">{t("reviewVocab")}</Button>
+          </Link>
+        </Card>
+      )}
 
       <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
         <p className="text-overline text-accent-700 uppercase mb-4">
@@ -158,6 +195,15 @@ export default function DashboardPage() {
         <Link href="/progress">
           <Button variant="secondary" size="sm">{t("viewProgress")}</Button>
         </Link>
+        <Link href="/vocabulary">
+          <Button variant="secondary" size="sm">{t("viewVocab")}</Button>
+        </Link>
+        <Link href="/grammar">
+          <Button variant="secondary" size="sm">{t("viewGrammar")}</Button>
+        </Link>
+        <Link href="/tutor">
+          <Button variant="secondary" size="sm">{t("viewTutor")}</Button>
+        </Link>
         <Link href="/resources">
           <Button variant="secondary" size="sm">{t("viewResources")}</Button>
         </Link>
@@ -174,6 +220,7 @@ export default function DashboardPage() {
 
       <div className="pt-8 border-t border-ink-100">
         <button
+          type="button"
           onClick={() => {
             clearLearner();
             router.push("/");
