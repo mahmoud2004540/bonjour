@@ -11,10 +11,19 @@ import type {
   Locale,
   CefrLevel,
   SkillEvidence,
+  TargetLanguage,
 } from "@/domain/types";
 import { getPrimaryNextAction } from "@/domain/learning/recommendation";
 
 const STORAGE_KEY = "bonjour_learner_v1";
+
+const FIRST_GOAL: Record<TargetLanguage, string> = {
+  fr: "goal-introduce-self",
+  en: "goal-en-name",
+  de: "goal-de-name",
+  it: "goal-it-name",
+  es: "goal-es-name",
+};
 
 function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
@@ -119,10 +128,12 @@ export function finalizePlacement(
   let estimated: CefrLevel = "A1";
   if (demonstrated >= 4) estimated = "A2";
 
+  const lang = profile.preferences.targetLanguage ?? "fr";
+
   profile.placementCompleted = true;
   profile.estimatedStartingLevel = estimated;
   profile.skillEvidence = skillEvidence;
-  profile.currentPriorities = ["goal-introduce-self"];
+  profile.currentPriorities = [FIRST_GOAL[lang] ?? "goal-introduce-self"];
 
   saveProfile(profile);
   return profile;
