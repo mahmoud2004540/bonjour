@@ -11,14 +11,6 @@
     --border: 235 233 228;
   }
 
-  .dark {
-    --background: 36 34 29;
-    --foreground: 250 249 247;
-    --surface: 36 34 29;
-    --surface-elevated: 52 49 43;
-    --border: 78 73 63;
-  }
-
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -28,19 +20,20 @@
   body {
     @apply bg-surface text-ink-950 antialiased;
     font-feature-settings: "kern" 1, "liga" 1;
+    background-image:
+      radial-gradient(ellipse 120% 80% at 100% -20%, rgba(224, 106, 84, 0.06), transparent 50%),
+      radial-gradient(ellipse 80% 60% at -10% 40%, rgba(36, 34, 29, 0.03), transparent 45%);
+    background-attachment: fixed;
   }
 
-  /* Selection */
   ::selection {
     @apply bg-accent-100 text-ink-950;
   }
 
-  /* Focus visible for keyboard users */
   :focus-visible {
     @apply outline-none;
   }
 
-  /* Respect reduced motion — required by blueprint */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

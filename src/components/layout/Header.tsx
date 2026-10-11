@@ -16,13 +16,16 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink-100/70 bg-surface/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-ink-100/80 bg-surface/90 backdrop-blur-lg">
       <div className="max-w-wide mx-auto px-6 h-16 flex items-center justify-between gap-3">
         <Link
           href="/"
-          className="font-serif text-[1.35rem] tracking-tight text-ink-950 hover:text-ink-700 transition-colors duration-200"
+          className="group flex items-center gap-2.5 text-ink-950 hover:text-ink-800 transition-colors"
         >
-          Bonjour
+          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-ink-950 text-surface font-serif text-sm tracking-tight group-hover:bg-accent-600 transition-colors duration-200">
+            B
+          </span>
+          <span className="font-serif text-[1.3rem] tracking-tight">Bonjour</span>
         </Link>
 
         <nav className="flex items-center gap-3 sm:gap-5" aria-label="Main">
@@ -71,15 +74,8 @@ export function Header() {
           </div>
 
           <Link
-            href="/sign-in"
-            className="text-sm font-medium text-ink-500 hover:text-ink-900 transition-colors duration-200 hidden sm:inline"
-          >
-            {t("signIn")}
-          </Link>
-
-          <Link
             href="/onboarding"
-            className="inline-flex items-center h-9 px-4 rounded-lg bg-ink-950 text-surface text-sm font-medium transition-all duration-200 hover:bg-ink-800 focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2"
+            className="inline-flex items-center h-9 px-4 rounded-lg bg-accent-600 text-white text-sm font-medium transition-all duration-200 hover:bg-accent-700 focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2"
           >
             {t("getStarted")}
           </Link>
