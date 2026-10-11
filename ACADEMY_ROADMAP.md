@@ -1,30 +1,21 @@
-# AI Language Academy × Bonjour — status
+# Bonjour Academy 3.0 — execution status
 
 Live: https://mahmoud2004540.github.io/bonjour/ar/
 
-## Implemented without external keys
+## Implemented this wave
 
-- French full CEFR scenario path A1–C2
-- EN / DE / IT / ES **A1 intro starters** (modular registry)
-- Target language filter in recommendations
-- Vocabulary SRS, grammar FR, writing lab (local correction)
-- Tutor 3 modes (local patterns)
-- XP, streak, daily goal, achievements (local)
-- Onboarding: language + minutes + objectives
-- UI en/fr/ar + RTL
+- Fixed production build (tutor-fallback syntax)
+- **Full vs Starter** path labels on onboarding + dashboard
+- **Skip placement** for true beginners (onboarding + placement page)
+- Open placement answers optional (blank allowed)
+- **Continue learning** primary CTA on dashboard
+- English A1 expanded: intro + **café** scenario with full task chain
+- Target-language filtered scenarios on dashboard
 
-## Not implemented (requires keys / production backend)
+## Still needs external services
 
-| Prompt area | Blocker |
-|-------------|---------|
-| Cloud LLM tutor | API + server proxy |
-| Real audio / STT / pronunciation scores | Speech providers |
-| Cloud accounts & sync | Supabase |
-| Payments / tiers | Stripe |
-| Human tutors marketplace | Separate product |
-| Full EN/DE/IT/ES to C2 | Content authoring |
-| Official exam certification claims | Never claimed |
+Cloud LLM · Supabase auth · real audio · payments
 
-## Honesty
+## Honest scope
 
-Local tutor is **not** a cloud model. Multi-language beyond French is **starter depth**, not parity with French.
+French = full CEFR path. EN = growing starter. DE/IT/ES = intro starters.
