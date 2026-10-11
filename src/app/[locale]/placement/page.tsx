@@ -6,7 +6,11 @@ import { useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { PLACEMENT_QUESTIONS } from "@/domain/placement/questions";
-import { finalizePlacement, getStoredProfile } from "@/application/learner-store";
+import {
+  finalizePlacement,
+  getStoredProfile,
+  startAsBeginner,
+} from "@/application/learner-store";
 import type { PlacementObservation } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -45,11 +49,9 @@ export default function PlacementPage() {
       const observations: PlacementObservation[] = PLACEMENT_QUESTIONS.map((q) => {
         const answer = nextAnswers[q.id] ?? (q.type === "open" ? openText : -1);
         let isCorrect: boolean | null = null;
-
         if (q.type === "multiple_choice" && typeof answer === "number") {
           isCorrect = answer === q.correctIndex;
         }
-
         return {
           dimension: q.dimension,
           questionId: q.id,
@@ -58,7 +60,6 @@ export default function PlacementPage() {
           observedAt: new Date().toISOString(),
         };
       });
-
       finalizePlacement(observations);
       router.push("/profile");
     } else {
@@ -68,9 +69,14 @@ export default function PlacementPage() {
     }
   }
 
+  function handleSkip() {
+    startAsBeginner();
+    router.push("/dashboard");
+  }
+
   const canContinue =
     question.type === "open"
-      ? openText.trim().length > 0
+      ? true
       : answers[question.id] !== undefined;
 
   return (
@@ -105,6 +111,7 @@ export default function PlacementPage() {
             {question.options[locale].map((opt, idx) => (
               <button
                 key={idx}
+                type="button"
                 onClick={() => selectOption(idx)}
                 className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all duration-150 ${
                   answers[question.id] === idx
@@ -123,12 +130,15 @@ export default function PlacementPage() {
             value={openText}
             onChange={(e) => setOpenText(e.target.value)}
             rows={4}
-            className="w-full px-4 py-3 rounded-xl border border-ink-200 bg-surface-elevated text-body text-ink-950 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent resize-none transition-all duration-200"
+            className="w-full px-4 py-3 rounded-xl border border-ink-200 bg-surface-elevated text-body text-ink-950 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent resize-none"
             placeholder={t("openPlaceholder")}
           />
         )}
 
-        <div className="mt-8 flex justify-end">
+        <div className="mt-8 flex flex-wrap justify-between gap-3">
+          <Button variant="ghost" onClick={handleSkip}>
+            {t("skipBeginner")}
+          </Button>
           <Button onClick={handleNext} disabled={!canContinue}>
             {isLast ? t("finish") : t("next")}
           </Button>

@@ -18,6 +18,7 @@ import {
   getScenarioById,
   getPublishedScenarios,
 } from "@/domain/curriculum/registry";
+import { getLanguageMeta } from "@/domain/languages";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -56,6 +57,7 @@ export default function DashboardPage() {
   }
 
   const target = profile.preferences.targetLanguage ?? "fr";
+  const langMeta = getLanguageMeta(target);
   const primary = getPrimaryNextAction(profile);
   const allRecs = getNextRecommendations(profile);
   const primaryGoal = primary ? getGoalById(primary.goalId) : null;
@@ -70,7 +72,14 @@ export default function DashboardPage() {
         <p className="text-caption text-ink-400 mb-1">
           {t("greeting", { name: profile.displayName })}
         </p>
-        <h1 className="text-title font-serif text-ink-950 mb-3">{t("title")}</h1>
+        <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
+        {langMeta && (
+          <p className="text-body-sm text-ink-500 mb-2">
+            {langMeta.name[locale]}
+            {" · "}
+            {langMeta.pathDepth === "full" ? t("pathFull") : t("pathStarter")}
+          </p>
+        )}
         <p className="text-body-sm text-ink-500 text-pretty">{t("encourage")}</p>
       </div>
 
@@ -81,9 +90,7 @@ export default function DashboardPage() {
         </Card>
         <Card>
           <p className="text-caption text-ink-400">{t("streak")}</p>
-          <p className="text-title-sm font-serif text-ink-950">
-            {profile.streakDays ?? 0}
-          </p>
+          <p className="text-title-sm font-serif text-ink-950">{profile.streakDays ?? 0}</p>
         </Card>
         <Card>
           <p className="text-caption text-ink-400">{t("dailyGoal")}</p>
@@ -93,56 +100,46 @@ export default function DashboardPage() {
         </Card>
       </div>
 
+      <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
+        <p className="text-overline text-accent-700 uppercase mb-4">{t("nextAction")}</p>
+        {primaryGoal ? (
+          <>
+            <h2 className="text-title-sm font-serif text-ink-950 mb-2">
+              {primaryGoal.title[locale]}
+            </h2>
+            <p className="text-body text-ink-600 mb-1">{primaryGoal.canDoStatement[locale]}</p>
+            <p className="text-caption text-ink-400 mb-7">{primary?.reason[locale]}</p>
+            <Link href={`/learn/${primaryGoal.id}`}>
+              <Button variant="accent" className="min-w-[12rem]">
+                {t("continueLearning")}
+              </Button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <h2 className="text-title-sm font-serif text-ink-950 mb-2">{t("allDone")}</h2>
+            <p className="text-body text-ink-600 mb-4">{t("allDoneBody")}</p>
+            <Link href="/vocabulary">
+              <Button variant="accent">{t("reviewVocab")}</Button>
+            </Link>
+          </>
+        )}
+      </Card>
+
       {dueCount > 0 && (
         <Card className="mb-6">
-          <p className="text-body text-ink-800 mb-3">
-            {t("vocabDue", { count: dueCount })}
-          </p>
+          <p className="text-body text-ink-800 mb-3">{t("vocabDue", { count: dueCount })}</p>
           <Link href="/vocabulary">
             <Button variant="secondary" size="sm">{t("reviewVocab")}</Button>
           </Link>
         </Card>
       )}
 
-      <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
-        <p className="text-overline text-accent-700 uppercase mb-4">
-          {t("nextAction")}
-        </p>
-
-        {primaryGoal ? (
-          <>
-            <h2 className="text-title-sm font-serif text-ink-950 mb-2">
-              {primaryGoal.title[locale]}
-            </h2>
-            <p className="text-body text-ink-600 mb-1">
-              {primaryGoal.canDoStatement[locale]}
-            </p>
-            <p className="text-caption text-ink-400 mb-7">
-              {primary?.reason[locale]}
-            </p>
-            <Link href={`/learn/${primaryGoal.id}`}>
-              <Button variant="accent">{t("start")}</Button>
-            </Link>
-          </>
-        ) : (
-          <>
-            <h2 className="text-title-sm font-serif text-ink-950 mb-2">
-              {t("allDone")}
-            </h2>
-            <p className="text-body text-ink-600">{t("allDoneBody")}</p>
-          </>
-        )}
-      </Card>
-
       {primaryScenario && (
         <Card className="mb-6">
           <h3 className="text-caption text-ink-400 mb-2">{t("currentScenario")}</h3>
-          <p className="text-body-lg font-medium text-ink-950">
-            {primaryScenario.title[locale]}
-          </p>
-          <p className="text-body-sm text-ink-600 mt-1">
-            {primaryScenario.description[locale]}
-          </p>
+          <p className="text-body-lg font-medium text-ink-950">{primaryScenario.title[locale]}</p>
+          <p className="text-body-sm text-ink-600 mt-1">{primaryScenario.description[locale]}</p>
         </Card>
       )}
 
@@ -166,9 +163,7 @@ export default function DashboardPage() {
               const g = getGoalById(gid);
               return g ? (
                 <li key={gid} className="text-body text-ink-800 flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-success-100 text-success-700 text-xs flex items-center justify-center flex-shrink-0">
-                    ✓
-                  </span>
+                  <span className="w-5 h-5 rounded-full bg-success-100 text-success-700 text-xs flex items-center justify-center flex-shrink-0">✓</span>
                   {g.canDoStatement[locale]}
                 </li>
               ) : null;
@@ -184,9 +179,7 @@ export default function DashboardPage() {
             {allRecs.slice(1, 6).map((rec) => {
               const g = getGoalById(rec.goalId);
               return g ? (
-                <li key={rec.goalId} className="text-body-sm text-ink-500">
-                  {g.title[locale]}
-                </li>
+                <li key={rec.goalId} className="text-body-sm text-ink-500">{g.title[locale]}</li>
               ) : null;
             })}
           </ul>
@@ -194,44 +187,20 @@ export default function DashboardPage() {
       )}
 
       <div className="flex flex-wrap gap-3 mb-8">
-        <Link href="/progress">
-          <Button variant="secondary" size="sm">{t("viewProgress")}</Button>
-        </Link>
-        <Link href="/vocabulary">
-          <Button variant="secondary" size="sm">{t("viewVocab")}</Button>
-        </Link>
-        <Link href="/grammar">
-          <Button variant="secondary" size="sm">{t("viewGrammar")}</Button>
-        </Link>
-        <Link href="/writing">
-          <Button variant="secondary" size="sm">{t("viewWriting")}</Button>
-        </Link>
-        <Link href="/tutor">
-          <Button variant="secondary" size="sm">{t("viewTutor")}</Button>
-        </Link>
-        <Link href="/resources">
-          <Button variant="secondary" size="sm">{t("viewResources")}</Button>
-        </Link>
-        <Link href="/practice">
-          <Button variant="secondary" size="sm">{t("viewPractice")}</Button>
-        </Link>
-        <Link href="/real-life">
-          <Button variant="secondary" size="sm">{t("viewRealLife")}</Button>
-        </Link>
-        <Link href="/scenarios">
-          <Button variant="secondary" size="sm">{t("viewScenarios")}</Button>
-        </Link>
+        <Link href="/progress"><Button variant="secondary" size="sm">{t("viewProgress")}</Button></Link>
+        <Link href="/vocabulary"><Button variant="secondary" size="sm">{t("viewVocab")}</Button></Link>
+        <Link href="/grammar"><Button variant="secondary" size="sm">{t("viewGrammar")}</Button></Link>
+        <Link href="/writing"><Button variant="secondary" size="sm">{t("viewWriting")}</Button></Link>
+        <Link href="/tutor"><Button variant="secondary" size="sm">{t("viewTutor")}</Button></Link>
+        <Link href="/resources"><Button variant="secondary" size="sm">{t("viewResources")}</Button></Link>
+        <Link href="/practice"><Button variant="secondary" size="sm">{t("viewPractice")}</Button></Link>
+        <Link href="/real-life"><Button variant="secondary" size="sm">{t("viewRealLife")}</Button></Link>
+        <Link href="/scenarios"><Button variant="secondary" size="sm">{t("viewScenarios")}</Button></Link>
       </div>
 
       <div className="pt-8 border-t border-ink-100">
-        <button
-          type="button"
-          onClick={() => {
-            clearLearner();
-            router.push("/");
-          }}
-          className="text-caption text-ink-300 hover:text-ink-500 transition-colors duration-200"
-        >
+        <button type="button" onClick={() => { clearLearner(); router.push("/"); }}
+          className="text-caption text-ink-300 hover:text-ink-500 transition-colors">
           {t("reset")}
         </button>
       </div>

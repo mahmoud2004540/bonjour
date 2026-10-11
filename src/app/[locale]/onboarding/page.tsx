@@ -5,7 +5,11 @@ import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { createLearner, updatePreferences } from "@/application/learner-store";
+import {
+  createLearner,
+  updatePreferences,
+  startAsBeginner,
+} from "@/application/learner-store";
 import { trackEvent } from "@/application/local-events";
 import { TARGET_LANGUAGES } from "@/domain/languages";
 import type { Locale } from "@/i18n/config";
@@ -17,7 +21,7 @@ const OBJECTIVES = [
   { id: "travel", en: "Travel", fr: "Voyage", ar: "السفر" },
   { id: "admin", en: "Administration", fr: "Démarches administratives", ar: "الإجراءات الإدارية" },
   { id: "social", en: "Social situations", fr: "Situations sociales", ar: "المواقف الاجتماعية" },
-  { id: "integration", en: "Living in a French-speaking country", fr: "Vivre dans un pays francophone", ar: "العيش في بلد ناطق بالفرنسية" },
+  { id: "integration", en: "Living abroad", fr: "Vivre à l'étranger", ar: "العيش في الخارج" },
 ];
 
 const SITUATIONS = [
@@ -48,7 +52,7 @@ export default function OnboardingPage() {
     setter(list.includes(id) ? list.filter((x) => x !== id) : [...list, id]);
   }
 
-  function handleFinish() {
+  function saveProfileBase() {
     createLearner(name || "Learner", email || "learner@example.com", locale);
     updatePreferences({
       objectives,
@@ -59,7 +63,17 @@ export default function OnboardingPage() {
       dailyMinutes,
     });
     trackEvent("onboarding_complete", { lang: targetLanguage });
+  }
+
+  function handlePlacement() {
+    saveProfileBase();
     router.push("/placement");
+  }
+
+  function handleBeginner() {
+    saveProfileBase();
+    startAsBeginner();
+    router.push("/dashboard");
   }
 
   const totalSteps = 4;
@@ -113,9 +127,9 @@ export default function OnboardingPage() {
                   }`}
                 >
                   <span className="font-medium">{lang.name[locale]}</span>
-                  {!lang.curriculumReady && (
-                    <span className="text-caption text-ink-400 ms-2">{t("comingSoon")}</span>
-                  )}
+                  <span className="text-caption text-ink-400 ms-2">
+                    {lang.pathDepth === "full" ? t("pathFull") : t("pathStarter")}
+                  </span>
                 </button>
               ))}
             </div>
@@ -128,9 +142,7 @@ export default function OnboardingPage() {
                     type="button"
                     onClick={() => setDailyMinutes(m)}
                     className={`px-3 py-2 rounded-lg border text-sm ${
-                      dailyMinutes === m
-                        ? "border-accent-500 bg-accent-50"
-                        : "border-ink-200"
+                      dailyMinutes === m ? "border-accent-500 bg-accent-50" : "border-ink-200"
                     }`}
                   >
                     {m} min
@@ -163,7 +175,7 @@ export default function OnboardingPage() {
           </div>
         )}
 
-        <div className="mt-8 flex justify-between">
+        <div className="mt-8 flex flex-col sm:flex-row sm:justify-between gap-3">
           {step > 0 ? (
             <Button variant="ghost" onClick={() => setStep(step - 1)}>{t("back")}</Button>
           ) : (
@@ -174,7 +186,14 @@ export default function OnboardingPage() {
               {t("continue")}
             </Button>
           ) : (
-            <Button variant="accent" onClick={handleFinish}>{t("startPlacement")}</Button>
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto sm:ms-auto">
+              <Button variant="secondary" onClick={handleBeginner}>
+                {t("skipPlacement")}
+              </Button>
+              <Button variant="accent" onClick={handlePlacement}>
+                {t("startPlacement")}
+              </Button>
+            </div>
           )}
         </div>
       </Card>
