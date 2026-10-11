@@ -55,12 +55,14 @@ export default function DashboardPage() {
     );
   }
 
+  const target = profile.preferences.targetLanguage ?? "fr";
   const primary = getPrimaryNextAction(profile);
   const allRecs = getNextRecommendations(profile);
   const primaryGoal = primary ? getGoalById(primary.goalId) : null;
   const primaryScenario = primaryGoal
     ? getScenarioById(primaryGoal.scenarioId)
     : null;
+  const scenarios = getPublishedScenarios(target);
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
@@ -147,7 +149,7 @@ export default function DashboardPage() {
       <Card className="mb-6">
         <h3 className="text-caption text-ink-400 mb-3">{t("allScenarios")}</h3>
         <ul className="space-y-2">
-          {getPublishedScenarios().map((s) => (
+          {scenarios.map((s) => (
             <li key={s.id} className="text-body-sm text-ink-700">
               {s.title[locale]}
               <span className="text-caption text-ink-400 ms-2">{s.level}</span>
@@ -200,6 +202,9 @@ export default function DashboardPage() {
         </Link>
         <Link href="/grammar">
           <Button variant="secondary" size="sm">{t("viewGrammar")}</Button>
+        </Link>
+        <Link href="/writing">
+          <Button variant="secondary" size="sm">{t("viewWriting")}</Button>
         </Link>
         <Link href="/tutor">
           <Button variant="secondary" size="sm">{t("viewTutor")}</Button>
