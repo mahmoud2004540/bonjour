@@ -1,12 +1,10 @@
 /**
  * Application service for learner state.
- * Currently uses localStorage — designed to be swapped for Supabase later.
- * No fake data is invented.
+ * localStorage now — designed for Supabase later.
  */
 
 import type {
   LearnerProfile,
-  PlacementAttempt,
   PlacementObservation,
   PracticeAttempt,
   LearnerPreferences,
@@ -14,7 +12,6 @@ import type {
   CefrLevel,
   SkillEvidence,
 } from "@/domain/types";
-import { PLACEMENT_VERSION } from "@/domain/placement/questions";
 import { getPrimaryNextAction } from "@/domain/learning/recommendation";
 
 const STORAGE_KEY = "bonjour_learner_v1";
@@ -55,12 +52,16 @@ export function createLearner(
       situations: [],
       availability: "",
       preferredStyle: "",
+      targetLanguage: "fr",
+      dailyMinutes: 15,
     },
     placementCompleted: false,
     estimatedStartingLevel: "unknown",
     skillEvidence: [],
     completedGoals: [],
     currentPriorities: [],
+    xp: 0,
+    streakDays: 0,
   };
   saveProfile(profile);
   return profile;
@@ -71,7 +72,7 @@ export function updatePreferences(
 ): LearnerProfile | null {
   const profile = getStoredProfile();
   if (!profile) return null;
-  profile.preferences = preferences;
+  profile.preferences = { ...profile.preferences, ...preferences };
   saveProfile(profile);
   return profile;
 }
@@ -82,7 +83,6 @@ export function finalizePlacement(
   const profile = getStoredProfile();
   if (!profile) return null;
 
-  // Build evidence from observations — no invented mastery
   const skillEvidence: SkillEvidence[] = [];
   const dimensions = [
     "vocabulary",
@@ -103,15 +103,10 @@ export function finalizePlacement(
     const totalScored = dimObs.filter((o) => o.isCorrect !== null).length;
 
     let status: SkillEvidence["status"] = "unknown";
-    if (totalScored === 0) {
-      status = "unknown"; // open responses only
-    } else if (correctCount === totalScored) {
-      status = "demonstrated";
-    } else if (correctCount > 0) {
-      status = "partial";
-    } else {
-      status = "not_yet";
-    }
+    if (totalScored === 0) status = "unknown";
+    else if (correctCount === totalScored) status = "demonstrated";
+    else if (correctCount > 0) status = "partial";
+    else status = "not_yet";
 
     skillEvidence.push({
       dimension: dim,
@@ -120,11 +115,9 @@ export function finalizePlacement(
     });
   }
 
-  // Estimate starting level only from available evidence — never invent C1/C2
   const demonstrated = skillEvidence.filter((e) => e.status === "demonstrated").length;
   let estimated: CefrLevel = "A1";
   if (demonstrated >= 4) estimated = "A2";
-  // We never claim higher than A2 from this short placement
 
   profile.placementCompleted = true;
   profile.estimatedStartingLevel = estimated;
@@ -140,8 +133,8 @@ export function markGoalCompleted(goalId: string): LearnerProfile | null {
   if (!profile) return null;
   if (!profile.completedGoals.includes(goalId)) {
     profile.completedGoals.push(goalId);
+    profile.xp = (profile.xp ?? 0) + 25;
   }
-  // Update priorities based on recommendation engine
   const next = getPrimaryNextAction(profile);
   profile.currentPriorities = next ? [next.goalId] : [];
   saveProfile(profile);
@@ -154,7 +147,6 @@ export function recordPracticeAttempt(
   response: string,
   evidenceStatus: PracticeAttempt["evidenceStatus"]
 ): void {
-  // For now we only use it to update goal completion when evidence is demonstrated
   if (evidenceStatus === "demonstrated") {
     markGoalCompleted(goalId);
   }

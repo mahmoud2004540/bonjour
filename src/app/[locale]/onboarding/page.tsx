@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { createLearner, updatePreferences } from "@/application/learner-store";
 import { trackEvent } from "@/application/local-events";
+import { TARGET_LANGUAGES } from "@/domain/languages";
 import type { Locale } from "@/i18n/config";
+import type { TargetLanguage } from "@/domain/types";
 
 const OBJECTIVES = [
   { id: "daily", en: "Daily life", fr: "Vie quotidienne", ar: "الحياة اليومية" },
@@ -27,6 +29,8 @@ const SITUATIONS = [
   { id: "work", en: "Workplace", fr: "Lieu de travail", ar: "مكان العمل" },
 ];
 
+const MINUTES = [10, 15, 20, 30, 45];
+
 export default function OnboardingPage() {
   const t = useTranslations("onboarding");
   const locale = useLocale() as Locale;
@@ -35,6 +39,8 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [targetLanguage, setTargetLanguage] = useState<TargetLanguage>("fr");
+  const [dailyMinutes, setDailyMinutes] = useState(15);
   const [objectives, setObjectives] = useState<string[]>([]);
   const [situations, setSituations] = useState<string[]>([]);
 
@@ -47,22 +53,34 @@ export default function OnboardingPage() {
     updatePreferences({
       objectives,
       situations,
-      availability: "",
+      availability: `${dailyMinutes}m`,
       preferredStyle: "",
+      targetLanguage,
+      dailyMinutes,
     });
-    trackEvent("onboarding_complete");
+    trackEvent("onboarding_complete", { lang: targetLanguage });
     router.push("/placement");
   }
+
+  const totalSteps = 4;
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
       <div className="mb-10">
         <p className="text-caption text-ink-400 mb-2 tabular-nums">
-          {t("step", { current: step + 1, total: 3 })}
+          {t("step", { current: step + 1, total: totalSteps })}
         </p>
-        <h1 className="text-title font-serif text-ink-950">{t(`steps.${step}.title`)}</h1>
+        <h1 className="text-title font-serif text-ink-950">
+          {step === 0 && t("steps.0.title")}
+          {step === 1 && t("langTitle")}
+          {step === 2 && t("steps.1.title")}
+          {step === 3 && t("steps.2.title")}
+        </h1>
         <p className="text-body text-ink-600 mt-2 text-pretty">
-          {t(`steps.${step}.description`)}
+          {step === 0 && t("steps.0.description")}
+          {step === 1 && t("langBody")}
+          {step === 2 && t("steps.1.description")}
+          {step === 3 && t("steps.2.description")}
         </p>
       </div>
 
@@ -70,89 +88,93 @@ export default function OnboardingPage() {
         {step === 0 && (
           <div className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-ink-700 mb-1.5">
-                {t("nameLabel")}
-              </label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="input-field"
-                placeholder={t("namePlaceholder")}
-                autoComplete="name"
-              />
+              <label className="block text-sm font-medium text-ink-700 mb-1.5">{t("nameLabel")}</label>
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="input-field" placeholder={t("namePlaceholder")} autoComplete="name" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink-700 mb-1.5">
-                {t("emailLabel")}
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input-field"
-                placeholder={t("emailPlaceholder")}
-                autoComplete="email"
-              />
+              <label className="block text-sm font-medium text-ink-700 mb-1.5">{t("emailLabel")}</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-field" placeholder={t("emailPlaceholder")} autoComplete="email" />
             </div>
           </div>
         )}
 
         {step === 1 && (
-          <div className="space-y-2.5">
-            {OBJECTIVES.map((obj) => (
-              <button
-                key={obj.id}
-                type="button"
-                onClick={() => toggle(objectives, obj.id, setObjectives)}
-                className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all duration-150 ${
-                  objectives.includes(obj.id)
-                    ? "border-accent-500 bg-accent-50 text-ink-950"
-                    : "border-ink-200 hover:border-ink-300 text-ink-700"
-                }`}
-              >
-                {obj[locale]}
-              </button>
-            ))}
+          <div className="space-y-5">
+            <div className="space-y-2.5">
+              {TARGET_LANGUAGES.map((lang) => (
+                <button
+                  key={lang.code}
+                  type="button"
+                  onClick={() => setTargetLanguage(lang.code)}
+                  className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all ${
+                    targetLanguage === lang.code
+                      ? "border-accent-500 bg-accent-50 text-ink-950"
+                      : "border-ink-200 text-ink-700"
+                  }`}
+                >
+                  <span className="font-medium">{lang.name[locale]}</span>
+                  {!lang.curriculumReady && (
+                    <span className="text-caption text-ink-400 ms-2">{t("comingSoon")}</span>
+                  )}
+                </button>
+              ))}
+            </div>
+            <div>
+              <p className="text-sm font-medium text-ink-700 mb-2">{t("dailyMinutes")}</p>
+              <div className="flex flex-wrap gap-2">
+                {MINUTES.map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    onClick={() => setDailyMinutes(m)}
+                    className={`px-3 py-2 rounded-lg border text-sm ${
+                      dailyMinutes === m
+                        ? "border-accent-500 bg-accent-50"
+                        : "border-ink-200"
+                    }`}
+                  >
+                    {m} min
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
         {step === 2 && (
           <div className="space-y-2.5">
+            {OBJECTIVES.map((obj) => (
+              <button key={obj.id} type="button" onClick={() => toggle(objectives, obj.id, setObjectives)}
+                className={`w-full text-start px-4 py-3.5 rounded-xl border ${
+                  objectives.includes(obj.id) ? "border-accent-500 bg-accent-50" : "border-ink-200"
+                }`}>{obj[locale]}</button>
+            ))}
+          </div>
+        )}
+
+        {step === 3 && (
+          <div className="space-y-2.5">
             {SITUATIONS.map((sit) => (
-              <button
-                key={sit.id}
-                type="button"
-                onClick={() => toggle(situations, sit.id, setSituations)}
-                className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all duration-150 ${
-                  situations.includes(sit.id)
-                    ? "border-accent-500 bg-accent-50 text-ink-950"
-                    : "border-ink-200 hover:border-ink-300 text-ink-700"
-                }`}
-              >
-                {sit[locale]}
-              </button>
+              <button key={sit.id} type="button" onClick={() => toggle(situations, sit.id, setSituations)}
+                className={`w-full text-start px-4 py-3.5 rounded-xl border ${
+                  situations.includes(sit.id) ? "border-accent-500 bg-accent-50" : "border-ink-200"
+                }`}>{sit[locale]}</button>
             ))}
           </div>
         )}
 
         <div className="mt-8 flex justify-between">
           {step > 0 ? (
-            <Button variant="ghost" onClick={() => setStep(step - 1)}>
-              {t("back")}
-            </Button>
+            <Button variant="ghost" onClick={() => setStep(step - 1)}>{t("back")}</Button>
           ) : (
             <div />
           )}
-
-          {step < 2 ? (
+          {step < totalSteps - 1 ? (
             <Button onClick={() => setStep(step + 1)} disabled={step === 0 && !name.trim()}>
               {t("continue")}
             </Button>
           ) : (
-            <Button variant="accent" onClick={handleFinish}>
-              {t("startPlacement")}
-            </Button>
+            <Button variant="accent" onClick={handleFinish}>{t("startPlacement")}</Button>
           )}
         </div>
       </Card>
