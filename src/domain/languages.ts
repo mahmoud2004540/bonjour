@@ -1,14 +1,9 @@
-/**
- * Supported target languages (what the user learns).
- * UI locale remains independent (en/fr/ar).
- */
-
 import type { Locale, TargetLanguage } from "./types";
 
 export interface LanguageMeta {
   code: TargetLanguage;
   name: Record<Locale, string>;
-  /** Full CEFR scenario path available on-platform */
+  /** At least one published A1 path exists */
   curriculumReady: boolean;
   flagHint: string;
 }
@@ -23,25 +18,25 @@ export const TARGET_LANGUAGES: LanguageMeta[] = [
   {
     code: "en",
     name: { en: "English", fr: "Anglais", ar: "الإنجليزية" },
-    curriculumReady: false,
+    curriculumReady: true,
     flagHint: "EN",
   },
   {
     code: "de",
     name: { en: "German", fr: "Allemand", ar: "الألمانية" },
-    curriculumReady: false,
+    curriculumReady: true,
     flagHint: "DE",
   },
   {
     code: "it",
     name: { en: "Italian", fr: "Italien", ar: "الإيطالية" },
-    curriculumReady: false,
+    curriculumReady: true,
     flagHint: "IT",
   },
   {
     code: "es",
     name: { en: "Spanish", fr: "Espagnol", ar: "الإسبانية" },
-    curriculumReady: false,
+    curriculumReady: true,
     flagHint: "ES",
   },
 ];

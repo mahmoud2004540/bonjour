@@ -1,36 +1,21 @@
 /**
- * Deterministic recommendation engine.
- * Evidence + preferences. No invented mastery scores.
+ * Deterministic recommendation — filters by target language when set.
  */
 
-import type { LearnerProfile, Recommendation, Locale } from "../types";
+import type { LearnerProfile, Recommendation, Locale, TargetLanguage } from "../types";
 import { getAllGoals } from "../curriculum/registry";
 
 const SITUATION_TO_SCENARIOS: Record<string, string[]> = {
   shopping: ["a1-courses", "a1-au-cafe", "a2-restaurant"],
   healthcare: ["a1-sante", "a2-rdv"],
   housing: ["a1-logement", "a2-hotel"],
-  meeting: ["a1-faire-connaissance", "a2-telephone"],
+  meeting: ["a1-faire-connaissance", "a2-telephone", "en-a1-intro"],
   travel: ["a1-transport", "a2-hotel", "a2-restaurant"],
-  work: [
-    "b1-travail",
-    "a2-telephone",
-    "a2-rdv",
-    "b2-opinion",
-    "c1-argument",
-    "c2-nuance",
-  ],
+  work: ["b1-travail", "a2-telephone", "a2-rdv", "b2-opinion", "c1-argument", "c2-nuance"],
   daily: ["a1-au-cafe", "a1-courses", "a1-transport"],
   admin: ["a2-rdv", "a1-logement", "b1-service", "c2-nuance"],
   social: ["a1-faire-connaissance", "a2-restaurant", "b2-opinion"],
-  integration: [
-    "a1-logement",
-    "a1-sante",
-    "a2-rdv",
-    "b1-travail",
-    "b2-opinion",
-    "c2-nuance",
-  ],
+  integration: ["a1-logement", "a1-sante", "a2-rdv", "b1-travail", "b2-opinion", "c2-nuance"],
 };
 
 function preferenceBoost(profile: LearnerProfile, scenarioId: string): number {
@@ -46,13 +31,19 @@ function preferenceBoost(profile: LearnerProfile, scenarioId: string): number {
   return boost;
 }
 
+function goalLang(goal: { targetLanguage?: TargetLanguage; scenarioId: string }): TargetLanguage {
+  return goal.targetLanguage ?? "fr";
+}
+
 export function getNextRecommendations(
   profile: LearnerProfile
 ): Recommendation[] {
   const recommendations: Recommendation[] = [];
   const goals = getAllGoals();
+  const target = profile.preferences.targetLanguage ?? "fr";
 
   for (const goal of goals) {
+    if (goalLang(goal) !== target) continue;
     if (profile.completedGoals.includes(goal.id)) continue;
 
     const prereqsMet = goal.prerequisites.every((p) =>
@@ -79,11 +70,7 @@ export function getNextRecommendations(
           : `موصى به لأنك لم تُثبت بعد: « ${goal.canDoStatement.ar} »`,
     };
 
-    recommendations.push({
-      goalId: goal.id,
-      reason,
-      priority,
-    });
+    recommendations.push({ goalId: goal.id, reason, priority });
   }
 
   return recommendations.sort((a, b) => b.priority - a.priority);

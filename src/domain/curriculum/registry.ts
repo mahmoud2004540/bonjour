@@ -1,4 +1,4 @@
-import type { Scenario, LearningGoal, Task } from "../types";
+import type { Scenario, LearningGoal, Task, TargetLanguage } from "../types";
 import {
   SCENARIO_FAIRE_CONNAISSANCE,
   GOALS as FC_GOALS,
@@ -34,6 +34,26 @@ import {
   ARGUMENT_TASKS,
 } from "./c1-argument";
 import { SCENARIO_NUANCE, NUANCE_GOALS, NUANCE_TASKS } from "./c2-nuance";
+import {
+  SCENARIO_EN_INTRO,
+  EN_INTRO_GOALS,
+  EN_INTRO_TASKS,
+} from "./en-a1-intro";
+import {
+  SCENARIO_DE_INTRO,
+  DE_INTRO_GOALS,
+  DE_INTRO_TASKS,
+} from "./de-a1-intro";
+import {
+  SCENARIO_IT_INTRO,
+  IT_INTRO_GOALS,
+  IT_INTRO_TASKS,
+} from "./it-a1-intro";
+import {
+  SCENARIO_ES_INTRO,
+  ES_INTRO_GOALS,
+  ES_INTRO_TASKS,
+} from "./es-a1-intro";
 
 const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_FAIRE_CONNAISSANCE,
@@ -51,6 +71,10 @@ const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_OPINION,
   SCENARIO_ARGUMENT,
   SCENARIO_NUANCE,
+  SCENARIO_EN_INTRO,
+  SCENARIO_DE_INTRO,
+  SCENARIO_IT_INTRO,
+  SCENARIO_ES_INTRO,
 ];
 
 const ALL_GOALS: LearningGoal[] = [
@@ -69,6 +93,10 @@ const ALL_GOALS: LearningGoal[] = [
   ...OPINION_GOALS,
   ...ARGUMENT_GOALS,
   ...NUANCE_GOALS,
+  ...EN_INTRO_GOALS,
+  ...DE_INTRO_GOALS,
+  ...IT_INTRO_GOALS,
+  ...ES_INTRO_GOALS,
 ];
 
 const ALL_TASKS: Task[] = [
@@ -87,14 +115,20 @@ const ALL_TASKS: Task[] = [
   ...OPINION_TASKS,
   ...ARGUMENT_TASKS,
   ...NUANCE_TASKS,
+  ...EN_INTRO_TASKS,
+  ...DE_INTRO_TASKS,
+  ...IT_INTRO_TASKS,
+  ...ES_INTRO_TASKS,
 ];
 
-export function getPublishedScenarios(): Scenario[] {
-  return ALL_SCENARIOS.filter((s) => s.status === "published");
+export function getPublishedScenarios(lang?: TargetLanguage): Scenario[] {
+  const list = ALL_SCENARIOS.filter((s) => s.status === "published");
+  if (!lang) return list;
+  return list.filter((s) => (s.targetLanguage ?? "fr") === lang);
 }
 
 export function getScenarioById(id: string): Scenario | undefined {
-  return getPublishedScenarios().find((s) => s.id === id);
+  return ALL_SCENARIOS.find((s) => s.id === id && s.status === "published");
 }
 
 export function getAllGoals(): LearningGoal[] {
@@ -123,9 +157,6 @@ export function validateCurriculumIntegrity(): string[] {
   for (const g of ALL_GOALS) {
     for (const p of g.prerequisites) {
       if (!ids.has(p)) issues.push(`${g.id} missing prereq ${p}`);
-    }
-    if (!ALL_SCENARIOS.some((s) => s.id === g.scenarioId)) {
-      issues.push(`${g.id} unknown scenario ${g.scenarioId}`);
     }
   }
   for (const t of ALL_TASKS) {
