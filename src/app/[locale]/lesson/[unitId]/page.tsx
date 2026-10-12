@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { getStoredProfile, markGoalCompleted } from "@/application/learner-store";
 import { recordStudyActivity } from "@/application/motivation-store";
 import { trackEvent } from "@/application/local-events";
-import { getUnitById } from "@/domain/lessons/registry";
+import { getUnitById, getUnitAfter } from "@/domain/lessons/registry";
 import { speakFrench, canSpeak } from "@/lib/speech";
 import type { LessonPhase } from "@/domain/lessons/types";
 import type { Locale } from "@/i18n/config";
@@ -56,7 +56,6 @@ export default function LessonUnitPage({
   useEffect(() => {
     if (!getStoredProfile()) router.replace("/onboarding");
     setTtsOk(canSpeak());
-    // load voices
     if (typeof window !== "undefined" && window.speechSynthesis) {
       window.speechSynthesis.getVoices();
     }
@@ -164,7 +163,6 @@ export default function LessonUnitPage({
 
   return (
     <div className="min-h-[100dvh] flex flex-col max-w-lg mx-auto">
-      {/* Session top bar — path progress + lives */}
       <header className="sticky top-0 z-20 bg-surface/95 backdrop-blur border-b border-ink-100 px-4 py-3">
         <div className="flex items-center gap-3">
           <Link href="/path" className="text-ink-400 hover:text-ink-700 text-xl leading-none px-1" aria-label={t("exit")}>
@@ -395,26 +393,28 @@ export default function LessonUnitPage({
           </div>
         )}
 
-        {phase === "quiz" && quizDone && (
-          <div className="text-center pt-8">
-            <div className="text-5xl mb-4">
-              {quizScore / unit.quiz.length >= unit.passRatio ? "🎉" : "💪"}
-            </div>
+        {phase === "quiz" && quizDone && (() => {
+          const passed = quizScore / unit.quiz.length >= unit.passRatio;
+          const nextUnit = passed ? getUnitAfter(unit.id) : null;
+          return (
+          <div className="text-center pt-8 scene-3d">
+            <div className="text-5xl mb-4">{passed ? "🎉" : "💪"}</div>
             <h2 className="text-title-sm font-serif text-ink-950 mb-3">
-              {quizScore / unit.quiz.length >= unit.passRatio
-                ? t("passedTitle")
-                : t("failedTitle")}
+              {passed ? t("passedTitle") : t("failedTitle")}
             </h2>
             <p className="text-body text-ink-600 mb-2">
               {t("score", { score: quizScore, total: unit.quiz.length })}
             </p>
-            <p className="text-body-sm text-ink-500 mb-8">
-              {quizScore / unit.quiz.length >= unit.passRatio
-                ? t("passedBody")
-                : t("failedBody")}
+            <p className="text-body-sm text-ink-500 mb-6">
+              {passed ? t("passedBody") : t("failedBody")}
             </p>
-            <div className="flex flex-col gap-3">
-              {quizScore / unit.quiz.length < unit.passRatio && (
+            {passed && nextUnit && (
+              <p className="text-body-sm text-accent-700 mb-4 font-medium">
+                {t("nextLessonReady", { title: nextUnit.title[locale] })}
+              </p>
+            )}
+            <div className="flex flex-col gap-3 max-w-xs mx-auto">
+              {!passed && (
                 <Button
                   variant="secondary"
                   className="h-12"
@@ -431,14 +431,22 @@ export default function LessonUnitPage({
                   {t("retry")}
                 </Button>
               )}
+              {passed && nextUnit && (
+                <Link href={`/lesson/${nextUnit.id}`}>
+                  <Button variant="accent" className="w-full h-14 text-body-lg">
+                    {t("continueNext")}
+                  </Button>
+                </Link>
+              )}
               <Link href="/path">
-                <Button variant="accent" className="w-full h-12">
+                <Button variant={passed && nextUnit ? "secondary" : "accent"} className="w-full h-12">
                   {t("toPath")}
                 </Button>
               </Link>
             </div>
           </div>
-        )}
+          );
+        })()}
       </main>
     </div>
   );
