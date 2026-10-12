@@ -20,7 +20,7 @@ export default function TeacherTrackPage({
 }) {
   const t = useTranslations("teacher");
   const locale = useLocale() as Locale;
-  const [track, setTrack] = useState<TeacherTrack | null>(null);
+  const [track, setTrack] = useState<TeacherTrack | null | undefined>(undefined);
 
   useEffect(() => {
     params.then((p) => {
@@ -32,11 +32,15 @@ export default function TeacherTrackPage({
     });
   }, [params]);
 
-  if (track === null && track !== undefined) {
-    /* loading */
+  if (track === undefined) {
+    return (
+      <div className="max-w-content mx-auto px-6 py-20">
+        <div className="h-6 w-40 bg-ink-100 rounded animate-pulse" />
+      </div>
+    );
   }
 
-  if (!track) {
+  if (track === null) {
     return (
       <div className="max-w-content mx-auto px-6 py-20 text-center">
         <p className="mb-4">{t("notFound")}</p>
