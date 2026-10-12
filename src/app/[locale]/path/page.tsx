@@ -17,6 +17,30 @@ import { getStoredProfile } from "@/application/learner-store";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
+const READY_LABEL: Record<
+  string,
+  Record<"start" | "building" | "ready_practice" | "ready_exam", string>
+> = {
+  ar: {
+    start: "لسه في البداية",
+    building: "بتبني الأساس",
+    ready_practice: "جاهز لممارسة مكثفة",
+    ready_exam: "جاهز لمحاكاة الامتحان",
+  },
+  en: {
+    start: "Just starting",
+    building: "Building the base",
+    ready_practice: "Ready for intensive practice",
+    ready_exam: "Ready for mock exam",
+  },
+  fr: {
+    start: "Début",
+    building: "Bases en cours",
+    ready_practice: "Prêt pour la pratique intensive",
+    ready_exam: "Prêt pour l'examen blanc",
+  },
+};
+
 export default function PathPage() {
   const t = useTranslations("path");
   const locale = useLocale() as Locale;
@@ -41,6 +65,7 @@ export default function PathPage() {
   }
 
   const next = getNextUnit(profile);
+  const labels = READY_LABEL[locale] ?? READY_LABEL.en;
 
   return (
     <div className="max-w-lg mx-auto px-5 py-12 md:py-16 scene-3d">
@@ -113,7 +138,13 @@ export default function PathPage() {
                 {unlocked && (
                   <div className="mb-5">
                     <div className="flex justify-between text-caption text-ink-500 mb-1">
-                      <span>{t("readiness")}</span>
+                      <span>
+                        {locale === "ar"
+                          ? "جاهزية المستوى"
+                          : locale === "fr"
+                            ? "Préparation"
+                            : "Readiness"}
+                      </span>
                       <span className="font-medium text-ink-800">
                         {readiness.percent}%
                       </span>
@@ -129,7 +160,7 @@ export default function PathPage() {
                       />
                     </div>
                     <p className="text-caption text-ink-400 mt-1">
-                      {t(`ready_${readiness.label}`)}
+                      {labels[readiness.label]}
                     </p>
                   </div>
                 )}
@@ -146,7 +177,6 @@ export default function PathPage() {
                       className="path-rail absolute top-2 bottom-2 w-1.5 rounded-full left-1/2 -translate-x-1/2 z-0"
                       aria-hidden
                     />
-
                     {units.map((u, i) => {
                       const done = isUnitComplete(u, profile);
                       const isCurrent = next?.id === u.id;
@@ -164,10 +194,7 @@ export default function PathPage() {
                           }}
                         >
                           {locked ? (
-                            <div
-                              className="node-3d node-3d-locked w-[4.25rem] h-[4.25rem] rounded-full bg-ink-100 border-[5px] border-ink-200 flex items-center justify-center text-ink-300 text-xl"
-                              title={t("locked")}
-                            >
+                            <div className="node-3d node-3d-locked w-[4.25rem] h-[4.25rem] rounded-full bg-ink-100 border-[5px] border-ink-200 flex items-center justify-center text-ink-300 text-xl">
                               🔒
                             </div>
                           ) : (
@@ -186,7 +213,6 @@ export default function PathPage() {
                               {done ? "✓" : isExam ? "🎓" : i + 1}
                             </Link>
                           )}
-
                           <p
                             className={`mt-2.5 text-center text-body-sm max-w-[11rem] font-medium ${
                               locked ? "text-ink-300" : "text-ink-800"
@@ -194,7 +220,6 @@ export default function PathPage() {
                           >
                             {u.title[locale]}
                           </p>
-
                           {isCurrent && (
                             <Link href={`/lesson/${u.id}`} className="mt-2">
                               <Button variant="accent" size="sm">
@@ -227,11 +252,23 @@ export default function PathPage() {
 
       <div className="mt-12 text-center space-y-3">
         <Link href="/practice-lab">
-          <Button variant="accent">{t("practiceLab")}</Button>
+          <Button variant="accent">
+            {locale === "ar"
+              ? "معمل ساعات الممارسة"
+              : locale === "fr"
+                ? "Labo de pratique"
+                : "Practice hours lab"}
+          </Button>
         </Link>
         <div>
           <Link href="/exam">
-            <Button variant="secondary">{t("exam")}</Button>
+            <Button variant="secondary">
+              {locale === "ar"
+                ? "استعداد الامتحان"
+                : locale === "fr"
+                  ? "Examen"
+                  : "Exam prep"}
+            </Button>
           </Link>
         </div>
         <div>
