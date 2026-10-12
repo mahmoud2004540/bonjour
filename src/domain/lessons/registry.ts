@@ -5,6 +5,7 @@ import { A1_DEEP_UNITS } from "./units-a1-deep";
 import { A2_C2_UNITS } from "./units-a2-c2";
 import { EXTRA_UNITS } from "./units-extra";
 import { DAILY_LIFE_UNITS } from "./units-daily-life";
+import { EXAM_TRACK_UNITS } from "./units-exam-track";
 import { enrichUnit } from "./enrich";
 
 const LEVEL_RANK: Record<string, number> = {
@@ -35,6 +36,7 @@ const RAW_UNITS: LessonUnit[] = mergeById([
   ...A2_C2_UNITS,
   ...EXTRA_UNITS,
   ...DAILY_LIFE_UNITS,
+  ...EXAM_TRACK_UNITS,
 ]);
 
 export const ALL_UNITS: LessonUnit[] = RAW_UNITS.map(enrichUnit);
@@ -96,10 +98,17 @@ export function isUnitAccessible(
 ): boolean {
   if (!isLevelUnlocked(unit.level, profile)) return false;
   const next = getNextUnit(profile);
-  if (!next) return true; // all done
+  if (!next) return true;
   const nextIdx = ALL_UNITS.findIndex((u) => u.id === next.id);
   const thisIdx = ALL_UNITS.findIndex((u) => u.id === unit.id);
   return thisIdx <= nextIdx;
+}
+
+/** Exam-track units for a level (skill prep woven into the path) */
+export function getExamTrackUnits(level: string): LessonUnit[] {
+  return ALL_UNITS.filter(
+    (u) => u.level === level && u.id.includes("-exam-")
+  );
 }
 
 export function getCurriculumStats() {
