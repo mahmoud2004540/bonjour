@@ -87,13 +87,23 @@ export default function DashboardPage() {
         </Link>
       </Card>
 
-      <Card className="mb-6 layer-stack">
+      <Card className="mb-4 layer-stack">
         <h3 className="text-title-sm font-serif text-ink-950 mb-2">
           {t("teacherCardTitle")}
         </h3>
         <p className="text-body-sm text-ink-600 mb-4">{t("teacherCardBody")}</p>
         <Link href="/teacher">
           <Button variant="secondary">{t("viewTeacher")}</Button>
+        </Link>
+      </Card>
+
+      <Card className="mb-6 border-ink-200">
+        <h3 className="text-title-sm font-serif text-ink-950 mb-2">
+          {t("examCardTitle")}
+        </h3>
+        <p className="text-body-sm text-ink-600 mb-4">{t("examCardBody")}</p>
+        <Link href="/exam">
+          <Button variant="secondary">{t("viewExam")}</Button>
         </Link>
       </Card>
 
@@ -123,14 +133,14 @@ export default function DashboardPage() {
         <Link href="/path">
           <Button variant="secondary" size="sm">{t("viewPath")}</Button>
         </Link>
+        <Link href="/exam">
+          <Button variant="secondary" size="sm">{t("viewExam")}</Button>
+        </Link>
         <Link href="/teacher">
           <Button variant="secondary" size="sm">{t("viewTeacher")}</Button>
         </Link>
         <Link href="/academic">
           <Button variant="secondary" size="sm">{t("viewAcademic")}</Button>
-        </Link>
-        <Link href="/vocabulary">
-          <Button variant="secondary" size="sm">{t("viewVocab")}</Button>
         </Link>
       </div>
 
