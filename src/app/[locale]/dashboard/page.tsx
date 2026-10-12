@@ -13,7 +13,6 @@ import {
   getNextUnit,
   isUnitComplete,
 } from "@/domain/lessons/registry";
-import { getGoalById } from "@/domain/curriculum/registry";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -42,7 +41,7 @@ export default function DashboardPage() {
   if (!profile) {
     return (
       <div className="max-w-content mx-auto px-6 py-20">
-        <div className="h-8 w-48 bg-ink-100 rounded-lg animate-pulse mb-4" />
+        <div className="h-8 w-48 bg-ink-100 rounded-lg animate-pulse" />
       </div>
     );
   }
@@ -52,123 +51,93 @@ export default function DashboardPage() {
   const doneCount = allUnits.filter((u) => isUnitComplete(u, profile)).length;
 
   return (
-    <div className="max-w-content mx-auto px-6 py-16 md:py-20 scene-3d">
-      <div className="mb-10">
+    <div className="max-w-content mx-auto px-6 py-16 scene-3d">
+      <div className="mb-8">
         <p className="text-caption text-ink-400 mb-1">
           {t("greeting", { name: profile.displayName })}
         </p>
         <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
-        <p className="text-body-sm text-ink-500 mb-2">{t("learningFrench")}</p>
-        <p className="text-body-sm text-ink-500 text-pretty">{t("encourage")}</p>
+        <p className="text-body-sm text-ink-500">{t("encourage")}</p>
       </div>
 
-      <div className="grid sm:grid-cols-3 gap-3 mb-8">
-        <Card>
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        <Card depth={false}>
           <p className="text-caption text-ink-400">{t("xp")}</p>
-          <p className="text-title-sm font-serif text-ink-950">{profile.xp ?? 0}</p>
+          <p className="text-title-sm font-serif">{profile.xp ?? 0}</p>
         </Card>
-        <Card>
+        <Card depth={false}>
           <p className="text-caption text-ink-400">{t("streak")}</p>
-          <p className="text-title-sm font-serif text-ink-950">{profile.streakDays ?? 0}</p>
+          <p className="text-title-sm font-serif">{profile.streakDays ?? 0}</p>
         </Card>
-        <Card>
+        <Card depth={false}>
           <p className="text-caption text-ink-400">{t("unitsProgress")}</p>
-          <p className="text-title-sm font-serif text-ink-950">
+          <p className="text-title-sm font-serif">
             {doneCount}/{allUnits.length}
           </p>
         </Card>
       </div>
 
-      <Card className="mb-6 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
-        <h3 className="text-title-sm font-serif text-ink-950 mb-2">{t("academyCardTitle")}</h3>
-        <p className="text-body-sm text-ink-600 mb-4 text-pretty">{t("academyCardBody")}</p>
-        <Link href="/academic">
-          <Button variant="accent">{t("viewAcademic")}</Button>
+      <Card className="mb-6 border-accent-200 bg-gradient-to-br from-accent-50/50 to-white">
+        <h3 className="text-title-sm font-serif text-ink-950 mb-2">
+          {t("academyCardTitle")}
+        </h3>
+        <p className="text-body-sm text-ink-600 mb-4 text-pretty">
+          {t("academyCardBody")}
+        </p>
+        <Link href="/path">
+          <Button variant="accent" className="w-full sm:w-auto h-12">
+            {t("viewPath")}
+          </Button>
         </Link>
       </Card>
 
-      {nextUnit ? (
-        <Card className="mb-8">
-          <p className="text-overline text-accent-700 uppercase mb-3">
+      {nextUnit && (
+        <Card className="mb-6">
+          <p className="text-overline text-accent-700 mb-2">
             {t("todayLesson")} · {nextUnit.level}
           </p>
-          <h2 className="text-title-sm font-serif text-ink-950 mb-2">
-            {nextUnit.title[locale]}
-          </h2>
-          <p className="text-body-sm text-ink-600 mb-6 text-pretty">{t("lessonFlowHint")}</p>
+          <h2 className="text-title-sm font-serif mb-2">{nextUnit.title[locale]}</h2>
+          <p className="text-body-sm text-ink-500 mb-4">{t("lessonFlowHint")}</p>
           <Link href={`/lesson/${nextUnit.id}`}>
             <Button variant="secondary">{t("startLesson")}</Button>
           </Link>
         </Card>
-      ) : null}
+      )}
 
       {dueCount > 0 && (
         <Card className="mb-6">
-          <p className="text-body text-ink-800 mb-3">{t("vocabDue", { count: dueCount })}</p>
+          <p className="text-body mb-3">{t("vocabDue", { count: dueCount })}</p>
           <Link href="/vocabulary">
             <Button variant="secondary" size="sm">{t("reviewVocab")}</Button>
           </Link>
         </Card>
       )}
 
-      <Card className="mb-6">
-        <h3 className="text-caption text-ink-400 mb-4">{t("allUnits")}</h3>
-        <ul className="space-y-2.5">
-          {allUnits.map((u) => {
-            const done = isUnitComplete(u, profile);
-            return (
-              <li key={u.id} className="flex items-center justify-between gap-3">
-                <span className={`text-body-sm ${
-                  done ? "text-ink-400 line-through" : "text-ink-800"
-                }`}>
-                  <span className="text-caption text-ink-400 me-2">{u.level}</span>
-                  {u.title[locale]}
-                </span>
-                {done ? (
-                  <span className="text-caption text-success-700">{t("unitDone")}</span>
-                ) : (
-                  <Link href={`/lesson/${u.id}`} className="text-caption text-accent-700 hover:underline">
-                    {t("openUnit")}
-                  </Link>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </Card>
-
-      {profile.completedGoals.length > 0 && (
-        <Card className="mb-6">
-          <h3 className="text-caption text-ink-400 mb-4">{t("completed")}</h3>
-          <ul className="space-y-3">
-            {profile.completedGoals.slice(0, 12).map((gid) => {
-              const g = getGoalById(gid);
-              return g ? (
-                <li key={gid} className="text-body-sm text-ink-800 flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-success-100 text-success-700 text-xs flex items-center justify-center flex-shrink-0">✓</span>
-                  {g.canDoStatement[locale]}
-                </li>
-              ) : null;
-            })}
-          </ul>
-        </Card>
-      )}
-
-      <div className="flex flex-wrap gap-3 mb-8">
-        <Link href="/academic"><Button variant="secondary" size="sm">{t("viewAcademic")}</Button></Link>
-        <Link href="/academy"><Button variant="secondary" size="sm">{t("viewAcademy")}</Button></Link>
-        <Link href="/grammar"><Button variant="secondary" size="sm">{t("viewGrammar")}</Button></Link>
-        <Link href="/vocabulary"><Button variant="secondary" size="sm">{t("viewVocab")}</Button></Link>
-        <Link href="/progress"><Button variant="secondary" size="sm">{t("viewProgress")}</Button></Link>
-        <Link href="/tutor"><Button variant="secondary" size="sm">{t("viewTutor")}</Button></Link>
+      <div className="flex flex-wrap gap-2 mb-8">
+        <Link href="/path">
+          <Button variant="secondary" size="sm">{t("viewPath")}</Button>
+        </Link>
+        <Link href="/academic">
+          <Button variant="secondary" size="sm">{t("viewAcademic")}</Button>
+        </Link>
+        <Link href="/vocabulary">
+          <Button variant="secondary" size="sm">{t("viewVocab")}</Button>
+        </Link>
+        <Link href="/grammar">
+          <Button variant="secondary" size="sm">{t("viewGrammar")}</Button>
+        </Link>
       </div>
 
-      <div className="pt-8 border-t border-ink-100">
-        <button type="button" onClick={() => { clearLearner(); router.push("/"); }}
-          className="text-caption text-ink-300 hover:text-ink-500 transition-colors">
-          {t("reset")}
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={() => {
+          clearLearner();
+          router.push("/");
+        }}
+        className="text-caption text-ink-300"
+      >
+        {t("reset")}
+      </button>
     </div>
   );
 }
