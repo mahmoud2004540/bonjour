@@ -63,7 +63,11 @@ export default function DashboardPage() {
           {t("greeting", { name: profile.displayName })}
         </p>
         <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
-        <p className="text-body-sm text-ink-500">{t("encourage")}</p>
+        <p className="text-body-sm text-ink-500">
+          {locale === "ar"
+            ? "مسار أعمق + استماع أطول + ممارسة مكثفة + محاكاة امتحان."
+            : t("encourage")}
+        </p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -82,40 +86,86 @@ export default function DashboardPage() {
           </p>
         </Card>
         <Card depth={false}>
-          <p className="text-caption text-ink-400">{t("readinessOverall")}</p>
+          <p className="text-caption text-ink-400">
+            {locale === "ar" ? "الجاهزية" : "Readiness"}
+          </p>
           <p className="text-title-sm font-serif">{overall}%</p>
         </Card>
       </div>
 
       <Card className="mb-4 border-accent-200">
-        <h3 className="text-title-sm font-serif mb-2">{t("practiceCardTitle")}</h3>
-        <p className="text-body-sm text-ink-600 mb-2">{t("practiceCardBody")}</p>
+        <h3 className="text-title-sm font-serif mb-2">
+          {locale === "ar" ? "استماع أطول" : "Longer listening"}
+        </h3>
+        <p className="text-body-sm text-ink-600 mb-4">
+          {locale === "ar"
+            ? "مقاطع كاملة من A1 إلى C2 على الموقع — تشغيل، إخفاء النص، تركيز على جمل مفتاحية."
+            : "Full passages A1–C2 on-site — play, hide text, focus lines."}
+        </p>
+        <Link href="/listening">
+          <Button variant="accent">
+            {locale === "ar" ? "افتح الاستماع" : "Open listening"}
+          </Button>
+        </Link>
+      </Card>
+
+      <Card className="mb-4 border-accent-100">
+        <h3 className="text-title-sm font-serif mb-2">
+          {locale === "ar" ? "ساعات ممارسة" : "Practice hours"}
+        </h3>
+        <p className="text-body-sm text-ink-600 mb-2">
+          {locale === "ar"
+            ? "جولات كتابة واستماع واختيار من دروسك."
+            : "Writing, listening, quiz drills from your lessons."}
+        </p>
         <p className="text-caption text-ink-500 mb-4">
-          {t("a1Readiness", { pct: a1.percent })}
+          {locale === "ar"
+            ? `جاهزية A1: ${a1.percent}%`
+            : `A1 readiness: ${a1.percent}%`}
         </p>
         <div className="flex flex-wrap gap-2">
           <Link href="/practice-lab">
-            <Button variant="accent">{t("viewPracticeLab")}</Button>
+            <Button variant="secondary">
+              {locale === "ar" ? "معمل الممارسة" : "Practice lab"}
+            </Button>
           </Link>
           <Link href="/path">
-            <Button variant="secondary">{t("viewPath")}</Button>
+            <Button variant="secondary">
+              {locale === "ar" ? "المسار" : "Path"}
+            </Button>
           </Link>
         </div>
       </Card>
 
-      <Card className="mb-4 layer-stack">
-        <h3 className="text-title-sm font-serif mb-2">{t("teacherCardTitle")}</h3>
-        <p className="text-body-sm text-ink-600 mb-4">{t("teacherCardBody")}</p>
+      <Card className="mb-4">
+        <h3 className="text-title-sm font-serif mb-2">
+          {locale === "ar" ? "مع المدرس (مهارات)" : "Teacher skills"}
+        </h3>
+        <p className="text-body-sm text-ink-600 mb-4">
+          {locale === "ar"
+            ? "قراءة، كتابة، استماع، حفظ كلمات."
+            : "Reading, writing, listening, vocab."}
+        </p>
         <Link href="/teacher">
-          <Button variant="secondary">{t("viewTeacher")}</Button>
+          <Button variant="secondary">
+            {locale === "ar" ? "افتح المهارات" : "Open skills"}
+          </Button>
         </Link>
       </Card>
 
       <Card className="mb-6">
-        <h3 className="text-title-sm font-serif mb-2">{t("examCardTitle")}</h3>
-        <p className="text-body-sm text-ink-600 mb-4">{t("examCardBody")}</p>
+        <h3 className="text-title-sm font-serif mb-2">
+          {locale === "ar" ? "محاكاة الامتحان" : "Mock exam"}
+        </h3>
+        <p className="text-body-sm text-ink-600 mb-4">
+          {locale === "ar"
+            ? "استعداد DELF/DALF — الشهادة الرسمية من مركز معتمد."
+            : "DELF/DALF readiness — official certificate from an accredited centre."}
+        </p>
         <Link href="/exam">
-          <Button variant="secondary">{t("viewExam")}</Button>
+          <Button variant="secondary">
+            {locale === "ar" ? "الاستعداد" : "Exam prep"}
+          </Button>
         </Link>
       </Card>
 
@@ -124,7 +174,9 @@ export default function DashboardPage() {
           <p className="text-overline text-accent-700 mb-2">
             {t("todayLesson")} · {nextUnit.level}
           </p>
-          <h2 className="text-title-sm font-serif mb-2">{nextUnit.title[locale]}</h2>
+          <h2 className="text-title-sm font-serif mb-2">
+            {nextUnit.title[locale]}
+          </h2>
           <p className="text-body-sm text-ink-500 mb-4">{t("lessonFlowHint")}</p>
           <Link href={`/lesson/${nextUnit.id}`}>
             <Button variant="secondary">{t("startLesson")}</Button>
@@ -136,7 +188,9 @@ export default function DashboardPage() {
         <Card className="mb-6">
           <p className="text-body mb-3">{t("vocabDue", { count: dueCount })}</p>
           <Link href="/vocabulary">
-            <Button variant="secondary" size="sm">{t("reviewVocab")}</Button>
+            <Button variant="secondary" size="sm">
+              {t("reviewVocab")}
+            </Button>
           </Link>
         </Card>
       )}

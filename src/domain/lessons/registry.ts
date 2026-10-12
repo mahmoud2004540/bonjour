@@ -8,6 +8,7 @@ import { DAILY_LIFE_UNITS } from "./units-daily-life";
 import { EXAM_TRACK_UNITS } from "./units-exam-track";
 import { LEVEL_DEPTH_UNITS } from "./units-level-depth";
 import { A1_B1_MORE_UNITS } from "./units-a1-b1-more";
+import { B2_C2_MORE_UNITS } from "./units-b2-c2-more";
 import { enrichUnit } from "./enrich";
 
 const LEVEL_RANK: Record<string, number> = {
@@ -36,6 +37,7 @@ const RAW_UNITS: LessonUnit[] = mergeById([
   ...A1_DEEP_UNITS,
   ...LEVEL_DEPTH_UNITS,
   ...A1_B1_MORE_UNITS,
+  ...B2_C2_MORE_UNITS,
   ...A2_C2_UNITS,
   ...EXTRA_UNITS,
   ...DAILY_LIFE_UNITS,
