@@ -9,15 +9,13 @@ import { getTeacherSession } from "@/domain/teacher/sessions";
 import { speakFrench, canSpeak } from "@/lib/speech";
 import { recordStudyActivity } from "@/application/motivation-store";
 import { getStoredProfile } from "@/application/learner-store";
-import { addVocabItem } from "@/application/vocab-store";
+import { addCustomVocab } from "@/application/vocab-store";
 import type { Locale } from "@/i18n/config";
 
 function analyzeWriting(text: string, hints: string[]): string[] {
   const notes: string[] = [];
   const lower = text.toLowerCase();
-  if (text.trim().length < 12) {
-    notes.push("short");
-  }
+  if (text.trim().length < 12) notes.push("short");
   const hit = hints.filter((h) =>
     lower.includes(h.toLowerCase().replace("…", "").trim())
   );
@@ -99,19 +97,21 @@ export default function TeacherSessionPage({
 
   function submitWriting() {
     const hints = session!.writingHints?.[locale] ?? [];
-    const notes = analyzeWriting(writing, hints);
-    setWriteNotes(notes);
+    setWriteNotes(analyzeWriting(writing, hints));
     recordStudyActivity(12);
   }
 
   function nextVocab(knew: boolean) {
     if (knew && words[vocabIndex]) {
-      addVocabItem(words[vocabIndex].term, words[vocabIndex].meaning[locale]);
+      addCustomVocab(
+        words[vocabIndex].term,
+        words[vocabIndex].meaning[locale],
+        locale
+      );
     }
     setVocabShow(false);
-    if (vocabIndex + 1 < words.length) {
-      setVocabIndex(vocabIndex + 1);
-    } else {
+    if (vocabIndex + 1 < words.length) setVocabIndex(vocabIndex + 1);
+    else {
       recordStudyActivity(10);
       setDone(true);
     }
@@ -134,7 +134,6 @@ export default function TeacherSessionPage({
       </header>
 
       <main className="flex-1 px-4 py-6 pb-24">
-        {/* Coach bubble */}
         <div className="flex gap-3 mb-6">
           <div className="w-11 h-11 rounded-full bg-accent-100 border border-accent-200 flex items-center justify-center text-lg shrink-0 shadow-sm">
             👩‍🏫
@@ -144,7 +143,6 @@ export default function TeacherSessionPage({
           </div>
         </div>
 
-        {/* Reading / Listening passage */}
         {(session.track === "reading" || session.track === "listening") &&
           session.passage &&
           !done && (
@@ -181,7 +179,7 @@ export default function TeacherSessionPage({
                 </button>
               )}
               {!(session.track === "listening" && hidePassage) && (
-                <p className="font-serif text-body-lg text-ink-900 leading-relaxed text-pretty">
+                <p className="font-serif text-body-lg text-ink-900 leading-relaxed text-pretty" dir="ltr">
                   {session.passage}
                 </p>
               )}
@@ -191,16 +189,12 @@ export default function TeacherSessionPage({
             </Card>
           )}
 
-        {/* Questions */}
         {(session.track === "reading" || session.track === "listening") &&
           !done &&
           questions.length > 0 && (
             <div>
               <p className="text-caption text-ink-400 mb-2">
-                {t("qProgress", {
-                  current: qIndex + 1,
-                  total: questions.length,
-                })}
+                {t("qProgress", { current: qIndex + 1, total: questions.length })}
               </p>
               <p className="text-body-lg text-ink-900 mb-4 font-medium">
                 {questions[qIndex].prompt[locale]}
@@ -226,7 +220,6 @@ export default function TeacherSessionPage({
             </div>
           )}
 
-        {/* Writing */}
         {session.track === "writing" && !writeNotes && (
           <div>
             <p className="text-body text-ink-800 mb-4 text-pretty">
@@ -288,7 +281,6 @@ export default function TeacherSessionPage({
           </Card>
         )}
 
-        {/* Vocab memorize */}
         {session.track === "vocab" && !done && words.length > 0 && (
           <div className="text-center pt-4">
             <p className="text-caption text-ink-400 mb-6">
