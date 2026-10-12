@@ -1,0 +1,300 @@
+import type { LessonUnit } from "./types";
+
+/**
+ * Deep A1 expansion: longer dialogues, 6+ vocab, 6 exercises, 5 quiz items each.
+ * Complements base A1 units (same ids override via registry merge order).
+ */
+export const A1_DEEP_UNITS: LessonUnit[] = [
+  {
+    id: "fr-a1-intro-unit",
+    level: "A1",
+    order: 1,
+    title: { en: "Introducing yourself", fr: "Se présenter", ar: "تقديم النفس" },
+    completesGoals: ["goal-introduce-self", "goal-ask-name"],
+    lesson: {
+      intro: {
+        en: "Greet, say your name, ask the other person's name, and respond politely.",
+        fr: "Saluer, dire son nom, demander le nom de l'autre, répondre poliment.",
+        ar: "حيِّ، قل اسمك، اسأل عن اسم الآخر، ورد بأدب.",
+      },
+      dialogue: [
+        "— Bonjour !",
+        "— Bonjour ! Je m'appelle Sara. Et vous ?",
+        "— Enchanté. Je m'appelle Karim.",
+        "— Comment vous appellez-vous, madame ?",
+        "— Je m'appelle Nour. Au revoir !",
+        "— Au revoir, bonne journée !",
+      ],
+      tip: {
+        en: "Je m'appelle… · Comment vous appellez-vous ? · Enchanté(e) · Au revoir",
+        fr: "Je m'appelle… · Comment vous appellez-vous ? · Enchanté(e)",
+        ar: "Je m'appelle… · Comment vous appellez-vous ؟ · Enchanté",
+      },
+    },
+    vocab: [
+      { term: "bonjour", meaning: { en: "hello (day)", fr: "salutation", ar: "مرحبًا" }, example: "Bonjour !" },
+      { term: "bonsoir", meaning: { en: "good evening", fr: "soir", ar: "مساء الخير" }, example: "Bonsoir !" },
+      { term: "je m'appelle", meaning: { en: "my name is", fr: "mon nom", ar: "اسمي" }, example: "Je m'appelle Sara." },
+      { term: "comment vous appellez-vous ?", meaning: { en: "what's your name? (formal)", fr: "nom formel", ar: "ما اسمك؟ رسمي" }, example: "Comment vous appellez-vous ?" },
+      { term: "enchanté", meaning: { en: "nice to meet you", fr: "plaisir", ar: "تشرفنا" }, example: "Enchanté !" },
+      { term: "au revoir", meaning: { en: "goodbye", fr: "salutation de fin", ar: "إلى اللقاء" }, example: "Au revoir !" },
+    ],
+    exercises: [
+      { id: "a1i-e1", prompt: { en: "Complete: Je …… Sara.", fr: "Je …… Sara.", ar: "أكمل: Je …… Sara." }, answers: ["m'appelle", "mappelle"], hint: { en: "m'appelle", fr: "m'appelle", ar: "m'appelle" } },
+      { id: "a1i-e2", prompt: { en: "Write a daytime greeting.", fr: "Salutation de jour.", ar: "تحية نهار." }, answers: ["bonjour"] },
+      { id: "a1i-e3", prompt: { en: "Formal: ask someone's name.", fr: "Demander le nom (formel).", ar: "اسأل عن الاسم رسميًا." }, answers: ["comment vous appellez-vous", "comment vous appellez-vous ?", "comment vous appelez-vous", "comment vous appelez-vous ?"] },
+      { id: "a1i-e4", prompt: { en: "Nice to meet you:", fr: "Enchanté :", ar: "تشرفنا:" }, answers: ["enchante", "enchanté", "enchantee", "enchantée"] },
+      { id: "a1i-e5", prompt: { en: "Goodbye:", fr: "Au revoir :", ar: "وداعًا:" }, answers: ["au revoir"] },
+      { id: "a1i-e6", prompt: { en: "Full line: Bonjour, je m'appelle Ahmed.", fr: "Phrase complète.", ar: "جملة كاملة." }, answers: ["bonjour, je m'appelle ahmed", "bonjour je m'appelle ahmed"] },
+    ],
+    review: {
+      summary: {
+        en: "You can greet, introduce yourself, ask a name, and say goodbye.",
+        fr: "Saluer, se présenter, demander un nom, dire au revoir.",
+        ar: "تحية، تقديم، سؤال عن الاسم، وداع.",
+      },
+      checklist: {
+        en: ["Bonjour / Bonsoir", "Je m'appelle…", "Comment vous appellez-vous ?", "Enchanté", "Au revoir"],
+        fr: ["Bonjour / Bonsoir", "Je m'appelle…", "Comment vous appellez-vous ?", "Enchanté", "Au revoir"],
+        ar: ["Bonjour / Bonsoir", "Je m'appelle…", "Comment vous appellez-vous ؟", "Enchanté", "Au revoir"],
+      },
+    },
+    quiz: [
+      { id: "a1i-q1", prompt: { en: "Bonjour means…", fr: "Bonjour :", ar: "Bonjour:" }, options: { en: ["Goodbye", "Hello", "Thanks", "Please"], fr: ["Au revoir", "Salutation", "Merci", "S'il vous plaît"], ar: ["وداعًا", "مرحبًا", "شكرًا", "من فضلك"] }, correctIndex: 1 },
+      { id: "a1i-q2", prompt: { en: "Correct form:", fr: "Bonne forme :", ar: "الصحيح:" }, options: { en: ["Je appelle Marie", "Je m'appelle Marie", "Je suis appelle", "Moi appelle"], fr: ["Je appelle Marie", "Je m'appelle Marie", "Je suis appelle", "Moi appelle"], ar: ["Je appelle Marie", "Je m'appelle Marie", "Je suis appelle", "Moi appelle"] }, correctIndex: 1 },
+      { id: "a1i-q3", prompt: { en: "Formal name question:", fr: "Question formelle :", ar: "سؤال الاسم:" }, options: { en: ["Comment allez-vous ?", "Comment vous appellez-vous ?", "Où habitez-vous ?", "C'est combien ?"], fr: ["Comment allez-vous ?", "Comment vous appellez-vous ?", "Où habitez-vous ?", "C'est combien ?"], ar: ["Comment allez-vous ؟", "Comment vous appellez-vous ؟", "Où habitez-vous ؟", "C'est combien ؟"] }, correctIndex: 1 },
+      { id: "a1i-q4", prompt: { en: "Enchanté means…", fr: "Enchanté :", ar: "Enchanté:" }, options: { en: ["Sorry", "Nice to meet you", "Bill please", "Straight ahead"], fr: ["Pardon", "Ravi de faire connaissance", "L'addition", "Tout droit"], ar: ["آسف", "تشرفنا", "الفاتورة", "على طول"] }, correctIndex: 1 },
+      { id: "a1i-q5", prompt: { en: "Goodbye:", fr: "Au revoir :", ar: "وداع:" }, options: { en: ["Bonjour", "Au revoir", "Un café", "J'ai faim"], fr: ["Bonjour", "Au revoir", "Un café", "J'ai faim"], ar: ["Bonjour", "Au revoir", "Un café", "J'ai faim"] }, correctIndex: 1 },
+    ],
+    passRatio: 0.6,
+  },
+  {
+    id: "fr-a1-cafe-unit",
+    level: "A1",
+    order: 2,
+    title: { en: "At the café", fr: "Au café", ar: "في المقهى" },
+    completesGoals: ["goal-order-drink", "goal-pay-cafe"],
+    lesson: {
+      intro: {
+        en: "Order drinks, add please/thank you, ask for the bill.",
+        fr: "Commander, politesse, demander l'addition.",
+        ar: "اطلب، أدب، الفاتورة.",
+      },
+      dialogue: [
+        "— Bonjour ! Vous désirez ?",
+        "— Un café, s'il vous plaît.",
+        "— Et pour vous ?",
+        "— Un thé, s'il vous plaît.",
+        "— Ce sera tout ?",
+        "— Oui. L'addition, s'il vous plaît.",
+        "— Voilà. Merci !",
+        "— Merci, au revoir !",
+      ],
+      tip: {
+        en: "Un/une + drink · s'il vous plaît · L'addition · Merci",
+        fr: "Un/une + boisson · s'il vous plaît · L'addition",
+        ar: "مشروب + من فضلك + الفاتورة",
+      },
+    },
+    vocab: [
+      { term: "un café", meaning: { en: "a coffee", fr: "café", ar: "قهوة" }, example: "Un café, s'il vous plaît." },
+      { term: "un thé", meaning: { en: "a tea", fr: "thé", ar: "شاي" }, example: "Un thé, s'il vous plaît." },
+      { term: "s'il vous plaît", meaning: { en: "please", fr: "politesse", ar: "من فضلك" }, example: "S'il vous plaît." },
+      { term: "l'addition", meaning: { en: "the bill", fr: "note", ar: "الفاتورة" }, example: "L'addition, s'il vous plaît." },
+      { term: "merci", meaning: { en: "thank you", fr: "remerciement", ar: "شكرًا" }, example: "Merci !" },
+      { term: "vous désirez ?", meaning: { en: "what would you like?", fr: "commande", ar: "ماذا تريد؟" }, example: "Vous désirez ?" },
+    ],
+    exercises: [
+      { id: "a1c-e1", prompt: { en: "Order a coffee politely.", fr: "Un café poli.", ar: "قهوة بأدب." }, answers: ["un cafe, s'il vous plait", "un café, s'il vous plaît", "un cafe s'il vous plait", "un café s'il vous plaît"] },
+      { id: "a1c-e2", prompt: { en: "Ask for the bill.", fr: "L'addition.", ar: "الفاتورة." }, answers: ["l'addition, s'il vous plait", "l'addition, s'il vous plaît", "l'addition s'il vous plait"] },
+      { id: "a1c-e3", prompt: { en: "Order tea politely.", fr: "Un thé.", ar: "شاي." }, answers: ["un the, s'il vous plait", "un thé, s'il vous plaît", "un the s'il vous plait"] },
+      { id: "a1c-e4", prompt: { en: "Thank you:", fr: "Merci :", ar: "شكرًا:" }, answers: ["merci", "merci beaucoup"] },
+      { id: "a1c-e5", prompt: { en: "Write: please (formal).", fr: "s'il vous plaît", ar: "من فضلك" }, answers: ["s'il vous plait", "s'il vous plaît", "sil vous plait"] },
+      { id: "a1c-e6", prompt: { en: "Staff asks what you want:", fr: "Vous désirez ?", ar: "ماذا تريد؟" }, answers: ["vous desirez", "vous désirez", "vous desirez ?", "vous désirez ?"] },
+    ],
+    review: {
+      summary: { en: "Café order and payment phrases.", fr: "Commander et payer au café.", ar: "طلب ودفع في المقهى." },
+      checklist: {
+        en: ["Un café / un thé", "s'il vous plaît", "L'addition", "Merci"],
+        fr: ["Un café / un thé", "s'il vous plaît", "L'addition", "Merci"],
+        ar: ["Un café / un thé", "s'il vous plaît", "L'addition", "Merci"],
+      },
+    },
+    quiz: [
+      { id: "a1c-q1", prompt: { en: "Please (formal):", fr: "Politesse :", ar: "من فضلك:" }, options: { en: ["merci", "s'il vous plaît", "bonjour", "gare"], fr: ["merci", "s'il vous plaît", "bonjour", "gare"], ar: ["merci", "s'il vous plaît", "bonjour", "gare"] }, correctIndex: 1 },
+      { id: "a1c-q2", prompt: { en: "L'addition:", fr: "L'addition :", ar: "L'addition:" }, options: { en: ["menu", "bill", "train", "brother"], fr: ["menu", "note", "train", "frère"], ar: ["قائمة", "فاتورة", "قطار", "أخ"] }, correctIndex: 1 },
+      { id: "a1c-q3", prompt: { en: "Order coffee:", fr: "Café :", ar: "قهوة:" }, options: { en: ["Un café, s'il vous plaît", "Je suis café", "Café moi", "Donne"], fr: ["Un café, s'il vous plaît", "Je suis café", "Café moi", "Donne"], ar: ["Un café, s'il vous plaît", "Je suis café", "Café moi", "Donne"] }, correctIndex: 0 },
+      { id: "a1c-q4", prompt: { en: "Merci means…", fr: "Merci :", ar: "Merci:" }, options: { en: ["Please", "Thank you", "Hello", "Ticket"], fr: ["S'il vous plaît", "Remerciement", "Bonjour", "Billet"], ar: ["من فضلك", "شكرًا", "مرحبًا", "تذكرة"] }, correctIndex: 1 },
+      { id: "a1c-q5", prompt: { en: "A tea:", fr: "Un thé :", ar: "شاي:" }, options: { en: ["Un thé", "Une gare", "Un frère", "Une maison"], fr: ["Un thé", "Une gare", "Un frère", "Une maison"], ar: ["Un thé", "Une gare", "Un frère", "Une maison"] }, correctIndex: 0 },
+    ],
+    passRatio: 0.6,
+  },
+  {
+    id: "fr-a1-numbers-talk",
+    level: "A1",
+    order: 2.3,
+    title: { en: "Numbers 1–20", fr: "Nombres 1–20", ar: "الأرقام 1–20" },
+    completesGoals: ["unit-a1-numbers-deep"],
+    lesson: {
+      intro: {
+        en: "Count from 1 to 20 and use numbers in prices.",
+        fr: "Compter de 1 à 20 et utiliser les prix.",
+        ar: "عدّ من 1 إلى 20 واستخدم الأسعار.",
+      },
+      dialogue: [
+        "— C'est combien ?",
+        "— Cinq euros.",
+        "— Et ça ?",
+        "— Douze euros cinquante.",
+        "— D'accord. Je prends les deux.",
+      ],
+      tip: {
+        en: "un deux trois quatre cinq six sept huit neuf dix · onze … vingt",
+        fr: "un → vingt",
+        ar: "من un إلى vingt",
+      },
+    },
+    vocab: [
+      { term: "un / deux / trois", meaning: { en: "1 / 2 / 3", fr: "1 2 3", ar: "1 2 3" }, example: "trois euros" },
+      { term: "cinq / dix", meaning: { en: "5 / 10", fr: "5 10", ar: "5 10" }, example: "dix euros" },
+      { term: "quinze / vingt", meaning: { en: "15 / 20", fr: "15 20", ar: "15 20" }, example: "vingt" },
+      { term: "douze", meaning: { en: "12", fr: "12", ar: "12" }, example: "douze euros" },
+      { term: "euros", meaning: { en: "euros", fr: "monnaie", ar: "يورو" }, example: "cinq euros" },
+    ],
+    exercises: [
+      { id: "a1n-e1", prompt: { en: "Write 3 in French.", fr: "3 :", ar: "3:" }, answers: ["trois"] },
+      { id: "a1n-e2", prompt: { en: "Write 10.", fr: "10 :", ar: "10:" }, answers: ["dix"] },
+      { id: "a1n-e3", prompt: { en: "Write 5.", fr: "5 :", ar: "5:" }, answers: ["cinq"] },
+      { id: "a1n-e4", prompt: { en: "Write 12.", fr: "12 :", ar: "12:" }, answers: ["douze"] },
+      { id: "a1n-e5", prompt: { en: "Write 20.", fr: "20 :", ar: "20:" }, answers: ["vingt"] },
+      { id: "a1n-e6", prompt: { en: "Say: five euros.", fr: "Cinq euros.", ar: "خمسة يورو." }, answers: ["cinq euros"] },
+    ],
+    review: {
+      summary: { en: "Numbers for prices and counting.", fr: "Nombres et prix.", ar: "أرقام وأسعار." },
+      checklist: {
+        en: ["1–10 core", "douze, quinze, vingt", "… euros"],
+        fr: ["1–10", "douze, quinze, vingt", "euros"],
+        ar: ["1–10", "douze, quinze, vingt", "euros"],
+      },
+    },
+    quiz: [
+      { id: "a1n-q1", prompt: { en: "trois =", fr: "trois =", ar: "trois =" }, options: { en: ["1", "2", "3", "10"], fr: ["1", "2", "3", "10"], ar: ["1", "2", "3", "10"] }, correctIndex: 2 },
+      { id: "a1n-q2", prompt: { en: "dix =", fr: "dix =", ar: "dix =" }, options: { en: ["2", "5", "10", "12"], fr: ["2", "5", "10", "12"], ar: ["2", "5", "10", "12"] }, correctIndex: 2 },
+      { id: "a1n-q3", prompt: { en: "vingt =", fr: "vingt =", ar: "vingt =" }, options: { en: ["12", "15", "20", "21"], fr: ["12", "15", "20", "21"], ar: ["12", "15", "20", "21"] }, correctIndex: 2 },
+      { id: "a1n-q4", prompt: { en: "douze =", fr: "douze =", ar: "douze =" }, options: { en: ["2", "12", "20", "22"], fr: ["2", "12", "20", "22"], ar: ["2", "12", "20", "22"] }, correctIndex: 1 },
+      { id: "a1n-q5", prompt: { en: "cinq euros:", fr: "cinq euros :", ar: "cinq euros:" }, options: { en: ["5 euros", "15 euros", "50 euros", "2 euros"], fr: ["5 euros", "15 euros", "50 euros", "2 euros"], ar: ["5 يورو", "15", "50", "2"] }, correctIndex: 0 },
+    ],
+    passRatio: 0.6,
+  },
+  {
+    id: "fr-a1-etre-avoir-unit",
+    level: "A1",
+    order: 1.2,
+    title: { en: "être & avoir", fr: "être et avoir", ar: "être و avoir" },
+    completesGoals: ["unit-a1-etre-avoir"],
+    lesson: {
+      intro: {
+        en: "Core verbs in the present: I am / I have.",
+        fr: "Verbes essentiels au présent : être et avoir.",
+        ar: "فعلان أساسيان في المضارع.",
+      },
+      dialogue: [
+        "— Tu es étudiant ?",
+        "— Oui, je suis étudiant. Et toi ?",
+        "— Je suis ingénieur. J'ai un travail à Lyon.",
+        "— Nous avons un cours demain.",
+      ],
+      tip: {
+        en: "je suis · tu es · il est · nous sommes · vous êtes · ils sont / j'ai · tu as · il a…",
+        fr: "être / avoir au présent",
+        ar: "تصريف être و avoir",
+      },
+    },
+    vocab: [
+      { term: "je suis", meaning: { en: "I am", fr: "être", ar: "أنا" }, example: "Je suis étudiant." },
+      { term: "j'ai", meaning: { en: "I have", fr: "avoir", ar: "لدي" }, example: "J'ai un livre." },
+      { term: "tu es", meaning: { en: "you are", fr: "être", ar: "أنت" }, example: "Tu es prêt ?" },
+      { term: "nous avons", meaning: { en: "we have", fr: "avoir", ar: "لدينا" }, example: "Nous avons un cours." },
+      { term: "vous êtes", meaning: { en: "you are (formal/pl)", fr: "être", ar: "أنتم" }, example: "Vous êtes d'où ?" },
+    ],
+    exercises: [
+      { id: "a1ea-e1", prompt: { en: "I am (write je …)", fr: "Je suis", ar: "أنا = je …" }, answers: ["je suis", "suis"] },
+      { id: "a1ea-e2", prompt: { en: "I have:", fr: "J'ai", ar: "لدي:" }, answers: ["j'ai", "jai"] },
+      { id: "a1ea-e3", prompt: { en: "You are (tu):", fr: "Tu es", ar: "أنت:" }, answers: ["tu es"] },
+      { id: "a1ea-e4", prompt: { en: "We have:", fr: "Nous avons", ar: "لدينا:" }, answers: ["nous avons"] },
+      { id: "a1ea-e5", prompt: { en: "Complete: Je …… de Paris.", fr: "Je …… de Paris.", ar: "Je …… de Paris." }, answers: ["suis"] },
+      { id: "a1ea-e6", prompt: { en: "Complete: J'…… un rendez-vous.", fr: "J'…… un rendez-vous.", ar: "J'…… un rendez-vous." }, answers: ["ai"] },
+    ],
+    review: {
+      summary: { en: "être ≠ avoir — don't mix them.", fr: "Ne pas confondre être et avoir.", ar: "لا تخلط بين être و avoir." },
+      checklist: {
+        en: ["je suis / j'ai", "tu es / tu as", "nous sommes / nous avons"],
+        fr: ["je suis / j'ai", "tu es / tu as", "nous sommes / nous avons"],
+        ar: ["je suis / j'ai", "tu es / tu as", "nous sommes / nous avons"],
+      },
+    },
+    quiz: [
+      { id: "a1ea-q1", prompt: { en: "I am:", fr: "Je suis :", ar: "أنا:" }, options: { en: ["Je suis", "J'ai", "Je parle", "Je vais"], fr: ["Je suis", "J'ai", "Je parle", "Je vais"], ar: ["Je suis", "J'ai", "Je parle", "Je vais"] }, correctIndex: 0 },
+      { id: "a1ea-q2", prompt: { en: "I have:", fr: "J'ai :", ar: "لدي:" }, options: { en: ["Je suis", "J'ai", "Tu es", "Nous sommes"], fr: ["Je suis", "J'ai", "Tu es", "Nous sommes"], ar: ["Je suis", "J'ai", "Tu es", "Nous sommes"] }, correctIndex: 1 },
+      { id: "a1ea-q3", prompt: { en: "You are (tu):", fr: "Tu es :", ar: "أنت:" }, options: { en: ["Tu as", "Tu es", "Tu vais", "Tu suis"], fr: ["Tu as", "Tu es", "Tu vais", "Tu suis"], ar: ["Tu as", "Tu es", "Tu vais", "Tu suis"] }, correctIndex: 1 },
+      { id: "a1ea-q4", prompt: { en: "We have:", fr: "Nous avons :", ar: "لدينا:" }, options: { en: ["Nous sommes", "Nous avons", "Nous est", "Nous suis"], fr: ["Nous sommes", "Nous avons", "Nous est", "Nous suis"], ar: ["Nous sommes", "Nous avons", "Nous est", "Nous suis"] }, correctIndex: 1 },
+      { id: "a1ea-q5", prompt: { en: "Je suis de Paris =", fr: "Je suis de Paris :", ar: "Je suis de Paris:" }, options: { en: ["I have Paris", "I am from Paris", "I take Paris", "I buy Paris"], fr: ["J'ai Paris", "Je viens de Paris / origine", "Je prends Paris", "J'achète"], ar: ["لدي باريس", "أنا من باريس", "آخذ باريس", "أشتري"] }, correctIndex: 1 },
+    ],
+    passRatio: 0.6,
+  },
+  {
+    id: "fr-a1-negation-unit",
+    level: "A1",
+    order: 1.4,
+    title: { en: "Negation ne… pas", fr: "Négation ne… pas", ar: "النفي ne… pas" },
+    completesGoals: ["unit-a1-negation"],
+    lesson: {
+      intro: {
+        en: "Say what you don't do or don't understand.",
+        fr: "Dire ce qu'on ne fait pas / ne comprend pas.",
+        ar: "قل ما لا تفعله أو لا تفهمه.",
+      },
+      dialogue: [
+        "— Tu parles anglais ?",
+        "— Non, je ne parle pas anglais.",
+        "— Tu comprends ?",
+        "— Je ne comprends pas bien.",
+      ],
+      tip: {
+        en: "ne + verb + pas · before vowel: n'",
+        fr: "ne / n' + verbe + pas",
+        ar: "ne + فعل + pas",
+      },
+    },
+    vocab: [
+      { term: "je ne parle pas", meaning: { en: "I don't speak", fr: "négation", ar: "لا أتكلم" }, example: "Je ne parle pas anglais." },
+      { term: "je ne comprends pas", meaning: { en: "I don't understand", fr: "compréhension", ar: "لا أفهم" }, example: "Je ne comprends pas." },
+      { term: "non", meaning: { en: "no", fr: "non", ar: "لا" }, example: "Non." },
+      { term: "pas bien", meaning: { en: "not well", fr: "pas bien", ar: "ليس جيدًا" }, example: "pas bien" },
+    ],
+    exercises: [
+      { id: "a1neg-e1", prompt: { en: "I don't understand:", fr: "Je ne comprends pas", ar: "لا أفهم" }, answers: ["je ne comprends pas", "je ne comprend pas"] },
+      { id: "a1neg-e2", prompt: { en: "I don't speak English:", fr: "Je ne parle pas anglais", ar: "لا أتكلم الإنجليزية" }, answers: ["je ne parle pas anglais"] },
+      { id: "a1neg-e3", prompt: { en: "Write: non", fr: "non", ar: "لا" }, answers: ["non"] },
+      { id: "a1neg-e4", prompt: { en: "Complete: Je ne …… pas.", fr: "Je ne …… pas (comprends)", ar: "Je ne …… pas" }, answers: ["comprends", "parle"] },
+      { id: "a1neg-e5", prompt: { en: "He is not here: Il n'est pas là", fr: "Il n'est pas là", ar: "ليس هنا" }, answers: ["il n'est pas la", "il n'est pas là", "il nest pas la"] },
+      { id: "a1neg-e6", prompt: { en: "I don't know: Je ne sais pas", fr: "Je ne sais pas", ar: "لا أعرف" }, answers: ["je ne sais pas"] },
+    ],
+    review: {
+      summary: { en: "Always wrap the verb with ne… pas in careful French.", fr: "ne… pas autour du verbe.", ar: "ne… pas حول الفعل." },
+      checklist: {
+        en: ["Je ne parle pas", "Je ne comprends pas", "Il n'est pas…"],
+        fr: ["Je ne parle pas", "Je ne comprends pas", "Il n'est pas…"],
+        ar: ["Je ne parle pas", "Je ne comprends pas", "Il n'est pas…"],
+      },
+    },
+    quiz: [
+      { id: "a1neg-q1", prompt: { en: "I don't understand:", fr: "Je ne comprends pas :", ar: "لا أفهم:" }, options: { en: ["Je comprends", "Je ne comprends pas", "Je suis pas", "Pas je"], fr: ["Je comprends", "Je ne comprends pas", "Je suis pas", "Pas je"], ar: ["Je comprends", "Je ne comprends pas", "Je suis pas", "Pas je"] }, correctIndex: 1 },
+      { id: "a1neg-q2", prompt: { en: "Negation uses…", fr: "La négation :", ar: "النفي:" }, options: { en: ["only pas", "ne… pas", "only ne", "merci"], fr: ["seulement pas", "ne… pas", "seulement ne", "merci"], ar: ["pas فقط", "ne… pas", "ne فقط", "merci"] }, correctIndex: 1 },
+      { id: "a1neg-q3", prompt: { en: "No:", fr: "Non :", ar: "لا:" }, options: { en: ["oui", "non", "merci", "bonjour"], fr: ["oui", "non", "merci", "bonjour"], ar: ["oui", "non", "merci", "bonjour"] }, correctIndex: 1 },
+      { id: "a1neg-q4", prompt: { en: "Je ne parle pas anglais:", fr: "Sens :", ar: "المعنى:" }, options: { en: ["I speak English", "I don't speak English", "I am English", "I like English"], fr: ["Je parle anglais", "Je ne parle pas anglais", "Je suis anglais", "J'aime"], ar: ["أتكلم الإنجليزية", "لا أتكلم الإنجليزية", "أنا إنجليزي", "أحب"] }, correctIndex: 1 },
+      { id: "a1neg-q5", prompt: { en: "Il n'est pas là:", fr: "Il n'est pas là :", ar: "Il n'est pas là:" }, options: { en: ["He is here", "He is not here", "He has", "He speaks"], fr: ["Il est là", "Il n'est pas là", "Il a", "Il parle"], ar: ["هو هنا", "هو ليس هنا", "لديه", "يتكلم"] }, correctIndex: 1 },
+    ],
+    passRatio: 0.6,
+  },
+];
