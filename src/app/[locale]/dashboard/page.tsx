@@ -192,6 +192,7 @@ export default function DashboardPage() {
         <Link href="/grammar"><Button variant="secondary" size="sm">{t("viewGrammar")}</Button></Link>
         <Link href="/writing"><Button variant="secondary" size="sm">{t("viewWriting")}</Button></Link>
         <Link href="/tutor"><Button variant="secondary" size="sm">{t("viewTutor")}</Button></Link>
+        <Link href="/achievements"><Button variant="secondary" size="sm">{t("viewAchievements")}</Button></Link>
         <Link href="/resources"><Button variant="secondary" size="sm">{t("viewResources")}</Button></Link>
         <Link href="/practice"><Button variant="secondary" size="sm">{t("viewPractice")}</Button></Link>
         <Link href="/real-life"><Button variant="secondary" size="sm">{t("viewRealLife")}</Button></Link>
