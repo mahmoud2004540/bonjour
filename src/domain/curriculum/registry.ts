@@ -41,6 +41,11 @@ import {
 } from "./en-a1-intro";
 import { SCENARIO_EN_CAFE, EN_CAFE_GOALS, EN_CAFE_TASKS } from "./en-a1-cafe";
 import {
+  SCENARIO_EN_SHOP,
+  EN_SHOP_GOALS,
+  EN_SHOP_TASKS,
+} from "./en-a1-shopping";
+import {
   SCENARIO_DE_INTRO,
   DE_INTRO_GOALS,
   DE_INTRO_TASKS,
@@ -74,6 +79,7 @@ const ALL_SCENARIOS: Scenario[] = [
   SCENARIO_NUANCE,
   SCENARIO_EN_INTRO,
   SCENARIO_EN_CAFE,
+  SCENARIO_EN_SHOP,
   SCENARIO_DE_INTRO,
   SCENARIO_IT_INTRO,
   SCENARIO_ES_INTRO,
@@ -97,6 +103,7 @@ const ALL_GOALS: LearningGoal[] = [
   ...NUANCE_GOALS,
   ...EN_INTRO_GOALS,
   ...EN_CAFE_GOALS,
+  ...EN_SHOP_GOALS,
   ...DE_INTRO_GOALS,
   ...IT_INTRO_GOALS,
   ...ES_INTRO_GOALS,
@@ -120,6 +127,7 @@ const ALL_TASKS: Task[] = [
   ...NUANCE_TASKS,
   ...EN_INTRO_TASKS,
   ...EN_CAFE_TASKS,
+  ...EN_SHOP_TASKS,
   ...DE_INTRO_TASKS,
   ...IT_INTRO_TASKS,
   ...ES_INTRO_TASKS,

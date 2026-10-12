@@ -1,21 +1,25 @@
-# Bonjour Academy 3.0 — execution status
+# Bonjour Academy — status
 
 Live: https://mahmoud2004540.github.io/bonjour/ar/
 
-## Implemented this wave
+## Audience
 
-- Fixed production build (tutor-fallback syntax)
-- **Full vs Starter** path labels on onboarding + dashboard
-- **Skip placement** for true beginners (onboarding + placement page)
-- Open placement answers optional (blank allowed)
-- **Continue learning** primary CTA on dashboard
-- English A1 expanded: intro + **café** scenario with full task chain
-- Target-language filtered scenarios on dashboard
+For **learners of all ages** who can read the interface (teens + adults).  
+Not a children's game app — but **not adults-only** either.
 
-## Still needs external services
+## Implemented (local / static)
 
-Cloud LLM · Supabase auth · real audio · payments
+- French CEFR scenarios A1–C2
+- English A1: intro + café + shopping
+- DE / IT / ES A1 intro starters
+- Full vs Starter labels
+- Skip placement for beginners
+- Continue-learning CTA
+- Vocab SRS, grammar FR (expanded), writing lab, local tutor
+- XP, streak, daily goal, achievements page
+- Premium fonts (Fraunces, DM Sans, Arabic stack)
+- Distinctive landing + all-ages messaging
 
-## Honest scope
+## Needs external services
 
-French = full CEFR path. EN = growing starter. DE/IT/ES = intro starters.
+Cloud LLM · Supabase auth · real audio · payments · full multi-lang to C2
