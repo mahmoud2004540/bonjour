@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { getAllUnits, isUnitComplete } from "@/domain/lessons/registry";
+import { getAllUnits } from "@/domain/lessons/registry";
 import { getStoredProfile } from "@/application/learner-store";
 import { recordStudyActivity } from "@/application/motivation-store";
 import { speakFrench, canSpeak } from "@/lib/speech";
@@ -22,6 +22,69 @@ type Drill = {
   speakText?: string;
 };
 
+const COPY = {
+  ar: {
+    eyebrow: "ساعات ممارسة",
+    title: "معمل التدريب المكثف",
+    instituteNote:
+      "جلسة زي واجب المعهد: تكرار من دروسك على الموقع. كل جولة = دقائق ممارسة حقيقية.",
+    write: "كتابة",
+    quiz: "اختيار",
+    listen: "استماع وتكرار",
+    play: "تشغيل",
+    heard: "سمعت وكررت",
+    typeAnswer: "اكتب بالفرنسية…",
+    check: "تحقق",
+    correct: "صح!",
+    tryAgain: "حاول تاني",
+    next: "التالي",
+    sessionDone: "خلّصت الجولة",
+    anotherRound: "جولة كمان",
+    toPath: "المسار",
+    toExam: "محاكاة الامتحان",
+  },
+  en: {
+    eyebrow: "Practice hours",
+    title: "Intensive practice lab",
+    instituteNote:
+      "Institute-style homework: drills from your on-site lessons. Each round = real practice minutes.",
+    write: "Writing",
+    quiz: "Quiz",
+    listen: "Listen & repeat",
+    play: "Play",
+    heard: "Heard & repeated",
+    typeAnswer: "Type in French…",
+    check: "Check",
+    correct: "Correct!",
+    tryAgain: "Try again",
+    next: "Next",
+    sessionDone: "Round complete",
+    anotherRound: "Another round",
+    toPath: "Path",
+    toExam: "Mock exam",
+  },
+  fr: {
+    eyebrow: "Heures de pratique",
+    title: "Labo intensif",
+    instituteNote:
+      "Comme les devoirs d'un institut : exercices tirés de vos leçons sur le site.",
+    write: "Écrit",
+    quiz: "QCM",
+    listen: "Écoute et répétition",
+    play: "Écouter",
+    heard: "Écouté et répété",
+    typeAnswer: "Écrivez en français…",
+    check: "Vérifier",
+    correct: "Correct !",
+    tryAgain: "Réessayez",
+    next: "Suivant",
+    sessionDone: "Série terminée",
+    anotherRound: "Encore une série",
+    toPath: "Parcours",
+    toExam: "Examen blanc",
+  },
+} as const;
+
 function norm(s: string): string {
   return s
     .trim()
@@ -32,13 +95,9 @@ function norm(s: string): string {
     .replace(/\s+/g, " ");
 }
 
-function buildDrills(locale: Locale, profile: LearnerProfile): Drill[] {
+function buildDrills(locale: Locale): Drill[] {
   const drills: Drill[] = [];
-  const units = getAllUnits().filter(
-    (u) => isUnitComplete(u, profile) || true
-  );
-
-  for (const u of units.slice(0, 40)) {
+  for (const u of getAllUnits().slice(0, 45)) {
     for (const v of u.vocab.slice(0, 2)) {
       drills.push({
         id: `${u.id}-v-${v.term}`,
@@ -69,14 +128,14 @@ function buildDrills(locale: Locale, profile: LearnerProfile): Drill[] {
         kind: "listen",
         prompt:
           locale === "ar"
-            ? "اسمع وكرّر الجملة (اضغط تشغيل)"
-            : "Listen and repeat",
+            ? "اسمع وكرّر الجملة"
+            : locale === "fr"
+              ? "Écoutez et répétez"
+              : "Listen and repeat",
         speakText: line,
       });
     }
   }
-
-  // Shuffle lightly
   for (let i = drills.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [drills[i], drills[j]] = [drills[j], drills[i]];
@@ -85,8 +144,8 @@ function buildDrills(locale: Locale, profile: LearnerProfile): Drill[] {
 }
 
 export default function PracticeLabPage() {
-  const t = useTranslations("practiceLab");
   const locale = useLocale() as Locale;
+  const c = COPY[locale] ?? COPY.en;
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [idx, setIdx] = useState(0);
@@ -96,6 +155,7 @@ export default function PracticeLabPage() {
   const [done, setDone] = useState(false);
   const [startedAt] = useState(() => Date.now());
   const [tts, setTts] = useState(false);
+  const [seed, setSeed] = useState(0);
 
   useEffect(() => {
     const p = getStoredProfile();
@@ -107,10 +167,7 @@ export default function PracticeLabPage() {
     setTts(canSpeak());
   }, [router]);
 
-  const drills = useMemo(() => {
-    if (!profile) return [];
-    return buildDrills(locale, profile);
-  }, [profile, locale]);
+  const drills = useMemo(() => buildDrills(locale), [locale, seed]);
 
   if (!profile) {
     return (
@@ -121,7 +178,7 @@ export default function PracticeLabPage() {
   }
 
   const drill = drills[idx];
-  const minutes = Math.max(1, Math.round((Date.now() - startedAt) / 60000));
+  const minutes = Math.max(1, Math.round((Date.now() - startedAt) / 60000) || 1);
 
   function finishSession() {
     recordStudyActivity(Math.min(40, 5 + score * 2));
@@ -158,8 +215,8 @@ export default function PracticeLabPage() {
             ×
           </Link>
           <div className="flex-1">
-            <p className="text-caption text-ink-400">{t("eyebrow")}</p>
-            <p className="text-body-sm font-medium">{t("title")}</p>
+            <p className="text-caption text-ink-400">{c.eyebrow}</p>
+            <p className="text-body-sm font-medium">{c.title}</p>
           </div>
           <span className="text-caption text-ink-500">
             {idx + 1}/{drills.length || 1}
@@ -177,13 +234,17 @@ export default function PracticeLabPage() {
 
       <main className="flex-1 px-4 py-6 pb-24">
         <Card className="mb-4 border-accent-100 bg-accent-50/30">
-          <p className="text-body-sm text-ink-700 text-pretty">{t("instituteNote")}</p>
+          <p className="text-body-sm text-ink-700 text-pretty">{c.instituteNote}</p>
         </Card>
 
         {!done && drill && (
           <Card className="layer-stack">
             <p className="text-caption text-ink-400 mb-2">
-              {t(`kind_${drill.kind}`)}
+              {drill.kind === "write"
+                ? c.write
+                : drill.kind === "quiz"
+                  ? c.quiz
+                  : c.listen}
             </p>
             <p className="text-body-lg font-medium text-ink-900 mb-4 text-pretty">
               {drill.prompt}
@@ -196,14 +257,14 @@ export default function PracticeLabPage() {
                     variant="accent"
                     onClick={() => speakFrench(drill.speakText!)}
                   >
-                    {t("play")}
+                    {c.play}
                   </Button>
                 )}
                 <p className="font-serif text-body text-ink-800" dir="ltr">
                   {drill.speakText}
                 </p>
                 <Button variant="secondary" onClick={next}>
-                  {t("heard")}
+                  {c.heard}
                 </Button>
               </div>
             )}
@@ -216,22 +277,22 @@ export default function PracticeLabPage() {
                     className="text-caption text-accent-700 underline mb-3"
                     onClick={() => speakFrench(drill.speakText!)}
                   >
-                    {t("play")}
+                    {c.play}
                   </button>
                 )}
                 <input
                   className="input-field h-14 mb-3 text-center"
                   value={answer}
                   onChange={(e) => setAnswer(e.target.value)}
-                  placeholder={t("typeAnswer")}
+                  placeholder={c.typeAnswer}
                   dir="ltr"
                   disabled={feedback === true}
                 />
                 {feedback === true && (
-                  <p className="text-success-700 mb-3">{t("correct")}</p>
+                  <p className="text-success-700 mb-3">{c.correct}</p>
                 )}
                 {feedback === false && (
-                  <p className="text-accent-700 mb-3">{t("tryAgain")}</p>
+                  <p className="text-accent-700 mb-3">{c.tryAgain}</p>
                 )}
                 {feedback !== true ? (
                   <Button
@@ -240,11 +301,11 @@ export default function PracticeLabPage() {
                     onClick={checkWrite}
                     disabled={!answer.trim()}
                   >
-                    {t("check")}
+                    {c.check}
                   </Button>
                 ) : (
                   <Button variant="accent" className="w-full" onClick={next}>
-                    {t("next")}
+                    {c.next}
                   </Button>
                 )}
               </div>
@@ -274,13 +335,11 @@ export default function PracticeLabPage() {
         {done && (
           <Card className="text-center">
             <p className="text-4xl mb-3">⏱</p>
-            <h2 className="text-title-sm font-serif mb-2">{t("sessionDone")}</h2>
+            <h2 className="text-title-sm font-serif mb-2">{c.sessionDone}</h2>
             <p className="text-body text-ink-600 mb-1">
-              {t("sessionScore", { score, total: drills.length })}
+              {score} / {drills.length}
             </p>
-            <p className="text-body-sm text-ink-500 mb-6">
-              {t("sessionMinutes", { min: minutes })}
-            </p>
+            <p className="text-body-sm text-ink-500 mb-6">~{minutes} min</p>
             <div className="flex flex-col gap-2">
               <Button
                 variant="accent"
@@ -290,18 +349,19 @@ export default function PracticeLabPage() {
                   setDone(false);
                   setAnswer("");
                   setFeedback(null);
+                  setSeed((s) => s + 1);
                 }}
               >
-                {t("anotherRound")}
+                {c.anotherRound}
               </Button>
               <Link href="/path">
                 <Button variant="secondary" className="w-full">
-                  {t("toPath")}
+                  {c.toPath}
                 </Button>
               </Link>
               <Link href="/exam">
                 <Button variant="secondary" className="w-full">
-                  {t("toExam")}
+                  {c.toExam}
                 </Button>
               </Link>
             </div>
