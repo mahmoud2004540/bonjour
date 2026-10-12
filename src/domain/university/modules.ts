@@ -1,7 +1,8 @@
 /**
  * On-site university-style French curriculum outline.
- * All content is hosted in the app — no external course required for the structured path.
  */
+
+import { A1_EXTRA_MODULES } from "./modules-a1-extra";
 
 export type UniModule = {
   id: string;
@@ -11,16 +12,14 @@ export type UniModule = {
   title: { en: string; fr: string; ar: string };
   summary: { en: string; fr: string; ar: string };
   outcomes: { en: string[]; fr: string[]; ar: string[] };
-  /** Links to in-app lesson unit ids when available */
   relatedUnitIds: string[];
-  /** In-app study blocks (text only, on site) */
   blocks: {
     heading: { en: string; fr: string; ar: string };
     body: { en: string; fr: string; ar: string };
   }[];
 };
 
-export const UNIVERSITY_MODULES: UniModule[] = [
+const BASE_MODULES: UniModule[] = [
   {
     id: "uni-a1-phonetics",
     track: "phonetics",
@@ -46,17 +45,25 @@ export const UNIVERSITY_MODULES: UniModule[] = [
       {
         heading: { en: "Oral vowels", fr: "Voyelles orales", ar: "حروف متحركة" },
         body: {
-          en: "Practice: a (patte), é (été), è (mère), i (si), o (eau), ou (vous), u (tu).",
-          fr: "Travaillez : a, é, è, i, o, ou, u.",
-          ar: "تمرّن: a, é, è, i, o, ou, u.",
+          en: "a (patte), é (été), è (mère), i (si), o (eau), ou (vous), u (tu).",
+          fr: "a, é, è, i, o, ou, u.",
+          ar: "a, é, è, i, o, ou, u.",
         },
       },
       {
         heading: { en: "Nasals", fr: "Nasales", ar: "أصوات أنفية" },
         body: {
           en: "an/en, on, in/ain — un (varies by region).",
-          fr: "an/en, on, in/ain — un (selon la région).",
+          fr: "an/en, on, in/ain.",
           ar: "an/en, on, in/ain.",
+        },
+      },
+      {
+        heading: { en: "Liaison", fr: "Liaison", ar: "ربط" },
+        body: {
+          en: "les‿amis · vous‿êtes — final consonant links before a vowel sound.",
+          fr: "les‿amis · vous‿êtes",
+          ar: "les‿amis · vous‿êtes",
         },
       },
     ],
@@ -72,23 +79,36 @@ export const UNIVERSITY_MODULES: UniModule[] = [
       ar: "قواعد A1 — الأساس",
     },
     summary: {
-      en: "Articles, être/avoir, present of regular -er, negation, questions.",
-      fr: "Articles, être/avoir, présent en -er, négation, questions.",
-      ar: "أدوات التعريف، être/avoir، المضارع، النفي، الأسئلة.",
+      en: "Articles, être/avoir, present -er, negation, questions.",
+      fr: "Articles, être/avoir, présent -er, négation, questions.",
+      ar: "أدوات، être/avoir، مضارع، نفي، أسئلة.",
     },
     outcomes: {
-      en: ["Build simple present sentences", "Use ne…pas", "Ask où / combien / comment"],
+      en: ["Simple present sentences", "ne…pas", "où / combien / comment"],
       fr: ["Phrases au présent", "ne…pas", "où / combien / comment"],
-      ar: ["جمل مضارع بسيطة", "النفي", "أسئلة أساسية"],
+      ar: ["جمل مضارع", "نفي", "أسئلة أساسية"],
     },
-    relatedUnitIds: ["fr-a1-intro-unit", "fr-a1-cafe-unit"],
+    relatedUnitIds: [
+      "fr-a1-intro-unit",
+      "fr-a1-etre-avoir-unit",
+      "fr-a1-negation-unit",
+      "fr-a1-cafe-unit",
+    ],
     blocks: [
       {
-        heading: { en: "Present -er", fr: "Présent des verbes en -er", ar: "مضارع أفعال -er" },
+        heading: { en: "Present -er", fr: "Présent -er", ar: "مضارع -er" },
         body: {
           en: "je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent.",
           fr: "je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent.",
           ar: "je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent.",
+        },
+      },
+      {
+        heading: { en: "être / avoir", fr: "être / avoir", ar: "être / avoir" },
+        body: {
+          en: "je suis / j'ai · tu es / tu as · il est / il a · nous sommes / nous avons…",
+          fr: "je suis / j'ai · tu es / tu as…",
+          ar: "je suis / j'ai · tu es / tu as…",
         },
       },
     ],
@@ -104,28 +124,29 @@ export const UNIVERSITY_MODULES: UniModule[] = [
       ar: "معجم الحياة اليومية",
     },
     summary: {
-      en: "Home, food, transport, health — aligned with lesson units.",
-      fr: "Maison, nourriture, transports, santé — aligné sur les unités.",
-      ar: "سكن، طعام، مواصلات، صحة — مع وحدات الدروس.",
+      en: "Home, food, transport, health — with lesson units.",
+      fr: "Maison, nourriture, transports, santé.",
+      ar: "سكن، طعام، مواصلات، صحة.",
     },
     outcomes: {
-      en: ["Name everyday objects", "Use café and shop phrases"],
-      fr: ["Nommer le quotidien", "Phrases café et magasin"],
-      ar: ["مفردات يومية", "جمل المقهى والتسوق"],
+      en: ["Everyday phrases in full units"],
+      fr: ["Phrases du quotidien en unités"],
+      ar: ["جمل يومية عبر الوحدات"],
     },
     relatedUnitIds: [
       "fr-a1-cafe-unit",
       "fr-a1-courses-unit",
       "fr-day-food-home",
       "fr-a1-transport-unit",
+      "fr-a1-sante-unit",
     ],
     blocks: [
       {
         heading: { en: "Study tip", fr: "Conseil", ar: "نصيحة" },
         body: {
-          en: "Learn phrases in full units (lesson → quiz), not isolated word lists only.",
-          fr: "Apprenez par unités complètes, pas seulement des listes isolées.",
-          ar: "تعلّم عبر الوحدات الكاملة، مش قوائم كلمات فقط.",
+          en: "Finish each unit: lesson → words → exercises → review → quiz.",
+          fr: "Terminez chaque unité complète.",
+          ar: "أكمل كل وحدة بالشكل الكامل.",
         },
       },
     ],
@@ -141,23 +162,23 @@ export const UNIVERSITY_MODULES: UniModule[] = [
       ar: "الماضي المركب",
     },
     summary: {
-      en: "avoir/être + past participle; agreement basics.",
-      fr: "avoir/être + participe passé ; accords de base.",
+      en: "avoir/être + past participle.",
+      fr: "avoir/être + participe passé.",
       ar: "avoir/être + التصريف الماضي.",
     },
     outcomes: {
-      en: ["Narrate yesterday simply", "Choose avoir vs être for common verbs"],
-      fr: ["Raconter hier simplement", "avoir / être"],
-      ar: ["احكِ عن الأمس", "اختيار avoir أو être"],
+      en: ["Narrate yesterday simply"],
+      fr: ["Raconter hier"],
+      ar: ["احكِ عن الأمس"],
     },
     relatedUnitIds: ["fr-a2-past-unit"],
     blocks: [
       {
         heading: { en: "Pattern", fr: "Schéma", ar: "النمط" },
         body: {
-          en: "J'ai mangé. Je suis allé(e). Elle est partie.",
-          fr: "J'ai mangé. Je suis allé(e). Elle est partie.",
-          ar: "J'ai mangé. Je suis allé(e). Elle est partie.",
+          en: "J'ai mangé. Je suis allé(e).",
+          fr: "J'ai mangé. Je suis allé(e).",
+          ar: "J'ai mangé. Je suis allé(e).",
         },
       },
     ],
@@ -173,14 +194,14 @@ export const UNIVERSITY_MODULES: UniModule[] = [
       ar: "المستقبل القريب",
     },
     summary: {
-      en: "aller + infinitive for plans.",
-      fr: "aller + infinitif pour les projets.",
-      ar: "aller + المصدر للخطط.",
+      en: "aller + infinitive.",
+      fr: "aller + infinitif.",
+      ar: "aller + مصدر.",
     },
     outcomes: {
-      en: ["Talk about tomorrow and the weekend"],
-      fr: ["Parler de demain et du week-end"],
-      ar: ["تحدّث عن الغد وعطلة نهاية الأسبوع"],
+      en: ["Talk about tomorrow"],
+      fr: ["Parler de demain"],
+      ar: ["تحدّث عن الغد"],
     },
     relatedUnitIds: ["fr-day-future"],
     blocks: [
@@ -190,134 +211,6 @@ export const UNIVERSITY_MODULES: UniModule[] = [
           en: "Je vais étudier. Nous allons voyager.",
           fr: "Je vais étudier. Nous allons voyager.",
           ar: "Je vais étudier. Nous allons voyager.",
-        },
-      },
-    ],
-  },
-  {
-    id: "uni-b1-argument",
-    track: "writing",
-    level: "B1",
-    order: 20,
-    title: {
-      en: "Structured opinion",
-      fr: "Opinion structurée",
-      ar: "رأي منظّم",
-    },
-    summary: {
-      en: "Connectors: d'abord, ensuite, cependant, donc.",
-      fr: "Connecteurs : d'abord, ensuite, cependant, donc.",
-      ar: "روابط: d'abord, ensuite, cependant, donc.",
-    },
-    outcomes: {
-      en: ["Write a short paragraph with clear structure"],
-      fr: ["Écrire un court paragraphe structuré"],
-      ar: ["اكتب فقرة قصيرة منظّمة"],
-    },
-    relatedUnitIds: ["fr-b1-advice-unit"],
-    blocks: [
-      {
-        heading: { en: "Frame", fr: "Cadre", ar: "إطار" },
-        body: {
-          en: "Je pense que… / À mon avis… / En conclusion…",
-          fr: "Je pense que… / À mon avis… / En conclusion…",
-          ar: "Je pense que… / À mon avis… / En conclusion…",
-        },
-      },
-    ],
-  },
-  {
-    id: "uni-b2-formal",
-    track: "writing",
-    level: "B2",
-    order: 30,
-    title: {
-      en: "Formal register",
-      fr: "Registre formel",
-      ar: "السجل الرسمي",
-    },
-    summary: {
-      en: "Email and letter formulas on site.",
-      fr: "Formules d'e-mail et de lettre sur le site.",
-      ar: "صيغ البريد والرسائل داخل الموقع.",
-    },
-    outcomes: {
-      en: ["Open and close a formal message"],
-      fr: ["Ouvrir et clôturer un message formel"],
-      ar: ["افتتاح وختام رسالة رسمية"],
-    },
-    relatedUnitIds: ["fr-b2-formal-unit"],
-    blocks: [
-      {
-        heading: { en: "Formulas", fr: "Formules", ar: "صيغ" },
-        body: {
-          en: "Je me permets de… / Dans l'attente de votre retour…",
-          fr: "Je me permets de… / Dans l'attente de votre retour…",
-          ar: "Je me permets de… / Dans l'attente de votre retour…",
-        },
-      },
-    ],
-  },
-  {
-    id: "uni-c1-hypothesis",
-    track: "grammar",
-    level: "C1",
-    order: 40,
-    title: {
-      en: "Hypothesis & nuance",
-      fr: "Hypothèse et nuance",
-      ar: "الفرض والفروق",
-    },
-    summary: {
-      en: "Conditionnel, à supposer que, register shifts.",
-      fr: "Conditionnel, à supposer que, registres.",
-      ar: "الشرط، الافتراض، تغيّر السجل.",
-    },
-    outcomes: {
-      en: ["Express conditions and careful opinions"],
-      fr: ["Exprimer conditions et opinions mesurées"],
-      ar: ["عبّر عن الشرط والرأي بحذر"],
-    },
-    relatedUnitIds: ["fr-c1-hypothesis-unit"],
-    blocks: [
-      {
-        heading: { en: "Patterns", fr: "Schémas", ar: "أنماط" },
-        body: {
-          en: "Si nous avions… / Cela dépendrait de…",
-          fr: "Si nous avions… / Cela dépendrait de…",
-          ar: "Si nous avions… / Cela dépendrait de…",
-        },
-      },
-    ],
-  },
-  {
-    id: "uni-civ-france",
-    track: "civilization",
-    level: "B1",
-    order: 25,
-    title: {
-      en: "Life in French-speaking contexts",
-      fr: "Vivre en contexte francophone",
-      ar: "الحياة في سياق ناطق بالفرنسية",
-    },
-    summary: {
-      en: "Politeness, admin basics, everyday culture notes — on site text.",
-      fr: "Politesse, bases admin, notes culturelles — texte sur le site.",
-      ar: "أدب، إدارة بسيطة، ملاحظات ثقافية — نص داخل الموقع.",
-    },
-    outcomes: {
-      en: ["Choose tu/vous appropriately", "Recognize common admin situations"],
-      fr: ["Choisir tu/vous", "Situations admin courantes"],
-      ar: ["اختيار tu/vous", "مواقف إدارية شائعة"],
-    },
-    relatedUnitIds: ["fr-day-bank", "fr-a1-logement-unit"],
-    blocks: [
-      {
-        heading: { en: "Politeness", fr: "Politesse", ar: "الأدب" },
-        body: {
-          en: "With strangers and staff, prefer vous, bonjour, s'il vous plaît, merci.",
-          fr: "Avec inconnus et personnel : vous, bonjour, s'il vous plaît, merci.",
-          ar: "مع الغرباء والموظفين: vous، bonjour، من فضلك، شكرًا.",
         },
       },
     ],
@@ -333,27 +226,160 @@ export const UNIVERSITY_MODULES: UniModule[] = [
       ar: "استراتيجيات الكلام",
     },
     summary: {
-      en: "Buy time, repair, ask for repetition — phrases on site.",
-      fr: "Gagner du temps, se corriger, demander de répéter.",
-      ar: "كسب وقت، تصحيح، طلب إعادة.",
+      en: "Ask to repeat, slow down, clarify.",
+      fr: "Répéter, ralentir, clarifier.",
+      ar: "إعادة، تهدئة، توضيح.",
     },
     outcomes: {
-      en: ["Use: Vous pouvez répéter ? / Comment on dit… ?"],
-      fr: ["Vous pouvez répéter ? / Comment on dit… ?"],
-      ar: ["Vous pouvez répéter ؟ / Comment on dit… ؟"],
+      en: ["Vous pouvez répéter ?"],
+      fr: ["Vous pouvez répéter ?"],
+      ar: ["Vous pouvez répéter ؟"],
     },
-    relatedUnitIds: ["fr-day-phone-unit", "fr-a2-phone-unit"],
+    relatedUnitIds: ["fr-a2-phone-unit"],
     blocks: [
       {
-        heading: { en: "Useful lines", fr: "Phrases utiles", ar: "جمل مفيدة" },
+        heading: { en: "Lines", fr: "Phrases", ar: "جمل" },
         body: {
           en: "Pardon ? / Plus lentement, s'il vous plaît. / Je ne comprends pas bien.",
-          fr: "Pardon ? / Plus lentement, s'il vous plaît. / Je ne comprends pas bien.",
-          ar: "Pardon ؟ / أبطأ من فضلك. / لا أفهم جيدًا.",
+          fr: "Pardon ? / Plus lentement… / Je ne comprends pas bien.",
+          ar: "Pardon ؟ / أبطأ… / لا أفهم جيدًا.",
         },
       },
     ],
   },
+  {
+    id: "uni-b1-argument",
+    track: "writing",
+    level: "B1",
+    order: 20,
+    title: {
+      en: "Structured opinion",
+      fr: "Opinion structurée",
+      ar: "رأي منظّم",
+    },
+    summary: {
+      en: "d'abord, ensuite, cependant, donc.",
+      fr: "Connecteurs de base.",
+      ar: "روابط أساسية.",
+    },
+    outcomes: {
+      en: ["Short structured paragraph"],
+      fr: ["Court paragraphe structuré"],
+      ar: ["فقرة قصيرة منظّمة"],
+    },
+    relatedUnitIds: ["fr-b1-advice-unit"],
+    blocks: [
+      {
+        heading: { en: "Frame", fr: "Cadre", ar: "إطار" },
+        body: {
+          en: "Je pense que… / À mon avis… / En conclusion…",
+          fr: "Je pense que… / À mon avis… / En conclusion…",
+          ar: "Je pense que… / À mon avis… / En conclusion…",
+        },
+      },
+    ],
+  },
+  {
+    id: "uni-civ-france",
+    track: "civilization",
+    level: "B1",
+    order: 25,
+    title: {
+      en: "Francophone daily culture",
+      fr: "Culture quotidienne francophone",
+      ar: "ثقافة يومية ناطقة بالفرنسية",
+    },
+    summary: {
+      en: "Politeness and common situations.",
+      fr: "Politesse et situations courantes.",
+      ar: "أدب ومواقف شائعة.",
+    },
+    outcomes: {
+      en: ["vous with strangers"],
+      fr: ["vous avec inconnus"],
+      ar: ["vous مع الغرباء"],
+    },
+    relatedUnitIds: ["fr-day-bank", "fr-a1-logement-unit"],
+    blocks: [
+      {
+        heading: { en: "Politeness", fr: "Politesse", ar: "أدب" },
+        body: {
+          en: "bonjour, s'il vous plaît, merci, vous.",
+          fr: "bonjour, s'il vous plaît, merci, vous.",
+          ar: "bonjour, s'il vous plaît, merci, vous.",
+        },
+      },
+    ],
+  },
+  {
+    id: "uni-b2-formal",
+    track: "writing",
+    level: "B2",
+    order: 30,
+    title: {
+      en: "Formal register",
+      fr: "Registre formel",
+      ar: "سجل رسمي",
+    },
+    summary: {
+      en: "Email formulas on site.",
+      fr: "Formules d'e-mail.",
+      ar: "صيغ البريد.",
+    },
+    outcomes: {
+      en: ["Open and close formally"],
+      fr: ["Ouvrir et clôturer"],
+      ar: ["افتتاح وختام"],
+    },
+    relatedUnitIds: ["fr-b2-formal-unit"],
+    blocks: [
+      {
+        heading: { en: "Formulas", fr: "Formules", ar: "صيغ" },
+        body: {
+          en: "Je me permets de… / Dans l'attente de votre retour…",
+          fr: "Je me permets de… / Dans l'attente…",
+          ar: "Je me permets de… / Dans l'attente…",
+        },
+      },
+    ],
+  },
+  {
+    id: "uni-c1-hypothesis",
+    track: "grammar",
+    level: "C1",
+    order: 40,
+    title: {
+      en: "Hypothesis & nuance",
+      fr: "Hypothèse et nuance",
+      ar: "فرض وفروق",
+    },
+    summary: {
+      en: "Conditionnel and careful opinion.",
+      fr: "Conditionnel et opinion mesurée.",
+      ar: "شرط ورأي حذر.",
+    },
+    outcomes: {
+      en: ["Si nous avions… / Cela dépendrait…"],
+      fr: ["Si nous avions… / Cela dépendrait…"],
+      ar: ["Si nous avions… / Cela dépendrait…"],
+    },
+    relatedUnitIds: ["fr-c1-hypothesis-unit"],
+    blocks: [
+      {
+        heading: { en: "Patterns", fr: "Schémas", ar: "أنماط" },
+        body: {
+          en: "Si nous avions… / À supposer que… / Cela dépendrait de…",
+          fr: "Si nous avions… / À supposer que…",
+          ar: "Si nous avions… / À supposer que…",
+        },
+      },
+    ],
+  },
+];
+
+export const UNIVERSITY_MODULES: UniModule[] = [
+  ...BASE_MODULES,
+  ...A1_EXTRA_MODULES,
 ];
 
 export function getModulesByLevel(level: string): UniModule[] {
