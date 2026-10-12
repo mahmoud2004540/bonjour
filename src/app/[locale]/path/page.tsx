@@ -12,6 +12,7 @@ import {
   isUnitAccessible,
   isUnitComplete,
 } from "@/domain/lessons/registry";
+import { getLevelReadiness } from "@/domain/learning/readiness";
 import { getStoredProfile } from "@/application/learner-store";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
@@ -69,6 +70,7 @@ export default function PathPage() {
           const doneCount = units.filter((u) => isUnitComplete(u, profile)).length;
           const levelDone = doneCount === units.length;
           const nextLevel = LEVEL_SEQUENCE[levelIdx + 1];
+          const readiness = getLevelReadiness(profile, level);
 
           return (
             <section key={level} className="relative">
@@ -81,7 +83,7 @@ export default function PathPage() {
                     : "border-ink-100 opacity-70"
                 }`}
               >
-                <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center justify-between mb-3">
                   <div>
                     <p className="text-overline text-accent-700">
                       {t("levelLabel", { level })}
@@ -108,6 +110,30 @@ export default function PathPage() {
                   </div>
                 </div>
 
+                {unlocked && (
+                  <div className="mb-5">
+                    <div className="flex justify-between text-caption text-ink-500 mb-1">
+                      <span>{t("readiness")}</span>
+                      <span className="font-medium text-ink-800">
+                        {readiness.percent}%
+                      </span>
+                    </div>
+                    <div className="h-2.5 rounded-full bg-ink-100 overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all ${
+                          readiness.percent >= 90
+                            ? "bg-success-500"
+                            : "bg-accent-500"
+                        }`}
+                        style={{ width: `${readiness.percent}%` }}
+                      />
+                    </div>
+                    <p className="text-caption text-ink-400 mt-1">
+                      {t(`ready_${readiness.label}`)}
+                    </p>
+                  </div>
+                )}
+
                 {!unlocked ? (
                   <p className="text-body-sm text-ink-400 text-center py-6">
                     {t("finishPrevLevel", {
@@ -126,6 +152,7 @@ export default function PathPage() {
                       const isCurrent = next?.id === u.id;
                       const accessible = isUnitAccessible(u, profile);
                       const locked = !accessible && !done;
+                      const isExam = u.id.includes("-exam-");
 
                       return (
                         <div
@@ -151,10 +178,12 @@ export default function PathPage() {
                                   ? "bg-success-600 text-white border-success-400 node-3d-done"
                                   : isCurrent
                                     ? "bg-accent-600 text-white border-accent-300 node-3d-current"
-                                    : "bg-white text-ink-800 border-ink-200 shadow-md"
+                                    : isExam
+                                      ? "bg-ink-900 text-white border-ink-600"
+                                      : "bg-white text-ink-800 border-ink-200 shadow-md"
                               }`}
                             >
-                              {done ? "✓" : i + 1}
+                              {done ? "✓" : isExam ? "🎓" : i + 1}
                             </Link>
                           )}
 
@@ -184,19 +213,6 @@ export default function PathPage() {
                     {t("levelCompleteNext", { next: nextLevel })}
                   </p>
                 )}
-
-                {levelDone && !nextLevel && (
-                  <div className="text-center mt-4 pt-4 border-t border-success-100">
-                    <p className="text-body-sm text-success-700 mb-3">
-                      {t("exam")}
-                    </p>
-                    <Link href="/exam">
-                      <Button variant="accent" size="sm">
-                        {t("exam")}
-                      </Button>
-                    </Link>
-                  </div>
-                )}
               </div>
 
               {levelIdx < LEVEL_SEQUENCE.length - 1 && (
@@ -210,12 +226,12 @@ export default function PathPage() {
       </div>
 
       <div className="mt-12 text-center space-y-3">
-        <Link href="/exam">
-          <Button variant="accent">{t("exam")}</Button>
+        <Link href="/practice-lab">
+          <Button variant="accent">{t("practiceLab")}</Button>
         </Link>
         <div>
-          <Link href="/teacher">
-            <Button variant="secondary">{t("teacher")}</Button>
+          <Link href="/exam">
+            <Button variant="secondary">{t("exam")}</Button>
           </Link>
         </div>
         <div>

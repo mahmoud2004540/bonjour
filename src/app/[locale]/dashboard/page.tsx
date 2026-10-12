@@ -13,6 +13,10 @@ import {
   getNextUnit,
   isUnitComplete,
 } from "@/domain/lessons/registry";
+import {
+  getOverallReadiness,
+  getLevelReadiness,
+} from "@/domain/learning/readiness";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -49,6 +53,8 @@ export default function DashboardPage() {
   const nextUnit = getNextUnit(profile);
   const allUnits = getAllUnits();
   const doneCount = allUnits.filter((u) => isUnitComplete(u, profile)).length;
+  const overall = getOverallReadiness(profile);
+  const a1 = getLevelReadiness(profile, "A1");
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 scene-3d">
@@ -60,7 +66,7 @@ export default function DashboardPage() {
         <p className="text-body-sm text-ink-500">{t("encourage")}</p>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         <Card depth={false}>
           <p className="text-caption text-ink-400">{t("xp")}</p>
           <p className="text-title-sm font-serif">{profile.xp ?? 0}</p>
@@ -75,32 +81,38 @@ export default function DashboardPage() {
             {doneCount}/{allUnits.length}
           </p>
         </Card>
+        <Card depth={false}>
+          <p className="text-caption text-ink-400">{t("readinessOverall")}</p>
+          <p className="text-title-sm font-serif">{overall}%</p>
+        </Card>
       </div>
 
-      <Card className="mb-4 border-accent-200 bg-gradient-to-br from-accent-50/50 to-white">
-        <h3 className="text-title-sm font-serif text-ink-950 mb-2">
-          {t("academyCardTitle")}
-        </h3>
-        <p className="text-body-sm text-ink-600 mb-4">{t("academyCardBody")}</p>
-        <Link href="/path">
-          <Button variant="accent">{t("viewPath")}</Button>
-        </Link>
+      <Card className="mb-4 border-accent-200">
+        <h3 className="text-title-sm font-serif mb-2">{t("practiceCardTitle")}</h3>
+        <p className="text-body-sm text-ink-600 mb-2">{t("practiceCardBody")}</p>
+        <p className="text-caption text-ink-500 mb-4">
+          {t("a1Readiness", { pct: a1.percent })}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/practice-lab">
+            <Button variant="accent">{t("viewPracticeLab")}</Button>
+          </Link>
+          <Link href="/path">
+            <Button variant="secondary">{t("viewPath")}</Button>
+          </Link>
+        </div>
       </Card>
 
       <Card className="mb-4 layer-stack">
-        <h3 className="text-title-sm font-serif text-ink-950 mb-2">
-          {t("teacherCardTitle")}
-        </h3>
+        <h3 className="text-title-sm font-serif mb-2">{t("teacherCardTitle")}</h3>
         <p className="text-body-sm text-ink-600 mb-4">{t("teacherCardBody")}</p>
         <Link href="/teacher">
           <Button variant="secondary">{t("viewTeacher")}</Button>
         </Link>
       </Card>
 
-      <Card className="mb-6 border-ink-200">
-        <h3 className="text-title-sm font-serif text-ink-950 mb-2">
-          {t("examCardTitle")}
-        </h3>
+      <Card className="mb-6">
+        <h3 className="text-title-sm font-serif mb-2">{t("examCardTitle")}</h3>
         <p className="text-body-sm text-ink-600 mb-4">{t("examCardBody")}</p>
         <Link href="/exam">
           <Button variant="secondary">{t("viewExam")}</Button>
@@ -128,21 +140,6 @@ export default function DashboardPage() {
           </Link>
         </Card>
       )}
-
-      <div className="flex flex-wrap gap-2 mb-8">
-        <Link href="/path">
-          <Button variant="secondary" size="sm">{t("viewPath")}</Button>
-        </Link>
-        <Link href="/exam">
-          <Button variant="secondary" size="sm">{t("viewExam")}</Button>
-        </Link>
-        <Link href="/teacher">
-          <Button variant="secondary" size="sm">{t("viewTeacher")}</Button>
-        </Link>
-        <Link href="/academic">
-          <Button variant="secondary" size="sm">{t("viewAcademic")}</Button>
-        </Link>
-      </div>
 
       <button
         type="button"
