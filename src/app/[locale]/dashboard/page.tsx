@@ -10,15 +10,11 @@ import { trackEvent } from "@/application/local-events";
 import { getDailyProgress } from "@/application/motivation-store";
 import { getDueVocab } from "@/application/vocab-store";
 import {
-  getPrimaryNextAction,
-  getNextRecommendations,
-} from "@/domain/learning/recommendation";
-import {
-  getGoalById,
-  getScenarioById,
-  getPublishedScenarios,
-} from "@/domain/curriculum/registry";
-import { getFirstUnit } from "@/domain/lessons/fr-a1-intro-unit";
+  getAllUnits,
+  getNextUnit,
+  isUnitComplete,
+} from "@/domain/lessons/registry";
+import { getGoalById } from "@/domain/curriculum/registry";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -56,18 +52,9 @@ export default function DashboardPage() {
     );
   }
 
-  const unit = getFirstUnit();
-  const unitDone = unit.completesGoals.every((g) =>
-    profile.completedGoals.includes(g)
-  );
-
-  const primary = getPrimaryNextAction(profile);
-  const allRecs = getNextRecommendations(profile);
-  const primaryGoal = primary ? getGoalById(primary.goalId) : null;
-  const primaryScenario = primaryGoal
-    ? getScenarioById(primaryGoal.scenarioId)
-    : null;
-  const scenarios = getPublishedScenarios("fr");
+  const nextUnit = getNextUnit(profile);
+  const allUnits = getAllUnits();
+  const doneCount = allUnits.filter((u) => isUnitComplete(u, profile)).length;
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
@@ -90,46 +77,31 @@ export default function DashboardPage() {
           <p className="text-title-sm font-serif text-ink-950">{profile.streakDays ?? 0}</p>
         </Card>
         <Card>
-          <p className="text-caption text-ink-400">{t("dailyGoal")}</p>
+          <p className="text-caption text-ink-400">{t("unitsProgress")}</p>
           <p className="text-title-sm font-serif text-ink-950">
-            {daily.minutes}/{daily.goal} min
+            {doneCount}/{allUnits.length}
           </p>
         </Card>
       </div>
 
-      {/* Classic unit flow CTA */}
-      {!unitDone && (
+      {nextUnit ? (
         <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/50 to-surface-elevated">
-          <p className="text-overline text-accent-700 uppercase mb-3">{t("todayLesson")}</p>
+          <p className="text-overline text-accent-700 uppercase mb-3">
+            {t("todayLesson")} · {nextUnit.level}
+          </p>
           <h2 className="text-title-sm font-serif text-ink-950 mb-2">
-            {unit.title[locale]}
+            {nextUnit.title[locale]}
           </h2>
           <p className="text-body-sm text-ink-600 mb-6 text-pretty">{t("lessonFlowHint")}</p>
-          <Link href={`/lesson/${unit.id}`}>
+          <Link href={`/lesson/${nextUnit.id}`}>
             <Button variant="accent" className="min-w-[12rem]">
               {t("startLesson")}
             </Button>
           </Link>
         </Card>
-      )}
-
-      {unitDone && primaryGoal && (
-        <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
-          <p className="text-overline text-accent-700 uppercase mb-4">{t("nextAction")}</p>
-          <h2 className="text-title-sm font-serif text-ink-950 mb-2">
-            {primaryGoal.title[locale]}
-          </h2>
-          <p className="text-body text-ink-600 mb-1">{primaryGoal.canDoStatement[locale]}</p>
-          <p className="text-caption text-ink-400 mb-7">{primary?.reason[locale]}</p>
-          <Link href={`/learn/${primaryGoal.id}`}>
-            <Button variant="accent">{t("continueLearning")}</Button>
-          </Link>
-        </Card>
-      )}
-
-      {unitDone && !primaryGoal && (
+      ) : (
         <Card className="mb-8">
-          <h2 className="text-title-sm font-serif text-ink-950 mb-2">{t("allDone")}</h2>
+          <h2 className="text-title-sm font-serif text-ink-950 mb-2">{t("allUnitsDone")}</h2>
           <p className="text-body text-ink-600 mb-4">{t("allDoneBody")}</p>
           <Link href="/vocabulary">
             <Button variant="accent">{t("reviewVocab")}</Button>
@@ -146,22 +118,29 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      {primaryScenario && unitDone && (
-        <Card className="mb-6">
-          <h3 className="text-caption text-ink-400 mb-2">{t("currentScenario")}</h3>
-          <p className="text-body-lg font-medium text-ink-950">{primaryScenario.title[locale]}</p>
-        </Card>
-      )}
-
       <Card className="mb-6">
-        <h3 className="text-caption text-ink-400 mb-3">{t("allScenarios")}</h3>
-        <ul className="space-y-2">
-          {scenarios.map((s) => (
-            <li key={s.id} className="text-body-sm text-ink-700">
-              {s.title[locale]}
-              <span className="text-caption text-ink-400 ms-2">{s.level}</span>
-            </li>
-          ))}
+        <h3 className="text-caption text-ink-400 mb-4">{t("allUnits")}</h3>
+        <ul className="space-y-2.5">
+          {allUnits.map((u) => {
+            const done = isUnitComplete(u, profile);
+            return (
+              <li key={u.id} className="flex items-center justify-between gap-3">
+                <span className={`text-body-sm ${
+                  done ? "text-ink-400 line-through" : "text-ink-800"
+                }`}>
+                  <span className="text-caption text-ink-400 me-2">{u.level}</span>
+                  {u.title[locale]}
+                </span>
+                {done ? (
+                  <span className="text-caption text-success-700">{t("unitDone")}</span>
+                ) : (
+                  <Link href={`/lesson/${u.id}`} className="text-caption text-accent-700 hover:underline">
+                    {t("openUnit")}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </Card>
 
@@ -169,27 +148,13 @@ export default function DashboardPage() {
         <Card className="mb-6">
           <h3 className="text-caption text-ink-400 mb-4">{t("completed")}</h3>
           <ul className="space-y-3">
-            {profile.completedGoals.map((gid) => {
+            {profile.completedGoals.slice(0, 12).map((gid) => {
               const g = getGoalById(gid);
               return g ? (
-                <li key={gid} className="text-body text-ink-800 flex items-center gap-3">
+                <li key={gid} className="text-body-sm text-ink-800 flex items-center gap-3">
                   <span className="w-5 h-5 rounded-full bg-success-100 text-success-700 text-xs flex items-center justify-center flex-shrink-0">✓</span>
                   {g.canDoStatement[locale]}
                 </li>
-              ) : null;
-            })}
-          </ul>
-        </Card>
-      )}
-
-      {allRecs.length > 1 && unitDone && (
-        <Card className="mb-6">
-          <h3 className="text-caption text-ink-400 mb-3">{t("upcoming")}</h3>
-          <ul className="space-y-2.5">
-            {allRecs.slice(0, 5).map((rec) => {
-              const g = getGoalById(rec.goalId);
-              return g ? (
-                <li key={rec.goalId} className="text-body-sm text-ink-500">{g.title[locale]}</li>
               ) : null;
             })}
           </ul>
@@ -204,9 +169,6 @@ export default function DashboardPage() {
         <Link href="/tutor"><Button variant="secondary" size="sm">{t("viewTutor")}</Button></Link>
         <Link href="/achievements"><Button variant="secondary" size="sm">{t("viewAchievements")}</Button></Link>
         <Link href="/resources"><Button variant="secondary" size="sm">{t("viewResources")}</Button></Link>
-        <Link href="/practice"><Button variant="secondary" size="sm">{t("viewPractice")}</Button></Link>
-        <Link href="/real-life"><Button variant="secondary" size="sm">{t("viewRealLife")}</Button></Link>
-        <Link href="/scenarios"><Button variant="secondary" size="sm">{t("viewScenarios")}</Button></Link>
       </div>
 
       <div className="pt-8 border-t border-ink-100">

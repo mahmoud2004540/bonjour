@@ -8,10 +8,8 @@ import { Card } from "@/components/ui/Card";
 import { getStoredProfile, markGoalCompleted } from "@/application/learner-store";
 import { recordStudyActivity } from "@/application/motivation-store";
 import { trackEvent } from "@/application/local-events";
-import {
-  getUnitById,
-  type LessonPhase,
-} from "@/domain/lessons/fr-a1-intro-unit";
+import { getUnitById } from "@/domain/lessons/registry";
+import type { LessonPhase } from "@/domain/lessons/types";
 import type { Locale } from "@/i18n/config";
 
 const PHASES: LessonPhase[] = ["lesson", "vocab", "exercise", "review", "quiz"];
@@ -22,7 +20,8 @@ function norm(s: string): string {
     .toLowerCase()
     .normalize("NFD")
     .replace(/\p{M}/gu, "")
-    .replace(/[?.!]/g, "");
+    .replace(/[?.!']/g, "")
+    .replace(/\s+/g, " ");
 }
 
 export default function LessonUnitPage({
@@ -59,10 +58,21 @@ export default function LessonUnitPage({
     [unitId]
   );
 
-  if (!unitId || !unit) {
+  if (!unitId) {
     return (
       <div className="max-w-content mx-auto px-6 py-20">
         <div className="h-6 w-40 bg-ink-100 rounded animate-pulse" />
+      </div>
+    );
+  }
+
+  if (!unit) {
+    return (
+      <div className="max-w-content mx-auto px-6 py-20 text-center">
+        <p className="text-body text-ink-600 mb-6">{t("notFound")}</p>
+        <Link href="/dashboard">
+          <Button variant="secondary">{t("toDashboard")}</Button>
+        </Link>
       </div>
     );
   }
@@ -81,7 +91,7 @@ export default function LessonUnitPage({
       for (const g of unit!.completesGoals) {
         markGoalCompleted(g);
       }
-      trackEvent("unit_passed", { unitId: unit!.id });
+      trackEvent("unit_passed", { unitId: unit!.id, level: unit!.level });
       recordStudyActivity(20);
     } else {
       trackEvent("unit_failed", { unitId: unit!.id });
@@ -122,7 +132,7 @@ export default function LessonUnitPage({
         const ratio = nextScore / unit!.quiz.length;
         finishUnit(ratio >= unit!.passRatio);
       }
-    }, 500);
+    }, 450);
   }
 
   return (
