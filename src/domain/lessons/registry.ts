@@ -6,6 +6,7 @@ import { A2_C2_UNITS } from "./units-a2-c2";
 import { EXTRA_UNITS } from "./units-extra";
 import { DAILY_LIFE_UNITS } from "./units-daily-life";
 import { EXAM_TRACK_UNITS } from "./units-exam-track";
+import { LEVEL_DEPTH_UNITS } from "./units-level-depth";
 import { enrichUnit } from "./enrich";
 
 const LEVEL_RANK: Record<string, number> = {
@@ -17,7 +18,6 @@ const LEVEL_RANK: Record<string, number> = {
   C2: 6,
 };
 
-/** Deep A1 overrides base A1 when same id; sort level → order */
 function mergeById(units: LessonUnit[]): LessonUnit[] {
   const map = new Map<string, LessonUnit>();
   for (const u of units) {
@@ -33,6 +33,7 @@ function mergeById(units: LessonUnit[]): LessonUnit[] {
 const RAW_UNITS: LessonUnit[] = mergeById([
   ...A1_UNITS,
   ...A1_DEEP_UNITS,
+  ...LEVEL_DEPTH_UNITS,
   ...A2_C2_UNITS,
   ...EXTRA_UNITS,
   ...DAILY_LIFE_UNITS,
@@ -62,7 +63,6 @@ export function isUnitComplete(
   return unit.completesGoals.every((g) => profile.completedGoals.includes(g));
 }
 
-/** First incomplete unit in strict sequence */
 export function getNextUnit(profile: LearnerProfile): LessonUnit | null {
   for (const unit of ALL_UNITS) {
     if (!isUnitComplete(unit, profile)) return unit;
@@ -70,7 +70,6 @@ export function getNextUnit(profile: LearnerProfile): LessonUnit | null {
   return null;
 }
 
-/** Unit that follows this one in the curriculum chain */
 export function getUnitAfter(unitId: string): LessonUnit | null {
   const i = ALL_UNITS.findIndex((u) => u.id === unitId);
   if (i < 0 || i >= ALL_UNITS.length - 1) return null;
@@ -81,7 +80,6 @@ export function getUnitsByLevel(level: string): LessonUnit[] {
   return ALL_UNITS.filter((u) => u.level === level);
 }
 
-/** Level is unlocked when previous level is fully complete (A1 always open) */
 export function isLevelUnlocked(
   level: string,
   profile: LearnerProfile
@@ -104,7 +102,6 @@ export function isUnitAccessible(
   return thisIdx <= nextIdx;
 }
 
-/** Exam-track units for a level (skill prep woven into the path) */
 export function getExamTrackUnits(level: string): LessonUnit[] {
   return ALL_UNITS.filter(
     (u) => u.level === level && u.id.includes("-exam-")
