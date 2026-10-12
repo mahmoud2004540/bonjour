@@ -140,7 +140,14 @@ export default function LessonUnitPage({
       <p className="text-caption text-ink-400 mb-1">
         {unit.level} · {unit.title[locale]}
       </p>
-      <h1 className="text-title font-serif text-ink-950 mb-4">{t(`phase_${phase}`)}</h1>
+      <h1 className="text-title font-serif text-ink-950 mb-2">{t(`phase_${phase}`)}</h1>
+      <p className="text-caption text-ink-500 mb-4">
+        {t("packageHint", {
+          words: unit.vocab.length,
+          exercises: unit.exercises.length,
+          quiz: unit.quiz.length,
+        })}
+      </p>
 
       <div className="flex gap-1.5 mb-8" aria-hidden>
         {PHASES.map((p, i) => (
@@ -155,6 +162,7 @@ export default function LessonUnitPage({
 
       {phase === "lesson" && (
         <Card>
+          <p className="text-overline text-accent-700 mb-3">{t("fullLesson")}</p>
           <p className="text-body text-ink-700 mb-6 text-pretty">{unit.lesson.intro[locale]}</p>
           <div className="bg-ink-50 rounded-xl p-5 mb-6 space-y-2 font-serif text-body text-ink-900">
             {unit.lesson.dialogue.map((line, i) => (
