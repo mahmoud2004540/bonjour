@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getStoredProfile, clearLearner } from "@/application/learner-store";
 import { trackEvent } from "@/application/local-events";
-import { getDailyProgress } from "@/application/motivation-store";
 import { getDueVocab } from "@/application/vocab-store";
 import {
   getAllUnits,
@@ -44,7 +43,6 @@ export default function DashboardPage() {
     return (
       <div className="max-w-content mx-auto px-6 py-20">
         <div className="h-8 w-48 bg-ink-100 rounded-lg animate-pulse mb-4" />
-        <div className="h-4 w-72 bg-ink-50 rounded animate-pulse" />
       </div>
     );
   }
@@ -81,8 +79,16 @@ export default function DashboardPage() {
         </Card>
       </div>
 
+      <Card className="mb-6 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
+        <h3 className="text-title-sm font-serif text-ink-950 mb-2">{t("academyCardTitle")}</h3>
+        <p className="text-body-sm text-ink-600 mb-4 text-pretty">{t("academyCardBody")}</p>
+        <Link href="/academic">
+          <Button variant="accent">{t("viewAcademic")}</Button>
+        </Link>
+      </Card>
+
       {nextUnit ? (
-        <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/50 to-surface-elevated">
+        <Card className="mb-8">
           <p className="text-overline text-accent-700 uppercase mb-3">
             {t("todayLesson")} · {nextUnit.level}
           </p>
@@ -91,28 +97,10 @@ export default function DashboardPage() {
           </h2>
           <p className="text-body-sm text-ink-600 mb-6 text-pretty">{t("lessonFlowHint")}</p>
           <Link href={`/lesson/${nextUnit.id}`}>
-            <Button variant="accent" className="min-w-[12rem]">
-              {t("startLesson")}
-            </Button>
+            <Button variant="secondary">{t("startLesson")}</Button>
           </Link>
         </Card>
-      ) : (
-        <Card className="mb-8">
-          <h2 className="text-title-sm font-serif text-ink-950 mb-2">{t("allUnitsDone")}</h2>
-          <p className="text-body text-ink-600 mb-4">{t("allDoneBody")}</p>
-          <Link href="/vocabulary">
-            <Button variant="accent">{t("reviewVocab")}</Button>
-          </Link>
-        </Card>
-      )}
-
-      <Card className="mb-6">
-        <h3 className="text-title-sm font-serif text-ink-950 mb-2">{t("academyCardTitle")}</h3>
-        <p className="text-body-sm text-ink-600 mb-4 text-pretty">{t("academyCardBody")}</p>
-        <Link href="/academy">
-          <Button variant="secondary">{t("viewAcademy")}</Button>
-        </Link>
-      </Card>
+      ) : null}
 
       {dueCount > 0 && (
         <Card className="mb-6">
@@ -167,14 +155,12 @@ export default function DashboardPage() {
       )}
 
       <div className="flex flex-wrap gap-3 mb-8">
+        <Link href="/academic"><Button variant="secondary" size="sm">{t("viewAcademic")}</Button></Link>
         <Link href="/academy"><Button variant="secondary" size="sm">{t("viewAcademy")}</Button></Link>
-        <Link href="/progress"><Button variant="secondary" size="sm">{t("viewProgress")}</Button></Link>
-        <Link href="/vocabulary"><Button variant="secondary" size="sm">{t("viewVocab")}</Button></Link>
         <Link href="/grammar"><Button variant="secondary" size="sm">{t("viewGrammar")}</Button></Link>
-        <Link href="/writing"><Button variant="secondary" size="sm">{t("viewWriting")}</Button></Link>
+        <Link href="/vocabulary"><Button variant="secondary" size="sm">{t("viewVocab")}</Button></Link>
+        <Link href="/progress"><Button variant="secondary" size="sm">{t("viewProgress")}</Button></Link>
         <Link href="/tutor"><Button variant="secondary" size="sm">{t("viewTutor")}</Button></Link>
-        <Link href="/achievements"><Button variant="secondary" size="sm">{t("viewAchievements")}</Button></Link>
-        <Link href="/resources"><Button variant="secondary" size="sm">{t("viewResources")}</Button></Link>
       </div>
 
       <div className="pt-8 border-t border-ink-100">
