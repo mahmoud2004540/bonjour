@@ -173,12 +173,6 @@ export default function PathPage() {
                               </Button>
                             </Link>
                           )}
-
-                          {!locked && !done && !isCurrent && (
-                            <p className="text-caption text-ink-400 mt-1">
-                              {t("afterCurrent")}
-                            </p>
-                          )}
                         </div>
                       );
                     })}
@@ -189,6 +183,19 @@ export default function PathPage() {
                   <p className="text-center text-body-sm text-success-700 mt-2 pt-4 border-t border-success-100">
                     {t("levelCompleteNext", { next: nextLevel })}
                   </p>
+                )}
+
+                {levelDone && !nextLevel && (
+                  <div className="text-center mt-4 pt-4 border-t border-success-100">
+                    <p className="text-body-sm text-success-700 mb-3">
+                      {t("exam")}
+                    </p>
+                    <Link href="/exam">
+                      <Button variant="accent" size="sm">
+                        {t("exam")}
+                      </Button>
+                    </Link>
+                  </div>
                 )}
               </div>
 
@@ -203,9 +210,14 @@ export default function PathPage() {
       </div>
 
       <div className="mt-12 text-center space-y-3">
-        <Link href="/teacher">
-          <Button variant="secondary">{t("teacher")}</Button>
+        <Link href="/exam">
+          <Button variant="accent">{t("exam")}</Button>
         </Link>
+        <div>
+          <Link href="/teacher">
+            <Button variant="secondary">{t("teacher")}</Button>
+          </Link>
+        </div>
         <div>
           <Link
             href="/dashboard"
