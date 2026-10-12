@@ -19,7 +19,23 @@ export default function TeacherHubPage() {
       <p className="text-overline text-accent-700 mb-2">{t("eyebrow")}</p>
       <h1 className="text-title font-serif text-ink-950 mb-3">{t("title")}</h1>
       <p className="text-body text-ink-600 mb-2 text-pretty max-w-2xl">{t("subtitle")}</p>
-      <p className="text-body-sm text-ink-500 mb-10 text-pretty max-w-2xl">{t("coachNote")}</p>
+      <p className="text-body-sm text-ink-500 mb-6 text-pretty max-w-2xl">{t("coachNote")}</p>
+
+      <Card className="mb-8 border-accent-200">
+        <h2 className="text-title-sm font-serif mb-2">
+          {locale === "ar" ? "نطق تقريبي (مرحلة B)" : "Pronunciation (Phase B)"}
+        </h2>
+        <p className="text-body-sm text-ink-600 mb-4 text-pretty">
+          {locale === "ar"
+            ? "سجّل صوتك في المتصفح → مقارنة تلقائية بالنص الهدف. مش درجة DELF رسمية."
+            : "Speak in the browser → automatic text match. Not an official DELF score."}
+        </p>
+        <Link href="/speech">
+          <Button variant="accent" size="sm">
+            {locale === "ar" ? "افتح تمرين النطق" : "Open speech practice"}
+          </Button>
+        </Link>
+      </Card>
 
       <div className="grid sm:grid-cols-2 gap-4 mb-12">
         {TRACKS.map((track) => (
