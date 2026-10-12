@@ -7,13 +7,26 @@ import { EXTRA_UNITS } from "./units-extra";
 import { DAILY_LIFE_UNITS } from "./units-daily-life";
 import { enrichUnit } from "./enrich";
 
-/** Deep A1 overrides base A1 when same id */
+const LEVEL_RANK: Record<string, number> = {
+  A1: 1,
+  A2: 2,
+  B1: 3,
+  B2: 4,
+  C1: 5,
+  C2: 6,
+};
+
+/** Deep A1 overrides base A1 when same id; sort level → order */
 function mergeById(units: LessonUnit[]): LessonUnit[] {
   const map = new Map<string, LessonUnit>();
   for (const u of units) {
     map.set(u.id, u);
   }
-  return Array.from(map.values()).sort((a, b) => a.order - b.order);
+  return Array.from(map.values()).sort((a, b) => {
+    const lr = (LEVEL_RANK[a.level] ?? 99) - (LEVEL_RANK[b.level] ?? 99);
+    if (lr !== 0) return lr;
+    return a.order - b.order;
+  });
 }
 
 const RAW_UNITS: LessonUnit[] = mergeById([
@@ -25,6 +38,8 @@ const RAW_UNITS: LessonUnit[] = mergeById([
 ]);
 
 export const ALL_UNITS: LessonUnit[] = RAW_UNITS.map(enrichUnit);
+
+export const LEVEL_SEQUENCE = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
 
 export function getUnitById(id: string): LessonUnit | undefined {
   return ALL_UNITS.find((u) => u.id === id);
@@ -45,6 +60,7 @@ export function isUnitComplete(
   return unit.completesGoals.every((g) => profile.completedGoals.includes(g));
 }
 
+/** First incomplete unit in strict sequence */
 export function getNextUnit(profile: LearnerProfile): LessonUnit | null {
   for (const unit of ALL_UNITS) {
     if (!isUnitComplete(unit, profile)) return unit;
@@ -52,8 +68,38 @@ export function getNextUnit(profile: LearnerProfile): LessonUnit | null {
   return null;
 }
 
+/** Unit that follows this one in the curriculum chain */
+export function getUnitAfter(unitId: string): LessonUnit | null {
+  const i = ALL_UNITS.findIndex((u) => u.id === unitId);
+  if (i < 0 || i >= ALL_UNITS.length - 1) return null;
+  return ALL_UNITS[i + 1];
+}
+
 export function getUnitsByLevel(level: string): LessonUnit[] {
   return ALL_UNITS.filter((u) => u.level === level);
+}
+
+/** Level is unlocked when previous level is fully complete (A1 always open) */
+export function isLevelUnlocked(
+  level: string,
+  profile: LearnerProfile
+): boolean {
+  const idx = LEVEL_SEQUENCE.indexOf(level as (typeof LEVEL_SEQUENCE)[number]);
+  if (idx <= 0) return true;
+  const prev = LEVEL_SEQUENCE[idx - 1];
+  return getUnitsByLevel(prev).every((u) => isUnitComplete(u, profile));
+}
+
+export function isUnitAccessible(
+  unit: LessonUnit,
+  profile: LearnerProfile
+): boolean {
+  if (!isLevelUnlocked(unit.level, profile)) return false;
+  const next = getNextUnit(profile);
+  if (!next) return true; // all done
+  const nextIdx = ALL_UNITS.findIndex((u) => u.id === next.id);
+  const thisIdx = ALL_UNITS.findIndex((u) => u.id === unit.id);
+  return thisIdx <= nextIdx;
 }
 
 export function getCurriculumStats() {

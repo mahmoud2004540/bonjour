@@ -5,18 +5,17 @@ import { useTranslations, useLocale } from "next-intl";
 import { useRouter, Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import {
-  getAllUnits,
+  LEVEL_SEQUENCE,
   getNextUnit,
+  getUnitsByLevel,
+  isLevelUnlocked,
+  isUnitAccessible,
   isUnitComplete,
 } from "@/domain/lessons/registry";
 import { getStoredProfile } from "@/application/learner-store";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
-/**
- * Learning path — Duolingo-like progression map,
- * Bonjour visual identity (warm, not green clone).
- */
 export default function PathPage() {
   const t = useTranslations("path");
   const locale = useLocale() as Locale;
@@ -40,95 +39,178 @@ export default function PathPage() {
     );
   }
 
-  const units = getAllUnits();
   const next = getNextUnit(profile);
-  let locked = false;
 
   return (
-    <div className="max-w-md mx-auto px-6 py-12 md:py-16 scene-3d">
-      <div className="text-center mb-10">
+    <div className="max-w-lg mx-auto px-5 py-12 md:py-16 scene-3d">
+      <div className="text-center mb-12">
         <p className="text-overline text-accent-700 mb-2">{t("eyebrow")}</p>
         <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
-        <p className="text-body-sm text-ink-500 text-pretty">{t("subtitle")}</p>
-        <div className="mt-4 flex justify-center gap-4 text-caption text-ink-500">
-          <span>✦ {profile.xp ?? 0} XP</span>
-          <span>🔥 {profile.streakDays ?? 0}</span>
+        <p className="text-body-sm text-ink-500 text-pretty max-w-sm mx-auto">
+          {t("subtitle")}
+        </p>
+        <p className="text-caption text-ink-400 mt-3">{t("chainHint")}</p>
+        <div className="mt-4 flex justify-center gap-5 text-caption text-ink-600">
+          <span className="px-3 py-1 rounded-full bg-white shadow-sm border border-ink-100">
+            ✦ {profile.xp ?? 0} XP
+          </span>
+          <span className="px-3 py-1 rounded-full bg-white shadow-sm border border-ink-100">
+            🔥 {profile.streakDays ?? 0}
+          </span>
         </div>
       </div>
 
-      <div className="relative flex flex-col items-center gap-0">
-        {/* vertical line */}
-        <div
-          className="absolute top-4 bottom-4 w-1 rounded-full bg-gradient-to-b from-accent-400 via-ink-200 to-ink-100"
-          style={{ left: "50%", transform: "translateX(-50%)", zIndex: 0 }}
-          aria-hidden
-        />
+      <div className="space-y-10">
+        {LEVEL_SEQUENCE.map((level, levelIdx) => {
+          const units = getUnitsByLevel(level);
+          if (units.length === 0) return null;
 
-        {units.map((u, i) => {
-          const done = isUnitComplete(u, profile);
-          const isCurrent = next?.id === u.id;
-          if (!done && !isCurrent && next && units.findIndex((x) => x.id === next.id) < i) {
-            locked = true;
-          }
-          if (done) locked = false;
-
-          const state = done ? "done" : isCurrent ? "current" : locked ? "locked" : "open";
+          const unlocked = isLevelUnlocked(level, profile);
+          const doneCount = units.filter((u) => isUnitComplete(u, profile)).length;
+          const levelDone = doneCount === units.length;
+          const nextLevel = LEVEL_SEQUENCE[levelIdx + 1];
 
           return (
-            <div
-              key={u.id}
-              className="relative z-10 flex flex-col items-center mb-6 w-full"
-              style={{
-                marginInlineStart: i % 2 === 0 ? "0" : "12%",
-                marginInlineEnd: i % 2 === 0 ? "12%" : "0",
-              }}
-            >
-              {state === "locked" ? (
-                <div
-                  className="w-16 h-16 rounded-full bg-ink-100 border-4 border-ink-200 flex items-center justify-center text-ink-300 shadow-inner"
-                  title={t("locked")}
-                >
-                  🔒
-                </div>
-              ) : (
-                <Link
-                  href={`/lesson/${u.id}`}
-                  className={`w-16 h-16 rounded-full flex items-center justify-center text-lg font-medium transition-transform duration-300 hover:scale-110 ${
-                    state === "done"
-                      ? "bg-success-600 text-white shadow-lg border-4 border-success-400"
-                      : state === "current"
-                        ? "bg-accent-600 text-white shadow-[0_8px_24px_rgba(224,106,84,0.45)] border-4 border-accent-300 ring-4 ring-accent-100 animate-pulse"
-                        : "bg-white text-ink-800 border-4 border-ink-200 shadow-md"
-                  }`}
-                >
-                  {state === "done" ? "✓" : u.level.slice(0, 2)}
-                </Link>
-              )}
-              <p
-                className={`mt-2 text-center text-body-sm max-w-[10rem] ${
-                  state === "locked" ? "text-ink-300" : "text-ink-800"
+            <section key={level} className="relative">
+              <div
+                className={`level-block-3d rounded-3xl border bg-white/90 p-5 md:p-6 ${
+                  unlocked
+                    ? levelDone
+                      ? "border-success-200"
+                      : "border-accent-200"
+                    : "border-ink-100 opacity-70"
                 }`}
               >
-                {u.title[locale]}
-              </p>
-              {state === "current" && (
-                <Link href={`/lesson/${u.id}`} className="mt-2">
-                  <Button variant="accent" size="sm">
-                    {t("start")}
-                  </Button>
-                </Link>
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <p className="text-overline text-accent-700">
+                      {t("levelLabel", { level })}
+                    </p>
+                    <p className="text-body-sm text-ink-500">
+                      {unlocked
+                        ? t("levelProgress", {
+                            done: doneCount,
+                            total: units.length,
+                          })
+                        : t("levelLocked")}
+                    </p>
+                  </div>
+                  <div
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center font-serif text-body-lg ${
+                      levelDone
+                        ? "bg-success-600 text-white node-3d-done"
+                        : unlocked
+                          ? "bg-accent-600 text-white node-3d-current"
+                          : "bg-ink-100 text-ink-400 node-3d-locked"
+                    }`}
+                  >
+                    {levelDone ? "✓" : level}
+                  </div>
+                </div>
+
+                {!unlocked ? (
+                  <p className="text-body-sm text-ink-400 text-center py-6">
+                    {t("finishPrevLevel", {
+                      level: LEVEL_SEQUENCE[levelIdx - 1] ?? "A1",
+                    })}
+                  </p>
+                ) : (
+                  <div className="relative flex flex-col items-center">
+                    <div
+                      className="path-rail absolute top-2 bottom-2 w-1.5 rounded-full left-1/2 -translate-x-1/2 z-0"
+                      aria-hidden
+                    />
+
+                    {units.map((u, i) => {
+                      const done = isUnitComplete(u, profile);
+                      const isCurrent = next?.id === u.id;
+                      const accessible = isUnitAccessible(u, profile);
+                      const locked = !accessible && !done;
+
+                      return (
+                        <div
+                          key={u.id}
+                          className="relative z-10 flex flex-col items-center mb-7 w-full"
+                          style={{
+                            marginInlineStart: i % 2 === 0 ? "0" : "14%",
+                            marginInlineEnd: i % 2 === 0 ? "14%" : "0",
+                          }}
+                        >
+                          {locked ? (
+                            <div
+                              className="node-3d node-3d-locked w-[4.25rem] h-[4.25rem] rounded-full bg-ink-100 border-[5px] border-ink-200 flex items-center justify-center text-ink-300 text-xl"
+                              title={t("locked")}
+                            >
+                              🔒
+                            </div>
+                          ) : (
+                            <Link
+                              href={`/lesson/${u.id}`}
+                              className={`node-3d w-[4.25rem] h-[4.25rem] rounded-full flex items-center justify-center text-base font-semibold border-[5px] ${
+                                done
+                                  ? "bg-success-600 text-white border-success-400 node-3d-done"
+                                  : isCurrent
+                                    ? "bg-accent-600 text-white border-accent-300 node-3d-current"
+                                    : "bg-white text-ink-800 border-ink-200 shadow-md"
+                              }`}
+                            >
+                              {done ? "✓" : i + 1}
+                            </Link>
+                          )}
+
+                          <p
+                            className={`mt-2.5 text-center text-body-sm max-w-[11rem] font-medium ${
+                              locked ? "text-ink-300" : "text-ink-800"
+                            }`}
+                          >
+                            {u.title[locale]}
+                          </p>
+
+                          {isCurrent && (
+                            <Link href={`/lesson/${u.id}`} className="mt-2">
+                              <Button variant="accent" size="sm">
+                                {t("start")}
+                              </Button>
+                            </Link>
+                          )}
+
+                          {!locked && !done && !isCurrent && (
+                            <p className="text-caption text-ink-400 mt-1">
+                              {t("afterCurrent")}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {levelDone && nextLevel && (
+                  <p className="text-center text-body-sm text-success-700 mt-2 pt-4 border-t border-success-100">
+                    {t("levelCompleteNext", { next: nextLevel })}
+                  </p>
+                )}
+              </div>
+
+              {levelIdx < LEVEL_SEQUENCE.length - 1 && (
+                <div className="flex justify-center my-3" aria-hidden>
+                  <div className="w-0.5 h-8 bg-gradient-to-b from-accent-400 to-ink-200 rounded-full" />
+                </div>
               )}
-            </div>
+            </section>
           );
         })}
       </div>
 
-      <div className="mt-10 text-center space-y-3">
-        <Link href="/academic">
-          <Button variant="secondary">{t("academic")}</Button>
+      <div className="mt-12 text-center space-y-3">
+        <Link href="/teacher">
+          <Button variant="secondary">{t("teacher")}</Button>
         </Link>
         <div>
-          <Link href="/dashboard" className="text-caption text-ink-400 hover:text-ink-600">
+          <Link
+            href="/dashboard"
+            className="text-caption text-ink-400 hover:text-ink-600"
+          >
             {t("dashboard")}
           </Link>
         </div>
