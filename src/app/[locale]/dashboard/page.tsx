@@ -77,17 +77,23 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      <Card className="mb-6 border-accent-200 bg-gradient-to-br from-accent-50/50 to-white">
+      <Card className="mb-4 border-accent-200 bg-gradient-to-br from-accent-50/50 to-white">
         <h3 className="text-title-sm font-serif text-ink-950 mb-2">
           {t("academyCardTitle")}
         </h3>
-        <p className="text-body-sm text-ink-600 mb-4 text-pretty">
-          {t("academyCardBody")}
-        </p>
+        <p className="text-body-sm text-ink-600 mb-4">{t("academyCardBody")}</p>
         <Link href="/path">
-          <Button variant="accent" className="w-full sm:w-auto h-12">
-            {t("viewPath")}
-          </Button>
+          <Button variant="accent">{t("viewPath")}</Button>
+        </Link>
+      </Card>
+
+      <Card className="mb-6 layer-stack">
+        <h3 className="text-title-sm font-serif text-ink-950 mb-2">
+          {t("teacherCardTitle")}
+        </h3>
+        <p className="text-body-sm text-ink-600 mb-4">{t("teacherCardBody")}</p>
+        <Link href="/teacher">
+          <Button variant="secondary">{t("viewTeacher")}</Button>
         </Link>
       </Card>
 
@@ -117,14 +123,14 @@ export default function DashboardPage() {
         <Link href="/path">
           <Button variant="secondary" size="sm">{t("viewPath")}</Button>
         </Link>
+        <Link href="/teacher">
+          <Button variant="secondary" size="sm">{t("viewTeacher")}</Button>
+        </Link>
         <Link href="/academic">
           <Button variant="secondary" size="sm">{t("viewAcademic")}</Button>
         </Link>
         <Link href="/vocabulary">
           <Button variant="secondary" size="sm">{t("viewVocab")}</Button>
-        </Link>
-        <Link href="/grammar">
-          <Button variant="secondary" size="sm">{t("viewGrammar")}</Button>
         </Link>
       </div>
 
