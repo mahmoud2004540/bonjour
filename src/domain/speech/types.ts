@@ -35,8 +35,17 @@ export interface SpeechAttempt {
   targetId: string;
   /** null until real recording infrastructure exists */
   recordingPath: string | null;
-  /** null until real evaluation exists — never invent scores */
-  evaluationStatus: "not_evaluated" | "self_reviewed" | "system_evaluated" | "human_reviewed";
+  /**
+   * Phase B: system_evaluated = browser STT + text match only.
+   * Never invent formal accent grades.
+   */
+  evaluationStatus:
+    | "not_evaluated"
+    | "self_reviewed"
+    | "system_evaluated"
+    | "human_reviewed";
+  /** Rough word-overlap 0–100 when system_evaluated */
+  approximateWordScore?: number;
   selfReviewNotes?: string;
   createdAt: string;
 }
@@ -47,8 +56,15 @@ export interface SpeechAttempt {
  */
 export const SPEECH_CAPABILITIES = {
   textTargets: true,
-  audioPlayback: false, // no real assets yet
+  /** Browser TTS playback — not studio human audio */
+  audioPlayback: true,
+  /** Phase B uses live recognition, not stored audio files */
   recording: false,
-  automaticEvaluation: false,
+  /**
+   * Phase B: Web Speech API transcript vs target text.
+   * Approximate only — not DELF oral scoring.
+   */
+  automaticEvaluation: true,
+  automaticEvaluationMode: "browser_stt_text_match" as const,
   humanReview: false,
 } as const;
