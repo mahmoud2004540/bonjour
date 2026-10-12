@@ -18,7 +18,6 @@ import {
   getScenarioById,
   getPublishedScenarios,
 } from "@/domain/curriculum/registry";
-import { getLanguageMeta } from "@/domain/languages";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -56,15 +55,13 @@ export default function DashboardPage() {
     );
   }
 
-  const target = profile.preferences.targetLanguage ?? "fr";
-  const langMeta = getLanguageMeta(target);
   const primary = getPrimaryNextAction(profile);
   const allRecs = getNextRecommendations(profile);
   const primaryGoal = primary ? getGoalById(primary.goalId) : null;
   const primaryScenario = primaryGoal
     ? getScenarioById(primaryGoal.scenarioId)
     : null;
-  const scenarios = getPublishedScenarios(target);
+  const scenarios = getPublishedScenarios("fr");
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
@@ -73,13 +70,7 @@ export default function DashboardPage() {
           {t("greeting", { name: profile.displayName })}
         </p>
         <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
-        {langMeta && (
-          <p className="text-body-sm text-ink-500 mb-2">
-            {langMeta.name[locale]}
-            {" · "}
-            {langMeta.pathDepth === "full" ? t("pathFull") : t("pathStarter")}
-          </p>
-        )}
+        <p className="text-body-sm text-ink-500 mb-2">{t("learningFrench")}</p>
         <p className="text-body-sm text-ink-500 text-pretty">{t("encourage")}</p>
       </div>
 

@@ -1,5 +1,6 @@
 /**
- * Deterministic recommendation — filters by target language when set.
+ * Deterministic recommendation — French-first product.
+ * Always filters to the learner's target language (default fr).
  */
 
 import type { LearnerProfile, Recommendation, Locale, TargetLanguage } from "../types";
@@ -9,7 +10,7 @@ const SITUATION_TO_SCENARIOS: Record<string, string[]> = {
   shopping: ["a1-courses", "a1-au-cafe", "a2-restaurant"],
   healthcare: ["a1-sante", "a2-rdv"],
   housing: ["a1-logement", "a2-hotel"],
-  meeting: ["a1-faire-connaissance", "a2-telephone", "en-a1-intro"],
+  meeting: ["a1-faire-connaissance", "a2-telephone"],
   travel: ["a1-transport", "a2-hotel", "a2-restaurant"],
   work: ["b1-travail", "a2-telephone", "a2-rdv", "b2-opinion", "c1-argument", "c2-nuance"],
   daily: ["a1-au-cafe", "a1-courses", "a1-transport"],
@@ -31,7 +32,7 @@ function preferenceBoost(profile: LearnerProfile, scenarioId: string): number {
   return boost;
 }
 
-function goalLang(goal: { targetLanguage?: TargetLanguage; scenarioId: string }): TargetLanguage {
+function goalLang(goal: { targetLanguage?: TargetLanguage }): TargetLanguage {
   return goal.targetLanguage ?? "fr";
 }
 
@@ -40,7 +41,8 @@ export function getNextRecommendations(
 ): Recommendation[] {
   const recommendations: Recommendation[] = [];
   const goals = getAllGoals();
-  const target = profile.preferences.targetLanguage ?? "fr";
+  /** Current product: force French learning path */
+  const target: TargetLanguage = "fr";
 
   for (const goal of goals) {
     if (goalLang(goal) !== target) continue;

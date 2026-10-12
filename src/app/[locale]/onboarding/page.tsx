@@ -11,7 +11,7 @@ import {
   startAsBeginner,
 } from "@/application/learner-store";
 import { trackEvent } from "@/application/local-events";
-import { TARGET_LANGUAGES } from "@/domain/languages";
+import { getSelectableLanguages } from "@/domain/languages";
 import type { Locale } from "@/i18n/config";
 import type { TargetLanguage } from "@/domain/types";
 
@@ -43,10 +43,13 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [targetLanguage, setTargetLanguage] = useState<TargetLanguage>("fr");
+  /** Product focus: French only for now */
+  const targetLanguage: TargetLanguage = "fr";
   const [dailyMinutes, setDailyMinutes] = useState(15);
   const [objectives, setObjectives] = useState<string[]>([]);
   const [situations, setSituations] = useState<string[]>([]);
+
+  const selectable = getSelectableLanguages();
 
   function toggle(list: string[], id: string, setter: (v: string[]) => void) {
     setter(list.includes(id) ? list.filter((x) => x !== id) : [...list, id]);
@@ -59,10 +62,10 @@ export default function OnboardingPage() {
       situations,
       availability: `${dailyMinutes}m`,
       preferredStyle: "",
-      targetLanguage,
+      targetLanguage: "fr",
       dailyMinutes,
     });
-    trackEvent("onboarding_complete", { lang: targetLanguage });
+    trackEvent("onboarding_complete", { lang: "fr" });
   }
 
   function handlePlacement() {
@@ -115,24 +118,17 @@ export default function OnboardingPage() {
         {step === 1 && (
           <div className="space-y-5">
             <div className="space-y-2.5">
-              {TARGET_LANGUAGES.map((lang) => (
-                <button
+              {selectable.map((lang) => (
+                <div
                   key={lang.code}
-                  type="button"
-                  onClick={() => setTargetLanguage(lang.code)}
-                  className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all ${
-                    targetLanguage === lang.code
-                      ? "border-accent-500 bg-accent-50 text-ink-950"
-                      : "border-ink-200 text-ink-700"
-                  }`}
+                  className="w-full text-start px-4 py-3.5 rounded-xl border border-accent-500 bg-accent-50 text-ink-950"
                 >
                   <span className="font-medium">{lang.name[locale]}</span>
-                  <span className="text-caption text-ink-400 ms-2">
-                    {lang.pathDepth === "full" ? t("pathFull") : t("pathStarter")}
-                  </span>
-                </button>
+                  <span className="text-caption text-ink-500 ms-2">{t("pathFull")}</span>
+                </div>
               ))}
             </div>
+            <p className="text-caption text-ink-400 text-pretty">{t("frenchOnlyNote")}</p>
             <div>
               <p className="text-sm font-medium text-ink-700 mb-2">{t("dailyMinutes")}</p>
               <div className="flex flex-wrap gap-2">
