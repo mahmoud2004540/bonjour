@@ -1,0 +1,12 @@
+{
+  "_comment": "Merged into locale files via academy keys — reference only",
+  "academy": {
+    "eyebrow": { "ar": "منهج جامعي داخل الموقع", "en": "University path on site", "fr": "Parcours universitaire sur le site" },
+    "title": { "ar": "أكاديمية الفرنسية", "en": "French Academy", "fr": "Académie de français" },
+    "subtitle": { "ar": "قواعد، صوتيات، كتابة، شفهي، حضارة — كله على بونجور.", "en": "Grammar, phonetics, writing, speaking, culture — all on Bonjour.", "fr": "Grammaire, phonétique, écriture, oral, culture — tout sur Bonjour." },
+    "onsiteNote": { "ar": "المحتوى داخل الموقع. اربط كل وحدة درسًا كاملًا من اللوحة.", "en": "Content is on site. Open full lesson units from the dashboard.", "fr": "Contenu sur le site. Ouvrez les unités depuis le tableau de bord." },
+    "openUnit": { "ar": "افتح درس الوحدة", "en": "Open unit lesson", "fr": "Ouvrir l'unité" },
+    "toLessons": { "ar": "إلى الدروس", "en": "To lessons", "fr": "Vers les leçons" },
+    "toGrammar": { "ar": "مرجع القواعد", "en": "Grammar reference", "fr": "Référence grammaire" }
+  }
+}

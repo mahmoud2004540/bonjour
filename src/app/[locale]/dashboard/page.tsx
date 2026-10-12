@@ -24,7 +24,6 @@ export default function DashboardPage() {
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [dueCount, setDueCount] = useState(0);
-  const [daily, setDaily] = useState({ minutes: 0, goal: 15 });
 
   useEffect(() => {
     const p = getStoredProfile();
@@ -38,8 +37,6 @@ export default function DashboardPage() {
     }
     setProfile(p);
     setDueCount(getDueVocab(50).length);
-    const d = getDailyProgress();
-    setDaily({ minutes: d.minutes, goal: d.goal });
     trackEvent("dashboard_view");
   }, [router]);
 
@@ -57,7 +54,7 @@ export default function DashboardPage() {
   const doneCount = allUnits.filter((u) => isUnitComplete(u, profile)).length;
 
   return (
-    <div className="max-w-content mx-auto px-6 py-16 md:py-20">
+    <div className="max-w-content mx-auto px-6 py-16 md:py-20 scene-3d">
       <div className="mb-10">
         <p className="text-caption text-ink-400 mb-1">
           {t("greeting", { name: profile.displayName })}
@@ -108,6 +105,14 @@ export default function DashboardPage() {
           </Link>
         </Card>
       )}
+
+      <Card className="mb-6">
+        <h3 className="text-title-sm font-serif text-ink-950 mb-2">{t("academyCardTitle")}</h3>
+        <p className="text-body-sm text-ink-600 mb-4 text-pretty">{t("academyCardBody")}</p>
+        <Link href="/academy">
+          <Button variant="secondary">{t("viewAcademy")}</Button>
+        </Link>
+      </Card>
 
       {dueCount > 0 && (
         <Card className="mb-6">
@@ -162,6 +167,7 @@ export default function DashboardPage() {
       )}
 
       <div className="flex flex-wrap gap-3 mb-8">
+        <Link href="/academy"><Button variant="secondary" size="sm">{t("viewAcademy")}</Button></Link>
         <Link href="/progress"><Button variant="secondary" size="sm">{t("viewProgress")}</Button></Link>
         <Link href="/vocabulary"><Button variant="secondary" size="sm">{t("viewVocab")}</Button></Link>
         <Link href="/grammar"><Button variant="secondary" size="sm">{t("viewGrammar")}</Button></Link>
