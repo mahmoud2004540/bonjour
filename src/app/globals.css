@@ -22,12 +22,13 @@
     font-family: var(--font-sans), system-ui, sans-serif;
     font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
     background-image:
-      radial-gradient(ellipse 120% 80% at 100% -20%, rgba(224, 106, 84, 0.06), transparent 50%),
-      radial-gradient(ellipse 80% 60% at -10% 40%, rgba(36, 34, 29, 0.03), transparent 45%);
+      radial-gradient(ellipse 120% 80% at 100% -20%, rgba(224, 106, 84, 0.08), transparent 50%),
+      radial-gradient(ellipse 80% 60% at -10% 40%, rgba(36, 34, 29, 0.04), transparent 45%),
+      linear-gradient(180deg, rgba(255,255,255,0.4) 0%, transparent 30%);
     background-attachment: fixed;
+    perspective: 1200px;
   }
 
-  /* Arabic: prioritize IBM Plex + Noto Naskh */
   [dir="rtl"] body {
     font-family: var(--font-arabic-sans), var(--font-sans), system-ui, sans-serif;
     letter-spacing: 0;
@@ -40,7 +41,6 @@
     font-family: var(--font-arabic-serif), var(--font-serif), serif;
   }
 
-  /* Latin serif utility still works under LTR */
   [dir="ltr"] .font-serif {
     font-family: var(--font-serif), Georgia, serif;
     font-optical-sizing: auto;
@@ -63,6 +63,9 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+    .card-3d:hover {
+      transform: none !important;
+    }
   }
 }
 
@@ -71,7 +74,7 @@
     @apply inline-flex items-center justify-center h-11 px-6 rounded-xl
            bg-ink-950 text-surface font-medium text-body
            transition-all duration-200 ease-out-expo
-           hover:bg-ink-800
+           hover:bg-ink-800 hover:-translate-y-0.5 hover:shadow-lg
            focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2
            disabled:opacity-50 disabled:pointer-events-none;
   }
@@ -80,7 +83,7 @@
     @apply inline-flex items-center justify-center h-11 px-6 rounded-xl
            bg-accent-600 text-white font-medium text-body
            transition-all duration-200 ease-out-expo
-           hover:bg-accent-700
+           hover:bg-accent-700 hover:-translate-y-0.5 hover:shadow-lg
            focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2
            disabled:opacity-50 disabled:pointer-events-none;
   }
@@ -89,7 +92,7 @@
     @apply inline-flex items-center justify-center h-11 px-6 rounded-xl
            border border-ink-200 text-ink-800 font-medium text-body
            transition-all duration-200 ease-out-expo
-           hover:bg-ink-50 hover:border-ink-300
+           hover:bg-ink-50 hover:border-ink-300 hover:-translate-y-0.5
            focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2
            disabled:opacity-50 disabled:pointer-events-none;
   }
@@ -98,11 +101,61 @@
     @apply w-full h-11 px-4 rounded-xl border border-ink-200 bg-surface-elevated
            text-body text-ink-950 placeholder:text-ink-400
            transition-all duration-200
-           focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent;
+           focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent
+           shadow-sm;
   }
 
+  /* 3D elevated card */
   .card {
-    @apply bg-surface-elevated border border-ink-100 rounded-2xl shadow-card p-6;
+    @apply bg-surface-elevated border border-ink-100 rounded-2xl p-6;
+    box-shadow:
+      0 1px 2px rgba(36, 34, 29, 0.04),
+      0 8px 24px rgba(36, 34, 29, 0.06),
+      0 24px 48px rgba(36, 34, 29, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transform-style: preserve-3d;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+  }
+
+  .card-3d:hover {
+    transform: translateY(-6px) rotateX(2deg) rotateY(-1deg);
+    box-shadow:
+      0 4px 8px rgba(36, 34, 29, 0.06),
+      0 16px 40px rgba(36, 34, 29, 0.1),
+      0 32px 64px rgba(224, 106, 84, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .scene-3d {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .float-3d {
+    animation: float3d 6s ease-in-out infinite;
+  }
+
+  @keyframes float3d {
+    0%, 100% { transform: translateY(0) rotateX(0deg); }
+    50% { transform: translateY(-10px) rotateX(1deg); }
+  }
+
+  .layer-stack {
+    position: relative;
+  }
+
+  .layer-stack::before {
+    content: "";
+    position: absolute;
+    inset: 8px -6px -8px 6px;
+    border-radius: 1.25rem;
+    background: rgba(36, 34, 29, 0.04);
+    z-index: -1;
+    transform: translateZ(-20px);
   }
 }
 
