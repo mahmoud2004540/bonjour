@@ -18,6 +18,7 @@ import {
   getScenarioById,
   getPublishedScenarios,
 } from "@/domain/curriculum/registry";
+import { getFirstUnit } from "@/domain/lessons/fr-a1-intro-unit";
 import type { LearnerProfile } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -55,6 +56,11 @@ export default function DashboardPage() {
     );
   }
 
+  const unit = getFirstUnit();
+  const unitDone = unit.completesGoals.every((g) =>
+    profile.completedGoals.includes(g)
+  );
+
   const primary = getPrimaryNextAction(profile);
   const allRecs = getNextRecommendations(profile);
   const primaryGoal = primary ? getGoalById(primary.goalId) : null;
@@ -91,31 +97,45 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
-        <p className="text-overline text-accent-700 uppercase mb-4">{t("nextAction")}</p>
-        {primaryGoal ? (
-          <>
-            <h2 className="text-title-sm font-serif text-ink-950 mb-2">
-              {primaryGoal.title[locale]}
-            </h2>
-            <p className="text-body text-ink-600 mb-1">{primaryGoal.canDoStatement[locale]}</p>
-            <p className="text-caption text-ink-400 mb-7">{primary?.reason[locale]}</p>
-            <Link href={`/learn/${primaryGoal.id}`}>
-              <Button variant="accent" className="min-w-[12rem]">
-                {t("continueLearning")}
-              </Button>
-            </Link>
-          </>
-        ) : (
-          <>
-            <h2 className="text-title-sm font-serif text-ink-950 mb-2">{t("allDone")}</h2>
-            <p className="text-body text-ink-600 mb-4">{t("allDoneBody")}</p>
-            <Link href="/vocabulary">
-              <Button variant="accent">{t("reviewVocab")}</Button>
-            </Link>
-          </>
-        )}
-      </Card>
+      {/* Classic unit flow CTA */}
+      {!unitDone && (
+        <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/50 to-surface-elevated">
+          <p className="text-overline text-accent-700 uppercase mb-3">{t("todayLesson")}</p>
+          <h2 className="text-title-sm font-serif text-ink-950 mb-2">
+            {unit.title[locale]}
+          </h2>
+          <p className="text-body-sm text-ink-600 mb-6 text-pretty">{t("lessonFlowHint")}</p>
+          <Link href={`/lesson/${unit.id}`}>
+            <Button variant="accent" className="min-w-[12rem]">
+              {t("startLesson")}
+            </Button>
+          </Link>
+        </Card>
+      )}
+
+      {unitDone && primaryGoal && (
+        <Card className="mb-8 border-accent-200/80 bg-gradient-to-br from-accent-50/40 to-surface-elevated">
+          <p className="text-overline text-accent-700 uppercase mb-4">{t("nextAction")}</p>
+          <h2 className="text-title-sm font-serif text-ink-950 mb-2">
+            {primaryGoal.title[locale]}
+          </h2>
+          <p className="text-body text-ink-600 mb-1">{primaryGoal.canDoStatement[locale]}</p>
+          <p className="text-caption text-ink-400 mb-7">{primary?.reason[locale]}</p>
+          <Link href={`/learn/${primaryGoal.id}`}>
+            <Button variant="accent">{t("continueLearning")}</Button>
+          </Link>
+        </Card>
+      )}
+
+      {unitDone && !primaryGoal && (
+        <Card className="mb-8">
+          <h2 className="text-title-sm font-serif text-ink-950 mb-2">{t("allDone")}</h2>
+          <p className="text-body text-ink-600 mb-4">{t("allDoneBody")}</p>
+          <Link href="/vocabulary">
+            <Button variant="accent">{t("reviewVocab")}</Button>
+          </Link>
+        </Card>
+      )}
 
       {dueCount > 0 && (
         <Card className="mb-6">
@@ -126,11 +146,10 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      {primaryScenario && (
+      {primaryScenario && unitDone && (
         <Card className="mb-6">
           <h3 className="text-caption text-ink-400 mb-2">{t("currentScenario")}</h3>
           <p className="text-body-lg font-medium text-ink-950">{primaryScenario.title[locale]}</p>
-          <p className="text-body-sm text-ink-600 mt-1">{primaryScenario.description[locale]}</p>
         </Card>
       )}
 
@@ -163,11 +182,11 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      {allRecs.length > 1 && (
+      {allRecs.length > 1 && unitDone && (
         <Card className="mb-6">
           <h3 className="text-caption text-ink-400 mb-3">{t("upcoming")}</h3>
           <ul className="space-y-2.5">
-            {allRecs.slice(1, 6).map((rec) => {
+            {allRecs.slice(0, 5).map((rec) => {
               const g = getGoalById(rec.goalId);
               return g ? (
                 <li key={rec.goalId} className="text-body-sm text-ink-500">{g.title[locale]}</li>
