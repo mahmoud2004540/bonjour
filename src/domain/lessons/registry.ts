@@ -3,11 +3,13 @@ import type { LessonUnit } from "./types";
 import { A1_UNITS } from "./units-a1";
 import { A2_C2_UNITS } from "./units-a2-c2";
 import { EXTRA_UNITS } from "./units-extra";
+import { DAILY_LIFE_UNITS } from "./units-daily-life";
 
 export const ALL_UNITS: LessonUnit[] = [
   ...A1_UNITS,
   ...A2_C2_UNITS,
   ...EXTRA_UNITS,
+  ...DAILY_LIFE_UNITS,
 ].sort((a, b) => a.order - b.order);
 
 export function getUnitById(id: string): LessonUnit | undefined {
