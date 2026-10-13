@@ -1,4 +1,4 @@
-/** Level word banks = curated packs + high-frequency core coverage */
+/** Level word banks = curated packs + high-frequency cores (batch 1+2) */
 
 import {
   FREQ_A1,
@@ -7,6 +7,12 @@ import {
   FREQ_B2,
   freqToBank,
 } from "./freq-core";
+import {
+  FREQ2_A1,
+  FREQ2_A2,
+  FREQ2_B1,
+  FREQ2_B2,
+} from "./freq-batch2";
 
 export type BankWord = {
   term: string;
@@ -23,44 +29,26 @@ function dedupe(words: BankWord[]): BankWord[] {
   return Array.from(map.values());
 }
 
-const EXTRA_A1: BankWord[] = [
-  {
-    term: "bonjour",
-    meaning: { en: "hello", fr: "salutation", ar: "مرحبًا" },
-    example: "Bonjour !",
-  },
-  {
-    term: "s'il vous plaît",
-    meaning: { en: "please", fr: "politesse", ar: "من فضلك" },
-  },
-  {
-    term: "je voudrais",
-    meaning: { en: "I would like", fr: "demande", ar: "أود" },
-  },
-  {
-    term: "l'addition",
-    meaning: { en: "the bill", fr: "restaurant", ar: "الحساب" },
-  },
-  {
-    term: "tout droit",
-    meaning: { en: "straight ahead", fr: "direction", ar: "على طول" },
-  },
-  {
-    term: "quelle heure est-il ?",
-    meaning: { en: "what time is it?", fr: "heure", ar: "كم الساعة؟" },
-  },
-];
-
 export const A1_WORD_BANK: BankWord[] = dedupe([
-  ...EXTRA_A1,
   ...freqToBank(FREQ_A1),
+  ...freqToBank(FREQ2_A1),
 ]);
 
-export const A2_WORD_BANK: BankWord[] = dedupe(freqToBank(FREQ_A2));
-export const B1_WORD_BANK: BankWord[] = dedupe(freqToBank(FREQ_B1));
-export const B2_WORD_BANK: BankWord[] = dedupe(freqToBank(FREQ_B2));
+export const A2_WORD_BANK: BankWord[] = dedupe([
+  ...freqToBank(FREQ_A2),
+  ...freqToBank(FREQ2_A2),
+]);
 
-/** Approximate coverage counts for UI honesty */
+export const B1_WORD_BANK: BankWord[] = dedupe([
+  ...freqToBank(FREQ_B1),
+  ...freqToBank(FREQ2_B1),
+]);
+
+export const B2_WORD_BANK: BankWord[] = dedupe([
+  ...freqToBank(FREQ_B2),
+  ...freqToBank(FREQ2_B2),
+]);
+
 export const BANK_STATS = {
   A1: A1_WORD_BANK.length,
   A2: A2_WORD_BANK.length,
