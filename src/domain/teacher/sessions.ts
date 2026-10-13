@@ -3,6 +3,8 @@
  * All content hosted on-site.
  */
 
+import { EXTRA_VOCAB_SESSIONS } from "./vocab-sessions";
+
 export type TeacherTrack = "reading" | "writing" | "listening" | "vocab";
 
 export type TeacherSession = {
@@ -11,25 +13,21 @@ export type TeacherSession = {
   level: "A1" | "A2" | "B1" | "B2";
   order: number;
   title: { en: string; fr: string; ar: string };
-  /** Teacher intro line */
   coach: { en: string; fr: string; ar: string };
-  /** Main French text to read / listen */
   passage?: string;
-  /** Comprehension MCQ */
   questions?: {
     id: string;
     prompt: { en: string; fr: string; ar: string };
     options: { en: string[]; fr: string[]; ar: string[] };
     correctIndex: number;
   }[];
-  /** Writing prompt */
   writingPrompt?: { en: string; fr: string; ar: string };
   writingHints?: { en: string[]; fr: string[]; ar: string[] };
-  /** Vocab list to memorize */
   words?: { term: string; meaning: { en: string; fr: string; ar: string } }[];
 };
 
-export const TEACHER_SESSIONS: TeacherSession[] = [
+/** Core skill sessions (reading / writing / listening + small legacy vocab) */
+const CORE_SESSIONS: TeacherSession[] = [
   {
     id: "teach-a1-read-cafe",
     track: "reading",
@@ -81,12 +79,12 @@ export const TEACHER_SESSIONS: TeacherSession[] = [
         prompt: {
           en: "What else does she take today?",
           fr: "Que prend-elle aussi ?",
-          ar: "ماذا تأخذ أيضًا اليوم؟",
+          ar: "بتاخد إيه كمان النهاردة؟",
         },
         options: {
-          en: ["Tea", "A croissant", "Bread only", "Nothing"],
-          fr: ["Un thé", "Un croissant", "Du pain seulement", "Rien"],
-          ar: ["شاي", "كرواسون", "خبز فقط", "لا شيء"],
+          en: ["Tea", "A croissant", "Water only", "Nothing"],
+          fr: ["Thé", "Un croissant", "Eau seulement", "Rien"],
+          ar: ["شاي", "كرواسون", "ميه بس", "ولا حاجة"],
         },
         correctIndex: 1,
       },
@@ -103,38 +101,38 @@ export const TEACHER_SESSIONS: TeacherSession[] = [
       ar: "استماع: التحيات",
     },
     coach: {
-      en: "Listen several times, then answer.",
-      fr: "Écoutez plusieurs fois, puis répondez.",
-      ar: "اسمع أكتر من مرة، بعدين جاوب.",
+      en: "Use the play button, then answer.",
+      fr: "Écoutez, puis répondez.",
+      ar: "اسمع، بعدين جاوب.",
     },
     passage:
-      "Bonjour ! Je m'appelle Karim. Enchanté. Comment vous appellez-vous ? Je suis de Lyon. Au revoir et bonne journée !",
+      "Bonjour ! Je m'appelle Ahmed. Enchanté. Comment ça va ? Ça va bien, merci. Et vous ?",
     questions: [
       {
-        id: "q1",
+        id: "lq1",
         prompt: {
           en: "His name is…",
           fr: "Il s'appelle…",
           ar: "اسمه…",
         },
         options: {
-          en: ["Léa", "Karim", "Marc", "Paul"],
-          fr: ["Léa", "Karim", "Marc", "Paul"],
-          ar: ["Léa", "Karim", "Marc", "Paul"],
+          en: ["Marc", "Ahmed", "Léa", "Paul"],
+          fr: ["Marc", "Ahmed", "Léa", "Paul"],
+          ar: ["Marc", "Ahmed", "Léa", "Paul"],
         },
         correctIndex: 1,
       },
       {
-        id: "q2",
+        id: "lq2",
         prompt: {
-          en: "He is from…",
-          fr: "Il est de…",
-          ar: "هو من…",
+          en: "How is he?",
+          fr: "Comment va-t-il ?",
+          ar: "هو عامل إيه؟",
         },
         options: {
-          en: ["Paris", "Lyon", "Marseille", "Nice"],
-          fr: ["Paris", "Lyon", "Marseille", "Nice"],
-          ar: ["باريس", "ليون", "مارسيليا", "نيس"],
+          en: ["Bad", "Fine", "Angry", "Sick"],
+          fr: ["Mal", "Bien", "En colère", "Malade"],
+          ar: ["وحش", "كويس", "زعلان", "تعبان"],
         },
         correctIndex: 1,
       },
@@ -151,46 +149,20 @@ export const TEACHER_SESSIONS: TeacherSession[] = [
       ar: "كتابة: قدّم نفسك",
     },
     coach: {
-      en: "Write 2–4 short French sentences. I will check basic patterns.",
-      fr: "Écrivez 2 à 4 phrases simples.",
-      ar: "اكتب من جملتين لأربع جمل بسيطة بالفرنسية.",
+      en: "Write 3–4 short sentences about yourself.",
+      fr: "Écrivez 3 ou 4 phrases.",
+      ar: "اكتب 3–4 جمل عن نفسك.",
     },
     writingPrompt: {
-      en: "Say hello, your name, where you are from, and goodbye.",
-      fr: "Dites bonjour, votre nom, d'où vous êtes, et au revoir.",
-      ar: "قل مرحبًا، اسمك، من أين أنت، وإلى اللقاء.",
+      en: "Write your name, where you live, and one thing you like.",
+      fr: "Nom, ville, une chose que vous aimez.",
+      ar: "اسمك، سكنك، وحاجة بتحبها.",
     },
     writingHints: {
-      en: ["Bonjour", "Je m'appelle…", "Je suis de…", "Au revoir"],
-      fr: ["Bonjour", "Je m'appelle…", "Je suis de…", "Au revoir"],
-      ar: ["Bonjour", "Je m'appelle…", "Je suis de…", "Au revoir"],
+      en: ["Je m'appelle…", "J'habite…", "J'aime…"],
+      fr: ["Je m'appelle…", "J'habite…", "J'aime…"],
+      ar: ["Je m'appelle…", "J'habite…", "J'aime…"],
     },
-  },
-  {
-    id: "teach-a1-vocab-daily",
-    track: "vocab",
-    level: "A1",
-    order: 4,
-    title: {
-      en: "Memorize: Daily words",
-      fr: "Mémoriser : Mots du quotidien",
-      ar: "حفظ: كلمات يومية",
-    },
-    coach: {
-      en: "Look, listen, then recall the meaning.",
-      fr: "Regardez, écoutez, puis retrouvez le sens.",
-      ar: "شوف، اسمع، بعدين افتكر المعنى.",
-    },
-    words: [
-      { term: "bonjour", meaning: { en: "hello", fr: "salutation", ar: "مرحبًا" } },
-      { term: "merci", meaning: { en: "thank you", fr: "remerciement", ar: "شكرًا" } },
-      { term: "s'il vous plaît", meaning: { en: "please", fr: "politesse", ar: "من فضلك" } },
-      { term: "au revoir", meaning: { en: "goodbye", fr: "salutation de fin", ar: "إلى اللقاء" } },
-      { term: "oui", meaning: { en: "yes", fr: "oui", ar: "نعم" } },
-      { term: "non", meaning: { en: "no", fr: "non", ar: "لا" } },
-      { term: "un café", meaning: { en: "a coffee", fr: "un café", ar: "قهوة" } },
-      { term: "l'eau", meaning: { en: "water", fr: "l'eau", ar: "ماء" } },
-    ],
   },
   {
     id: "teach-a2-read-weekend",
@@ -198,192 +170,45 @@ export const TEACHER_SESSIONS: TeacherSession[] = [
     level: "A2",
     order: 10,
     title: {
-      en: "Reading: Last weekend",
-      fr: "Lecture : Le week-end dernier",
-      ar: "قراءة: عطلة نهاية الأسبوع",
+      en: "Reading: Weekend",
+      fr: "Lecture : Week-end",
+      ar: "قراءة: نهاية الأسبوع",
     },
     coach: {
-      en: "Read about the past, then answer.",
-      fr: "Lisez au passé, puis répondez.",
-      ar: "اقرأ عن الماضي، بعدين جاوب.",
+      en: "Read, then answer about the past weekend.",
+      fr: "Lisez le récit au passé.",
+      ar: "اقرأ عن نهاية الأسبوع الماضية.",
     },
     passage:
-      "Hier, j'ai visité un musée avec mon ami. Nous avons mangé au restaurant le soir. Le repas était très bon. Après, nous sommes rentrés en métro. J'ai dormi tôt parce que j'étais fatigué.",
+      "Samedi, j'ai visité un musée avec des amis. Nous sommes restés trois heures. Dimanche, j'ai regardé un film et j'ai dormi tôt. C'était calme et agréable.",
     questions: [
       {
-        id: "q1",
+        id: "a2r1",
         prompt: {
-          en: "Where did he go?",
-          fr: "Où est-il allé ?",
-          ar: "أين ذهب؟",
+          en: "What did they visit?",
+          fr: "Qu'ont-ils visité ?",
+          ar: "زاروا إيه؟",
         },
         options: {
-          en: ["Beach", "Museum", "School", "Airport"],
-          fr: ["Plage", "Musée", "École", "Aéroport"],
-          ar: ["شاطئ", "متحف", "مدرسة", "مطار"],
+          en: ["A museum", "A cinema only", "A hospital", "A station"],
+          fr: ["Un musée", "Un cinéma seulement", "Un hôpital", "Une gare"],
+          ar: ["متحف", "سينما بس", "مستشفى", "محطة"],
         },
-        correctIndex: 1,
+        correctIndex: 0,
       },
       {
-        id: "q2",
+        id: "a2r2",
         prompt: {
-          en: "How did they go home?",
-          fr: "Comment sont-ils rentrés ?",
-          ar: "كيف رجعوا؟",
+          en: "Sunday was…",
+          fr: "Dimanche était…",
+          ar: "الأحد كان…",
         },
         options: {
-          en: ["By car", "By metro", "On foot", "By plane"],
-          fr: ["En voiture", "En métro", "À pied", "En avion"],
-          ar: ["بالسيارة", "بالمترو", "مشيًا", "بالطائرة"],
+          en: ["Calm", "Very noisy", "At work only", "Cancelled"],
+          fr: ["Calme", "Très bruyant", "Au travail seulement", "Annulé"],
+          ar: ["هادي", "دوشة أوي", "شغل بس", "متلغي"],
         },
-        correctIndex: 1,
-      },
-    ],
-  },
-  {
-    id: "teach-a2-listen-phone",
-    track: "listening",
-    level: "A2",
-    order: 11,
-    title: {
-      en: "Listening: On the phone",
-      fr: "Écoute : Au téléphone",
-      ar: "استماع: على الهاتف",
-    },
-    coach: {
-      en: "Listen to the call, then choose.",
-      fr: "Écoutez l'appel, puis choisissez.",
-      ar: "اسمع المكالمة، بعدين اختار.",
-    },
-    passage:
-      "Allô ? Oui, bonjour. Je voudrais prendre rendez-vous pour mardi matin, s'il vous plaît. À dix heures ? Parfait. Merci beaucoup. Au revoir !",
-    questions: [
-      {
-        id: "q1",
-        prompt: {
-          en: "The appointment is for…",
-          fr: "Le rendez-vous est pour…",
-          ar: "الموعد…",
-        },
-        options: {
-          en: ["Monday evening", "Tuesday morning", "Friday night", "Sunday"],
-          fr: ["Lundi soir", "Mardi matin", "Vendredi soir", "Dimanche"],
-          ar: ["الاثنين مساءً", "الثلاثاء صباحًا", "الجمعة ليلًا", "الأحد"],
-        },
-        correctIndex: 1,
-      },
-      {
-        id: "q2",
-        prompt: {
-          en: "At what time?",
-          fr: "À quelle heure ?",
-          ar: "في أي ساعة؟",
-        },
-        options: {
-          en: ["8", "9", "10", "11"],
-          fr: ["8 heures", "9 heures", "10 heures", "11 heures"],
-          ar: ["8", "9", "10", "11"],
-        },
-        correctIndex: 2,
-      },
-    ],
-  },
-  {
-    id: "teach-a2-write-past",
-    track: "writing",
-    level: "A2",
-    order: 12,
-    title: {
-      en: "Writing: Yesterday",
-      fr: "Écriture : Hier",
-      ar: "كتابة: أمس",
-    },
-    coach: {
-      en: "Write what you did yesterday in simple passé composé.",
-      fr: "Écrivez ce que vous avez fait hier.",
-      ar: "اكتب ماذا فعلت أمس بجمل بسيطة.",
-    },
-    writingPrompt: {
-      en: "Use: hier, j'ai…, je suis allé(e)…",
-      fr: "Utilisez : hier, j'ai…, je suis allé(e)…",
-      ar: "استخدم: hier، j'ai…، je suis allé(e)…",
-    },
-    writingHints: {
-      en: ["Hier", "J'ai mangé", "Je suis allé(e)", "Ensuite"],
-      fr: ["Hier", "J'ai mangé", "Je suis allé(e)", "Ensuite"],
-      ar: ["Hier", "J'ai mangé", "Je suis allé(e)", "Ensuite"],
-    },
-  },
-  {
-    id: "teach-a2-vocab-travel",
-    track: "vocab",
-    level: "A2",
-    order: 13,
-    title: {
-      en: "Memorize: Travel",
-      fr: "Mémoriser : Voyage",
-      ar: "حفظ: السفر",
-    },
-    coach: {
-      en: "Learn these travel words with your ear and eye.",
-      fr: "Apprenez ces mots de voyage.",
-      ar: "احفظ كلمات السفر سمعًا ونظرًا.",
-    },
-    words: [
-      { term: "la gare", meaning: { en: "train station", fr: "gare", ar: "محطة القطار" } },
-      { term: "un billet", meaning: { en: "a ticket", fr: "billet", ar: "تذكرة" } },
-      { term: "le train", meaning: { en: "the train", fr: "train", ar: "قطار" } },
-      { term: "l'hôtel", meaning: { en: "the hotel", fr: "hôtel", ar: "الفندق" } },
-      { term: "une réservation", meaning: { en: "a booking", fr: "réservation", ar: "حجز" } },
-      { term: "tout droit", meaning: { en: "straight ahead", fr: "tout droit", ar: "على طول" } },
-    ],
-  },
-  {
-    id: "teach-b1-read-opinion",
-    track: "reading",
-    level: "B1",
-    order: 20,
-    title: {
-      en: "Reading: An opinion",
-      fr: "Lecture : Une opinion",
-      ar: "قراءة: رأي",
-    },
-    coach: {
-      en: "Read the opinion text and identify the main idea.",
-      fr: "Repérez l'idée principale.",
-      ar: "حدد الفكرة الرئيسية.",
-    },
-    passage:
-      "À mon avis, apprendre une langue demande de la régularité. Il ne suffit pas de connaître des listes de mots. Il faut aussi parler, écouter et écrire un peu chaque jour. Cependant, il ne faut pas avoir peur de faire des erreurs. Les erreurs font partie de l'apprentissage.",
-    questions: [
-      {
-        id: "q1",
-        prompt: {
-          en: "Main idea:",
-          fr: "Idée principale :",
-          ar: "الفكرة الرئيسية:",
-        },
-        options: {
-          en: [
-            "Only vocabulary lists matter",
-            "Regular practice of several skills matters",
-            "Never write",
-            "Errors are forbidden",
-          ],
-          fr: [
-            "Seules les listes comptent",
-            "La régularité et plusieurs compétences",
-            "Ne jamais écrire",
-            "Interdiction d'erreurs",
-          ],
-          ar: [
-            "قوائم الكلمات فقط",
-            "الانتظام ومهارات متعددة",
-            "لا تكتب أبدًا",
-            "الأخطاء ممنوعة",
-          ],
-        },
-        correctIndex: 1,
+        correctIndex: 0,
       },
     ],
   },
@@ -413,6 +238,11 @@ export const TEACHER_SESSIONS: TeacherSession[] = [
       ar: ["À mon avis", "Parce que", "Cependant", "En conclusion"],
     },
   },
+];
+
+export const TEACHER_SESSIONS: TeacherSession[] = [
+  ...CORE_SESSIONS,
+  ...EXTRA_VOCAB_SESSIONS,
 ];
 
 export function getAllTeacherSessions(): TeacherSession[] {
