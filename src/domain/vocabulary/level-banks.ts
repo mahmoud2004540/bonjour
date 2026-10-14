@@ -1,4 +1,4 @@
-/** Level banks = frequency batches 1–4 + high-value coverage */
+/** Level banks = frequency batches 1–5 (target: high-value coverage toward 5k+) */
 
 import {
   FREQ_A1,
@@ -25,6 +25,7 @@ import {
   FREQ4_B1,
   FREQ4_B2,
 } from "./freq-batch4";
+import { FREQ5_A1 } from "./freq-batch5a";
 
 export type BankWord = {
   term: string;
@@ -46,6 +47,7 @@ export const A1_WORD_BANK: BankWord[] = dedupe([
   ...freqToBank(FREQ2_A1),
   ...freqToBank(FREQ3_A1),
   ...freqToBank(FREQ4_A1),
+  ...freqToBank(FREQ5_A1),
 ]);
 
 export const A2_WORD_BANK: BankWord[] = dedupe([
