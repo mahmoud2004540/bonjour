@@ -5,7 +5,6 @@ import { routing } from "@/i18n/routing";
 import { isRtl, isValidLocale } from "@/i18n/config";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { LearnerNav } from "@/components/layout/LearnerNav";
 
 type Props = {
   children: React.ReactNode;
@@ -41,11 +40,10 @@ export default async function LocaleLayout({ children, params }: Props) {
           Skip to content
         </a>
         <Header />
-        <main id="main-content" className="flex-1 pb-24 md:pb-8">
+        <main id="main-content" className="flex-1">
           {children}
         </main>
         <Footer />
-        <LearnerNav />
       </div>
     </NextIntlClientProvider>
   );
