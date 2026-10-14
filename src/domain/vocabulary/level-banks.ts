@@ -1,4 +1,4 @@
-/** Level banks = frequency batches 1–5 (target: high-value coverage toward 5k+) */
+/** Level banks = frequency batches 1–5 (quality EN/AR coverage growing toward 5k) */
 
 import {
   FREQ_A1,
@@ -26,6 +26,9 @@ import {
   FREQ4_B2,
 } from "./freq-batch4";
 import { FREQ5_A1 } from "./freq-batch5a";
+import { FREQ5_A2 } from "./freq-batch5b";
+import { FREQ5_B1 } from "./freq-batch5c";
+import { FREQ5_B2 } from "./freq-batch5d";
 
 export type BankWord = {
   term: string;
@@ -55,6 +58,7 @@ export const A2_WORD_BANK: BankWord[] = dedupe([
   ...freqToBank(FREQ2_A2),
   ...freqToBank(FREQ3_A2),
   ...freqToBank(FREQ4_A2),
+  ...freqToBank(FREQ5_A2),
 ]);
 
 export const B1_WORD_BANK: BankWord[] = dedupe([
@@ -62,6 +66,7 @@ export const B1_WORD_BANK: BankWord[] = dedupe([
   ...freqToBank(FREQ2_B1),
   ...freqToBank(FREQ3_B1),
   ...freqToBank(FREQ4_B1),
+  ...freqToBank(FREQ5_B1),
 ]);
 
 export const B2_WORD_BANK: BankWord[] = dedupe([
@@ -69,6 +74,7 @@ export const B2_WORD_BANK: BankWord[] = dedupe([
   ...freqToBank(FREQ2_B2),
   ...freqToBank(FREQ3_B2),
   ...freqToBank(FREQ4_B2),
+  ...freqToBank(FREQ5_B2),
 ]);
 
 export const BANK_STATS = {
