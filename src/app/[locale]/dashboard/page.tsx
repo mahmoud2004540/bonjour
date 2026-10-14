@@ -44,8 +44,8 @@ export default function DashboardPage() {
 
   if (!profile) {
     return (
-      <div className="max-w-content mx-auto px-6 py-20">
-        <div className="h-8 w-48 bg-ink-100 rounded-lg animate-pulse" />
+      <div className="max-w-content mx-auto px-5 py-20">
+        <div className="h-10 w-48 bg-ink-100 rounded-2xl animate-pulse" />
       </div>
     );
   }
@@ -56,144 +56,165 @@ export default function DashboardPage() {
   const overall = getOverallReadiness(profile);
   const a1 = getLevelReadiness(profile, "A1");
 
+  const hub = [
+    {
+      href: "/path",
+      title: locale === "ar" ? "مسار الدروس" : "Learning path",
+      body:
+        locale === "ar"
+          ? "درس بعد درس — متسلسل من A1 إلى C2"
+          : "Lesson by lesson — A1 to C2",
+      cta: locale === "ar" ? "افتح المسار" : "Open path",
+      primary: true,
+    },
+    {
+      href: "/practice-lab",
+      title: locale === "ar" ? "تدريب مكثف" : "Practice lab",
+      body:
+        locale === "ar"
+          ? "كتابة + استماع + أسئلة — ساعات ممارسة"
+          : "Writing, listening, quiz drills",
+      cta: locale === "ar" ? "ابدأ تدريب" : "Start practice",
+      primary: false,
+    },
+    {
+      href: "/vocabulary",
+      title: locale === "ar" ? "حفظ الكلمات" : "Vocabulary",
+      body:
+        locale === "ar"
+          ? dueCount > 0
+            ? `${dueCount} كلمة للمراجعة`
+            : "بنك كلمات كبير حسب المستوى"
+          : dueCount > 0
+            ? `${dueCount} due for review`
+            : "Large word bank by level",
+      cta: locale === "ar" ? "راجع الكلمات" : "Review words",
+      primary: false,
+    },
+    {
+      href: "/speech",
+      title: locale === "ar" ? "النطق" : "Pronunciation",
+      body:
+        locale === "ar"
+          ? "سجّل وقارن — تقييم تقريبي من المتصفح"
+          : "Speak & match — browser estimate",
+      cta: locale === "ar" ? "تمرين نطق" : "Practice speech",
+      primary: false,
+    },
+    {
+      href: "/listening",
+      title: locale === "ar" ? "استماع أطول" : "Listening",
+      body:
+        locale === "ar"
+          ? "مقاطع كاملة من A1 إلى C2"
+          : "Full passages A1–C2",
+      cta: locale === "ar" ? "اسمع" : "Listen",
+      primary: false,
+    },
+    {
+      href: "/exam",
+      title: locale === "ar" ? "محاكاة امتحان" : "Mock exam",
+      body:
+        locale === "ar"
+          ? "استعداد DELF/DALF — الشهادة من مركز معتمد"
+          : "DELF/DALF prep — certificate from a centre",
+      cta: locale === "ar" ? "الاستعداد" : "Exam prep",
+      primary: false,
+    },
+  ];
+
   return (
-    <div className="max-w-content mx-auto px-6 py-16 scene-3d">
+    <div className="max-w-content mx-auto px-5 sm:px-6 py-10 sm:py-14 scene-3d">
+      {/* Header block */}
       <div className="mb-8">
-        <p className="text-caption text-ink-400 mb-1">
+        <p className="text-caption font-semibold text-accent-700 mb-1">
           {t("greeting", { name: profile.displayName })}
         </p>
         <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
-        <p className="text-body-sm text-ink-500">
+        <p className="text-body-sm text-ink-500 max-w-xl">
           {locale === "ar"
-            ? "مسار أعمق + استماع أطول + ممارسة مكثفة + محاكاة امتحان."
-            : t("encourage")}
+            ? "كل حاجة في مكانها: مسار → تدريب → كلمات → نطق → امتحان."
+            : "Everything in place: path → practice → words → speech → exam."}
         </p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-        <Card depth={false}>
-          <p className="text-caption text-ink-400">{t("xp")}</p>
-          <p className="text-title-sm font-serif">{profile.xp ?? 0}</p>
-        </Card>
-        <Card depth={false}>
-          <p className="text-caption text-ink-400">{t("streak")}</p>
-          <p className="text-title-sm font-serif">{profile.streakDays ?? 0}</p>
-        </Card>
-        <Card depth={false}>
-          <p className="text-caption text-ink-400">{t("unitsProgress")}</p>
-          <p className="text-title-sm font-serif">
-            {doneCount}/{allUnits.length}
-          </p>
-        </Card>
-        <Card depth={false}>
-          <p className="text-caption text-ink-400">
-            {locale === "ar" ? "الجاهزية" : "Readiness"}
-          </p>
-          <p className="text-title-sm font-serif">{overall}%</p>
-        </Card>
+      {/* Stats — thick chips */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        {[
+          { label: t("xp"), value: profile.xp ?? 0 },
+          { label: t("streak"), value: profile.streakDays ?? 0 },
+          {
+            label: locale === "ar" ? "دروس" : "Units",
+            value: `${doneCount}/${allUnits.length}`,
+          },
+          {
+            label: locale === "ar" ? "جاهزية" : "Ready",
+            value: `${overall}%`,
+          },
+        ].map((s) => (
+          <div
+            key={s.label}
+            className="rounded-2xl border-2 border-ink-100 bg-white px-4 py-4 shadow-[0_4px_0_#e8e4dc]"
+          >
+            <p className="text-caption font-semibold text-ink-400 mb-1">
+              {s.label}
+            </p>
+            <p className="text-title-sm font-serif text-ink-950">{s.value}</p>
+          </div>
+        ))}
       </div>
 
-      <Card className="mb-4 border-accent-200">
-        <h3 className="text-title-sm font-serif mb-2">
-          {locale === "ar" ? "استماع أطول" : "Longer listening"}
-        </h3>
-        <p className="text-body-sm text-ink-600 mb-4">
-          {locale === "ar"
-            ? "مقاطع كاملة من A1 إلى C2 على الموقع — تشغيل، إخفاء النص، تركيز على جمل مفتاحية."
-            : "Full passages A1–C2 on-site — play, hide text, focus lines."}
-        </p>
-        <Link href="/listening">
-          <Button variant="accent">
-            {locale === "ar" ? "افتح الاستماع" : "Open listening"}
-          </Button>
-        </Link>
-      </Card>
-
-      <Card className="mb-4 border-accent-100">
-        <h3 className="text-title-sm font-serif mb-2">
-          {locale === "ar" ? "ساعات ممارسة" : "Practice hours"}
-        </h3>
-        <p className="text-body-sm text-ink-600 mb-2">
-          {locale === "ar"
-            ? "جولات كتابة واستماع واختيار من دروسك."
-            : "Writing, listening, quiz drills from your lessons."}
-        </p>
-        <p className="text-caption text-ink-500 mb-4">
-          {locale === "ar"
-            ? `جاهزية A1: ${a1.percent}%`
-            : `A1 readiness: ${a1.percent}%`}
-        </p>
-        <div className="flex flex-wrap gap-2">
-          <Link href="/practice-lab">
-            <Button variant="secondary">
-              {locale === "ar" ? "معمل الممارسة" : "Practice lab"}
-            </Button>
-          </Link>
-          <Link href="/path">
-            <Button variant="secondary">
-              {locale === "ar" ? "المسار" : "Path"}
-            </Button>
-          </Link>
-        </div>
-      </Card>
-
-      <Card className="mb-4">
-        <h3 className="text-title-sm font-serif mb-2">
-          {locale === "ar" ? "مع المدرس (مهارات)" : "Teacher skills"}
-        </h3>
-        <p className="text-body-sm text-ink-600 mb-4">
-          {locale === "ar"
-            ? "قراءة، كتابة، استماع، حفظ كلمات."
-            : "Reading, writing, listening, vocab."}
-        </p>
-        <Link href="/teacher">
-          <Button variant="secondary">
-            {locale === "ar" ? "افتح المهارات" : "Open skills"}
-          </Button>
-        </Link>
-      </Card>
-
-      <Card className="mb-6">
-        <h3 className="text-title-sm font-serif mb-2">
-          {locale === "ar" ? "محاكاة الامتحان" : "Mock exam"}
-        </h3>
-        <p className="text-body-sm text-ink-600 mb-4">
-          {locale === "ar"
-            ? "استعداد DELF/DALF — الشهادة الرسمية من مركز معتمد."
-            : "DELF/DALF readiness — official certificate from an accredited centre."}
-        </p>
-        <Link href="/exam">
-          <Button variant="secondary">
-            {locale === "ar" ? "الاستعداد" : "Exam prep"}
-          </Button>
-        </Link>
-      </Card>
-
+      {/* Continue lesson — primary action */}
       {nextUnit && (
-        <Card className="mb-6">
-          <p className="text-overline text-accent-700 mb-2">
+        <Card className="mb-8 border-accent-300 bg-gradient-to-br from-white to-accent-50/40">
+          <p className="text-overline text-accent-700 mb-2 font-bold">
             {t("todayLesson")} · {nextUnit.level}
           </p>
-          <h2 className="text-title-sm font-serif mb-2">
+          <h2 className="text-title-sm font-serif mb-2 text-ink-950">
             {nextUnit.title[locale]}
           </h2>
-          <p className="text-body-sm text-ink-500 mb-4">{t("lessonFlowHint")}</p>
+          <p className="text-body-sm text-ink-500 mb-5">{t("lessonFlowHint")}</p>
           <Link href={`/lesson/${nextUnit.id}`}>
-            <Button variant="secondary">{t("startLesson")}</Button>
-          </Link>
-        </Card>
-      )}
-
-      {dueCount > 0 && (
-        <Card className="mb-6">
-          <p className="text-body mb-3">{t("vocabDue", { count: dueCount })}</p>
-          <Link href="/vocabulary">
-            <Button variant="secondary" size="sm">
-              {t("reviewVocab")}
+            <Button variant="accent" size="lg" className="w-full sm:w-auto">
+              {t("startLesson")}
             </Button>
           </Link>
         </Card>
       )}
+
+      {/* Organized hub grid */}
+      <h2 className="text-body font-bold text-ink-800 mb-3">
+        {locale === "ar" ? "أقسام التعلم" : "Learning sections"}
+      </h2>
+      <div className="grid sm:grid-cols-2 gap-4 mb-10">
+        {hub.map((item) => (
+          <Card
+            key={item.href}
+            className={item.primary ? "border-ink-900 sm:col-span-2" : ""}
+          >
+            <h3 className="text-title-sm font-serif text-ink-950 mb-1.5">
+              {item.title}
+            </h3>
+            <p className="text-body-sm text-ink-500 mb-4 text-pretty">
+              {item.body}
+            </p>
+            <Link href={item.href}>
+              <Button
+                variant={item.primary ? "primary" : "secondary"}
+                size="sm"
+              >
+                {item.cta}
+              </Button>
+            </Link>
+          </Card>
+        ))}
+      </div>
+
+      <p className="text-caption text-ink-400 mb-6">
+        {locale === "ar"
+          ? `جاهزية A1: ${a1.percent}% · كلمات للمراجعة: ${dueCount}`
+          : `A1 readiness: ${a1.percent}% · Words due: ${dueCount}`}
+      </p>
 
       <button
         type="button"
@@ -201,7 +222,7 @@ export default function DashboardPage() {
           clearLearner();
           router.push("/");
         }}
-        className="text-caption text-ink-300"
+        className="text-caption text-ink-300 hover:text-ink-500"
       >
         {t("reset")}
       </button>
