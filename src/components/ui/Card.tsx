@@ -11,7 +11,13 @@ export function Card({
   depth?: boolean;
 }) {
   return (
-    <div className={cn("card", depth && "card-3d", className)}>
+    <div
+      className={cn(
+        "card rounded-3xl border-2 border-ink-100 bg-white p-5 sm:p-6",
+        depth && "card-3d",
+        className
+      )}
+    >
       {children}
     </div>
   );

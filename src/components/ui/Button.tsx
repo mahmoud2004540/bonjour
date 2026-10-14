@@ -14,20 +14,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center font-medium transition-all duration-200 ease-out-expo",
+          "inline-flex items-center justify-center font-bold tracking-tight transition-all duration-200 ease-out",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2",
           "disabled:opacity-50 disabled:pointer-events-none",
           {
-            "bg-ink-950 text-surface hover:bg-ink-800": variant === "primary",
-            "border border-ink-200 text-ink-800 hover:bg-ink-50 hover:border-ink-300":
+            "bg-ink-950 text-surface shadow-[0_4px_0_#1a1814] hover:bg-ink-800 hover:-translate-y-0.5 active:translate-y-[2px] active:shadow-[0_2px_0_#1a1814]":
+              variant === "primary",
+            "border-2 border-ink-300 bg-white text-ink-900 shadow-[0_3px_0_#d4d0c8] hover:border-ink-400 hover:bg-ink-50 hover:-translate-y-0.5 active:translate-y-[1px] active:shadow-[0_1px_0_#d4d0c8]":
               variant === "secondary",
-            "text-ink-500 hover:text-ink-900 hover:bg-ink-50": variant === "ghost",
-            "bg-accent-600 text-white hover:bg-accent-700": variant === "accent",
+            "text-ink-600 hover:text-ink-950 hover:bg-ink-100/80":
+              variant === "ghost",
+            "bg-accent-600 text-white shadow-[0_4px_0_#9a3d2c] hover:bg-accent-700 hover:-translate-y-0.5 active:translate-y-[2px] active:shadow-[0_2px_0_#9a3d2c]":
+              variant === "accent",
           },
           {
-            "h-9 px-4 text-sm rounded-lg": size === "sm",
-            "h-11 px-6 text-body rounded-xl": size === "md",
-            "h-12 px-8 text-body rounded-xl": size === "lg",
+            "h-10 px-4 text-sm rounded-xl": size === "sm",
+            "h-12 px-6 text-body rounded-2xl": size === "md",
+            "h-14 px-8 text-body-lg rounded-2xl": size === "lg",
           },
           className
         )}
