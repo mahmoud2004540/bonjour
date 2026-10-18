@@ -1,5 +1,6 @@
 /**
  * Learner state — localStorage (Supabase-ready later).
+ * Includes export/import so progress survives browser clears / device change.
  */
 
 import type {
@@ -15,6 +16,9 @@ import type {
 import { getPrimaryNextAction } from "@/domain/learning/recommendation";
 
 const STORAGE_KEY = "bonjour_learner_v1";
+const VOCAB_KEY = "bonjour_vocab_v2";
+const EVENTS_KEY = "bonjour_events_v1";
+const MOTIVATION_KEY = "bonjour_motivation_v1";
 
 const FIRST_GOAL: Record<TargetLanguage, string> = {
   fr: "goal-introduce-self",
@@ -184,4 +188,65 @@ export function recordPracticeAttempt(
 export function clearLearner(): void {
   if (typeof window === "undefined") return;
   localStorage.removeItem(STORAGE_KEY);
+}
+
+/** Full local backup (profile + vocab progress + light meta) */
+export type BonjourBackup = {
+  version: 1;
+  exportedAt: string;
+  learner: string | null;
+  vocab: string | null;
+  events: string | null;
+  motivation: string | null;
+};
+
+export function exportBackup(): BonjourBackup {
+  if (typeof window === "undefined") {
+    return {
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      learner: null,
+      vocab: null,
+      events: null,
+      motivation: null,
+    };
+  }
+  return {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    learner: localStorage.getItem(STORAGE_KEY),
+    vocab: localStorage.getItem(VOCAB_KEY),
+    events: localStorage.getItem(EVENTS_KEY),
+    motivation: localStorage.getItem(MOTIVATION_KEY),
+  };
+}
+
+export function downloadBackupFile(): void {
+  const data = exportBackup();
+  const blob = new Blob([JSON.stringify(data, null, 2)], {
+    type: "application/json",
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `bonjour-backup-${new Date().toISOString().slice(0, 10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+export function importBackup(raw: string): { ok: boolean; error?: string } {
+  if (typeof window === "undefined") return { ok: false, error: "ssr" };
+  try {
+    const data = JSON.parse(raw) as BonjourBackup;
+    if (!data || data.version !== 1) {
+      return { ok: false, error: "bad_version" };
+    }
+    if (data.learner) localStorage.setItem(STORAGE_KEY, data.learner);
+    if (data.vocab) localStorage.setItem(VOCAB_KEY, data.vocab);
+    if (data.events) localStorage.setItem(EVENTS_KEY, data.events);
+    if (data.motivation) localStorage.setItem(MOTIVATION_KEY, data.motivation);
+    return { ok: true };
+  } catch {
+    return { ok: false, error: "parse" };
+  }
 }
