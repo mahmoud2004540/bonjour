@@ -14,6 +14,7 @@ import {
   ensureSeedVocab,
 } from "@/application/vocab-store";
 import { recordStudyActivity } from "@/application/motivation-store";
+import { BANK_STATS } from "@/domain/vocabulary/level-banks";
 import type { VocabItem } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -68,8 +69,8 @@ export default function VocabularyPage() {
 
   const browse =
     filter === "all"
-      ? all.slice(0, 80)
-      : getVocabByLevel(filter).slice(0, 80);
+      ? all.slice(0, 100)
+      : getVocabByLevel(filter).slice(0, 100);
 
   return (
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
@@ -77,10 +78,15 @@ export default function VocabularyPage() {
       <p className="text-body text-ink-600 mb-4 text-pretty">{t("subtitle")}</p>
 
       <Card className="mb-6">
-        <p className="text-body-sm text-ink-700 mb-2">
+        <p className="text-body-sm text-ink-700 mb-1">
           {locale === "ar"
-            ? `إجمالي الكلمات في بنك الحفظ: ${all.length}`
-            : `Total words in bank: ${all.length}`}
+            ? `في جهازك دلوقتي: ${all.length} كلمة (مراجعة + تقدّم)`
+            : `On this device: ${all.length} words (review + progress)`}
+        </p>
+        <p className="text-caption text-ink-500 mb-3">
+          {locale === "ar"
+            ? `حجم البنك المنهجي في التحديث الحالي ≈ ${BANK_STATS.total} مدخل (A1 ${BANK_STATS.A1} · A2 ${BANK_STATS.A2} · B1 ${BANK_STATS.B1} · B2 ${BANK_STATS.B2}) — بيتوسّع باستمرار.`
+            : `Curriculum bank size in this build ≈ ${BANK_STATS.total} entries (A1 ${BANK_STATS.A1} · A2 ${BANK_STATS.A2} · B1 ${BANK_STATS.B1} · B2 ${BANK_STATS.B2}) — still expanding.`}
         </p>
         <div className="flex flex-wrap gap-2 text-caption text-ink-600">
           {levelCounts.map(({ lv, n }) => (
@@ -197,11 +203,18 @@ export default function VocabularyPage() {
         </div>
       </Card>
 
-      <Link href="/teacher/vocab">
-        <Button variant="accent">
-          {locale === "ar" ? "جلسات حفظ (مع المدرس)" : "Teacher vocab packs"}
-        </Button>
-      </Link>
+      <div className="flex flex-wrap gap-3">
+        <Link href="/teacher/vocab">
+          <Button variant="accent">
+            {locale === "ar" ? "جلسات حفظ (مع المدرس)" : "Teacher vocab packs"}
+          </Button>
+        </Link>
+        <Link href="/settings">
+          <Button variant="secondary">
+            {locale === "ar" ? "نسخ احتياطي" : "Backup progress"}
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

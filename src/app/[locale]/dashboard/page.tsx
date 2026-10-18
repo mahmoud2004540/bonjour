@@ -44,8 +44,13 @@ export default function DashboardPage() {
 
   if (!profile) {
     return (
-      <div className="max-w-content mx-auto px-5 py-20">
-        <div className="h-10 w-48 bg-ink-100 rounded-2xl animate-pulse" />
+      <div className="max-w-content mx-auto px-5 py-20 text-center">
+        <p className="text-body text-ink-600 mb-4">
+          {locale === "ar"
+            ? "بتجهّز لوحتك… لو أول مرة، هتحوّلك لتسجيل سريع."
+            : "Preparing your dashboard… First visit goes to signup."}
+        </p>
+        <div className="h-10 w-48 mx-auto bg-ink-100 rounded-2xl animate-pulse" />
       </div>
     );
   }
@@ -121,11 +126,20 @@ export default function DashboardPage() {
       cta: locale === "ar" ? "الاستعداد" : "Exam prep",
       primary: false,
     },
+    {
+      href: "/settings",
+      title: locale === "ar" ? "إعدادات ونسخ احتياطي" : "Settings & backup",
+      body:
+        locale === "ar"
+          ? "حمّل تقدّمك عشان ما يضيعش من الجهاز"
+          : "Export progress so it is not lost on this device",
+      cta: locale === "ar" ? "افتح الإعدادات" : "Open settings",
+      primary: false,
+    },
   ];
 
   return (
     <div className="max-w-content mx-auto px-5 sm:px-6 py-10 sm:py-14 scene-3d">
-      {/* Header block */}
       <div className="mb-8">
         <p className="text-caption font-semibold text-accent-700 mb-1">
           {t("greeting", { name: profile.displayName })}
@@ -133,12 +147,11 @@ export default function DashboardPage() {
         <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
         <p className="text-body-sm text-ink-500 max-w-xl">
           {locale === "ar"
-            ? "كل حاجة في مكانها: مسار → تدريب → كلمات → نطق → امتحان."
-            : "Everything in place: path → practice → words → speech → exam."}
+            ? "كل حاجة في مكانها: مسار → تدريب → كلمات → نطق → امتحان. احفظ نسخة احتياطية من الإعدادات."
+            : "Path → practice → words → speech → exam. Back up progress in Settings."}
         </p>
       </div>
 
-      {/* Stats — thick chips */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
         {[
           { label: t("xp"), value: profile.xp ?? 0 },
@@ -164,7 +177,6 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* Continue lesson — primary action */}
       {nextUnit && (
         <Card className="mb-8 border-accent-300 bg-gradient-to-br from-white to-accent-50/40">
           <p className="text-overline text-accent-700 mb-2 font-bold">
@@ -182,7 +194,6 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      {/* Organized hub grid */}
       <h2 className="text-body font-bold text-ink-800 mb-3">
         {locale === "ar" ? "أقسام التعلم" : "Learning sections"}
       </h2>
