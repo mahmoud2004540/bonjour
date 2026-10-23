@@ -109,7 +109,7 @@ export function Header() {
         {/* Burger — mobile */}
         <button
           type="button"
-          className="md:hidden flex h-11 w-11 items-center justify-center rounded-xl border-2 border-ink-200 bg-white text-ink-950 shadow-[0_3px_0_#e8e4dc] active:translate-y-[1px] active:shadow-[0_1px_0_#e8e4dc]"
+          className="md:hidden flex h-11 w-11 items-center justify-center rounded-xl border-2 border-ink-200 bg-surface-elevated text-ink-950 shadow-[0_3px_0_rgb(var(--ink-100))] active:translate-y-[1px] active:shadow-[0_1px_0_rgb(var(--ink-100))]"
           aria-expanded={open}
           aria-controls="site-menu"
           aria-label={open ? closeLabel : menuLabel}
@@ -142,7 +142,7 @@ export function Header() {
           href={inApp ? "/dashboard" : "/"}
           className="group flex items-center gap-2.5 text-ink-950 hover:text-ink-800 transition-colors shrink-0"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-ink-950 text-surface font-serif text-base tracking-tight shadow-[0_4px_0_#1a1814] group-hover:bg-accent-600 group-hover:shadow-[0_4px_0_#9a3d2c] transition-all duration-200">
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-ink-950 text-surface font-serif text-base tracking-tight shadow-[0_4px_0_rgb(var(--shadow))] group-hover:bg-accent-600 group-hover:shadow-[0_4px_0_#9a3d2c] transition-all duration-200">
             B
           </span>
           <span className="font-serif text-[1.35rem] tracking-tight">
@@ -170,8 +170,8 @@ export function Header() {
                   className={cn(
                     "px-3.5 py-2 text-sm font-semibold rounded-xl transition-all",
                     active
-                      ? "bg-ink-950 text-white shadow-md"
-                      : "text-ink-600 hover:text-ink-950 hover:bg-white"
+                      ? "bg-ink-950 text-surface shadow-md"
+                      : "text-ink-600 hover:text-ink-950 hover:bg-surface-elevated"
                   )}
                 >
                   {link.label[locale]}
@@ -207,7 +207,7 @@ export function Header() {
                 className={cn(
                   "px-2.5 py-1.5 text-[0.7rem] font-bold rounded-lg transition-all",
                   locale === code
-                    ? "bg-ink-950 text-white shadow-sm"
+                    ? "bg-ink-950 text-surface shadow-sm"
                     : "text-ink-500 hover:text-ink-900"
                 )}
               >
@@ -218,7 +218,7 @@ export function Header() {
 
           <Link
             href={inApp ? "/dashboard" : "/onboarding"}
-            className="hidden sm:inline-flex items-center h-11 px-4 sm:px-5 rounded-xl bg-accent-600 text-white text-sm font-bold shadow-[0_4px_0_#9a3d2c] hover:bg-accent-700 transition-all"
+            className="hidden sm:inline-flex items-center h-11 px-4 sm:px-5 rounded-xl bg-accent-600 text-white text-sm font-bold shadow-[0_4px_0_#9a3d2c] hover:brightness-95 transition-all"
           >
             {inApp ? t("myDashboard") : t("getStarted")}
           </Link>
@@ -236,7 +236,7 @@ export function Header() {
           />
           <div
             id="site-menu"
-            className="absolute inset-x-0 top-full z-50 border-b-2 border-ink-200 bg-white shadow-2xl md:hidden"
+            className="absolute inset-x-0 top-full z-50 border-b-2 border-ink-200 bg-surface-elevated shadow-2xl md:hidden"
             role="dialog"
             aria-modal="true"
             aria-label={menuLabel}
@@ -266,7 +266,7 @@ export function Header() {
                     className={cn(
                       "block rounded-2xl px-4 py-3.5 text-body font-bold transition-colors",
                       active
-                        ? "bg-ink-950 text-white"
+                        ? "bg-ink-950 text-surface"
                         : "text-ink-800 hover:bg-ink-50"
                     )}
                   >
@@ -298,8 +298,8 @@ export function Header() {
                       className={cn(
                         "flex-1 py-3 rounded-xl text-sm font-bold border-2",
                         locale === code
-                          ? "bg-ink-950 text-white border-ink-950"
-                          : "bg-white text-ink-700 border-ink-200"
+                          ? "bg-ink-950 text-surface border-ink-950"
+                          : "bg-surface-elevated text-ink-700 border-ink-200"
                       )}
                     >
                       {localeShortNames[code]}

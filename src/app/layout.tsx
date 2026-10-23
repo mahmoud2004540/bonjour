@@ -7,6 +7,7 @@ import {
   JetBrains_Mono,
 } from "next/font/google";
 import "./globals.css";
+import { THEME_BOOT_SCRIPT } from "@/application/theme";
 
 /** Clean modern body for Latin (EN/FR) */
 const dmSans = DM_Sans({
@@ -59,6 +60,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+      </head>
       <body
         className={`${dmSans.variable} ${fraunces.variable} ${ibmArabic.variable} ${notoNaskh.variable} ${jetbrainsMono.variable} font-sans`}
       >

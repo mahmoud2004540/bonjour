@@ -18,8 +18,7 @@ export default function SignInPage() {
       <Card className="mb-6">
         {!status.configured ? (
           <>
-            <p className="text-body text-ink-800 mb-4">{t("localMode")}</p>
-            <p className="text-caption text-ink-400 mb-6">{status.message}</p>
+            <p className="text-body text-ink-800 mb-6">{t("localMode")}</p>
             <Link href="/onboarding">
               <Button variant="accent">{t("continueLocal")}</Button>
             </Link>

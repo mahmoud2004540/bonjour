@@ -55,7 +55,7 @@ export default function ResourcesPage() {
             }}
             className={`px-3 py-1.5 rounded-full text-caption transition-colors duration-200 ${
               level === l
-                ? "bg-ink-950 text-white"
+                ? "bg-ink-950 text-surface"
                 : "bg-ink-100 text-ink-600 hover:bg-ink-200"
             }`}
           >

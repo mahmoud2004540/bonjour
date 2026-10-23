@@ -34,9 +34,15 @@ export default async function LocaleLayout({ children, params }: Props) {
         lang={locale}
         className="min-h-screen flex flex-col bg-surface"
       >
+        {/* Static export has one root <html>; set the real language and direction on it */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.lang=${JSON.stringify(locale)};document.documentElement.dir=${JSON.stringify(dir)};`,
+          }}
+        />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:start-2 focus:z-[100] focus:bg-ink-950 focus:text-white focus:px-3 focus:py-2 focus:rounded-lg"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:start-2 focus:z-[100] focus:bg-ink-950 focus:text-surface focus:px-3 focus:py-2 focus:rounded-lg"
         >
           {t("skipToContent")}
         </a>

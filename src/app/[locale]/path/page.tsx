@@ -85,18 +85,18 @@ export default function PathPage() {
         <p className="text-caption text-ink-400 mt-2">{t("chainHint")}</p>
 
         <div className="mt-5 flex flex-wrap gap-3">
-          <span className="inline-flex items-center gap-2 rounded-xl border-2 border-ink-200 bg-white px-3.5 py-2 text-sm font-bold text-ink-800 shadow-[0_3px_0_#e8e4dc]">
+          <span className="inline-flex items-center gap-2 rounded-xl border-2 border-ink-200 bg-surface-elevated px-3.5 py-2 text-sm font-bold text-ink-800 shadow-[0_3px_0_rgb(var(--ink-100))]">
             <span className="text-accent-600">{t("lessonsDone")}</span>{" "}
             {unitsDone}/{allUnits.length}
           </span>
-          <span className="inline-flex items-center gap-2 rounded-xl border-2 border-ink-200 bg-white px-3.5 py-2 text-sm font-bold text-ink-800 shadow-[0_3px_0_#e8e4dc]">
+          <span className="inline-flex items-center gap-2 rounded-xl border-2 border-ink-200 bg-surface-elevated px-3.5 py-2 text-sm font-bold text-ink-800 shadow-[0_3px_0_rgb(var(--ink-100))]">
             <span className="text-accent-600">{t("studyDays")}</span>{" "}
             {profile.streakDays ?? 0}
           </span>
           {next && (
             <Link
               href={`/lesson/${next.id}`}
-              className="inline-flex items-center rounded-xl bg-accent-600 px-4 py-2 text-sm font-bold text-white shadow-[0_3px_0_#9a3d2c] hover:bg-accent-700"
+              className="inline-flex items-center rounded-xl bg-accent-600 px-4 py-2 text-sm font-bold text-white shadow-[0_3px_0_#9a3d2c] hover:brightness-95"
             >
               {t("continueHere")}
             </Link>
@@ -121,11 +121,11 @@ export default function PathPage() {
             <section
               key={level}
               className={cn(
-                "rounded-2xl border-2 bg-white overflow-hidden transition-shadow",
+                "rounded-2xl border-2 bg-surface-elevated overflow-hidden transition-shadow",
                 unlocked
                   ? levelDone
-                    ? "border-success-300 shadow-[0_6px_0_#b8e0c8]"
-                    : "border-ink-200 shadow-[0_6px_0_#e8e4dc]"
+                    ? "border-success-300 shadow-[0_6px_0_rgb(var(--success-100))]"
+                    : "border-ink-200 shadow-[0_6px_0_rgb(var(--ink-100))]"
                   : "border-ink-100 opacity-80"
               )}
             >
@@ -147,7 +147,7 @@ export default function PathPage() {
                     levelDone
                       ? "bg-success-600 text-white border-success-500"
                       : unlocked
-                        ? "bg-ink-950 text-white border-ink-800"
+                        ? "bg-ink-950 text-surface border-ink-800"
                         : "bg-ink-100 text-ink-400 border-ink-200"
                   )}
                 >
@@ -232,10 +232,10 @@ export default function PathPage() {
                                 : isCurrent
                                   ? "bg-accent-600 text-white border-accent-500"
                                   : locked
-                                    ? "bg-ink-50 text-ink-300 border-ink-200"
+                                    ? "bg-ink-50 text-ink-400 border-ink-200"
                                     : isExam
-                                      ? "bg-ink-900 text-white border-ink-700"
-                                      : "bg-white text-ink-700 border-ink-200"
+                                      ? "bg-ink-900 text-surface border-ink-700"
+                                      : "bg-surface-elevated text-ink-700 border-ink-200"
                             )}
                           >
                             {done ? "✓" : locked ? "–" : isExam ? "E" : i + 1}

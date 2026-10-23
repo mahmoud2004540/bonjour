@@ -30,9 +30,9 @@
   "privacy": {
     "title": "الخصوصية",
     "p1": "محلي.",
-    "p2": "—",
+    "p2": "مفيش أي حاجة بتتبعت لسيرفر: لسه مفيش حسابات سحابية.",
     "p3": "لا إعلانات.",
-    "p4": "—",
+    "p4": "لو اتضافت حسابات سحابية، الصفحة دي هتتحدّث الأول.",
     "home": "الرئيسية"
   },
   "settings": {
@@ -51,7 +51,11 @@
     "backupTitle": "نسخ احتياطي للتقدّم",
     "backupBody": "التقدّم محفوظ على جهازك. حمّل نسخة JSON عشان ما تضيعش لو مسحت المتصفح أو غيّرت الجهاز. مفيش حساب سحابي حاليًا — ده بديل صريح.",
     "downloadBackup": "تحميل نسخة احتياطية",
-    "importBackup": "استيراد نسخة"
+    "importBackup": "استيراد نسخة",
+    "themeTitle": "المظهر",
+    "theme_system": "زي الجهاز",
+    "theme_light": "فاتح",
+    "theme_dark": "داكن"
   },
   "about": {
     "title": "عن بونجور",
@@ -77,8 +81,8 @@
   },
   "practice": {
     "title": "مراجعة",
-    "subtitle": "—",
-    "empty": "—",
+    "subtitle": "راجع الأهداف اللي أثبتّها قبل كده.",
+    "empty": "مفيش حاجة للمراجعة لسه — خلّص هدف الأول.",
     "toDashboard": "لوحة",
     "review": "تدرّب",
     "back": "رجوع"
@@ -90,7 +94,7 @@
     "reveal": "المعنى",
     "knew": "تذكرت",
     "forgot": "لا",
-    "caughtUp": "—",
+    "caughtUp": "مفيش كلمات مستحقة للمراجعة دلوقتي.",
     "addTitle": "أضف",
     "termPlaceholder": "كلمة",
     "translationPlaceholder": "معنى",
@@ -136,7 +140,7 @@
   },
   "achievements": {
     "title": "الإنجازات",
-    "subtitle": "—",
+    "subtitle": "بتتفتح بس باللي عملته فعلًا.",
     "unlocked": "مفتوح",
     "locked": "مقفل",
     "back": "رجوع",
@@ -397,7 +401,7 @@
     "skipPlacement": "مبتدئ",
     "langTitle": "اللغة",
     "langBody": "فرنسية.",
-    "frenchOnlyNote": "—",
+    "frenchOnlyNote": "الفرنساوي بس حاليًا، عشان المحتوى يفضل بجودة عالية.",
     "pathFull": "كامل",
     "pathStarter": "بداية",
     "comingSoon": "لاحقًا",
@@ -405,21 +409,21 @@
     "steps": {
       "0": {
         "title": "مرحبًا",
-        "description": "—"
+        "description": "شوية أسئلة قصيرة عشان نجهّز تعلّمك."
       },
       "1": {
         "title": "لماذا؟",
-        "description": "—"
+        "description": "عاوز الفرنساوي في إيه؟"
       },
       "2": {
         "title": "مواقف",
-        "description": "—"
+        "description": "أنهي مواقف حقيقية تهمّك أكتر؟"
       }
     }
   },
   "placement": {
     "title": "تقييم",
-    "subtitle": "—",
+    "subtitle": "اختياري. بيسجّل اللي تقدر تثبته النهارده — مش امتحان نجاح ورسوب.",
     "progress": "{current}/{total}",
     "next": "التالي",
     "finish": "الملف",
@@ -428,14 +432,14 @@
   },
   "profile": {
     "title": "الملف",
-    "subtitle": "—",
-    "startingPoint": "بداية",
-    "levelEstimate": "{level}",
-    "levelUnknown": "…",
-    "levelNote": "—",
-    "evidenceTitle": "—",
-    "evidenceNote": "—",
-    "goToDashboard": "لوحة",
+    "subtitle": "اللي اختبار المستوى لاحظه فعلًا — من غير تخمين.",
+    "startingPoint": "نقطة البداية المقترحة",
+    "levelEstimate": "ابدأ من {level}",
+    "levelUnknown": "لسه مفيش أدلة كفاية",
+    "levelNote": "نقطة بداية للدروس، مش مستوى CEFR معتمد.",
+    "evidenceTitle": "الأدلة حسب المهارة",
+    "evidenceNote": "«لم يُقيَّم» معناها إن مفيش أدلة لسه — مش إنك فشلت.",
+    "goToDashboard": "روح للوحة التحكم",
     "dim_vocabulary": "المفردات",
     "dim_grammar": "القواعد",
     "dim_reading": "القراءة",
@@ -549,7 +553,7 @@
     "intro": "كل حاجة في مكانها: مسار → تدريب → كلمات → نطق → امتحان. احفظ نسخة احتياطية من الإعدادات."
   },
   "learn": {
-    "notFound": "—",
+    "notFound": "الهدف مش موجود",
     "backToDashboard": "رجوع",
     "writePlaceholder": "…",
     "selfAssessPrompt": "؟",
@@ -558,7 +562,7 @@
     "checkUnderstanding": "…",
     "understood": "فهمت",
     "feedbackRecorded": "تم",
-    "feedbackNote": "—",
+    "feedbackNote": "تقييم ذاتي: الإجابة دي ما اتصحّحتش تلقائيًا.",
     "continue": "متابعة",
     "finish": "إنهاء",
     "exit": "خروج",
@@ -567,20 +571,20 @@
   },
   "progress": {
     "title": "التقدّم",
-    "subtitle": "—",
+    "subtitle": "اللي أثبتّه بس — من غير تقديرات.",
     "demonstrated": "مثبت",
-    "noneYet": "—",
+    "noneYet": "لسه ما أثبتّش أي هدف.",
     "scenarioProgress": "{done}/{total}",
-    "note": "—",
+    "note": "التقدّم بييجي من المهام اللي خلّصتها، مش من الوقت اللي قضيته.",
     "back": "رجوع"
   },
   "resources": {
     "title": "المواد",
-    "subtitle": "—",
-    "inAppNote": "—",
-    "allLevels": "—",
-    "pick": "—",
-    "vocab": "—",
+    "subtitle": "مواد قراءة وتدريب، كلها على الموقع.",
+    "inAppNote": "كل حاجة بتفتح جوه Bonjour — مش محتاج مواقع تانية.",
+    "allLevels": "كل المستويات",
+    "pick": "اختار مادة عشان تفتحها.",
+    "vocab": "مفردات أساسية",
     "listen": "استمع",
     "listenWord": "استمع",
     "ttsNote": "متصفح",
@@ -588,29 +592,29 @@
     "check": "تحقق",
     "correct": "صح",
     "tryAgain": "أعد",
-    "empty": "—",
+    "empty": "لسه مفيش مواد للمستوى ده.",
     "back": "رجوع"
   },
   "realLife": {
     "title": "الحياة",
-    "subtitle": "—",
-    "situation": "—",
+    "subtitle": "سجّل لما تستخدم الفرنساوي برّه التطبيق.",
+    "situation": "الموقف",
     "situationPlaceholder": "…",
-    "note": "—",
+    "note": "قلت أو فهمت إيه؟",
     "notePlaceholder": "…",
     "save": "حفظ",
-    "listTitle": "—",
-    "empty": "—",
-    "defaultSituation": "—",
+    "listTitle": "ملاحظاتك",
+    "empty": "لسه مفيش ملاحظات.",
+    "defaultSituation": "الحياة اليومية",
     "back": "رجوع"
   },
   "auth": {
     "title": "دخول",
-    "subtitle": "—",
-    "localMode": "محلي",
-    "continueLocal": "متابعة",
-    "supabaseReady": "—",
-    "backHome": "رئيسية"
+    "subtitle": "الحسابات والمزامنة بين الأجهزة.",
+    "localMode": "لسه مفيش حسابات أونلاين. تقدّمك محفوظ على الجهاز ده بس — استخدم الإعدادات ← النسخ الاحتياطي عشان تحتفظ بنسخة.",
+    "continueLocal": "كمّل على الجهاز ده",
+    "supabaseReady": "الحسابات السحابية متجهّزة، بس تسجيل الدخول لسه ما اتعملش. تقدّمك هيفضل على الجهاز ده حاليًا.",
+    "backHome": "رجوع للرئيسية"
   },
   "speech": {
     "disclaimer": "تقييم تقريبي من متصفحك (تحويل كلام → نص ثم مقارنة). مش شهادة نطق رسمية ولا درجة DELF.",

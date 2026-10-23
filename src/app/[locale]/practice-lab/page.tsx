@@ -325,7 +325,7 @@ export default function PracticeLabPage() {
                     className={`w-full text-start px-4 py-3 rounded-2xl border-2 ${
                       feedback !== null && i === drill.correctIndex
                         ? "border-success-500 bg-success-50"
-                        : "border-ink-100 bg-white"
+                        : "border-ink-100 bg-surface-elevated"
                     }`}
                   >
                     {opt}

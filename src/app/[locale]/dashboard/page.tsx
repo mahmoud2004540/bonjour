@@ -135,7 +135,7 @@ export default function DashboardPage() {
         ].map((s) => (
           <div
             key={s.label}
-            className="rounded-2xl border-2 border-ink-100 bg-white px-4 py-4 shadow-[0_4px_0_#e8e4dc]"
+            className="rounded-2xl border-2 border-ink-100 bg-surface-elevated px-4 py-4 shadow-[0_4px_0_rgb(var(--ink-100))]"
           >
             <p className="text-caption font-semibold text-ink-400 mb-1">
               {s.label}
@@ -146,7 +146,7 @@ export default function DashboardPage() {
       </div>
 
       {nextUnit && (
-        <Card className="mb-8 border-accent-300 bg-gradient-to-br from-white to-accent-50/40">
+        <Card className="mb-8 border-accent-300 bg-gradient-to-br from-surface-elevated to-accent-50/40">
           <p className="text-overline text-accent-700 mb-2 font-bold">
             {t("todayLesson")} · {nextUnit.level}
           </p>
@@ -200,7 +200,7 @@ export default function DashboardPage() {
           clearLearner();
           router.push("/");
         }}
-        className="text-caption text-ink-300 hover:text-ink-500"
+        className="text-caption text-ink-500 hover:text-ink-700"
       >
         {t("reset")}
       </button>

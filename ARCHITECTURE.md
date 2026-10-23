@@ -23,6 +23,8 @@ C2: materials catalogue only until scenario design is ready.
 ## Honesty constraints
 
 - No fake speech scores
+- Placement results are derived only in `domain/placement/scoring.ts`; open answers are never auto-scored
+- No invented minutes, points or levels in progress UI
 - Listening placement uses **text stand-ins** until real audio assets exist
 - Materials stay on-platform (no core redirects to external FLE sites)
 - Cloud auth / analytics / payments are optional and not claimed as live without keys
@@ -30,6 +32,12 @@ C2: materials catalogue only until scenario design is ready.
 ## Checks
 
 ```bash
+npm run check   # typecheck + lint + unit tests + domain checks (CI runs this)
 npm run build
-node scripts/domain-checks.mjs
 ```
+
+## Theming
+
+Colors are RGB CSS variables in `src/app/globals.css` (`--ink-*`, `--accent-*`, `--surface*`, …)
+consumed by `tailwind.config.ts`. Dark values apply via `prefers-color-scheme` or
+`<html data-theme>` (set from Settings, see `src/application/theme.ts`).

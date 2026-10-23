@@ -176,7 +176,7 @@ export default function SpeechPracticePage() {
         )}
 
         {lastMatch && (
-          <div className="rounded-2xl border border-ink-100 bg-white p-4 space-y-2">
+          <div className="rounded-2xl border border-ink-100 bg-surface-elevated p-4 space-y-2">
             <p className="text-body font-medium text-ink-900">
               {levelLabel(locale, lastMatch.level)}
             </p>

@@ -25,7 +25,7 @@ export function LandingContent() {
       <section className="relative px-6 pt-20 pb-20 md:pt-28 md:pb-28 max-w-wide mx-auto scene-3d">
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-16 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 mb-6 rounded-full border border-accent-200/80 bg-white/90 px-3 py-1 shadow-sm">
+            <div className="inline-flex items-center gap-2 mb-6 rounded-full border border-accent-200/80 bg-surface-elevated/90 px-3 py-1 shadow-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-600 shadow-[0_0_8px_rgba(224,106,84,0.8)]" />
               <p className="text-overline text-accent-700 uppercase tracking-wider">
                 {t("eyebrow")}
@@ -61,8 +61,8 @@ export function LandingContent() {
             <div className="relative float-3d">
               <div className="hero-3d-back" aria-hidden />
               <div className="hero-3d-mid" aria-hidden />
-              <div className="hero-3d relative rounded-3xl border border-ink-100 bg-white overflow-hidden">
-                <div className="px-5 py-3 border-b border-ink-50 flex items-center justify-between bg-gradient-to-b from-ink-25 to-white">
+              <div className="hero-3d relative rounded-3xl border border-ink-100 bg-surface-elevated overflow-hidden">
+                <div className="px-5 py-3 border-b border-ink-50 flex items-center justify-between bg-gradient-to-b from-ink-25 to-surface-elevated">
                   <span className="text-caption text-ink-500">{t("previewLabel")}</span>
                   <span className="text-overline text-accent-600 px-2 py-0.5 rounded-md bg-accent-50">
                     {t("previewLevel")}
@@ -97,7 +97,7 @@ export function LandingContent() {
         </div>
       </section>
 
-      <section className="px-6 py-14 md:py-16 bg-ink-950 text-surface panel-3d relative z-10">
+      <section className="px-6 py-14 md:py-16 band-inverse text-surface panel-3d relative z-10">
         <div className="max-w-wide mx-auto grid sm:grid-cols-3 gap-10 scene-3d">
           {["feel1", "feel2", "feel3"].map((key, i) => (
             <div
@@ -157,7 +157,7 @@ export function LandingContent() {
             {[1, 2, 3, 4, 5].map((step) => (
               <li
                 key={step}
-                className="step-3d rounded-2xl border border-ink-100 bg-white p-5"
+                className="step-3d rounded-2xl border border-ink-100 bg-surface-elevated p-5"
               >
                 <span className="inline-flex w-9 h-9 rounded-full bg-ink-950 text-surface text-sm font-medium items-center justify-center tabular-nums mb-4 shadow-lg">
                   {step}

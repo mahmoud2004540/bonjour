@@ -30,9 +30,9 @@
   "privacy": {
     "title": "Confidentialité",
     "p1": "Mode local : données sur cet appareil.",
-    "p2": "Pas d'envoi serveur sans cloud.",
+    "p2": "Rien n’est envoyé à un serveur : il n’y a pas encore de comptes en ligne.",
     "p3": "Pas de publicité tierce.",
-    "p4": "Politique à jour si le cloud est activé.",
+    "p4": "Si des comptes en ligne sont ajoutés, cette page sera mise à jour d’abord.",
     "home": "Accueil"
   },
   "settings": {
@@ -51,7 +51,11 @@
     "backupTitle": "Sauvegarde de la progression",
     "backupBody": "Votre progression est enregistrée sur cet appareil. Téléchargez une sauvegarde JSON pour ne rien perdre si vous videz le navigateur ou changez d’appareil. Pas encore de compte en ligne — c’est la solution honnête en attendant.",
     "downloadBackup": "Télécharger la sauvegarde",
-    "importBackup": "Importer une sauvegarde"
+    "importBackup": "Importer une sauvegarde",
+    "themeTitle": "Apparence",
+    "theme_system": "Comme l’appareil",
+    "theme_light": "Clair",
+    "theme_dark": "Sombre"
   },
   "about": {
     "title": "À propos",
@@ -77,8 +81,8 @@
   },
   "practice": {
     "title": "Révision",
-    "subtitle": "Objectifs faits.",
-    "empty": "Rien encore.",
+    "subtitle": "Révisez les objectifs que vous avez déjà démontrés.",
+    "empty": "Rien à réviser pour l’instant — terminez d’abord un objectif.",
     "toDashboard": "Tableau de bord",
     "review": "Repratiquer",
     "back": "Retour"
@@ -90,7 +94,7 @@
     "reveal": "Sens",
     "knew": "Je savais",
     "forgot": "Pas encore",
-    "caughtUp": "Rien à revoir.",
+    "caughtUp": "Rien à réviser pour le moment.",
     "addTitle": "Ajouter",
     "termPlaceholder": "Mot",
     "translationPlaceholder": "Sens",
@@ -136,7 +140,7 @@
   },
   "achievements": {
     "title": "Réussites",
-    "subtitle": "Événements réels.",
+    "subtitle": "Débloqués uniquement par ce que vous avez réellement fait.",
     "unlocked": "Débloqué",
     "locked": "Verrouillé",
     "back": "Retour",
@@ -247,7 +251,7 @@
     "skipPlacement": "Débutant — commencer",
     "langTitle": "Langue",
     "langBody": "Français uniquement pour l'instant.",
-    "frenchOnlyNote": "Focus qualité.",
+    "frenchOnlyNote": "Pour l’instant, uniquement le français, pour garder un contenu de qualité.",
     "pathFull": "Complet",
     "pathStarter": "Début",
     "comingSoon": "Plus tard",
@@ -255,21 +259,21 @@
     "steps": {
       "0": {
         "title": "Bienvenue",
-        "description": "Quelques questions."
+        "description": "Quelques questions courtes pour préparer votre apprentissage."
       },
       "1": {
         "title": "Pourquoi ?",
-        "description": "Vos priorités."
+        "description": "Pourquoi voulez-vous apprendre le français ?"
       },
       "2": {
         "title": "Situations",
-        "description": "Ce qui compte."
+        "description": "Quelles situations réelles comptent le plus pour vous ?"
       }
     }
   },
   "placement": {
     "title": "Placement",
-    "subtitle": "Optionnel.",
+    "subtitle": "Facultatif. Il enregistre ce que vous savez montrer aujourd’hui — ce n’est pas un examen.",
     "progress": "{current} / {total}",
     "next": "Suivant",
     "finish": "Profil",
@@ -278,14 +282,14 @@
   },
   "profile": {
     "title": "Profil",
-    "subtitle": "Observé.",
-    "startingPoint": "Départ",
-    "levelEstimate": "Environ {level}",
-    "levelUnknown": "…",
-    "levelNote": "Estimation.",
-    "evidenceTitle": "Preuves",
-    "evidenceNote": "—",
-    "goToDashboard": "Tableau de bord",
+    "subtitle": "Ce que le test a réellement observé — rien n’est deviné.",
+    "startingPoint": "Point de départ suggéré",
+    "levelEstimate": "Commencer au niveau {level}",
+    "levelUnknown": "Pas encore assez d’éléments",
+    "levelNote": "Un point de départ pour les leçons, pas un niveau CECRL certifié.",
+    "evidenceTitle": "Éléments par compétence",
+    "evidenceNote": "« Non évalué » signifie qu’il n’y a pas encore d’éléments — pas un échec.",
+    "goToDashboard": "Aller au tableau de bord",
     "dim_vocabulary": "Vocabulaire",
     "dim_grammar": "Grammaire",
     "dim_reading": "Compréhension écrite",
@@ -399,7 +403,7 @@
     "intro": "Parcours → pratique → mots → prononciation → examen. Sauvegardez votre progression dans les réglages."
   },
   "learn": {
-    "notFound": "Introuvable",
+    "notFound": "Objectif introuvable",
     "backToDashboard": "Retour",
     "writePlaceholder": "…",
     "selfAssessPrompt": "?",
@@ -408,7 +412,7 @@
     "checkUnderstanding": "…",
     "understood": "OK",
     "feedbackRecorded": "Noté",
-    "feedbackNote": "Auto",
+    "feedbackNote": "Auto-évaluation : cette réponse n’a pas été vérifiée automatiquement.",
     "continue": "Continuer",
     "finish": "Terminer",
     "exit": "Quitter",
@@ -417,20 +421,20 @@
   },
   "progress": {
     "title": "Progrès",
-    "subtitle": "Démontré.",
+    "subtitle": "Uniquement ce que vous avez démontré — rien d’estimé.",
     "demonstrated": "Fait",
-    "noneYet": "Rien.",
+    "noneYet": "Aucun objectif démontré pour l’instant.",
     "scenarioProgress": "{done}/{total}",
-    "note": "Preuves.",
+    "note": "La progression vient des tâches réalisées, pas du temps passé.",
     "back": "Retour"
   },
   "resources": {
     "title": "Supports",
-    "subtitle": "Sur le site.",
-    "inAppNote": "Bonjour.",
-    "allLevels": "Niveaux",
-    "pick": "Choisir",
-    "vocab": "Vocabulaire",
+    "subtitle": "Supports de lecture et d’entraînement, tous sur ce site.",
+    "inAppNote": "Tout s’ouvre dans Bonjour — aucun site externe nécessaire.",
+    "allLevels": "Tous les niveaux",
+    "pick": "Choisissez un support pour l’ouvrir.",
+    "vocab": "Vocabulaire clé",
     "listen": "Écouter",
     "listenWord": "Écouter",
     "ttsNote": "Navigateur",
@@ -438,29 +442,29 @@
     "check": "Vérifier",
     "correct": "Oui",
     "tryAgain": "Réessayer",
-    "empty": "Vide",
+    "empty": "Pas encore de supports pour ce niveau.",
     "back": "Retour"
   },
   "realLife": {
     "title": "Vraie vie",
-    "subtitle": "Notes.",
+    "subtitle": "Notez quand vous avez utilisé le français en dehors de l’appli.",
     "situation": "Situation",
     "situationPlaceholder": "…",
-    "note": "Note",
+    "note": "Qu’avez-vous dit ou compris ?",
     "notePlaceholder": "…",
     "save": "Enregistrer",
-    "listTitle": "Liste",
-    "empty": "—",
+    "listTitle": "Vos notes",
+    "empty": "Pas encore de notes.",
     "defaultSituation": "Quotidien",
     "back": "Retour"
   },
   "auth": {
     "title": "Connexion",
-    "subtitle": "Compte",
-    "localMode": "Local.",
-    "continueLocal": "Continuer",
-    "supabaseReady": "Prêt",
-    "backHome": "Accueil"
+    "subtitle": "Comptes et synchronisation entre appareils.",
+    "localMode": "Il n’y a pas encore de comptes en ligne. Votre progression est enregistrée sur cet appareil uniquement — utilisez Réglages → Sauvegarde pour en garder une copie.",
+    "continueLocal": "Continuer sur cet appareil",
+    "supabaseReady": "Les comptes en ligne sont configurés, mais la connexion n’est pas encore disponible. Votre progression reste sur cet appareil pour l’instant.",
+    "backHome": "Retour à l’accueil"
   },
   "path": {
     "eyebrow": "Parcours structuré",

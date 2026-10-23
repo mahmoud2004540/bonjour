@@ -139,7 +139,7 @@ export default function ExamLevelPage({
           {bp.skills.map((s) => (
             <li
               key={s.skill}
-              className="rounded-xl bg-white border border-ink-100 px-4 py-3 shadow-sm"
+              className="rounded-xl bg-surface-elevated border border-ink-100 px-4 py-3 shadow-sm"
             >
               <p className="text-body font-medium text-ink-900">{s.title[locale]}</p>
               <p className="text-body-sm text-ink-500">{s.whatYouDo[locale]}</p>
@@ -198,7 +198,7 @@ export default function ExamLevelPage({
                         ? idx === item.correctIndex
                           ? "border-success-500 bg-success-50"
                           : "border-accent-500 bg-accent-50"
-                        : "border-ink-100 bg-white hover:border-ink-300"
+                        : "border-ink-100 bg-surface-elevated hover:border-ink-300"
                     }`}
                   >
                     {opt}

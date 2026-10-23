@@ -223,7 +223,7 @@ export default function LessonUnitPage({
                     className={`flex-1 rounded-2xl px-4 py-3 text-body shadow-sm ${
                       i % 2 === 1
                         ? "bg-accent-50 border border-accent-100 text-ink-900 rounded-se-md"
-                        : "bg-white border border-ink-100 text-ink-800 rounded-ss-md"
+                        : "bg-surface-elevated border border-ink-100 text-ink-800 rounded-ss-md"
                     }`}
                   >
                     {line}
@@ -344,7 +344,7 @@ export default function LessonUnitPage({
               {unit.review.checklist[locale].map((line, i) => (
                 <li
                   key={i}
-                  className="flex items-center gap-3 rounded-xl bg-white border border-ink-100 px-4 py-3 shadow-sm"
+                  className="flex items-center gap-3 rounded-xl bg-surface-elevated border border-ink-100 px-4 py-3 shadow-sm"
                 >
                   <span className="text-success-600 text-lg">✓</span>
                   <span className="text-body text-ink-800 flex-1">{line}</span>
@@ -383,7 +383,7 @@ export default function LessonUnitPage({
                       ? idx === unit.quiz[quizIndex].correctIndex
                         ? "border-success-500 bg-success-50 shadow-md"
                         : "border-accent-500 bg-accent-50"
-                      : "border-ink-150 bg-white hover:border-ink-300 shadow-sm"
+                      : "border-ink-150 bg-surface-elevated hover:border-ink-300 shadow-sm"
                   }`}
                 >
                   {opt}

@@ -138,7 +138,7 @@ export default function TeacherSessionPage({
           <div className="w-11 h-11 rounded-full bg-accent-100 border border-accent-200 flex items-center justify-center text-lg shrink-0 shadow-sm">
             👩‍🏫
           </div>
-          <div className="rounded-2xl rounded-ss-md bg-white border border-ink-100 px-4 py-3 shadow-sm text-body-sm text-ink-800 text-pretty">
+          <div className="rounded-2xl rounded-ss-md bg-surface-elevated border border-ink-100 px-4 py-3 shadow-sm text-body-sm text-ink-800 text-pretty">
             {session.coach[locale]}
           </div>
         </div>
@@ -210,7 +210,7 @@ export default function TeacherSessionPage({
                         ? idx === questions[qIndex].correctIndex
                           ? "border-success-500 bg-success-50"
                           : "border-accent-500 bg-accent-50"
-                        : "border-ink-100 bg-white hover:border-ink-300"
+                        : "border-ink-100 bg-surface-elevated hover:border-ink-300"
                     }`}
                   >
                     {opt}

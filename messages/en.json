@@ -30,9 +30,9 @@
   "privacy": {
     "title": "Privacy",
     "p1": "Local on device.",
-    "p2": "No server without cloud.",
+    "p2": "Nothing is sent to a server: there are no cloud accounts yet.",
     "p3": "No ads.",
-    "p4": "Updates with cloud.",
+    "p4": "If cloud accounts are added, this page will be updated first.",
     "home": "Home"
   },
   "settings": {
@@ -51,7 +51,11 @@
     "backupTitle": "Progress backup",
     "backupBody": "Progress is stored on this device. Download a JSON backup so you don’t lose it if you clear the browser or switch devices. No cloud account yet — this is the honest workaround.",
     "downloadBackup": "Download backup",
-    "importBackup": "Import backup"
+    "importBackup": "Import backup",
+    "themeTitle": "Appearance",
+    "theme_system": "Match device",
+    "theme_light": "Light",
+    "theme_dark": "Dark"
   },
   "about": {
     "title": "About",
@@ -77,8 +81,8 @@
   },
   "practice": {
     "title": "Review",
-    "subtitle": "Done.",
-    "empty": "None.",
+    "subtitle": "Review goals you have already demonstrated.",
+    "empty": "Nothing to review yet — complete a goal first.",
     "toDashboard": "Dashboard",
     "review": "Practise",
     "back": "Back"
@@ -90,7 +94,7 @@
     "reveal": "Meaning",
     "knew": "Knew",
     "forgot": "Not yet",
-    "caughtUp": "Nothing due.",
+    "caughtUp": "Nothing due for review right now.",
     "addTitle": "Add",
     "termPlaceholder": "Word",
     "translationPlaceholder": "Meaning",
@@ -136,7 +140,7 @@
   },
   "achievements": {
     "title": "Achievements",
-    "subtitle": "Real events.",
+    "subtitle": "Unlocked only by things you actually did.",
     "unlocked": "Unlocked",
     "locked": "Locked",
     "back": "Back",
@@ -256,7 +260,7 @@
     "skipPlacement": "Beginner — start",
     "langTitle": "Language",
     "langBody": "French only.",
-    "frenchOnlyNote": "Quality focus.",
+    "frenchOnlyNote": "French only for now, so the content stays high quality.",
     "pathFull": "Full",
     "pathStarter": "Starter",
     "comingSoon": "Later",
@@ -264,21 +268,21 @@
     "steps": {
       "0": {
         "title": "Welcome",
-        "description": "Questions."
+        "description": "A few short questions to set up your learning."
       },
       "1": {
         "title": "Why?",
-        "description": "Priorities."
+        "description": "What do you want French for?"
       },
       "2": {
         "title": "Situations",
-        "description": "Focus."
+        "description": "Which real-life situations matter most to you?"
       }
     }
   },
   "placement": {
     "title": "Placement",
-    "subtitle": "Optional.",
+    "subtitle": "Optional. It records what you can show today — it is not a pass/fail test.",
     "progress": "{current} / {total}",
     "next": "Next",
     "finish": "Profile",
@@ -287,14 +291,14 @@
   },
   "profile": {
     "title": "Profile",
-    "subtitle": "Observed.",
-    "startingPoint": "Start",
-    "levelEstimate": "Around {level}",
-    "levelUnknown": "…",
-    "levelNote": "Estimate.",
-    "evidenceTitle": "Evidence",
-    "evidenceNote": "—",
-    "goToDashboard": "Dashboard",
+    "subtitle": "What placement actually observed — nothing is guessed.",
+    "startingPoint": "Suggested starting point",
+    "levelEstimate": "Start at {level}",
+    "levelUnknown": "Not enough evidence yet",
+    "levelNote": "A starting point for lessons, not a certified CEFR level.",
+    "evidenceTitle": "Evidence by skill",
+    "evidenceNote": "“Not assessed” means there is no evidence yet — not that you failed.",
+    "goToDashboard": "Go to dashboard",
     "dim_vocabulary": "Vocabulary",
     "dim_grammar": "Grammar",
     "dim_reading": "Reading",
@@ -408,7 +412,7 @@
     "intro": "Path → practice → words → speech → exam. Back up progress in Settings."
   },
   "learn": {
-    "notFound": "Not found",
+    "notFound": "Goal not found",
     "backToDashboard": "Back",
     "writePlaceholder": "…",
     "selfAssessPrompt": "?",
@@ -417,7 +421,7 @@
     "checkUnderstanding": "…",
     "understood": "OK",
     "feedbackRecorded": "Noted",
-    "feedbackNote": "Self",
+    "feedbackNote": "Self-review: this answer was not checked automatically.",
     "continue": "Continue",
     "finish": "Finish",
     "exit": "Exit",
@@ -426,20 +430,20 @@
   },
   "progress": {
     "title": "Progress",
-    "subtitle": "Demonstrated.",
+    "subtitle": "Only what you have demonstrated — nothing estimated.",
     "demonstrated": "Done",
-    "noneYet": "None.",
+    "noneYet": "No goals demonstrated yet.",
     "scenarioProgress": "{done}/{total}",
-    "note": "Evidence.",
+    "note": "Progress comes from completed tasks, not from time spent.",
     "back": "Back"
   },
   "resources": {
     "title": "Materials",
-    "subtitle": "On site.",
-    "inAppNote": "Bonjour.",
-    "allLevels": "Levels",
-    "pick": "Pick",
-    "vocab": "Vocab",
+    "subtitle": "Reading and practice materials, all on this site.",
+    "inAppNote": "Everything opens inside Bonjour — no external sites needed.",
+    "allLevels": "All levels",
+    "pick": "Pick a material to open it.",
+    "vocab": "Key vocabulary",
     "listen": "Listen",
     "listenWord": "Listen",
     "ttsNote": "Browser",
@@ -447,29 +451,29 @@
     "check": "Check",
     "correct": "Yes",
     "tryAgain": "Retry",
-    "empty": "Empty",
+    "empty": "No materials for this level yet.",
     "back": "Back"
   },
   "realLife": {
     "title": "Real life",
-    "subtitle": "Notes.",
+    "subtitle": "Note when you used French outside the app.",
     "situation": "Situation",
     "situationPlaceholder": "…",
-    "note": "Note",
+    "note": "What did you say or understand?",
     "notePlaceholder": "…",
     "save": "Save",
-    "listTitle": "List",
-    "empty": "—",
+    "listTitle": "Your notes",
+    "empty": "No notes yet.",
     "defaultSituation": "Everyday",
     "back": "Back"
   },
   "auth": {
     "title": "Sign in",
-    "subtitle": "Account",
-    "localMode": "Local.",
-    "continueLocal": "Continue",
-    "supabaseReady": "Ready",
-    "backHome": "Home"
+    "subtitle": "Accounts and syncing across devices.",
+    "localMode": "There are no online accounts yet. Your progress is saved on this device only — use Settings → Backup to keep a copy.",
+    "continueLocal": "Continue on this device",
+    "supabaseReady": "Cloud accounts are configured, but sign-in is not built yet. Your progress stays on this device for now.",
+    "backHome": "Back to home"
   },
   "path": {
     "eyebrow": "Structured path",

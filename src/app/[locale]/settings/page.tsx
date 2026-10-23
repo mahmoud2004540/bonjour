@@ -11,6 +11,13 @@ import {
   downloadBackupFile,
   importBackup,
 } from "@/application/learner-store";
+import {
+  getThemePreference,
+  setThemePreference,
+  type ThemePreference,
+} from "@/application/theme";
+
+const THEMES: ThemePreference[] = ["system", "light", "dark"];
 
 export default function SettingsPage() {
   const t = useTranslations("settings");
@@ -19,10 +26,17 @@ export default function SettingsPage() {
   const [cleared, setCleared] = useState(false);
   const [hasProfile, setHasProfile] = useState(false);
   const [importMsg, setImportMsg] = useState<string | null>(null);
+  const [theme, setTheme] = useState<ThemePreference>("system");
 
   useEffect(() => {
     setHasProfile(!!getStoredProfile());
+    setTheme(getThemePreference());
   }, []);
+
+  function chooseTheme(pref: ThemePreference) {
+    setThemePreference(pref);
+    setTheme(pref);
+  }
 
   function handleClear() {
     if (!window.confirm(t("confirm"))) return;
@@ -63,6 +77,30 @@ export default function SettingsPage() {
     <div className="max-w-content mx-auto px-6 py-16 md:py-20">
       <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
       <p className="text-body text-ink-600 mb-8 text-pretty">{t("subtitle")}</p>
+
+      <Card className="mb-6">
+        <h2 id="theme-heading" className="text-body font-bold text-ink-900 mb-3">
+          {t("themeTitle")}
+        </h2>
+        <div role="radiogroup" aria-labelledby="theme-heading" className="flex flex-wrap gap-2">
+          {THEMES.map((pref) => (
+            <button
+              key={pref}
+              type="button"
+              role="radio"
+              aria-checked={theme === pref}
+              onClick={() => chooseTheme(pref)}
+              className={`min-h-11 px-4 rounded-xl border-2 text-body-sm font-semibold transition-colors ${
+                theme === pref
+                  ? "border-ink-950 bg-ink-950 text-surface"
+                  : "border-ink-200 text-ink-800 hover:border-ink-400"
+              }`}
+            >
+              {t(`theme_${pref}`)}
+            </button>
+          ))}
+        </div>
+      </Card>
 
       {/* Backup — closes the “no cloud account” gap honestly */}
       <Card className="mb-6">

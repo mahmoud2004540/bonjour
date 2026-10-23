@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="text-body text-ink-600 mb-8">Page not found.</p>
       <Link
         href="/"
-        className="inline-flex h-10 px-5 items-center rounded-lg bg-ink-950 text-white text-sm font-medium"
+        className="inline-flex h-10 px-5 items-center rounded-lg bg-ink-950 text-surface text-sm font-medium"
       >
         Home
       </Link>
