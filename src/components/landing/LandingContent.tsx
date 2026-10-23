@@ -102,7 +102,7 @@ export function LandingContent() {
           {["feel1", "feel2", "feel3"].map((key, i) => (
             <div
               key={key}
-              className="relative rounded-2xl p-5 bg-white/5 border border-white/10 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-2 hover:bg-white/10"
+              className="relative rounded-2xl p-5 bg-white/5 border border-white/10 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-0.5 hover:bg-white/10"
               style={{ transform: `translateZ(${i * 8}px)` }}
             >
               <span className="text-overline text-accent-400 mb-3 block">0{i + 1}</span>

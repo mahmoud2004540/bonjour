@@ -87,7 +87,7 @@ export default function PlacementPage() {
       </div>
 
       <Card>
-        <p className="text-body-lg text-ink-900 mb-7 text-pretty">
+        <p id="placement-prompt" className="text-body-lg text-ink-900 mb-7 text-pretty">
           {question.prompt[locale]}
         </p>
 
@@ -97,6 +97,7 @@ export default function PlacementPage() {
               <button
                 key={idx}
                 type="button"
+                aria-pressed={answers[question.id] === idx}
                 onClick={() => selectOption(idx)}
                 className={`w-full text-start px-4 py-3.5 rounded-xl border transition-all duration-150 ${
                   answers[question.id] === idx
@@ -112,6 +113,7 @@ export default function PlacementPage() {
 
         {question.type === "open" && (
           <textarea
+            aria-labelledby="placement-prompt"
             value={openText}
             onChange={(e) => setOpenText(e.target.value)}
             rows={4}

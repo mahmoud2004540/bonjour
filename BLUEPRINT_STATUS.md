@@ -35,12 +35,18 @@ practice, real-life log, settings, privacy, domain checks, architecture notes.
 - **Design system** — colors are CSS-variable tokens; light + dark themes (follows the device,
   or choose in Settings).
 
+- **Materials in French** — every on-site material has a French note and every term a French
+  gloss (`domain/resources/materials-fr.ts`, enforced by a test).
+- **Motion** — hover lifts of 1–2px at ~150–200ms, no idle 3D tilt, no infinite decorative
+  animation; loading skeletons and progress transitions kept; reduced-motion respected.
+- **Browser tests** — Playwright (`npm run test:e2e`, mobile + desktop) runs in CI before deploy:
+  EN/FR/AR direction and language, no raw keys, no horizontal scroll, single landmark, skip
+  link, onboarding → placement → honest profile → dashboard, no placement retake, theme choice.
+
 ## Remaining
 
 - Same full task chain on remaining A1 scenarios (courses, transport, …)
-- French versions of resource glosses (content data currently has ar/en only)
-- End-to-end and visual regression tests (Playwright) in CI
-- Motion pass: heavy 3D hover transforms vs. the blueprint's "fast, subtle" rule
+- Visual regression snapshots (screenshot diffs) once the design stabilises
 
 ## Blocked on keys/assets
 

@@ -10,6 +10,7 @@ import {
   MATERIAL_LEVELS,
   type MaterialItem,
 } from "@/domain/resources/materials";
+import { getGloss, getMaterialNote } from "@/domain/resources/materials-fr";
 import type { CefrLevel } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
@@ -120,7 +121,7 @@ function MaterialView({
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState<"idle" | "ok" | "no">("idle");
 
-  const support = locale === "ar" ? item.bodyAr : item.bodyEn;
+  const support = getMaterialNote(item, locale);
 
   function check() {
     if (!item.exercise) return;
@@ -175,7 +176,7 @@ function MaterialView({
                   {v.fr}
                 </span>
                 <span className="text-ink-600">
-                  {locale === "ar" ? v.ar : v.en}
+                  {getGloss(v, locale)}
                 </span>
                 <button
                   type="button"

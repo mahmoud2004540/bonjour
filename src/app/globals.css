@@ -244,7 +244,7 @@
   .btn-primary {
     @apply inline-flex items-center justify-center h-11 px-6 rounded-xl
            bg-ink-950 text-surface font-medium text-body
-           transition-all duration-300 ease-out
+           transition-[transform,box-shadow,filter] duration-150 ease-out
            focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2
            disabled:opacity-50 disabled:pointer-events-none;
     box-shadow:
@@ -253,7 +253,7 @@
       inset 0 1px 0 rgb(var(--highlight) / 0.12);
   }
   .btn-primary:hover {
-    transform: translateY(-4px) scale(1.03);
+    transform: translateY(-1px);
     box-shadow:
       0 6px 0 rgba(0, 0, 0, 0.18),
       0 18px 36px rgb(var(--shadow) / 0.32),
@@ -266,7 +266,7 @@
   .btn-accent {
     @apply inline-flex items-center justify-center h-11 px-6 rounded-xl
            bg-accent-600 text-white font-medium text-body
-           transition-all duration-300 ease-out
+           transition-[transform,box-shadow,filter] duration-150 ease-out
            focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2
            disabled:opacity-50 disabled:pointer-events-none;
     box-shadow:
@@ -275,7 +275,7 @@
       inset 0 1px 0 rgb(var(--highlight) / 0.28);
   }
   .btn-accent:hover {
-    transform: translateY(-4px) scale(1.03);
+    transform: translateY(-1px);
     filter: brightness(1.06);
     box-shadow:
       0 7px 0 #823226,
@@ -283,7 +283,7 @@
       inset 0 1px 0 rgb(var(--highlight) / 0.35);
   }
   .btn-accent:active {
-    transform: translateY(2px);
+    transform: translateY(1px);
     box-shadow:
       0 1px 0 #9a3d2c,
       0 4px 12px rgba(224, 106, 84, 0.3);
@@ -292,7 +292,7 @@
   .btn-secondary {
     @apply inline-flex items-center justify-center h-11 px-6 rounded-xl
            border border-ink-200 text-ink-800 font-medium text-body bg-surface-elevated
-           transition-all duration-300 ease-out
+           transition-[transform,box-shadow,filter] duration-150 ease-out
            focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2
            disabled:opacity-50 disabled:pointer-events-none;
     box-shadow:
@@ -301,7 +301,7 @@
       inset 0 1px 0 rgb(var(--highlight));
   }
   .btn-secondary:hover {
-    transform: translateY(-3px);
+    transform: translateY(-1px);
     box-shadow:
       0 5px 0 rgb(var(--shadow) / 0.08),
       0 14px 28px rgb(var(--shadow) / 0.14),
@@ -328,8 +328,8 @@
       0 16px 32px rgb(var(--shadow) / 0.1),
       0 40px 72px rgb(var(--shadow) / 0.08);
     transition:
-      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.45s ease;
+      transform 0.18s ease-out,
+      box-shadow 0.18s ease-out;
   }
 
   .card-3d {
@@ -337,7 +337,7 @@
   }
 
   .card-3d:hover {
-    transform: translateY(-14px) rotateX(6deg) rotateY(-4deg) scale(1.02);
+    transform: translateY(-2px);
     box-shadow:
       0 1px 0 rgb(var(--highlight)) inset,
       0 8px 16px rgb(var(--shadow) / 0.08),
@@ -359,8 +359,8 @@
 
   .hero-3d {
     transform-style: preserve-3d;
-    transform: rotateY(-12deg) rotateX(8deg) translateZ(0);
-    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: none;
+    transition: transform 0.2s ease-out;
     box-shadow:
       0 2px 0 rgb(var(--highlight) / 0.95) inset,
       0 12px 24px rgb(var(--shadow) / 0.1),
@@ -369,7 +369,7 @@
   }
 
   .hero-3d:hover {
-    transform: rotateY(-5deg) rotateX(4deg) translateY(-16px) translateZ(32px);
+    transform: translateY(-2px);
   }
 
   .hero-3d-back {
@@ -391,17 +391,8 @@
     z-index: -1;
   }
 
+  /* Kept as a hook; decorative infinite motion removed (blueprint: purposeful motion) */
   .float-3d {
-    animation: float3d 5s ease-in-out infinite;
-  }
-
-  @keyframes float3d {
-    0%, 100% {
-      transform: translateY(0) rotateX(0deg) rotateY(-12deg);
-    }
-    50% {
-      transform: translateY(-18px) rotateX(3deg) rotateY(-8deg);
-    }
   }
 
   .layer-stack {
@@ -431,7 +422,7 @@
 
   .step-3d {
     transform-style: preserve-3d;
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
     box-shadow:
       0 1px 0 rgb(var(--highlight)) inset,
       0 8px 20px rgb(var(--shadow) / 0.1),
@@ -439,7 +430,7 @@
   }
 
   .step-3d:hover {
-    transform: translateY(-10px) rotateX(4deg) scale(1.04);
+    transform: translateY(-2px);
     box-shadow:
       0 1px 0 rgb(var(--highlight)) inset,
       0 16px 32px rgb(var(--shadow) / 0.14),
@@ -457,11 +448,11 @@
   /* Path nodes — strong 3D */
   .node-3d {
     transform-style: preserve-3d;
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
   }
 
   .node-3d:hover {
-    transform: translateY(-8px) scale(1.08) rotateX(8deg);
+    transform: translateY(-2px);
   }
 
   .node-3d-current {
@@ -470,16 +461,6 @@
       0 8px 0 #9a3d2c,
       0 16px 32px rgba(224, 106, 84, 0.45),
       0 28px 56px rgb(var(--shadow) / 0.15);
-    animation: nodePulse 2.2s ease-in-out infinite;
-  }
-
-  @keyframes nodePulse {
-    0%, 100% {
-      transform: translateY(0) scale(1);
-    }
-    50% {
-      transform: translateY(-6px) scale(1.04);
-    }
   }
 
   .node-3d-done {
@@ -500,11 +481,11 @@
       0 1px 0 rgb(var(--highlight)) inset,
       0 12px 28px rgb(var(--shadow) / 0.1),
       0 32px 64px rgb(var(--shadow) / 0.08);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
   }
 
   .level-block-3d:hover {
-    transform: translateY(-6px) rotateX(2deg);
+    transform: translateY(-2px);
     box-shadow:
       0 1px 0 rgb(var(--highlight)) inset,
       0 18px 40px rgb(var(--shadow) / 0.14),

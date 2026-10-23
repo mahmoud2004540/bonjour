@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "check:domain": "node scripts/domain-checks.mjs",
     "test": "vitest run",
-    "check": "npm run typecheck && npm run lint && npm run test && npm run check:domain"
+    "check": "npm run typecheck && npm run lint && npm run test && npm run check:domain",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.7",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

@@ -67,3 +67,13 @@ describe("recommendations", () => {
     }
   });
 });
+
+describe("materials in French", () => {
+  it("every material has a French note and every term a French gloss", async () => {
+    const { MATERIALS } = await import("@/domain/resources/materials");
+    const { NOTE_FR, GLOSS_FR } = await import("@/domain/resources/materials-fr");
+    expect(MATERIALS.filter((m) => !NOTE_FR[m.id]).map((m) => m.id)).toEqual([]);
+    const terms = MATERIALS.flatMap((m) => (m.vocabulary ?? []).map((v) => v.fr));
+    expect(terms.filter((t) => !GLOSS_FR[t])).toEqual([]);
+  });
+});

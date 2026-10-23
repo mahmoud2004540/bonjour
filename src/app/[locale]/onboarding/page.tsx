@@ -105,12 +105,12 @@ export default function OnboardingPage() {
         {step === 0 && (
           <div className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-ink-700 mb-1.5">{t("nameLabel")}</label>
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="input-field" placeholder={t("namePlaceholder")} autoComplete="name" />
+              <label htmlFor="onb-name" className="block text-sm font-medium text-ink-700 mb-1.5">{t("nameLabel")}</label>
+              <input id="onb-name" type="text" value={name} onChange={(e) => setName(e.target.value)} className="input-field" placeholder={t("namePlaceholder")} autoComplete="name" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink-700 mb-1.5">{t("emailLabel")}</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-field" placeholder={t("emailPlaceholder")} autoComplete="email" />
+              <label htmlFor="onb-email" className="block text-sm font-medium text-ink-700 mb-1.5">{t("emailLabel")}</label>
+              <input id="onb-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-field" placeholder={t("emailPlaceholder")} autoComplete="email" />
             </div>
           </div>
         )}
@@ -136,6 +136,7 @@ export default function OnboardingPage() {
                   <button
                     key={m}
                     type="button"
+                    aria-pressed={dailyMinutes === m}
                     onClick={() => setDailyMinutes(m)}
                     className={`px-3 py-2 rounded-lg border text-sm ${
                       dailyMinutes === m ? "border-accent-500 bg-accent-50" : "border-ink-200"
@@ -152,7 +153,7 @@ export default function OnboardingPage() {
         {step === 2 && (
           <div className="space-y-2.5">
             {OBJECTIVES.map((obj) => (
-              <button key={obj.id} type="button" onClick={() => toggle(objectives, obj.id, setObjectives)}
+              <button key={obj.id} type="button" aria-pressed={objectives.includes(obj.id)} onClick={() => toggle(objectives, obj.id, setObjectives)}
                 className={`w-full text-start px-4 py-3.5 rounded-xl border ${
                   objectives.includes(obj.id) ? "border-accent-500 bg-accent-50" : "border-ink-200"
                 }`}>{obj[locale]}</button>
@@ -163,7 +164,7 @@ export default function OnboardingPage() {
         {step === 3 && (
           <div className="space-y-2.5">
             {SITUATIONS.map((sit) => (
-              <button key={sit.id} type="button" onClick={() => toggle(situations, sit.id, setSituations)}
+              <button key={sit.id} type="button" aria-pressed={situations.includes(sit.id)} onClick={() => toggle(situations, sit.id, setSituations)}
                 className={`w-full text-start px-4 py-3.5 rounded-xl border ${
                   situations.includes(sit.id) ? "border-accent-500 bg-accent-50" : "border-ink-200"
                 }`}>{sit[locale]}</button>

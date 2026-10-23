@@ -170,7 +170,7 @@ export default function LessonUnitPage({
           </Link>
           <div className="flex-1 h-3 rounded-full bg-ink-100 overflow-hidden">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-accent-500 to-accent-600 transition-all duration-500"
+              className="h-full rounded-full bg-gradient-to-r from-accent-500 to-accent-600 transition-[width] duration-300"
               style={{ width: `${progressPct}%` }}
             />
           </div>
