@@ -167,7 +167,11 @@ export default function PracticeLabPage() {
     setTts(canSpeak());
   }, [router]);
 
-  const drills = useMemo(() => buildDrills(locale), [locale, seed]);
+  // `seed` changes on "new round" to reshuffle the drills.
+  const drills = useMemo(() => {
+    void seed;
+    return buildDrills(locale);
+  }, [locale, seed]);
 
   if (!profile) {
     return (

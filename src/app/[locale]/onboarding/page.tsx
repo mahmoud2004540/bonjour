@@ -62,7 +62,7 @@ export default function OnboardingPage() {
       situations,
       availability: `${dailyMinutes}m`,
       preferredStyle: "",
-      targetLanguage: "fr",
+      targetLanguage,
       dailyMinutes,
     });
     trackEvent("onboarding_complete", { lang: "fr" });

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 /**
  * Root → default locale (static-friendly redirect).
  */
@@ -6,7 +8,7 @@ export default function RootPage() {
     <div style={{ fontFamily: "system-ui", padding: "2rem", textAlign: "center" }}>
       <p>Redirecting…</p>
       <p>
-        <a href="/bonjour/en/">Continue to Bonjour</a>
+        <Link href="/en/">Continue to Bonjour</Link>
       </p>
       <script
         dangerouslySetInnerHTML={{

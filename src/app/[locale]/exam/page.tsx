@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -12,11 +12,9 @@ import {
 } from "@/domain/lessons/registry";
 import { getStoredProfile } from "@/application/learner-store";
 import type { LearnerProfile } from "@/domain/types";
-import type { Locale } from "@/i18n/config";
 
 export default function ExamHubPage() {
   const t = useTranslations("exam");
-  const locale = useLocale() as Locale;
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
 
