@@ -98,11 +98,7 @@ export default function PathPage() {
               href={`/lesson/${next.id}`}
               className="inline-flex items-center rounded-xl bg-accent-600 px-4 py-2 text-sm font-bold text-white shadow-[0_3px_0_#9a3d2c] hover:bg-accent-700"
             >
-              {locale === "ar"
-                ? "كمّل من هنا ←"
-                : locale === "fr"
-                  ? "Continuer →"
-                  : "Continue →"}
+              {t("continueHere")}
             </Link>
           )}
         </div>
@@ -255,26 +251,18 @@ export default function PathPage() {
                             </p>
                             {isExam && (
                               <p className="text-caption text-ink-400">
-                                {locale === "ar"
-                                  ? "اختبار نهاية المستوى"
-                                  : locale === "fr"
-                                    ? "Épreuve de fin de niveau"
-                                    : "End-of-level check"}
+                                {t("endOfLevel")}
                               </p>
                             )}
                           </div>
                           {isCurrent && (
                             <span className="shrink-0 text-caption font-bold text-accent-700 bg-accent-100 px-2.5 py-1 rounded-lg">
-                              {locale === "ar"
-                                ? "الآن"
-                                : locale === "fr"
-                                  ? "En cours"
-                                  : "Now"}
+                              {t("now")}
                             </span>
                           )}
                           {done && !isCurrent && (
                             <span className="shrink-0 text-caption font-bold text-success-700">
-                              {locale === "ar" ? "تم" : "Done"}
+                              {t("done")}
                             </span>
                           )}
                         </div>
@@ -317,20 +305,12 @@ export default function PathPage() {
       <footer className="mt-12 flex flex-col sm:flex-row gap-3 justify-center items-center">
         <Link href="/practice-lab">
           <Button variant="accent">
-            {locale === "ar"
-              ? "معمل الممارسة"
-              : locale === "fr"
-                ? "Labo de pratique"
-                : "Practice lab"}
+            {t("practiceLab")}
           </Button>
         </Link>
         <Link href="/exam">
           <Button variant="secondary">
-            {locale === "ar"
-              ? "محاكاة امتحان"
-              : locale === "fr"
-                ? "Examen blanc"
-                : "Mock exam"}
+            {t("mockExam")}
           </Button>
         </Link>
         <Link

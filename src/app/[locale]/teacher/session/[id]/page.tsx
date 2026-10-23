@@ -133,7 +133,7 @@ export default function TeacherSessionPage({
         </div>
       </header>
 
-      <main className="flex-1 px-4 py-6 pb-24">
+      <div className="flex-1 px-4 py-6 pb-24">
         <div className="flex gap-3 mb-6">
           <div className="w-11 h-11 rounded-full bg-accent-100 border border-accent-200 flex items-center justify-center text-lg shrink-0 shadow-sm">
             👩‍🏫
@@ -341,7 +341,7 @@ export default function TeacherSessionPage({
             </Link>
           </Card>
         )}
-      </main>
+      </div>
     </div>
   );
 }

@@ -12,7 +12,12 @@
     "scenarios": "Scénarios",
     "about": "À propos",
     "signIn": "Connexion",
-    "getStarted": "Commencer"
+    "getStarted": "Commencer",
+    "menu": "Menu",
+    "close": "Fermer",
+    "myDashboard": "Tableau de bord",
+    "learnSections": "Apprendre",
+    "interfaceLanguage": "Langue de l'interface"
   },
   "footer": {
     "about": "À propos",
@@ -40,7 +45,13 @@
     "cleared": "Effacé.",
     "dashboard": "Tableau de bord",
     "home": "Accueil",
-    "restart": "Recommencer"
+    "restart": "Recommencer",
+    "importOk": "Sauvegarde restaurée — actualisez la page.",
+    "importBad": "Fichier invalide. Utilisez une sauvegarde exportée depuis Bonjour.",
+    "backupTitle": "Sauvegarde de la progression",
+    "backupBody": "Votre progression est enregistrée sur cet appareil. Téléchargez une sauvegarde JSON pour ne rien perdre si vous videz le navigateur ou changez d’appareil. Pas encore de compte en ligne — c’est la solution honnête en attendant.",
+    "downloadBackup": "Télécharger la sauvegarde",
+    "importBackup": "Importer une sauvegarde"
   },
   "about": {
     "title": "À propos",
@@ -85,7 +96,14 @@
     "translationPlaceholder": "Sens",
     "add": "Ajouter",
     "allTitle": "Liste ({count})",
-    "back": "Retour"
+    "back": "Retour",
+    "onDevice": "Sur cet appareil : {count} mots (révision + progression)",
+    "bankSize": "Taille de la banque de mots dans cette version ≈ {total} entrées (A1 {a1} · A2 {a2} · B1 {b1} · B2 {b2}) — en cours d'extension.",
+    "all": "Tous",
+    "noneDue": "Aucun mot à réviser pour l'instant — parcourez la banque ci-dessous ou ajoutez un mot.",
+    "browseLevel": "Parcourir les mots du niveau",
+    "teacherPacks": "Séances de vocabulaire (professeur)",
+    "backup": "Sauvegarder la progression"
   },
   "tutor": {
     "title": "Tuteur",
@@ -214,7 +232,8 @@
     "error": "Erreur",
     "retry": "Réessayer",
     "continue": "Continuer",
-    "back": "Retour"
+    "back": "Retour",
+    "skipToContent": "Aller au contenu"
   },
   "onboarding": {
     "step": "{current} / {total}",
@@ -334,7 +353,50 @@
     "statGoals": "Objectifs démontrés",
     "statStudyDays": "Jours d'étude d'affilée",
     "statUnits": "Leçons",
-    "statReady": "Programme terminé"
+    "statReady": "Programme terminé",
+    "hub": {
+      "path": {
+        "title": "Parcours des leçons",
+        "body": "Leçon après leçon — de A1 à C2",
+        "cta": "Ouvrir le parcours"
+      },
+      "practiceLab": {
+        "title": "Labo de pratique",
+        "body": "Exercices d’écriture, d’écoute et quiz",
+        "cta": "Commencer"
+      },
+      "vocabulary": {
+        "due": "{count} à réviser",
+        "title": "Vocabulaire",
+        "body": "Grande banque de mots par niveau",
+        "cta": "Réviser les mots"
+      },
+      "speech": {
+        "title": "Prononciation",
+        "body": "Parlez et comparez — estimation du navigateur",
+        "cta": "S’entraîner"
+      },
+      "listening": {
+        "title": "Écoute",
+        "body": "Textes complets de A1 à C2",
+        "cta": "Écouter"
+      },
+      "exam": {
+        "title": "Examen blanc",
+        "body": "Préparation DELF/DALF — diplôme délivré par un centre",
+        "cta": "Se préparer"
+      },
+      "settings": {
+        "title": "Réglages et sauvegarde",
+        "body": "Exportez votre progression pour ne pas la perdre",
+        "cta": "Ouvrir les réglages"
+      }
+    },
+    "preparing": "Préparation de votre tableau de bord… Première visite : inscription rapide.",
+    "sections": "Rubriques d’apprentissage",
+    "footerStats": "Programme A1 terminé : {pct} % · Mots à réviser : {due}",
+    "resetConfirm": "Supprimer toute la progression sur cet appareil ? Action irréversible.",
+    "intro": "Parcours → pratique → mots → prononciation → examen. Sauvegardez votre progression dans les réglages."
   },
   "learn": {
     "notFound": "Introuvable",
@@ -418,7 +480,13 @@
     "levelCompleteNext": "✓ Niveau terminé — {next} débloqué",
     "afterCurrent": "Après la leçon en cours",
     "lessonsDone": "Leçons",
-    "studyDays": "Jours d'étude"
+    "studyDays": "Jours d'étude",
+    "continueHere": "Continuer →",
+    "endOfLevel": "Épreuve de fin de niveau",
+    "now": "En cours",
+    "done": "Terminé",
+    "practiceLab": "Labo de pratique",
+    "mockExam": "Examen blanc"
   },
   "exam": {
     "eyebrow": "Préparation à l'examen officiel",
@@ -500,7 +568,10 @@
     "hard": "Difficile",
     "knew": "Je savais",
     "sessionDone": "Terminé",
-    "score": "{score}/{total}"
+    "score": "{score}/{total}",
+    "speechTitle": "Prononciation (approximative)",
+    "speechBody": "Parlez dans le navigateur → comparaison automatique avec le texte cible. Ce n’est pas une note DELF officielle.",
+    "openSpeech": "Ouvrir l’exercice de prononciation"
   },
   "academy": {
     "eyebrow": "Parcours universitaire sur le site",
@@ -540,5 +611,38 @@
     "backList": "Liste des chapitres",
     "exit": "Quitter",
     "notFound": "Introuvable"
+  },
+  "speech": {
+    "disclaimer": "Évaluation approximative du navigateur (parole → texte). Ce n'est pas un score DELF officiel.",
+    "errMic": "Autorisez l'accès au micro dans le navigateur.",
+    "errTimeout": "Délai dépassé — réessayez plus distinctement.",
+    "errUnsupported": "Reconnaissance non prise en charge — essayez Chrome ou Edge.",
+    "errOther": "Erreur : {error}",
+    "dashboard": "Tableau de bord",
+    "title": "Prononciation",
+    "noRecognition": "La reconnaissance vocale nécessite Chrome ou Edge avec l'accès au micro.",
+    "hearTarget": "Écouter la cible",
+    "listening": "J'écoute…",
+    "speakNow": "Parlez",
+    "nextLine": "Phrase suivante",
+    "wordOverlap": "Mots en commun (approx.)",
+    "heard": "Entendu :",
+    "attempts": "Essais : {count}",
+    "toListening": "Écoute",
+    "toTeacher": "Professeur",
+    "toPath": "Parcours"
+  },
+  "listening": {
+    "dashboard": "Tableau de bord",
+    "title": "Écoute prolongée",
+    "subtitle": "Textes plus longs lus par la synthèse vocale du navigateur. Écoutez en entier, puis affichez le texte et répétez les phrases clés.",
+    "noTts": "Synthèse vocale indisponible — vous pouvez quand même lire et vous entraîner à voix haute.",
+    "playFull": "Tout écouter",
+    "hideText": "Masquer le texte",
+    "showText": "Afficher le texte",
+    "focusLines": "Phrases clés :",
+    "plays": "Écoutes pendant cette séance : {count}",
+    "toPracticeLab": "Labo de pratique",
+    "toPath": "Parcours"
   }
 }

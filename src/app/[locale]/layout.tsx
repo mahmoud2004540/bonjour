@@ -1,5 +1,5 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { isRtl, isValidLocale } from "@/i18n/config";
@@ -24,6 +24,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const t = await getTranslations("common");
   const dir = isRtl(locale) ? "rtl" : "ltr";
 
   return (
@@ -37,7 +38,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:start-2 focus:z-[100] focus:bg-ink-950 focus:text-white focus:px-3 focus:py-2 focus:rounded-lg"
         >
-          Skip to content
+          {t("skipToContent")}
         </a>
         <Header />
         <main id="main-content" className="flex-1">

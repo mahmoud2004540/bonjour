@@ -236,7 +236,7 @@ export default function PracticeLabPage() {
         </div>
       </header>
 
-      <main className="flex-1 px-4 py-6 pb-24">
+      <div className="flex-1 px-4 py-6 pb-24">
         <Card className="mb-4 border-accent-100 bg-accent-50/30">
           <p className="text-body-sm text-ink-700 text-pretty">{c.instituteNote}</p>
         </Card>
@@ -371,7 +371,7 @@ export default function PracticeLabPage() {
             </div>
           </Card>
         )}
-      </main>
+      </div>
     </div>
   );
 }

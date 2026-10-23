@@ -12,7 +12,12 @@
     "scenarios": "Scenarios",
     "about": "About",
     "signIn": "Sign in",
-    "getStarted": "Start now"
+    "getStarted": "Start now",
+    "menu": "Menu",
+    "close": "Close",
+    "myDashboard": "Dashboard",
+    "learnSections": "Learn",
+    "interfaceLanguage": "Interface language"
   },
   "footer": {
     "about": "About",
@@ -40,7 +45,13 @@
     "cleared": "Cleared.",
     "dashboard": "Dashboard",
     "home": "Home",
-    "restart": "Restart"
+    "restart": "Restart",
+    "importOk": "Backup restored — refresh the page.",
+    "importBad": "Invalid file. Use a Bonjour backup export.",
+    "backupTitle": "Progress backup",
+    "backupBody": "Progress is stored on this device. Download a JSON backup so you don’t lose it if you clear the browser or switch devices. No cloud account yet — this is the honest workaround.",
+    "downloadBackup": "Download backup",
+    "importBackup": "Import backup"
   },
   "about": {
     "title": "About",
@@ -85,7 +96,14 @@
     "translationPlaceholder": "Meaning",
     "add": "Add",
     "allTitle": "List ({count})",
-    "back": "Back"
+    "back": "Back",
+    "onDevice": "On this device: {count} words (review + progress)",
+    "bankSize": "Curriculum bank size in this build ≈ {total} entries (A1 {a1} · A2 {a2} · B1 {b1} · B2 {b2}) — still expanding.",
+    "all": "All",
+    "noneDue": "No words due right now — browse the bank below or add a word.",
+    "browseLevel": "Browse level words",
+    "teacherPacks": "Teacher vocab packs",
+    "backup": "Backup progress"
   },
   "tutor": {
     "title": "Tutor",
@@ -223,7 +241,8 @@
     "error": "Error",
     "retry": "Retry",
     "continue": "Continue",
-    "back": "Back"
+    "back": "Back",
+    "skipToContent": "Skip to content"
   },
   "onboarding": {
     "step": "{current} / {total}",
@@ -343,7 +362,50 @@
     "statGoals": "Goals demonstrated",
     "statStudyDays": "Study days in a row",
     "statUnits": "Lessons",
-    "statReady": "Curriculum done"
+    "statReady": "Curriculum done",
+    "hub": {
+      "path": {
+        "title": "Learning path",
+        "body": "Lesson by lesson — A1 to C2",
+        "cta": "Open path"
+      },
+      "practiceLab": {
+        "title": "Practice lab",
+        "body": "Writing, listening and quiz drills",
+        "cta": "Start practice"
+      },
+      "vocabulary": {
+        "due": "{count} due for review",
+        "title": "Vocabulary",
+        "body": "Large word bank by level",
+        "cta": "Review words"
+      },
+      "speech": {
+        "title": "Pronunciation",
+        "body": "Speak & match — browser estimate",
+        "cta": "Practice speech"
+      },
+      "listening": {
+        "title": "Listening",
+        "body": "Full passages A1–C2",
+        "cta": "Listen"
+      },
+      "exam": {
+        "title": "Mock exam",
+        "body": "DELF/DALF prep — certificate from a centre",
+        "cta": "Exam prep"
+      },
+      "settings": {
+        "title": "Settings & backup",
+        "body": "Export progress so it is not lost on this device",
+        "cta": "Open settings"
+      }
+    },
+    "preparing": "Preparing your dashboard… First visit goes to signup.",
+    "sections": "Learning sections",
+    "footerStats": "A1 curriculum done: {pct}% · Words due: {due}",
+    "resetConfirm": "Delete all progress on this device? This cannot be undone.",
+    "intro": "Path → practice → words → speech → exam. Back up progress in Settings."
   },
   "learn": {
     "notFound": "Not found",
@@ -427,7 +489,13 @@
     "levelCompleteNext": "✓ Level complete — {next} unlocked",
     "afterCurrent": "After the current lesson",
     "lessonsDone": "Lessons",
-    "studyDays": "Study days"
+    "studyDays": "Study days",
+    "continueHere": "Continue →",
+    "endOfLevel": "End-of-level check",
+    "now": "Now",
+    "done": "Done",
+    "practiceLab": "Practice lab",
+    "mockExam": "Mock exam"
   },
   "exam": {
     "eyebrow": "Official exam prep",
@@ -509,7 +577,10 @@
     "hard": "Hard",
     "knew": "I knew it",
     "sessionDone": "Done",
-    "score": "{score}/{total}"
+    "score": "{score}/{total}",
+    "speechTitle": "Pronunciation (approximate)",
+    "speechBody": "Speak in the browser → automatic text match. Not an official DELF score.",
+    "openSpeech": "Open speech practice"
   },
   "academic": {
     "eyebrow": "Academic",
@@ -540,5 +611,38 @@
     "backList": "Chapter list",
     "exit": "Exit",
     "notFound": "Not found"
+  },
+  "speech": {
+    "disclaimer": "Approximate browser evaluation (speech → text match). Not an official DELF oral score.",
+    "errMic": "Allow microphone access in the browser.",
+    "errTimeout": "Timed out — try again more clearly.",
+    "errUnsupported": "Recognition not supported — try Chrome or Edge.",
+    "errOther": "Error: {error}",
+    "dashboard": "Dashboard",
+    "title": "Pronunciation practice",
+    "noRecognition": "Speech recognition needs Chrome or Edge with microphone permission.",
+    "hearTarget": "Hear target",
+    "listening": "Listening…",
+    "speakNow": "Speak now",
+    "nextLine": "Next line",
+    "wordOverlap": "Word overlap (approx)",
+    "heard": "Heard:",
+    "attempts": "Attempts: {count}",
+    "toListening": "Listening",
+    "toTeacher": "Teacher",
+    "toPath": "Path"
+  },
+  "listening": {
+    "dashboard": "Dashboard",
+    "title": "Longer listening",
+    "subtitle": "Longer on-site passages via browser speech. Listen fully, then reveal text and repeat focus lines.",
+    "noTts": "Speech synthesis unavailable — you can still read and practice aloud.",
+    "playFull": "Play full",
+    "hideText": "Hide text",
+    "showText": "Show text",
+    "focusLines": "Focus lines:",
+    "plays": "Plays this session: {count}",
+    "toPracticeLab": "Practice lab",
+    "toPath": "Path"
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -31,6 +31,7 @@ function levelLabel(locale: Locale, level: MatchLevel): string {
 
 export default function SpeechPracticePage() {
   const locale = useLocale() as Locale;
+  const t = useTranslations("speech");
   const router = useRouter();
   const [ready, setReady] = useState(false);
   const [tts, setTts] = useState(false);
@@ -65,12 +66,7 @@ export default function SpeechPracticePage() {
 
   const target = targets[idx] || "";
 
-  const disclaimer =
-    locale === "ar"
-      ? "تقييم تقريبي من متصفحك (تحويل كلام → نص ثم مقارنة). مش شهادة نطق رسمية ولا درجة DELF."
-      : locale === "fr"
-        ? "Évaluation approximative du navigateur (parole → texte). Ce n'est pas un score DELF officiel."
-        : "Approximate browser evaluation (speech → text match). Not an official DELF oral score.";
+  const disclaimer = t("disclaimer");
 
   async function startListen() {
     if (!target || listening) return;
@@ -83,20 +79,12 @@ export default function SpeechPracticePage() {
     if (!result.ok) {
       const msg =
         result.error === "not-allowed" || result.error === "service-not-allowed"
-          ? locale === "ar"
-            ? "اسمح بالميكروفون من إعدادات المتصفح."
-            : "Allow microphone access in the browser."
+          ? t("errMic")
           : result.error === "timeout"
-            ? locale === "ar"
-              ? "انتهى الوقت — جرّب تاني بصوت أوضح."
-              : "Timed out — try again more clearly."
+            ? t("errTimeout")
             : result.error === "unsupported"
-              ? locale === "ar"
-                ? "التعرّف غير مدعوم هنا — جرّب Chrome أو Edge."
-                : "Recognition not supported — try Chrome or Edge."
-              : locale === "ar"
-                ? `حصل خطأ: ${result.error}`
-                : `Error: ${result.error}`;
+              ? t("errUnsupported")
+              : t("errOther", { error: result.error ?? "" });
       setError(msg);
       return;
     }
@@ -129,15 +117,11 @@ export default function SpeechPracticePage() {
         href="/dashboard"
         className="text-caption text-ink-400 hover:text-ink-600"
       >
-        ← {locale === "ar" ? "لوحة التحكم" : "Dashboard"}
+        ← {t("dashboard")}
       </Link>
 
       <h1 className="text-title font-serif text-ink-950 mt-3 mb-2">
-        {locale === "ar"
-          ? "تمرين النطق (مرحلة B)"
-          : locale === "fr"
-            ? "Prononciation (phase B)"
-            : "Pronunciation practice (Phase B)"}
+        {t("title")}
       </h1>
 
       <Card className="mb-4 border-accent-100 bg-accent-50/40">
@@ -150,9 +134,7 @@ export default function SpeechPracticePage() {
       {!recOk && (
         <Card className="mb-4">
           <p className="text-body-sm text-ink-600">
-            {locale === "ar"
-              ? "متصفحك لا يدعم التعرّف على الكلام. استخدم Chrome أو Edge على الكمبيوتر، واسمح بالميكروفون."
-              : "Speech recognition needs Chrome or Edge with microphone permission."}
+            {t("noRecognition")}
           </p>
         </Card>
       )}
@@ -173,7 +155,7 @@ export default function SpeechPracticePage() {
               onClick={() => speakFrench(target)}
               disabled={!target}
             >
-              {locale === "ar" ? "اسمع الهدف" : "Hear target"}
+              {t("hearTarget")}
             </Button>
           )}
           <Button
@@ -182,16 +164,10 @@ export default function SpeechPracticePage() {
             onClick={startListen}
             disabled={!recOk || listening || !target}
           >
-            {listening
-              ? locale === "ar"
-                ? "بسمعك…"
-                : "Listening…"
-              : locale === "ar"
-                ? "سجّل نطقك"
-                : "Speak now"}
+            {listening ? t("listening") : t("speakNow")}
           </Button>
           <Button variant="ghost" size="sm" onClick={nextTarget}>
-            {locale === "ar" ? "جملة تانية" : "Next line"}
+            {t("nextLine")}
           </Button>
         </div>
 
@@ -205,12 +181,12 @@ export default function SpeechPracticePage() {
               {levelLabel(locale, lastMatch.level)}
             </p>
             <p className="text-caption text-ink-500">
-              {locale === "ar" ? "تداخل الكلمات (تقريبي)" : "Word overlap (approx)"}:{" "}
+              {t("wordOverlap")}:{" "}
               {lastMatch.wordScore}%
             </p>
             <p className="text-body-sm text-ink-700" dir="ltr">
               <span className="text-ink-400">
-                {locale === "ar" ? "سمعت:" : "Heard:"}{" "}
+                {t("heard")}{" "}
               </span>
               {lastMatch.heard || "—"}
             </p>
@@ -224,23 +200,23 @@ export default function SpeechPracticePage() {
       </Card>
 
       <p className="text-caption text-ink-400 mb-4">
-        {locale === "ar" ? `محاولات: ${attempts}` : `Attempts: ${attempts}`}
+        {t("attempts", { count: attempts })}
       </p>
 
       <div className="flex flex-wrap gap-2">
         <Link href="/listening">
           <Button variant="secondary">
-            {locale === "ar" ? "استماع أطول" : "Listening"}
+            {t("toListening")}
           </Button>
         </Link>
         <Link href="/teacher">
           <Button variant="secondary">
-            {locale === "ar" ? "المهارات" : "Teacher"}
+            {t("toTeacher")}
           </Button>
         </Link>
         <Link href="/path">
           <Button variant="ghost">
-            {locale === "ar" ? "المسار" : "Path"}
+            {t("toPath")}
           </Button>
         </Link>
       </div>

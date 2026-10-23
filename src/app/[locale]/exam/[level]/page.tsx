@@ -116,7 +116,7 @@ export default function ExamLevelPage({
         </div>
       </header>
 
-      <main className="flex-1 px-4 py-6 pb-24 scene-3d">
+      <div className="flex-1 px-4 py-6 pb-24 scene-3d">
         <Card className="mb-6">
           <p className="text-body-sm text-ink-700 mb-2 text-pretty">
             {bp.passNote[locale]}
@@ -281,7 +281,7 @@ export default function ExamLevelPage({
             </div>
           </Card>
         )}
-      </main>
+      </div>
     </div>
   );
 }

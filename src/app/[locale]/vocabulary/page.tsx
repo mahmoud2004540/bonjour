@@ -79,14 +79,16 @@ export default function VocabularyPage() {
 
       <Card className="mb-6">
         <p className="text-body-sm text-ink-700 mb-1">
-          {locale === "ar"
-            ? `في جهازك دلوقتي: ${all.length} كلمة (مراجعة + تقدّم)`
-            : `On this device: ${all.length} words (review + progress)`}
+          {t("onDevice", { count: all.length })}
         </p>
         <p className="text-caption text-ink-500 mb-3">
-          {locale === "ar"
-            ? `حجم البنك المنهجي في التحديث الحالي ≈ ${BANK_STATS.total} مدخل (A1 ${BANK_STATS.A1} · A2 ${BANK_STATS.A2} · B1 ${BANK_STATS.B1} · B2 ${BANK_STATS.B2}) — بيتوسّع باستمرار.`
-            : `Curriculum bank size in this build ≈ ${BANK_STATS.total} entries (A1 ${BANK_STATS.A1} · A2 ${BANK_STATS.A2} · B1 ${BANK_STATS.B1} · B2 ${BANK_STATS.B2}) — still expanding.`}
+          {t("bankSize", {
+            total: BANK_STATS.total,
+            a1: BANK_STATS.A1,
+            a2: BANK_STATS.A2,
+            b1: BANK_STATS.B1,
+            b2: BANK_STATS.B2,
+          })}
         </p>
         <div className="flex flex-wrap gap-2 text-caption text-ink-600">
           {levelCounts.map(({ lv, n }) => (
@@ -112,7 +114,7 @@ export default function VocabularyPage() {
                 : "border-ink-100"
             }`}
           >
-            {locale === "ar" ? "الكل" : "All"}
+            {t("all")}
           </button>
         </div>
       </Card>
@@ -153,16 +155,14 @@ export default function VocabularyPage() {
       ) : (
         <Card className="mb-10">
           <p className="text-body text-ink-600">
-            {locale === "ar"
-              ? "مفيش كلمات مستحقة للمراجعة دلوقتي — تصفّح البنك تحت أو أضف كلمة."
-              : "No words due right now — browse the bank below or add a word."}
+            {t("noneDue")}
           </p>
         </Card>
       )}
 
       <Card className="mb-10">
         <h2 className="text-title-sm font-serif mb-3">
-          {locale === "ar" ? "تصفح كلمات المستوى" : "Browse level words"}
+          {t("browseLevel")}
         </h2>
         <ul className="space-y-2 max-h-80 overflow-y-auto">
           {browse.map((v) => (
@@ -206,12 +206,12 @@ export default function VocabularyPage() {
       <div className="flex flex-wrap gap-3">
         <Link href="/teacher/vocab">
           <Button variant="accent">
-            {locale === "ar" ? "جلسات حفظ (مع المدرس)" : "Teacher vocab packs"}
+            {t("teacherPacks")}
           </Button>
         </Link>
         <Link href="/settings">
           <Button variant="secondary">
-            {locale === "ar" ? "نسخ احتياطي" : "Backup progress"}
+            {t("backup")}
           </Button>
         </Link>
       </div>

@@ -187,7 +187,7 @@ export default function LessonUnitPage({
         </p>
       </header>
 
-      <main className="flex-1 px-4 py-6 pb-24">
+      <div className="flex-1 px-4 py-6 pb-24">
         {lives === 0 && !quizDone && (
           <Card className="mb-6 text-center border-accent-200">
             <p className="text-body text-ink-800 mb-4">{t("outOfLives")}</p>
@@ -447,7 +447,7 @@ export default function LessonUnitPage({
           </div>
           );
         })()}
-      </main>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -16,6 +16,7 @@ import type { Locale } from "@/i18n/config";
 
 export default function ListeningPage() {
   const locale = useLocale() as Locale;
+  const t = useTranslations("listening");
   const router = useRouter();
   const [ready, setReady] = useState(false);
   const [tts, setTts] = useState(false);
@@ -57,28 +58,20 @@ export default function ListeningPage() {
           href="/dashboard"
           className="text-caption text-ink-400 hover:text-ink-600"
         >
-          ← {locale === "ar" ? "لوحة التحكم" : "Dashboard"}
+          ← {t("dashboard")}
         </Link>
         <h1 className="text-title font-serif text-ink-950 mt-3 mb-2">
-          {locale === "ar"
-            ? "جلسات استماع أطول"
-            : locale === "fr"
-              ? "Écoute prolongée"
-              : "Longer listening"}
+          {t("title")}
         </h1>
         <p className="text-body-sm text-ink-500 text-pretty">
-          {locale === "ar"
-            ? "مقاطع أطول على الموقع (نطق المتصفح). اسمع كاملًا، بعدين شوف النص وكرّر الجمل المهمة."
-            : "Longer on-site passages via browser speech. Listen fully, then reveal text and repeat focus lines."}
+          {t("subtitle")}
         </p>
       </div>
 
       {!tts && (
         <Card className="mb-4 border-accent-100">
           <p className="text-body-sm text-ink-600">
-            {locale === "ar"
-              ? "النطق غير متاح في المتصفح ده — تقدر تقرأ المقاطع وتتمرن بصوت عالي."
-              : "Speech synthesis unavailable — you can still read and practice aloud."}
+            {t("noTts")}
           </p>
         </Card>
       )}
@@ -98,7 +91,7 @@ export default function ListeningPage() {
                 size="sm"
                 onClick={() => playFull(pack)}
               >
-                {locale === "ar" ? "تشغيل كامل" : "Play full"}
+                {t("playFull")}
               </Button>
             </div>
             {active?.id === pack.id && (
@@ -108,13 +101,7 @@ export default function ListeningPage() {
                   size="sm"
                   onClick={() => setShowText((s) => !s)}
                 >
-                  {showText
-                    ? locale === "ar"
-                      ? "إخفاء النص"
-                      : "Hide text"
-                    : locale === "ar"
-                      ? "إظهار النص"
-                      : "Show text"}
+                  {showText ? t("hideText") : t("showText")}
                 </Button>
                 {showText && (
                   <p
@@ -125,7 +112,7 @@ export default function ListeningPage() {
                   </p>
                 )}
                 <p className="text-caption text-ink-400">
-                  {locale === "ar" ? "جمل للتركيز:" : "Focus lines:"}
+                  {t("focusLines")}
                 </p>
                 <ul className="space-y-2">
                   {pack.focus.map((line) => (
@@ -150,20 +137,18 @@ export default function ListeningPage() {
       </div>
 
       <p className="text-caption text-ink-400 mb-4">
-        {locale === "ar"
-          ? `تكرارات هالجلسة: ${reps}`
-          : `Plays this session: ${reps}`}
+        {t("plays", { count: reps })}
       </p>
 
       <div className="flex flex-wrap gap-2">
         <Link href="/practice-lab">
           <Button variant="secondary">
-            {locale === "ar" ? "معمل الممارسة" : "Practice lab"}
+            {t("toPracticeLab")}
           </Button>
         </Link>
         <Link href="/path">
           <Button variant="secondary">
-            {locale === "ar" ? "المسار" : "Path"}
+            {t("toPath")}
           </Button>
         </Link>
       </div>

@@ -46,9 +46,7 @@ export default function DashboardPage() {
     return (
       <div className="max-w-content mx-auto px-5 py-20 text-center">
         <p className="text-body text-ink-600 mb-4">
-          {locale === "ar"
-            ? "بتجهّز لوحتك… لو أول مرة، هتحوّلك لتسجيل سريع."
-            : "Preparing your dashboard… First visit goes to signup."}
+          {t("preparing")}
         </p>
         <div className="h-10 w-48 mx-auto bg-ink-100 rounded-2xl animate-pulse" />
       </div>
@@ -64,76 +62,54 @@ export default function DashboardPage() {
   const hub = [
     {
       href: "/path",
-      title: locale === "ar" ? "مسار الدروس" : "Learning path",
-      body:
-        locale === "ar"
-          ? "درس بعد درس — متسلسل من A1 إلى C2"
-          : "Lesson by lesson — A1 to C2",
-      cta: locale === "ar" ? "افتح المسار" : "Open path",
+      title: t("hub.path.title"),
+      body: t("hub.path.body"),
+      cta: t("hub.path.cta"),
       primary: true,
     },
     {
       href: "/practice-lab",
-      title: locale === "ar" ? "تدريب مكثف" : "Practice lab",
-      body:
-        locale === "ar"
-          ? "كتابة + استماع + أسئلة — ساعات ممارسة"
-          : "Writing, listening, quiz drills",
-      cta: locale === "ar" ? "ابدأ تدريب" : "Start practice",
+      title: t("hub.practiceLab.title"),
+      body: t("hub.practiceLab.body"),
+      cta: t("hub.practiceLab.cta"),
       primary: false,
     },
     {
       href: "/vocabulary",
-      title: locale === "ar" ? "حفظ الكلمات" : "Vocabulary",
+      title: t("hub.vocabulary.title"),
       body:
-        locale === "ar"
-          ? dueCount > 0
-            ? `${dueCount} كلمة للمراجعة`
-            : "بنك كلمات كبير حسب المستوى"
-          : dueCount > 0
-            ? `${dueCount} due for review`
-            : "Large word bank by level",
-      cta: locale === "ar" ? "راجع الكلمات" : "Review words",
+        dueCount > 0
+          ? t("hub.vocabulary.due", { count: dueCount })
+          : t("hub.vocabulary.body"),
+      cta: t("hub.vocabulary.cta"),
       primary: false,
     },
     {
       href: "/speech",
-      title: locale === "ar" ? "النطق" : "Pronunciation",
-      body:
-        locale === "ar"
-          ? "سجّل وقارن — تقييم تقريبي من المتصفح"
-          : "Speak & match — browser estimate",
-      cta: locale === "ar" ? "تمرين نطق" : "Practice speech",
+      title: t("hub.speech.title"),
+      body: t("hub.speech.body"),
+      cta: t("hub.speech.cta"),
       primary: false,
     },
     {
       href: "/listening",
-      title: locale === "ar" ? "استماع أطول" : "Listening",
-      body:
-        locale === "ar"
-          ? "مقاطع كاملة من A1 إلى C2"
-          : "Full passages A1–C2",
-      cta: locale === "ar" ? "اسمع" : "Listen",
+      title: t("hub.listening.title"),
+      body: t("hub.listening.body"),
+      cta: t("hub.listening.cta"),
       primary: false,
     },
     {
       href: "/exam",
-      title: locale === "ar" ? "محاكاة امتحان" : "Mock exam",
-      body:
-        locale === "ar"
-          ? "استعداد DELF/DALF — الشهادة من مركز معتمد"
-          : "DELF/DALF prep — certificate from a centre",
-      cta: locale === "ar" ? "الاستعداد" : "Exam prep",
+      title: t("hub.exam.title"),
+      body: t("hub.exam.body"),
+      cta: t("hub.exam.cta"),
       primary: false,
     },
     {
       href: "/settings",
-      title: locale === "ar" ? "إعدادات ونسخ احتياطي" : "Settings & backup",
-      body:
-        locale === "ar"
-          ? "حمّل تقدّمك عشان ما يضيعش من الجهاز"
-          : "Export progress so it is not lost on this device",
-      cta: locale === "ar" ? "افتح الإعدادات" : "Open settings",
+      title: t("hub.settings.title"),
+      body: t("hub.settings.body"),
+      cta: t("hub.settings.cta"),
       primary: false,
     },
   ];
@@ -146,9 +122,7 @@ export default function DashboardPage() {
         </p>
         <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
         <p className="text-body-sm text-ink-500 max-w-xl">
-          {locale === "ar"
-            ? "كل حاجة في مكانها: مسار → تدريب → كلمات → نطق → امتحان. احفظ نسخة احتياطية من الإعدادات."
-            : "Path → practice → words → speech → exam. Back up progress in Settings."}
+          {t("intro")}
         </p>
       </div>
 
@@ -189,7 +163,7 @@ export default function DashboardPage() {
       )}
 
       <h2 className="text-body font-bold text-ink-800 mb-3">
-        {locale === "ar" ? "أقسام التعلم" : "Learning sections"}
+        {t("sections")}
       </h2>
       <div className="grid sm:grid-cols-2 gap-4 mb-10">
         {hub.map((item) => (
@@ -216,14 +190,13 @@ export default function DashboardPage() {
       </div>
 
       <p className="text-caption text-ink-400 mb-6">
-        {locale === "ar"
-          ? `جاهزية A1: ${a1.percent}% · كلمات للمراجعة: ${dueCount}`
-          : `A1 readiness: ${a1.percent}% · Words due: ${dueCount}`}
+        {t("footerStats", { pct: a1.percent, due: dueCount })}
       </p>
 
       <button
         type="button"
         onClick={() => {
+          if (!window.confirm(t("resetConfirm"))) return;
           clearLearner();
           router.push("/");
         }}

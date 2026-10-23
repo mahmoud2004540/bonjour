@@ -1,17 +1,15 @@
 "use client";
 
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getAllTeacherSessions, type TeacherTrack } from "@/domain/teacher/sessions";
-import type { Locale } from "@/i18n/config";
 
 const TRACKS: TeacherTrack[] = ["reading", "listening", "writing", "vocab"];
 
 export default function TeacherHubPage() {
   const t = useTranslations("teacher");
-  const locale = useLocale() as Locale;
   const sessions = getAllTeacherSessions();
 
   return (
@@ -23,16 +21,14 @@ export default function TeacherHubPage() {
 
       <Card className="mb-8 border-accent-200">
         <h2 className="text-title-sm font-serif mb-2">
-          {locale === "ar" ? "نطق تقريبي (مرحلة B)" : "Pronunciation (Phase B)"}
+          {t("speechTitle")}
         </h2>
         <p className="text-body-sm text-ink-600 mb-4 text-pretty">
-          {locale === "ar"
-            ? "سجّل صوتك في المتصفح → مقارنة تلقائية بالنص الهدف. مش درجة DELF رسمية."
-            : "Speak in the browser → automatic text match. Not an official DELF score."}
+          {t("speechBody")}
         </p>
         <Link href="/speech">
           <Button variant="accent" size="sm">
-            {locale === "ar" ? "افتح تمرين النطق" : "Open speech practice"}
+            {t("openSpeech")}
           </Button>
         </Link>
       </Card>

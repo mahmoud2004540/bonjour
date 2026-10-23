@@ -100,10 +100,8 @@ export function Header() {
     setOpen(false);
   }
 
-  const menuLabel =
-    locale === "ar" ? "القائمة" : locale === "fr" ? "Menu" : "Menu";
-  const closeLabel =
-    locale === "ar" ? "إغلاق" : locale === "fr" ? "Fermer" : "Close";
+  const menuLabel = t("menu");
+  const closeLabel = t("close");
 
   return (
     <header className="sticky top-0 z-50 border-b-2 border-ink-200/90 bg-surface/95 backdrop-blur-xl shadow-[0_4px_24px_rgba(36,34,29,0.06)]">
@@ -222,11 +220,7 @@ export function Header() {
             href={inApp ? "/dashboard" : "/onboarding"}
             className="hidden sm:inline-flex items-center h-11 px-4 sm:px-5 rounded-xl bg-accent-600 text-white text-sm font-bold shadow-[0_4px_0_#9a3d2c] hover:bg-accent-700 transition-all"
           >
-            {inApp
-              ? locale === "ar"
-                ? "لوحتي"
-                : "Dashboard"
-              : t("getStarted")}
+            {inApp ? t("myDashboard") : t("getStarted")}
           </Link>
         </div>
       </div>
@@ -249,13 +243,7 @@ export function Header() {
           >
             <div className="max-w-wide mx-auto px-4 py-4 space-y-1">
               <p className="text-caption font-bold text-ink-400 px-3 mb-2">
-                {inApp
-                  ? locale === "ar"
-                    ? "أقسام التعلم"
-                    : "Learn"
-                  : locale === "ar"
-                    ? "القائمة"
-                    : "Menu"}
+                {inApp ? t("learnSections") : t("menu")}
               </p>
 
               {(inApp ? LEARN_LINKS : MARKETING_LINKS.map((m) => ({
@@ -299,7 +287,7 @@ export function Header() {
 
               <div className="pt-3 mt-2 border-t border-ink-100">
                 <p className="text-caption font-bold text-ink-400 px-3 mb-2">
-                  {locale === "ar" ? "لغة الواجهة" : "Interface language"}
+                  {t("interfaceLanguage")}
                 </p>
                 <div className="flex gap-2 px-2">
                   {locales.map((code) => (

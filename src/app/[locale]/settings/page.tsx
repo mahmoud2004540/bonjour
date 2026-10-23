@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -11,11 +11,9 @@ import {
   downloadBackupFile,
   importBackup,
 } from "@/application/learner-store";
-import type { Locale } from "@/i18n/config";
 
 export default function SettingsPage() {
   const t = useTranslations("settings");
-  const locale = useLocale() as Locale;
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [cleared, setCleared] = useState(false);
@@ -51,19 +49,11 @@ export default function SettingsPage() {
       const text = String(reader.result ?? "");
       const result = importBackup(text);
       if (result.ok) {
-        setImportMsg(
-          locale === "ar"
-            ? "تم استيراد النسخة — حدّث الصفحة."
-            : "Backup restored — refresh the page."
-        );
+        setImportMsg(t("importOk"));
         setHasProfile(!!getStoredProfile());
         setTimeout(() => router.push("/dashboard"), 800);
       } else {
-        setImportMsg(
-          locale === "ar"
-            ? "الملف غير صالح. جرّب نسخة احتياطية من Bonjour."
-            : "Invalid file. Use a Bonjour backup export."
-        );
+        setImportMsg(t("importBad"));
       }
     };
     reader.readAsText(file);
@@ -77,24 +67,20 @@ export default function SettingsPage() {
       {/* Backup — closes the “no cloud account” gap honestly */}
       <Card className="mb-6">
         <h2 className="text-body font-bold text-ink-900 mb-2">
-          {locale === "ar"
-            ? "نسخ احتياطي للتقدّم"
-            : "Progress backup"}
+          {t("backupTitle")}
         </h2>
         <p className="text-body-sm text-ink-600 mb-4">
-          {locale === "ar"
-            ? "التقدّم محفوظ على جهازك. حمّل نسخة JSON عشان ما تضيعش لو مسحت المتصفح أو غيّرت الجهاز. مفيش حساب سحابي حاليًا — ده بديل صريح."
-            : "Progress is stored on this device. Download a JSON backup so you don’t lose it if you clear the browser or switch devices. No cloud account yet — this is the honest workaround."}
+          {t("backupBody")}
         </p>
         <div className="flex flex-wrap gap-3">
           <Button variant="accent" onClick={handleExport} disabled={!hasProfile}>
-            {locale === "ar" ? "تحميل نسخة احتياطية" : "Download backup"}
+            {t("downloadBackup")}
           </Button>
           <Button
             variant="secondary"
             onClick={() => fileRef.current?.click()}
           >
-            {locale === "ar" ? "استيراد نسخة" : "Import backup"}
+            {t("importBackup")}
           </Button>
           <input
             ref={fileRef}
