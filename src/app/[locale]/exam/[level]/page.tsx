@@ -74,6 +74,7 @@ export default function ExamLevelPage({
       : 0;
   const curriculumReady = units.length > 0 && unitsDone === units.length;
 
+  const mockCount = bp.mock.length;
   const item = bp.mock[mockIdx];
   const isMcq = item?.options && typeof item.correctIndex === "number";
 
@@ -85,7 +86,7 @@ export default function ExamLevelPage({
     setScoredCount((c) => c + 1);
     setTimeout(() => {
       setSelected(null);
-      if (mockIdx + 1 < bp!.mock.length) setMockIdx(mockIdx + 1);
+      if (mockIdx + 1 < mockCount) setMockIdx(mockIdx + 1);
       else {
         recordStudyActivity(20);
         setDone(true);
@@ -96,7 +97,7 @@ export default function ExamLevelPage({
   function nextOpen() {
     setShowHint(false);
     setWriting("");
-    if (mockIdx + 1 < bp.mock.length) setMockIdx(mockIdx + 1);
+    if (mockIdx + 1 < mockCount) setMockIdx(mockIdx + 1);
     else {
       recordStudyActivity(15);
       setDone(true);
