@@ -11,7 +11,6 @@ import {
   getStoredProfile,
   startAsBeginner,
 } from "@/application/learner-store";
-import type { PlacementObservation } from "@/domain/types";
 import type { Locale } from "@/i18n/config";
 
 export default function PlacementPage() {
@@ -46,21 +45,7 @@ export default function PlacementPage() {
     }
 
     if (isLast) {
-      const observations: PlacementObservation[] = PLACEMENT_QUESTIONS.map((q) => {
-        const answer = nextAnswers[q.id] ?? (q.type === "open" ? openText : -1);
-        let isCorrect: boolean | null = null;
-        if (q.type === "multiple_choice" && typeof answer === "number") {
-          isCorrect = answer === q.correctIndex;
-        }
-        return {
-          dimension: q.dimension,
-          questionId: q.id,
-          response: String(answer),
-          isCorrect,
-          observedAt: new Date().toISOString(),
-        };
-      });
-      finalizePlacement(observations);
+      finalizePlacement(nextAnswers);
       router.push("/profile");
     } else {
       setAnswers(nextAnswers);

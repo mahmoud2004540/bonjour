@@ -60,7 +60,7 @@ export interface LearnerProfile {
   skillEvidence: SkillEvidence[];
   completedGoals: string[];
   currentPriorities: string[];
-  /** Local gamification — never invent server-side ranks */
+  /** Legacy points from older versions — kept for backup compatibility, not shown */
   xp?: number;
   streakDays?: number;
   lastStudyDate?: string;
@@ -71,6 +71,8 @@ export interface PlacementObservation {
   questionId: string;
   response: string;
   isCorrect: boolean | null;
+  /** Provenance: scored from the question bank, awaiting human review, or unanswered */
+  source?: "auto_scored" | "pending_review" | "no_response";
   observedAt: string;
 }
 
@@ -82,6 +84,11 @@ export interface PlacementAttempt {
   completedAt?: string;
   observations: PlacementObservation[];
   finalized: boolean;
+  /** Frozen at finalization — never recomputed or edited afterwards */
+  result?: {
+    skillEvidence: SkillEvidence[];
+    estimatedStartingLevel: CefrLevel;
+  };
 }
 
 export interface LearningGoal {

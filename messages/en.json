@@ -121,7 +121,12 @@
     "subtitle": "Real events.",
     "unlocked": "Unlocked",
     "locked": "Locked",
-    "back": "Back"
+    "back": "Back",
+    "label_first_goal": "First goal demonstrated",
+    "label_five_goals": "Five goals demonstrated",
+    "label_ten_units": "Ten lessons completed",
+    "label_streak_3": "Studied 3 days in a row",
+    "label_vocab_master_1": "First mastered word"
   },
   "academy": {
     "eyebrow": "University path on site",
@@ -270,7 +275,19 @@
     "levelNote": "Estimate.",
     "evidenceTitle": "Evidence",
     "evidenceNote": "—",
-    "goToDashboard": "Dashboard"
+    "goToDashboard": "Dashboard",
+    "dim_vocabulary": "Vocabulary",
+    "dim_grammar": "Grammar",
+    "dim_reading": "Reading",
+    "dim_listening": "Listening",
+    "dim_writing": "Writing",
+    "dim_speaking": "Speaking",
+    "status_demonstrated": "Demonstrated",
+    "status_partial": "Partial",
+    "status_not_yet": "Not yet",
+    "status_unknown": "Not assessed",
+    "pendingReview": "Your answer is saved but not scored automatically — it needs review.",
+    "speakingNote": "Speaking is not assessed yet: there is no speech evaluation on the site."
   },
   "dashboard": {
     "greeting": "Hello, {name}",
@@ -322,7 +339,11 @@
     "teacherCardTitle": "With the teacher",
     "teacherCardBody": "Reading · Listening · Writing · Vocabulary",
     "examCardTitle": "Exam & certificate",
-    "examCardBody": "DELF/DALF prep — the certificate comes from an accredited school/centre."
+    "examCardBody": "DELF/DALF prep — the certificate comes from an accredited school/centre.",
+    "statGoals": "Goals demonstrated",
+    "statStudyDays": "Study days in a row",
+    "statUnits": "Lessons",
+    "statReady": "Curriculum done"
   },
   "learn": {
     "notFound": "Not found",
@@ -404,7 +425,9 @@
     "levelLocked": "Locked",
     "finishPrevLevel": "Finish level {level} completely first",
     "levelCompleteNext": "✓ Level complete — {next} unlocked",
-    "afterCurrent": "After the current lesson"
+    "afterCurrent": "After the current lesson",
+    "lessonsDone": "Lessons",
+    "studyDays": "Study days"
   },
   "exam": {
     "eyebrow": "Official exam prep",

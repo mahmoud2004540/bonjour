@@ -43,7 +43,7 @@ export default function TutorPage() {
     };
     setMessages((m) => [...m, userMsg, tutorMsg]);
     setInput("");
-    recordStudyActivity(5);
+    recordStudyActivity();
   }
 
   return (

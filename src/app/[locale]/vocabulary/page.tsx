@@ -48,7 +48,7 @@ export default function VocabularyPage() {
   function answer(ok: boolean) {
     if (!item) return;
     reviewVocab(item.id, ok);
-    recordStudyActivity(ok ? 8 : 3);
+    recordStudyActivity();
     setRevealed(false);
     if (current + 1 < due.length) setCurrent(current + 1);
     else refresh();

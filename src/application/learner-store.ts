@@ -5,20 +5,21 @@
 
 import type {
   LearnerProfile,
-  PlacementObservation,
+  PlacementAttempt,
   PracticeAttempt,
   LearnerPreferences,
   Locale,
-  CefrLevel,
-  SkillEvidence,
   TargetLanguage,
 } from "@/domain/types";
 import { getPrimaryNextAction } from "@/domain/learning/recommendation";
+import { scorePlacement, type PlacementResponses } from "@/domain/placement/scoring";
+import { PLACEMENT_VERSION } from "@/domain/placement/questions";
 
 const STORAGE_KEY = "bonjour_learner_v1";
 const VOCAB_KEY = "bonjour_vocab_v2";
 const EVENTS_KEY = "bonjour_events_v1";
 const MOTIVATION_KEY = "bonjour_motivation_v1";
+const PLACEMENT_KEY = "bonjour_placement_attempts_v1";
 
 const FIRST_GOAL: Record<TargetLanguage, string> = {
   fr: "goal-introduce-self",
@@ -72,7 +73,6 @@ export function createLearner(
     skillEvidence: [],
     completedGoals: [],
     currentPriorities: [],
-    xp: 0,
     streakDays: 0,
   };
   saveProfile(profile);
@@ -101,6 +101,7 @@ export function startAsBeginner(): LearnerProfile | null {
     { dimension: "grammar", status: "unknown" },
     { dimension: "reading", status: "unknown" },
     { dimension: "listening", status: "unknown" },
+    { dimension: "writing", status: "unknown" },
     { dimension: "speaking", status: "unknown" },
   ];
   profile.currentPriorities = [FIRST_GOAL[lang] ?? "goal-introduce-self"];
@@ -108,53 +109,59 @@ export function startAsBeginner(): LearnerProfile | null {
   return profile;
 }
 
+export function getPlacementAttempts(): PlacementAttempt[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(PLACEMENT_KEY);
+    return raw ? (JSON.parse(raw) as PlacementAttempt[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function savePlacementAttempts(attempts: PlacementAttempt[]): void {
+  localStorage.setItem(PLACEMENT_KEY, JSON.stringify(attempts));
+}
+
+/**
+ * Finalize placement for the current question-bank version.
+ * Idempotent: a finalized attempt is immutable, and finalizing again
+ * (double click, second tab) returns it unchanged instead of re-scoring.
+ */
 export function finalizePlacement(
-  observations: PlacementObservation[]
+  responses: PlacementResponses
 ): LearnerProfile | null {
   const profile = getStoredProfile();
   if (!profile) return null;
 
-  const skillEvidence: SkillEvidence[] = [];
-  const dimensions = [
-    "vocabulary",
-    "grammar",
-    "reading",
-    "listening",
-    "speaking",
-  ] as const;
+  const attempts = getPlacementAttempts();
+  let attempt = attempts.find(
+    (a) => a.learnerId === profile.id && a.version === PLACEMENT_VERSION && a.finalized
+  );
 
-  for (const dim of dimensions) {
-    const dimObs = observations.filter((o) => o.dimension === dim);
-    if (dimObs.length === 0) {
-      skillEvidence.push({ dimension: dim, status: "unknown" });
-      continue;
-    }
-
-    const correctCount = dimObs.filter((o) => o.isCorrect === true).length;
-    const totalScored = dimObs.filter((o) => o.isCorrect !== null).length;
-
-    let status: SkillEvidence["status"] = "unknown";
-    if (totalScored === 0) status = "unknown";
-    else if (correctCount === totalScored) status = "demonstrated";
-    else if (correctCount > 0) status = "partial";
-    else status = "not_yet";
-
-    skillEvidence.push({
-      dimension: dim,
-      status,
-      observedAt: new Date().toISOString(),
-    });
+  if (!attempt) {
+    const now = new Date().toISOString();
+    const result = scorePlacement(responses, now);
+    attempt = {
+      id: generateId(),
+      learnerId: profile.id,
+      version: result.version,
+      startedAt: now,
+      completedAt: now,
+      observations: result.observations,
+      finalized: true,
+      result: {
+        skillEvidence: result.skillEvidence,
+        estimatedStartingLevel: result.estimatedStartingLevel,
+      },
+    };
+    savePlacementAttempts([...attempts, attempt]);
   }
 
-  const demonstrated = skillEvidence.filter((e) => e.status === "demonstrated").length;
-  let estimated: CefrLevel = "A1";
-  if (demonstrated >= 4) estimated = "A2";
-
   const lang = profile.preferences.targetLanguage ?? "fr";
-
   profile.placementCompleted = true;
-  profile.estimatedStartingLevel = estimated;
-  profile.skillEvidence = skillEvidence;
+  profile.estimatedStartingLevel = attempt.result!.estimatedStartingLevel;
+  profile.skillEvidence = attempt.result!.skillEvidence;
   profile.currentPriorities = [FIRST_GOAL[lang] ?? "goal-introduce-self"];
 
   saveProfile(profile);
@@ -166,7 +173,6 @@ export function markGoalCompleted(goalId: string): LearnerProfile | null {
   if (!profile) return null;
   if (!profile.completedGoals.includes(goalId)) {
     profile.completedGoals.push(goalId);
-    profile.xp = (profile.xp ?? 0) + 25;
   }
   const next = getPrimaryNextAction(profile);
   profile.currentPriorities = next ? [next.goalId] : [];
@@ -188,6 +194,7 @@ export function recordPracticeAttempt(
 export function clearLearner(): void {
   if (typeof window === "undefined") return;
   localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(PLACEMENT_KEY);
 }
 
 /** Full local backup (profile + vocab progress + light meta) */
@@ -198,6 +205,8 @@ export type BonjourBackup = {
   vocab: string | null;
   events: string | null;
   motivation: string | null;
+  /** Added later; older backups omit it */
+  placement?: string | null;
 };
 
 export function exportBackup(): BonjourBackup {
@@ -218,6 +227,7 @@ export function exportBackup(): BonjourBackup {
     vocab: localStorage.getItem(VOCAB_KEY),
     events: localStorage.getItem(EVENTS_KEY),
     motivation: localStorage.getItem(MOTIVATION_KEY),
+    placement: localStorage.getItem(PLACEMENT_KEY),
   };
 }
 
@@ -245,6 +255,7 @@ export function importBackup(raw: string): { ok: boolean; error?: string } {
     if (data.vocab) localStorage.setItem(VOCAB_KEY, data.vocab);
     if (data.events) localStorage.setItem(EVENTS_KEY, data.events);
     if (data.motivation) localStorage.setItem(MOTIVATION_KEY, data.motivation);
+    if (data.placement) localStorage.setItem(PLACEMENT_KEY, data.placement);
     return { ok: true };
   } catch {
     return { ok: false, error: "parse" };

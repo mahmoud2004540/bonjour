@@ -16,7 +16,7 @@ export default function WritingPage() {
   function submit() {
     const fb = localTutorReply(text, "correction");
     setFeedback(fb);
-    recordStudyActivity(6);
+    recordStudyActivity();
   }
 
   return (

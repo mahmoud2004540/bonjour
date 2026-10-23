@@ -185,7 +185,7 @@ export default function PracticeLabPage() {
   const minutes = Math.max(1, Math.round((Date.now() - startedAt) / 60000) || 1);
 
   function finishSession() {
-    recordStudyActivity(Math.min(40, 5 + score * 2));
+    recordStudyActivity();
     setDone(true);
   }
 

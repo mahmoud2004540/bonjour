@@ -121,7 +121,12 @@
     "subtitle": "Événements réels.",
     "unlocked": "Débloqué",
     "locked": "Verrouillé",
-    "back": "Retour"
+    "back": "Retour",
+    "label_first_goal": "Premier objectif démontré",
+    "label_five_goals": "Cinq objectifs démontrés",
+    "label_ten_units": "Dix leçons terminées",
+    "label_streak_3": "3 jours d'étude d'affilée",
+    "label_vocab_master_1": "Premier mot maîtrisé"
   },
   "lessonFlow": {
     "phase_lesson": "① Leçon complète",
@@ -261,7 +266,19 @@
     "levelNote": "Estimation.",
     "evidenceTitle": "Preuves",
     "evidenceNote": "—",
-    "goToDashboard": "Tableau de bord"
+    "goToDashboard": "Tableau de bord",
+    "dim_vocabulary": "Vocabulaire",
+    "dim_grammar": "Grammaire",
+    "dim_reading": "Compréhension écrite",
+    "dim_listening": "Compréhension orale",
+    "dim_writing": "Production écrite",
+    "dim_speaking": "Production orale",
+    "status_demonstrated": "Démontré",
+    "status_partial": "Partiel",
+    "status_not_yet": "Pas encore",
+    "status_unknown": "Non évalué",
+    "pendingReview": "Votre réponse est enregistrée mais pas notée automatiquement — elle doit être relue.",
+    "speakingNote": "L'oral n'est pas encore évalué : le site n'a pas d'évaluation de la parole."
   },
   "dashboard": {
     "greeting": "Bonjour, {name}",
@@ -313,7 +330,11 @@
     "teacherCardTitle": "Avec le professeur",
     "teacherCardBody": "Lecture · Écoute · Écriture · Vocabulaire",
     "examCardTitle": "Examen et diplôme",
-    "examCardBody": "Préparation DELF/DALF — le diplôme est délivré par une école/un centre agréé."
+    "examCardBody": "Préparation DELF/DALF — le diplôme est délivré par une école/un centre agréé.",
+    "statGoals": "Objectifs démontrés",
+    "statStudyDays": "Jours d'étude d'affilée",
+    "statUnits": "Leçons",
+    "statReady": "Programme terminé"
   },
   "learn": {
     "notFound": "Introuvable",
@@ -395,7 +416,9 @@
     "levelLocked": "Verrouillé",
     "finishPrevLevel": "Terminez d'abord tout le niveau {level}",
     "levelCompleteNext": "✓ Niveau terminé — {next} débloqué",
-    "afterCurrent": "Après la leçon en cours"
+    "afterCurrent": "Après la leçon en cours",
+    "lessonsDone": "Leçons",
+    "studyDays": "Jours d'étude"
   },
   "exam": {
     "eyebrow": "Préparation à l'examen officiel",

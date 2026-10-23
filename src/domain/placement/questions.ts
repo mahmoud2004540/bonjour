@@ -2,6 +2,7 @@
  * Placement assessment questions (version 1.2).
  * Multi-dimension evidence — no pass/fail, no invented scores.
  * Listening items are text stand-ins until real audio exists.
+ * Open items are written answers (writing evidence) held for review, not scored.
  */
 
 import type { SkillDimension } from "../types";
@@ -227,7 +228,7 @@ export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
   },
   {
     id: "pq-open-1",
-    dimension: "speaking",
+    dimension: "writing",
     type: "open",
     prompt: {
       en: "Write how you would introduce yourself in French (even a short sentence).",
@@ -237,7 +238,7 @@ export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
   },
   {
     id: "pq-open-2",
-    dimension: "speaking",
+    dimension: "writing",
     type: "open",
     prompt: {
       en: "Write one sentence you could say at a café in French.",

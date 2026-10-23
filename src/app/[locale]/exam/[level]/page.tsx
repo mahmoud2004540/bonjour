@@ -88,7 +88,7 @@ export default function ExamLevelPage({
       setSelected(null);
       if (mockIdx + 1 < mockCount) setMockIdx(mockIdx + 1);
       else {
-        recordStudyActivity(20);
+        recordStudyActivity();
         setDone(true);
       }
     }, 500);
@@ -99,7 +99,7 @@ export default function ExamLevelPage({
     setWriting("");
     if (mockIdx + 1 < mockCount) setMockIdx(mockIdx + 1);
     else {
-      recordStudyActivity(15);
+      recordStudyActivity();
       setDone(true);
     }
   }

@@ -6,6 +6,7 @@ import { useRouter, Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import {
   LEVEL_SEQUENCE,
+  getAllUnits,
   getNextUnit,
   getUnitsByLevel,
   isLevelUnlocked,
@@ -70,6 +71,8 @@ export default function PathPage() {
   }
 
   const next = getNextUnit(profile);
+  const allUnits = getAllUnits();
+  const unitsDone = allUnits.filter((u) => isUnitComplete(u, profile)).length;
   const labels = READY_LABEL[locale] ?? READY_LABEL.en;
 
   return (
@@ -83,12 +86,11 @@ export default function PathPage() {
 
         <div className="mt-5 flex flex-wrap gap-3">
           <span className="inline-flex items-center gap-2 rounded-xl border-2 border-ink-200 bg-white px-3.5 py-2 text-sm font-bold text-ink-800 shadow-[0_3px_0_#e8e4dc]">
-            <span className="text-accent-600">XP</span> {profile.xp ?? 0}
+            <span className="text-accent-600">{t("lessonsDone")}</span>{" "}
+            {unitsDone}/{allUnits.length}
           </span>
           <span className="inline-flex items-center gap-2 rounded-xl border-2 border-ink-200 bg-white px-3.5 py-2 text-sm font-bold text-ink-800 shadow-[0_3px_0_#e8e4dc]">
-            <span className="text-accent-600">
-              {locale === "ar" ? "أيام" : "Streak"}
-            </span>{" "}
+            <span className="text-accent-600">{t("studyDays")}</span>{" "}
             {profile.streakDays ?? 0}
           </span>
           {next && (

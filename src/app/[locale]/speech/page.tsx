@@ -105,7 +105,7 @@ export default function SpeechPracticePage() {
     setLastMatch(match);
     setAttempts((a) => a + 1);
     if (match.level === "exact" || match.level === "close") {
-      recordStudyActivity(2);
+      recordStudyActivity();
     }
   }
 

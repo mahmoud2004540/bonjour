@@ -89,7 +89,7 @@ export default function TeacherSessionPage({
       setSelected(null);
       if (qIndex + 1 < questions.length) setQIndex(qIndex + 1);
       else {
-        recordStudyActivity(15);
+        recordStudyActivity();
         setDone(true);
       }
     }, 450);
@@ -98,7 +98,7 @@ export default function TeacherSessionPage({
   function submitWriting() {
     const hints = session!.writingHints?.[locale] ?? [];
     setWriteNotes(analyzeWriting(writing, hints));
-    recordStudyActivity(12);
+    recordStudyActivity();
   }
 
   function nextVocab(knew: boolean) {
@@ -112,7 +112,7 @@ export default function TeacherSessionPage({
     setVocabShow(false);
     if (vocabIndex + 1 < words.length) setVocabIndex(vocabIndex + 1);
     else {
-      recordStudyActivity(10);
+      recordStudyActivity();
       setDone(true);
     }
   }

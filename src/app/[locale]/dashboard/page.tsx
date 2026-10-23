@@ -154,16 +154,10 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
         {[
-          { label: t("xp"), value: profile.xp ?? 0 },
-          { label: t("streak"), value: profile.streakDays ?? 0 },
-          {
-            label: locale === "ar" ? "دروس" : "Units",
-            value: `${doneCount}/${allUnits.length}`,
-          },
-          {
-            label: locale === "ar" ? "جاهزية" : "Ready",
-            value: `${overall}%`,
-          },
+          { label: t("statGoals"), value: profile.completedGoals.length },
+          { label: t("statStudyDays"), value: profile.streakDays ?? 0 },
+          { label: t("statUnits"), value: `${doneCount}/${allUnits.length}` },
+          { label: t("statReady"), value: `${overall}%` },
         ].map((s) => (
           <div
             key={s.label}

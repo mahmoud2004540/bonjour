@@ -99,7 +99,7 @@ export default function LessonUnitPage({
   function goNextPhase() {
     if (phaseIndex < PHASES.length - 1) {
       setPhaseIndex(phaseIndex + 1);
-      recordStudyActivity(5);
+      recordStudyActivity();
     }
   }
 
@@ -107,7 +107,7 @@ export default function LessonUnitPage({
     if (passed) {
       for (const g of unit!.completesGoals) markGoalCompleted(g);
       trackEvent("unit_passed", { unitId: unit!.id });
-      recordStudyActivity(25);
+      recordStudyActivity();
     }
     setQuizDone(true);
   }
@@ -116,7 +116,7 @@ export default function LessonUnitPage({
     const item = unit!.exercises[exIndex];
     const ok = item.answers.some((a) => norm(a) === norm(exAnswer));
     setExFeedback(ok);
-    if (ok) recordStudyActivity(3);
+    if (ok) recordStudyActivity();
     else setLives((l) => Math.max(0, l - 1));
   }
 

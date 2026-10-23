@@ -47,7 +47,7 @@ export default function ListeningPage() {
     setShowText(false);
     if (tts) speakFrench(pack.passage);
     setReps((r) => r + 1);
-    recordStudyActivity(3);
+    recordStudyActivity();
   }
 
   return (

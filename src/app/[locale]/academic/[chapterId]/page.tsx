@@ -75,7 +75,7 @@ export default function AcademicChapterPage({
     const item = chapter!.drills[drillIndex];
     const ok = item.answers.some((a) => norm(a) === norm(answer));
     setFeedback(ok);
-    if (ok) recordStudyActivity(3);
+    if (ok) recordStudyActivity();
   }
 
   function nextDrill() {
@@ -103,7 +103,7 @@ export default function AcademicChapterPage({
         const ratio = next / chapter!.quiz.length;
         if (ratio >= chapter!.passRatio) {
           markGoalCompleted(`academic-${chapter!.id}`);
-          recordStudyActivity(15);
+          recordStudyActivity();
         }
         setPhase("done");
       }

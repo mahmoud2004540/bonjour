@@ -1,24 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getStoredProfile } from "@/application/learner-store";
 import type { LearnerProfile } from "@/domain/types";
-import type { Locale } from "@/i18n/config";
-
-const STATUS_LABELS: Record<string, Record<Locale, string>> = {
-  demonstrated: { en: "Demonstrated", fr: "Démontré", ar: "مُثبت" },
-  partial: { en: "Partial", fr: "Partiel", ar: "جزئي" },
-  not_yet: { en: "Not yet", fr: "Pas encore", ar: "ليس بعد" },
-  unknown: { en: "Not assessed", fr: "Non évalué", ar: "لم يُقيَّم" },
-};
 
 export default function ProfilePage() {
   const t = useTranslations("profile");
-  const locale = useLocale() as Locale;
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
 
@@ -70,19 +61,27 @@ export default function ProfilePage() {
         <h3 className="text-caption text-ink-400 mb-5">{t("evidenceTitle")}</h3>
         <ul className="space-y-3.5">
           {profile.skillEvidence.map((ev) => (
-            <li key={ev.dimension} className="flex justify-between items-center">
-              <span className="text-body text-ink-800 capitalize">{ev.dimension}</span>
-              <span
-                className={`text-caption font-medium px-2.5 py-1 rounded-full ${
-                  ev.status === "demonstrated"
-                    ? "bg-success-50 text-success-700"
-                    : ev.status === "partial"
-                    ? "bg-warning-50 text-warning-700"
-                    : "bg-ink-50 text-ink-400"
-                }`}
-              >
-                {STATUS_LABELS[ev.status][locale]}
-              </span>
+            <li key={ev.dimension}>
+              <div className="flex justify-between items-center gap-3">
+                <span className="text-body text-ink-800">{t(`dim_${ev.dimension}`)}</span>
+                <span
+                  className={`text-caption font-medium px-2.5 py-1 rounded-full ${
+                    ev.status === "demonstrated"
+                      ? "bg-success-50 text-success-700"
+                      : ev.status === "partial"
+                      ? "bg-warning-50 text-warning-700"
+                      : "bg-ink-50 text-ink-400"
+                  }`}
+                >
+                  {t(`status_${ev.status}`)}
+                </span>
+              </div>
+              {ev.notes === "pending_review" && (
+                <p className="text-caption text-ink-500 mt-1">{t("pendingReview")}</p>
+              )}
+              {ev.dimension === "speaking" && ev.status === "unknown" && (
+                <p className="text-caption text-ink-500 mt-1">{t("speakingNote")}</p>
+              )}
             </li>
           ))}
         </ul>
