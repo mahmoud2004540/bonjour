@@ -73,6 +73,16 @@ pass). Explanations in English, French and Arabic.
 - Content tests (`tests/course.test.ts`) check translations, item validity and a list of common
   French errors in all model French.
 
+## Accounts (Oct 2026)
+
+- The first screen is sign-in. With Supabase configured, every page except sign-in, sign-up,
+  password reset, About and Privacy requires an account; progress syncs to the account
+  (`learner_state`, row-level security) and follows the learner across devices.
+- Sign-up with email confirmation, sign-in, forgot / reset password, sign-out (clears the
+  device). Errors are translated, never raw.
+- Without keys the site stays in local mode and the sign-in page says so.
+- Setup: `supabase/README.md`.
+
 ## Remaining
 
 - A2–C2 syllabus in the same format (earlier lessons stay in place until then)
@@ -81,5 +91,5 @@ pass). Explanations in English, French and Arabic.
 
 ## Blocked on keys/assets
 
-Supabase auth + server-authoritative placement · real audio · speech scoring · Stripe · AI ·
+server-authoritative placement scoring (needs a server function) · real audio · speech scoring · Stripe · AI ·
 admin CMS / human review queue

@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { locales, localeShortNames, type Locale } from "@/i18n/config";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/components/auth/AuthGate";
 
 const LEARN_LINKS: {
   href: string;
@@ -67,6 +68,9 @@ export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const { configured, session, signOut } = useAuth();
+  // With accounts on, a visitor who is not signed in is sent to sign-in first.
+  const needsSignIn = configured && !session;
 
   const inApp =
     pathname.startsWith("/dashboard") ||
@@ -154,7 +158,7 @@ export function Header() {
         {inApp ? (
           <nav
             className="hidden md:flex items-center gap-1 rounded-2xl bg-ink-50 p-1 border border-ink-100"
-            aria-label="Learn"
+            aria-label={t("learnSections")}
           >
             {LEARN_LINKS.filter((l) =>
               ["/path", "/practice-lab", "/vocabulary", "/exam"].includes(
@@ -180,7 +184,7 @@ export function Header() {
             })}
           </nav>
         ) : (
-          <nav className="hidden md:flex items-center gap-5" aria-label="Main">
+          <nav className="hidden md:flex items-center gap-5" aria-label={t("menu")}>
             {MARKETING_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -197,7 +201,7 @@ export function Header() {
           <div
             className="hidden sm:flex items-center gap-0.5 rounded-xl bg-ink-50 p-1 border border-ink-100"
             role="group"
-            aria-label="Language"
+            aria-label={t("interfaceLanguage")}
           >
             {locales.map((code) => (
               <button
@@ -216,11 +220,21 @@ export function Header() {
             ))}
           </div>
 
+          {session && (
+            <button
+              type="button"
+              onClick={() => void signOut()}
+              className="hidden lg:inline-flex items-center h-11 px-3 rounded-xl text-sm font-semibold text-ink-600 hover:text-ink-950"
+              title={t("signedInAs", { email: session.user.email ?? "" })}
+            >
+              {t("signOut")}
+            </button>
+          )}
           <Link
-            href={inApp ? "/dashboard" : "/onboarding"}
+            href={needsSignIn ? "/sign-in" : inApp ? "/dashboard" : "/onboarding"}
             className="hidden sm:inline-flex items-center h-11 px-4 sm:px-5 rounded-xl bg-accent-600 text-white text-sm font-bold shadow-[0_4px_0_#9a3d2c] hover:brightness-95 transition-all"
           >
-            {inApp ? t("myDashboard") : t("getStarted")}
+            {needsSignIn ? t("signIn") : inApp ? t("myDashboard") : t("getStarted")}
           </Link>
         </div>
       </div>
@@ -277,12 +291,30 @@ export function Header() {
 
               {!inApp && (
                 <Link
-                  href="/onboarding"
+                  href={needsSignIn ? "/sign-in" : "/onboarding"}
                   onClick={() => setOpen(false)}
                   className="block rounded-2xl px-4 py-3.5 text-body font-bold bg-accent-600 text-white text-center mt-2"
                 >
-                  {t("getStarted")}
+                  {needsSignIn ? t("signIn") : t("getStarted")}
                 </Link>
+              )}
+
+              {session && (
+                <div className="pt-3 mt-2 border-t border-ink-100 px-3">
+                  <p className="text-caption text-ink-500 mb-2 break-all">
+                    {t("signedInAs", { email: session.user.email ?? "" })}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpen(false);
+                      void signOut();
+                    }}
+                    className="w-full min-h-11 rounded-xl border-2 border-ink-200 text-body-sm font-bold text-ink-800"
+                  >
+                    {t("signOut")}
+                  </button>
+                </div>
               )}
 
               <div className="pt-3 mt-2 border-t border-ink-100">

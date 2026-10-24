@@ -17,7 +17,9 @@
     "close": "Close",
     "myDashboard": "Dashboard",
     "learnSections": "Learn",
-    "interfaceLanguage": "Interface language"
+    "interfaceLanguage": "Interface language",
+    "signOut": "Sign out",
+    "signedInAs": "Signed in as {email}"
   },
   "footer": {
     "about": "About",
@@ -29,11 +31,13 @@
   },
   "privacy": {
     "title": "Privacy",
-    "p1": "Local on device.",
+    "p1": "Your learning progress (profile, placement, completed units, vocabulary review) is kept in your browser on this device.",
     "p2": "Nothing is sent to a server: there are no cloud accounts yet.",
-    "p3": "No ads.",
-    "p4": "If cloud accounts are added, this page will be updated first.",
-    "home": "Home"
+    "p3": "No ads, no tracking for advertising, and your data is never sold.",
+    "p4": "You can export a backup at any time from Settings, and delete the data on this device.",
+    "home": "Home",
+    "p2Cloud": "With an account, a copy of that progress, your email and your name are stored with our hosting provider, Supabase, so you can find them on any device. Each account can only read its own data. Your password is handled by Supabase and never stored by Bonjour.",
+    "deleteAccount": "To delete your account and its data, write to the site owner from the email address of the account."
   },
   "settings": {
     "title": "Settings",
@@ -278,7 +282,8 @@
         "title": "Situations",
         "description": "Which real-life situations matter most to you?"
       }
-    }
+    },
+    "defaultName": "Learner"
   },
   "placement": {
     "title": "Placement",
@@ -469,11 +474,53 @@
   },
   "auth": {
     "title": "Sign in",
-    "subtitle": "Accounts and syncing across devices.",
+    "signInTitle": "Sign in",
+    "signInSubtitle": "Welcome back. Your progress is saved in your account.",
+    "signUpTitle": "Create your account",
+    "signUpSubtitle": "Your progress will be saved and available on all your devices.",
+    "name": "Your name",
+    "email": "Email",
+    "password": "Password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "passwordHint": "At least {min} characters.",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "createAccount": "Create an account",
+    "creating": "Creating your account…",
+    "noAccount": "New to Bonjour?",
+    "haveAccount": "Already have an account?",
+    "forgotPassword": "Forgot your password?",
+    "forgotTitle": "Reset your password",
+    "forgotSubtitle": "Enter your email and we will send you a link to choose a new password.",
+    "sendResetLink": "Send the reset link",
+    "sending": "Sending…",
+    "resetSent": "If an account exists for {email}, a reset link has been sent. Check your inbox and spam folder.",
+    "resetTitle": "Choose a new password",
+    "resetSubtitle": "You opened the reset link. Choose your new password.",
+    "resetLinkInvalid": "This reset link is missing or has expired. Request a new one.",
+    "resetDone": "Your password has been changed.",
+    "savePassword": "Save the new password",
+    "saving": "Saving…",
+    "continue": "Continue",
+    "checkEmailTitle": "Confirm your email",
+    "checkEmailBody": "We sent a confirmation link to {email}. Open it to activate your account, then sign in.",
+    "backToSignIn": "Back to sign in",
+    "privacyNote": "We only use your email to sign you in and to send account emails.",
+    "privacyLink": "Privacy",
+    "localModeTitle": "Accounts are not switched on yet",
     "localMode": "There are no online accounts yet. Your progress is saved on this device only — use Settings → Backup to keep a copy.",
     "continueLocal": "Continue on this device",
-    "supabaseReady": "Cloud accounts are configured, but sign-in is not built yet. Your progress stays on this device for now.",
-    "backHome": "Back to home"
+    "error_not_configured": "Accounts are not available yet.",
+    "error_invalid_credentials": "Wrong email or password.",
+    "error_email_not_confirmed": "Confirm your email first: open the link we sent you.",
+    "error_user_exists": "An account already exists with this email. Sign in instead.",
+    "error_weak_password": "Choose a longer password (at least 8 characters).",
+    "error_invalid_email": "Enter a valid email address.",
+    "error_rate_limited": "Too many attempts. Wait a few minutes and try again.",
+    "error_network": "Connection problem. Check your internet and try again.",
+    "error_unknown": "Something went wrong. Please try again.",
+    "error_mismatch": "The two passwords are different."
   },
   "path": {
     "eyebrow": "Structured path",

@@ -1,36 +1,82 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { getSupabaseConfigStatus } from "@/infrastructure/supabase/client";
+import { AuthError, AuthShell, Field } from "@/components/auth/AuthShell";
+import { useAuth } from "@/components/auth/AuthGate";
+import { signIn, type AuthErrorCode } from "@/application/auth";
+import { getStoredProfile } from "@/application/learner-store";
 
 export default function SignInPage() {
   const t = useTranslations("auth");
-  const status = getSupabaseConfigStatus();
+  const { configured } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<AuthErrorCode | null>(null);
+
+  if (!configured) {
+    return (
+      <AuthShell title={t("signInTitle")} subtitle={t("localModeTitle")}>
+        <p className="text-body text-ink-700 mb-6 text-pretty">{t("localMode")}</p>
+        <Link href={getStoredProfile() ? "/dashboard" : "/onboarding"}>
+          <Button variant="accent" className="w-full">
+            {t("continueLocal")}
+          </Button>
+        </Link>
+      </AuthShell>
+    );
+  }
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setError(null);
+    const result = await signIn(email, password);
+    // On success the auth provider loads the account's progress and redirects.
+    if (!result.ok) {
+      setError(result.error);
+      setBusy(false);
+    }
+  }
 
   return (
-    <div className="max-w-content mx-auto px-6 py-16 md:py-20">
-      <h1 className="text-title font-serif text-ink-950 mb-2">{t("title")}</h1>
-      <p className="text-body text-ink-600 mb-10">{t("subtitle")}</p>
-
-      <Card className="mb-6">
-        {!status.configured ? (
-          <>
-            <p className="text-body text-ink-800 mb-6">{t("localMode")}</p>
-            <Link href="/onboarding">
-              <Button variant="accent">{t("continueLocal")}</Button>
+    <AuthShell
+      title={t("signInTitle")}
+      subtitle={t("signInSubtitle")}
+      footer={
+        <>
+          <p>
+            {t("noAccount")}{" "}
+            <Link href="/sign-up" className="font-semibold text-accent-700 hover:underline">
+              {t("createAccount")}
             </Link>
-          </>
-        ) : (
-          <p className="text-body text-ink-800">{t("supabaseReady")}</p>
-        )}
-      </Card>
-
-      <Link href="/" className="text-caption text-ink-400 hover:text-ink-600">
-        {t("backHome")}
-      </Link>
-    </div>
+          </p>
+        </>
+      }
+    >
+      <form onSubmit={submit} noValidate>
+        <AuthError code={error} />
+        <Field id="email" label={t("email")} type="email" value={email} onChange={setEmail} autoComplete="email" />
+        <Field
+          id="password"
+          label={t("password")}
+          type="password"
+          value={password}
+          onChange={setPassword}
+          autoComplete="current-password"
+        />
+        <div className="mb-5 text-end">
+          <Link href="/forgot-password" className="text-body-sm font-semibold text-accent-700 hover:underline">
+            {t("forgotPassword")}
+          </Link>
+        </div>
+        <Button type="submit" variant="accent" className="w-full" disabled={busy || !email || !password}>
+          {busy ? t("signingIn") : t("signIn")}
+        </Button>
+      </form>
+    </AuthShell>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
@@ -11,6 +11,7 @@ import {
   startAsBeginner,
 } from "@/application/learner-store";
 import { trackEvent } from "@/application/local-events";
+import { useAuth } from "@/components/auth/AuthGate";
 import { getSelectableLanguages } from "@/domain/languages";
 import type { Locale } from "@/i18n/config";
 import type { TargetLanguage } from "@/domain/types";
@@ -48,6 +49,15 @@ export default function OnboardingPage() {
   const [dailyMinutes, setDailyMinutes] = useState(15);
   const [objectives, setObjectives] = useState<string[]>([]);
   const [situations, setSituations] = useState<string[]>([]);
+  const { session } = useAuth();
+
+  // Signed-in learners: start from the name and email of their account.
+  useEffect(() => {
+    if (!session) return;
+    const meta = session.user.user_metadata as { display_name?: string } | undefined;
+    if (meta?.display_name) setName((n) => n || meta.display_name!);
+    if (session.user.email) setEmail(session.user.email);
+  }, [session]);
 
   const selectable = getSelectableLanguages();
 
@@ -56,7 +66,7 @@ export default function OnboardingPage() {
   }
 
   function saveProfileBase() {
-    createLearner(name || "Learner", email || "learner@example.com", locale);
+    createLearner(name.trim() || t("defaultName"), email.trim(), locale);
     updatePreferences({
       objectives,
       situations,
@@ -110,7 +120,7 @@ export default function OnboardingPage() {
             </div>
             <div>
               <label htmlFor="onb-email" className="block text-sm font-medium text-ink-700 mb-1.5">{t("emailLabel")}</label>
-              <input id="onb-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-field" placeholder={t("emailPlaceholder")} autoComplete="email" />
+              <input id="onb-email" type="email" readOnly={!!session} value={email} onChange={(e) => setEmail(e.target.value)} className="input-field" placeholder={t("emailPlaceholder")} autoComplete="email" />
             </div>
           </div>
         )}

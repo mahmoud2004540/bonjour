@@ -34,12 +34,21 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # Public Supabase settings (the anon / publishable key is meant for browsers;
+          # data is protected by row-level security). Empty → local mode.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
       - name: Install browser for end-to-end tests
         run: npx playwright install --with-deps chromium
 
       - name: End-to-end tests (EN/FR/AR, mobile + desktop)
         run: npm run test:e2e
+        env:
+          # Tests answer every Supabase request themselves; they never reach the real project.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

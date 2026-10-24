@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { signedIn } from "./helpers";
 
 const LOCALES = [
   { code: "en", dir: "ltr" },
@@ -42,6 +43,7 @@ test("keyboard: first Tab reaches a visible skip link", async ({ page, isMobile 
 });
 
 test("new learner: onboarding → placement → honest profile → dashboard", async ({ page }) => {
+  await signedIn(page);
   await page.goto("en/onboarding/");
   await page.getByLabel("Name").fill("Sara");
   for (let i = 0; i < 3; i++) await page.getByRole("button", { name: "Continue" }).click();
@@ -74,6 +76,7 @@ test("new learner: onboarding → placement → honest profile → dashboard", a
 });
 
 test("a learner who finished placement cannot retake it", async ({ page }) => {
+  await signedIn(page);
   await page.goto("en/onboarding/");
   await page.getByLabel("Name").fill("Sam");
   for (let i = 0; i < 3; i++) await page.getByRole("button", { name: "Continue" }).click();
@@ -85,6 +88,7 @@ test("a learner who finished placement cannot retake it", async ({ page }) => {
 });
 
 test("theme: choosing dark in Settings persists across pages", async ({ page }) => {
+  await signedIn(page);
   await page.goto("fr/settings/");
   await page.getByRole("radio", { name: "Sombre" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
@@ -98,6 +102,7 @@ test("theme: choosing dark in Settings persists across pages", async ({ page }) 
 });
 
 test("ar: dashboard is fully Arabic and right-to-left", async ({ page }) => {
+  await signedIn(page);
   await page.goto("ar/onboarding/");
   await page.locator("#onb-name").fill("سارة");
   for (let i = 0; i < 3; i++) await page.getByRole("button", { name: "متابعة" }).click();

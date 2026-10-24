@@ -17,7 +17,9 @@
     "close": "Fermer",
     "myDashboard": "Tableau de bord",
     "learnSections": "Apprendre",
-    "interfaceLanguage": "Langue de l'interface"
+    "interfaceLanguage": "Langue de l'interface",
+    "signOut": "Se déconnecter",
+    "signedInAs": "Connecté : {email}"
   },
   "footer": {
     "about": "À propos",
@@ -29,11 +31,13 @@
   },
   "privacy": {
     "title": "Confidentialité",
-    "p1": "Mode local : données sur cet appareil.",
+    "p1": "Votre progression (profil, test de niveau, unités terminées, révisions de vocabulaire) est conservée dans votre navigateur, sur cet appareil.",
     "p2": "Rien n’est envoyé à un serveur : il n’y a pas encore de comptes en ligne.",
-    "p3": "Pas de publicité tierce.",
-    "p4": "Si des comptes en ligne sont ajoutés, cette page sera mise à jour d’abord.",
-    "home": "Accueil"
+    "p3": "Pas de publicité, pas de pistage publicitaire, et vos données ne sont jamais vendues.",
+    "p4": "Vous pouvez exporter une sauvegarde à tout moment depuis les Réglages et supprimer les données de cet appareil.",
+    "home": "Accueil",
+    "p2Cloud": "Avec un compte, une copie de cette progression, votre e-mail et votre nom sont stockés chez notre hébergeur, Supabase, pour que vous les retrouviez sur tous vos appareils. Chaque compte ne peut lire que ses propres données. Votre mot de passe est géré par Supabase et n'est jamais stocké par Bonjour.",
+    "deleteAccount": "Pour supprimer votre compte et ses données, écrivez au responsable du site depuis l'adresse e-mail du compte."
   },
   "settings": {
     "title": "Paramètres",
@@ -269,7 +273,8 @@
         "title": "Situations",
         "description": "Quelles situations réelles comptent le plus pour vous ?"
       }
-    }
+    },
+    "defaultName": "Apprenant"
   },
   "placement": {
     "title": "Placement",
@@ -460,11 +465,53 @@
   },
   "auth": {
     "title": "Connexion",
-    "subtitle": "Comptes et synchronisation entre appareils.",
-    "localMode": "Il n’y a pas encore de comptes en ligne. Votre progression est enregistrée sur cet appareil uniquement — utilisez Réglages → Sauvegarde pour en garder une copie.",
+    "signInTitle": "Connexion",
+    "signInSubtitle": "Bon retour parmi nous. Votre progression est enregistrée dans votre compte.",
+    "signUpTitle": "Créer votre compte",
+    "signUpSubtitle": "Votre progression sera enregistrée et disponible sur tous vos appareils.",
+    "name": "Votre nom",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
+    "passwordHint": "Au moins {min} caractères.",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion…",
+    "createAccount": "Créer un compte",
+    "creating": "Création du compte…",
+    "noAccount": "Nouveau sur Bonjour ?",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "forgotPassword": "Mot de passe oublié ?",
+    "forgotTitle": "Réinitialiser le mot de passe",
+    "forgotSubtitle": "Saisissez votre e-mail : nous vous enverrons un lien pour choisir un nouveau mot de passe.",
+    "sendResetLink": "Envoyer le lien",
+    "sending": "Envoi…",
+    "resetSent": "Si un compte existe pour {email}, un lien a été envoyé. Vérifiez votre boîte de réception et vos spams.",
+    "resetTitle": "Choisir un nouveau mot de passe",
+    "resetSubtitle": "Vous avez ouvert le lien. Choisissez votre nouveau mot de passe.",
+    "resetLinkInvalid": "Ce lien est absent ou a expiré. Demandez-en un nouveau.",
+    "resetDone": "Votre mot de passe a été modifié.",
+    "savePassword": "Enregistrer le mot de passe",
+    "saving": "Enregistrement…",
+    "continue": "Continuer",
+    "checkEmailTitle": "Confirmez votre e-mail",
+    "checkEmailBody": "Nous avons envoyé un lien de confirmation à {email}. Ouvrez-le pour activer votre compte, puis connectez-vous.",
+    "backToSignIn": "Retour à la connexion",
+    "privacyNote": "Votre e-mail sert uniquement à vous connecter et à vous envoyer les e-mails liés au compte.",
+    "privacyLink": "Confidentialité",
+    "localModeTitle": "Les comptes ne sont pas encore activés",
+    "localMode": "Il n'y a pas encore de comptes en ligne. Votre progression est enregistrée sur cet appareil uniquement — utilisez Réglages → Sauvegarde pour en garder une copie.",
     "continueLocal": "Continuer sur cet appareil",
-    "supabaseReady": "Les comptes en ligne sont configurés, mais la connexion n’est pas encore disponible. Votre progression reste sur cet appareil pour l’instant.",
-    "backHome": "Retour à l’accueil"
+    "error_not_configured": "Les comptes ne sont pas encore disponibles.",
+    "error_invalid_credentials": "E-mail ou mot de passe incorrect.",
+    "error_email_not_confirmed": "Confirmez d'abord votre e-mail : ouvrez le lien que nous vous avons envoyé.",
+    "error_user_exists": "Un compte existe déjà avec cet e-mail. Connectez-vous.",
+    "error_weak_password": "Choisissez un mot de passe plus long (au moins 8 caractères).",
+    "error_invalid_email": "Saisissez une adresse e-mail valide.",
+    "error_rate_limited": "Trop de tentatives. Attendez quelques minutes et réessayez.",
+    "error_network": "Problème de connexion. Vérifiez votre connexion internet et réessayez.",
+    "error_unknown": "Une erreur s'est produite. Réessayez.",
+    "error_mismatch": "Les deux mots de passe sont différents."
   },
   "path": {
     "eyebrow": "Parcours structuré",

@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { isRtl, isValidLocale } from "@/i18n/config";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { AuthProvider, RouteGuard } from "@/components/auth/AuthGate";
 
 type Props = {
   children: React.ReactNode;
@@ -46,11 +47,13 @@ export default async function LocaleLayout({ children, params }: Props) {
         >
           {t("skipToContent")}
         </a>
-        <Header />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <main id="main-content" className="flex-1">
+            <RouteGuard>{children}</RouteGuard>
+          </main>
+          <Footer />
+        </AuthProvider>
       </div>
     </NextIntlClientProvider>
   );

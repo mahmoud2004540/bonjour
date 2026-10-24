@@ -21,6 +21,7 @@ const VOCAB_KEY = "bonjour_vocab_v2";
 const EVENTS_KEY = "bonjour_events_v1";
 const MOTIVATION_KEY = "bonjour_motivation_v1";
 const PLACEMENT_KEY = "bonjour_placement_attempts_v1";
+const REAL_LIFE_KEY = "bonjour_real_life_v1";
 
 const FIRST_GOAL: Record<TargetLanguage, string> = {
   fr: "goal-introduce-self",
@@ -215,6 +216,7 @@ export type BonjourBackup = {
   motivation: string | null;
   /** Added later; older backups omit it */
   placement?: string | null;
+  realLife?: string | null;
 };
 
 export function exportBackup(): BonjourBackup {
@@ -236,6 +238,7 @@ export function exportBackup(): BonjourBackup {
     events: localStorage.getItem(EVENTS_KEY),
     motivation: localStorage.getItem(MOTIVATION_KEY),
     placement: localStorage.getItem(PLACEMENT_KEY),
+    realLife: localStorage.getItem(REAL_LIFE_KEY),
   };
 }
 
@@ -264,8 +267,23 @@ export function importBackup(raw: string): { ok: boolean; error?: string } {
     if (data.events) localStorage.setItem(EVENTS_KEY, data.events);
     if (data.motivation) localStorage.setItem(MOTIVATION_KEY, data.motivation);
     if (data.placement) localStorage.setItem(PLACEMENT_KEY, data.placement);
+    if (data.realLife) localStorage.setItem(REAL_LIFE_KEY, data.realLife);
     return { ok: true };
   } catch {
     return { ok: false, error: "parse" };
   }
+}
+
+/** Remove every piece of learner data from this device (theme choice is kept). */
+export function clearAllLocalData(): void {
+  if (typeof window === "undefined") return;
+  for (const key of [STORAGE_KEY, VOCAB_KEY, EVENTS_KEY, MOTIVATION_KEY, PLACEMENT_KEY, REAL_LIFE_KEY]) {
+    localStorage.removeItem(key);
+  }
+}
+
+/** True when this device holds any learner progress. */
+export function hasLocalData(): boolean {
+  if (typeof window === "undefined") return false;
+  return localStorage.getItem(STORAGE_KEY) !== null;
 }

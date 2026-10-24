@@ -1,7 +1,9 @@
 import { expect, test, type Page } from "@playwright/test";
+import { signedIn } from "./helpers";
 import { A1_U01 } from "../src/domain/course/a1/u01-bonjour";
 
 async function startAsBeginner(page: Page) {
+  await signedIn(page);
   await page.goto("en/onboarding/");
   await page.getByLabel("Name").fill("Test learner");
   for (let i = 0; i < 3; i++) await page.getByRole("button", { name: "Continue" }).click();
@@ -63,6 +65,7 @@ test("old A1 lesson links redirect to the new unit", async ({ page }) => {
 });
 
 test("ar: the unit reads right-to-left with French kept left-to-right", async ({ page }) => {
+  await signedIn(page);
   await page.goto("ar/onboarding/");
   await page.locator("#onb-name").fill("سارة");
   for (let i = 0; i < 3; i++) await page.getByRole("button", { name: "متابعة" }).click();
