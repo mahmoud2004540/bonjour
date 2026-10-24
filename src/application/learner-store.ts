@@ -14,6 +14,7 @@ import type {
 import { getPrimaryNextAction } from "@/domain/learning/recommendation";
 import { scorePlacement, type PlacementResponses } from "@/domain/placement/scoring";
 import { PLACEMENT_VERSION } from "@/domain/placement/questions";
+import { migrateLegacyProgress } from "@/domain/course/registry";
 
 const STORAGE_KEY = "bonjour_learner_v1";
 const VOCAB_KEY = "bonjour_vocab_v2";
@@ -38,7 +39,14 @@ export function getStoredProfile(): LearnerProfile | null {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) return null;
   try {
-    return JSON.parse(raw) as LearnerProfile;
+    const profile = JSON.parse(raw) as LearnerProfile;
+    // Lessons replaced by the syllabus: carry completed progress over once.
+    const carried = migrateLegacyProgress(profile.completedGoals ?? []);
+    if (carried.length) {
+      profile.completedGoals = [...profile.completedGoals, ...carried];
+      saveProfile(profile);
+    }
+    return profile;
   } catch {
     return null;
   }

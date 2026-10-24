@@ -40,7 +40,7 @@ const BASE_MODULES: UniModule[] = [
       fr: ["Entendre et répéter les voyelles clés", "Repérer la liaison"],
       ar: ["سماع وتكرار الحروف الأساسية", "ملاحظة الربط"],
     },
-    relatedUnitIds: ["fr-a1-intro-unit"],
+    relatedUnitIds: ["fr-a1-u01-bonjour"],
     blocks: [
       {
         heading: { en: "Oral vowels", fr: "Voyelles orales", ar: "حروف متحركة" },
@@ -89,10 +89,10 @@ const BASE_MODULES: UniModule[] = [
       ar: ["جمل مضارع", "نفي", "أسئلة أساسية"],
     },
     relatedUnitIds: [
-      "fr-a1-intro-unit",
-      "fr-a1-etre-avoir-unit",
-      "fr-a1-negation-unit",
-      "fr-a1-cafe-unit",
+      "fr-a1-u01-bonjour",
+      "fr-a1-u02-identite",
+      "fr-a1-u03-famille",
+      "fr-a1-u06-restaurant",
     ],
     blocks: [
       {
@@ -134,11 +134,10 @@ const BASE_MODULES: UniModule[] = [
       ar: ["جمل يومية عبر الوحدات"],
     },
     relatedUnitIds: [
-      "fr-a1-cafe-unit",
-      "fr-a1-courses-unit",
-      "fr-day-food-home",
-      "fr-a1-transport-unit",
-      "fr-a1-sante-unit",
+      "fr-a1-u06-restaurant",
+      "fr-a1-u07-courses",
+      "fr-a1-u08-transports",
+      "fr-a1-u10-sante",
     ],
     blocks: [
       {
@@ -299,7 +298,7 @@ const BASE_MODULES: UniModule[] = [
       fr: ["vous avec inconnus"],
       ar: ["vous مع الغرباء"],
     },
-    relatedUnitIds: ["fr-day-bank", "fr-a1-logement-unit"],
+    relatedUnitIds: ["fr-day-bank", "fr-a1-u09-logement"],
     blocks: [
       {
         heading: { en: "Politeness", fr: "Politesse", ar: "أدب" },

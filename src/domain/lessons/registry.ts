@@ -10,6 +10,7 @@ import { LEVEL_DEPTH_UNITS } from "./units-level-depth";
 import { A1_B1_MORE_UNITS } from "./units-a1-b1-more";
 import { B2_C2_MORE_UNITS } from "./units-b2-c2-more";
 import { enrichUnit } from "./enrich";
+import { COURSE_UNITS, SYLLABUS_LEVELS, toLessonUnit } from "../course/registry";
 
 const LEVEL_RANK: Record<string, number> = {
   A1: 1,
@@ -44,7 +45,14 @@ const RAW_UNITS: LessonUnit[] = mergeById([
   ...EXAM_TRACK_UNITS,
 ]);
 
-export const ALL_UNITS: LessonUnit[] = RAW_UNITS.map(enrichUnit);
+/**
+ * Levels covered by the syllabus use its units only; other levels keep
+ * the earlier lessons until their syllabus is written.
+ */
+export const ALL_UNITS: LessonUnit[] = mergeById([
+  ...RAW_UNITS.filter((u) => !SYLLABUS_LEVELS.includes(u.level as never)).map(enrichUnit),
+  ...COURSE_UNITS.map(toLessonUnit),
+]);
 
 export const LEVEL_SEQUENCE = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
 

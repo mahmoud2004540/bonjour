@@ -43,9 +43,40 @@ practice, real-life log, settings, privacy, domain checks, architecture notes.
   EN/FR/AR direction and language, no raw keys, no horizontal scroll, single landmark, skip
   link, onboarding → placement → honest profile → dashboard, no placement retake, theme choice.
 
+## A1 syllabus (Oct 2026)
+
+A complete A1 curriculum replaces the earlier A1 lessons (`src/domain/course/a1/`), 13 units:
+
+| # | Unit | Grammar focus |
+|---|------|---------------|
+| 1 | Bonjour ! | s'appeler, tu / vous, alphabet |
+| 2 | Qui êtes-vous ? | être, avoir, nationalities, numbers 0–69 |
+| 3 | Ma famille | possessives, articles, ne… pas / pas de |
+| 4 | Une journée ordinaire | present -er, reflexive verbs, telling the time |
+| 5 | En ville | il y a, au / du, imperative for directions |
+| 6 | Au café et au restaurant | je voudrais, questions, partitives, 70–100 |
+| 7 | Faire les courses | quantities + de, ce / cette / ces, vouloir, acheter |
+| 8 | Se déplacer | aller, venir, prendre, prepositions with places, question words |
+| 9 | Chez moi | prepositions of place, adjective position, ordinals, 100+ |
+| 10 | La santé | avoir mal à, il faut / devoir, depuis / pendant |
+| 11 | Loisirs et météo | aimer + article, faire de / jouer à / jouer de, weather |
+| 12 | Week-end et projets | futur proche, passé composé with avoir and être |
+| 13 | Bilan A1 | DELF A1 format review (four skills) |
+
+Each unit: can-do goals → context → dialogue (browser TTS, labelled) → comprehension →
+vocabulary → grammar (tables, examples, common errors) → pronunciation → culture → practice
+(typed, multiple choice, word order; accent-aware checking) → guided writing with a model and
+self-check → real-life task (self-assessed) → unit test (70% to pass; answers revealed only after a
+pass). Explanations in English, French and Arabic.
+
+- Old A1 lesson links redirect to the replacing unit; completed old lessons carry over.
+- Content tests (`tests/course.test.ts`) check translations, item validity and a list of common
+  French errors in all model French.
+
 ## Remaining
 
-- Same full task chain on remaining A1 scenarios (courses, transport, …)
+- A2–C2 syllabus in the same format (earlier lessons stay in place until then)
+- Native-speaker recordings for dialogues (currently browser speech synthesis)
 - Visual regression snapshots (screenshot diffs) once the design stabilises
 
 ## Blocked on keys/assets

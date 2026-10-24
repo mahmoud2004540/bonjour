@@ -189,6 +189,17 @@
     min-height: 100vh;
   }
 
+  /* French inside Arabic pages keeps its own direction (punctuation, word order) */
+  [dir="rtl"] [lang="fr"] {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  /* …but stays aligned with the Arabic layout */
+  [dir="rtl"] [lang="fr"]:not([dir]) {
+    text-align: right;
+  }
+
   [dir="rtl"] body {
     font-family: var(--font-arabic-sans), var(--font-sans), system-ui, sans-serif;
     letter-spacing: 0;

@@ -228,3 +228,35 @@ export function addCustomVocab(
   });
   save(items);
 }
+
+/** Add a unit's vocabulary to spaced review. Returns how many were new. */
+export function addCourseVocab(
+  entries: { term: string; meaning: Record<Locale, string> }[],
+  level: string
+): number {
+  const items = ensureSeedVocab();
+  const known = new Set(items.map((x) => x.term.toLowerCase()));
+  const now = new Date().toISOString();
+  let added = 0;
+  for (const e of entries) {
+    if (known.has(e.term.toLowerCase())) continue;
+    known.add(e.term.toLowerCase());
+    items.push({
+      id: id(),
+      targetLanguage: "fr",
+      term: e.term,
+      translation: e.meaning,
+      level: level as VocabItem["level"],
+      status: "new",
+      ease: 2.5,
+      intervalDays: 0,
+      nextReviewAt: now,
+      correctCount: 0,
+      wrongCount: 0,
+      createdAt: now,
+    });
+    added++;
+  }
+  save(items);
+  return added;
+}

@@ -8,7 +8,10 @@ import { Card } from "@/components/ui/Card";
 import { getStoredProfile, markGoalCompleted } from "@/application/learner-store";
 import { recordStudyActivity } from "@/application/motivation-store";
 import { trackEvent } from "@/application/local-events";
-import { getUnitById, getUnitAfter } from "@/domain/lessons/registry";
+import { getUnitById, getUnitAfter, isUnitComplete } from "@/domain/lessons/registry";
+import { getCourseUnit, getReplacementUnitId } from "@/domain/course/registry";
+import { CourseUnitPlayer } from "@/components/course/CourseUnitPlayer";
+import type { CourseUnit } from "@/domain/course/types";
 import { speakFrench, canSpeak } from "@/lib/speech";
 import type { LessonPhase } from "@/domain/lessons/types";
 import type { Locale } from "@/i18n/config";
@@ -26,7 +29,7 @@ function norm(s: string): string {
     .replace(/\s+/g, " ");
 }
 
-export default function LessonUnitPage({
+function LegacyLessonPage({
   params,
 }: {
   params: Promise<{ unitId: string; locale: string }>;
@@ -449,5 +452,70 @@ export default function LessonUnitPage({
         })()}
       </div>
     </div>
+  );
+}
+
+/**
+ * Syllabus units open in the course player; lessons the syllabus replaced
+ * redirect to their new unit; other levels keep the earlier lesson flow.
+ */
+export default function LessonRoute({
+  params,
+}: {
+  params: Promise<{ unitId: string; locale: string }>;
+}) {
+  const router = useRouter();
+  const [unitId, setUnitId] = useState<string | null>(null);
+
+  useEffect(() => {
+    params.then((p) => setUnitId(p.unitId));
+  }, [params]);
+
+  const replacement = unitId && !getCourseUnit(unitId) ? getReplacementUnitId(unitId) : undefined;
+  useEffect(() => {
+    if (replacement) router.replace(`/lesson/${replacement}`);
+  }, [replacement, router]);
+
+  if (!unitId || replacement) {
+    return (
+      <div className="max-w-lg mx-auto px-4 py-16">
+        <div className="h-2 w-full bg-ink-100 rounded-full animate-pulse" />
+      </div>
+    );
+  }
+
+  const course = getCourseUnit(unitId);
+  if (course) return <CourseRoute unit={course} />;
+  return <LegacyLessonPage params={params} />;
+}
+
+function CourseRoute({ unit }: { unit: CourseUnit }) {
+  const router = useRouter();
+  const [state, setState] = useState<{ passed: boolean } | null>(null);
+
+  useEffect(() => {
+    const profile = getStoredProfile();
+    if (!profile) {
+      router.replace("/onboarding");
+      return;
+    }
+    const lesson = getUnitById(unit.id);
+    setState({ passed: !!lesson && isUnitComplete(lesson, profile) });
+  }, [router, unit.id]);
+
+  if (!state) {
+    return (
+      <div className="max-w-lg mx-auto px-4 py-16">
+        <div className="h-2 w-full bg-ink-100 rounded-full animate-pulse" />
+      </div>
+    );
+  }
+
+  return (
+    <CourseUnitPlayer
+      unit={unit}
+      nextUnitId={getUnitAfter(unit.id)?.id ?? null}
+      alreadyPassed={state.passed}
+    />
   );
 }

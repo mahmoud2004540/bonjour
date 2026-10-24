@@ -22,7 +22,7 @@ export const A1_EXTRA_MODULES: UniModule[] = [
       fr: ["Choisir le/la/les", "un/une/des", "au / du"],
       ar: ["اختيار le/la/les", "un/une/des", "au / du"],
     },
-    relatedUnitIds: ["fr-a1-cafe-unit", "fr-day-food-home"],
+    relatedUnitIds: ["fr-a1-u06-restaurant", "fr-a1-u07-courses"],
     blocks: [
       {
         heading: { en: "Definite", fr: "Définis", ar: "تعريف" },
@@ -70,7 +70,7 @@ export const A1_EXTRA_MODULES: UniModule[] = [
       fr: ["où / quand / comment / combien", "est-ce que"],
       ar: ["أين متى كيف كم", "est-ce que"],
     },
-    relatedUnitIds: ["fr-a1-transport-unit", "fr-a1-courses-unit"],
+    relatedUnitIds: ["fr-a1-u08-transports", "fr-a1-u07-courses"],
     blocks: [
       {
         heading: { en: "Key words", fr: "Mots clés", ar: "كلمات" },
@@ -110,7 +110,7 @@ export const A1_EXTRA_MODULES: UniModule[] = [
       fr: ["Conjuguer un verbe en -er à toutes les personnes"],
       ar: ["صرّف فعل -er لكل الضمائر"],
     },
-    relatedUnitIds: ["fr-a1-etre-avoir-unit", "fr-day-morning"],
+    relatedUnitIds: ["fr-a1-u02-identite", "fr-a1-u04-quotidien"],
     blocks: [
       {
         heading: { en: "parler", fr: "parler", ar: "parler" },
@@ -150,7 +150,7 @@ export const A1_EXTRA_MODULES: UniModule[] = [
       fr: ["s'il vous plaît / merci", "vous avec inconnus"],
       ar: ["من فضلك / شكرًا", "vous مع الغرباء"],
     },
-    relatedUnitIds: ["fr-a1-intro-unit", "fr-a1-cafe-unit"],
+    relatedUnitIds: ["fr-a1-u01-bonjour", "fr-a1-u06-restaurant"],
     blocks: [
       {
         heading: { en: "Core lines", fr: "Phrases clés", ar: "جمل" },
