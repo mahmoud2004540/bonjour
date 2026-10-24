@@ -187,6 +187,8 @@
     background-image: var(--page-gradient);
     background-attachment: fixed;
     min-height: 100vh;
+    /* Long words (emails, URLs, names) wrap instead of widening the page */
+    overflow-wrap: break-word;
   }
 
   /* French inside Arabic pages keeps its own direction (punctuation, word order) */

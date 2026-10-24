@@ -113,7 +113,7 @@ export function Header() {
         {/* Burger — mobile */}
         <button
           type="button"
-          className="md:hidden flex h-11 w-11 items-center justify-center rounded-xl border-2 border-ink-200 bg-surface-elevated text-ink-950 shadow-[0_3px_0_rgb(var(--ink-100))] active:translate-y-[1px] active:shadow-[0_1px_0_rgb(var(--ink-100))]"
+          className={cn(inApp ? "lg:hidden" : "md:hidden", "flex h-11 w-11 items-center justify-center rounded-xl border-2 border-ink-200 bg-surface-elevated text-ink-950 shadow-[0_3px_0_rgb(var(--ink-100))] active:translate-y-[1px] active:shadow-[0_1px_0_rgb(var(--ink-100))]")}
           aria-expanded={open}
           aria-controls="site-menu"
           aria-label={open ? closeLabel : menuLabel}
@@ -157,7 +157,7 @@ export function Header() {
         {/* Desktop nav */}
         {inApp ? (
           <nav
-            className="hidden md:flex items-center gap-1 rounded-2xl bg-ink-50 p-1 border border-ink-100"
+            className="hidden lg:flex items-center gap-1 rounded-2xl bg-ink-50 p-1 border border-ink-100"
             aria-label={t("learnSections")}
           >
             {LEARN_LINKS.filter((l) =>
@@ -244,13 +244,13 @@ export function Header() {
         <>
           <button
             type="button"
-            className="fixed inset-0 z-40 bg-ink-950/40 md:hidden"
+            className={cn("fixed inset-0 z-40 bg-ink-950/40", inApp ? "lg:hidden" : "md:hidden")}
             aria-label={closeLabel}
             onClick={() => setOpen(false)}
           />
           <div
             id="site-menu"
-            className="absolute inset-x-0 top-full z-50 border-b-2 border-ink-200 bg-surface-elevated shadow-2xl md:hidden"
+            className={cn("absolute inset-x-0 top-full z-50 border-b-2 border-ink-200 bg-surface-elevated shadow-2xl", inApp ? "lg:hidden" : "md:hidden")}
             role="dialog"
             aria-modal="true"
             aria-label={menuLabel}
