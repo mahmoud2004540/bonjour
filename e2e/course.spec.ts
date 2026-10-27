@@ -50,18 +50,21 @@ test("a failed unit test does not reveal the answers or record progress", async 
   await page.goto(`en/lesson/${A1_U01.id}/`);
   await page.getByRole("navigation", { name: "Unit sections" }).getByRole("button", { name: "Unit test" }).click();
   for (const [i, q] of A1_U01.test.entries()) {
-    const wrong = (q.correctIndex + 1) % (q.optionsL10n ? q.optionsL10n.en.length : q.options!.length);
-    await page.locator("main section").getByRole("group").nth(i).getByRole("button").nth(wrong).click();
+    const opts = q.optionsL10n ? q.optionsL10n.en : q.options!;
+    const wrong = opts[(q.correctIndex + 1) % opts.length];
+    await page.locator("main section").getByRole("group").nth(i).getByRole("button", { name: wrong, exact: true }).click();
   }
   await page.getByRole("button", { name: "Submit my answers" }).click();
   await expect(page.getByText(/Not yet/)).toBeVisible();
   await expect(page.locator("button.bg-success-50")).toHaveCount(0);
 });
 
-test("old A1 lesson links redirect to the new unit", async ({ page }) => {
+test("old A1 and A2 lesson links redirect to the new unit", async ({ page }) => {
   await startAsBeginner(page);
   await page.goto("en/lesson/fr-a1-intro-unit/");
   await expect(page).toHaveURL(new RegExp(`/lesson/${A1_U01.id}/$`));
+  await page.goto("en/lesson/fr-a2-restaurant-unit/");
+  await expect(page).toHaveURL(/\/lesson\/fr-a2-u08-restaurant\/$/);
 });
 
 test("ar: the unit reads right-to-left with French kept left-to-right", async ({ page }) => {

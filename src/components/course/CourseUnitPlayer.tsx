@@ -11,7 +11,7 @@ import { markGoalCompleted } from "@/application/learner-store";
 import { recordStudyActivity } from "@/application/motivation-store";
 import { trackEvent } from "@/application/local-events";
 import { addCourseVocab } from "@/application/vocab-store";
-import { checkAnswer, orderTokens, type AnswerVerdict } from "@/domain/course/answers";
+import { checkAnswer, optionOrder, orderTokens, type AnswerVerdict } from "@/domain/course/answers";
 import { unitGoalId } from "@/domain/course/types";
 import type { ChoiceItem, CourseUnit, PracticeItem } from "@/domain/course/types";
 import type { Locale } from "@/i18n/config";
@@ -138,11 +138,13 @@ export function CourseUnitPlayer({ unit, nextUnitId, alreadyPassed }: Props) {
       </section>
 
       <div className="mt-10 flex justify-between gap-3">
-        <Button variant="ghost" onClick={() => go(index - 1)} disabled={index === 0}>
+        <Button variant="ghost" className="shrink-0" onClick={() => go(index - 1)} disabled={index === 0}>
           {t("previous")}
         </Button>
         {index < SECTIONS.length - 1 && (
           <Button
+            // Long section names ("Suivant : Compréhension") wrap instead of overflowing narrow phones.
+            className="min-w-0 h-auto min-h-12 py-2 text-center"
             onClick={() => {
               recordStudyActivity();
               go(index + 1);
@@ -228,8 +230,10 @@ function DialogueView({ unit, locale, tts }: { unit: CourseUnit; locale: Locale;
   );
 }
 
-function choiceOptions(item: ChoiceItem, locale: Locale): string[] {
-  return item.optionsL10n ? item.optionsL10n[locale] : item.options ?? [];
+/** Options as [original index, text] pairs, in a stable shuffled order. */
+function choiceOptions(item: ChoiceItem, locale: Locale): [number, string][] {
+  const opts = item.optionsL10n ? item.optionsL10n[locale] : item.options ?? [];
+  return optionOrder(opts.length, item.id).map((i) => [i, opts[i]]);
 }
 
 function ChoiceList({
@@ -258,7 +262,7 @@ function ChoiceList({
                 {item.prompt[locale]}
               </p>
               <div className="grid gap-2" role="group" aria-label={item.prompt[locale]}>
-                {choiceOptions(item, locale).map((opt, i) => {
+                {choiceOptions(item, locale).map(([i, opt]) => {
                   const isRight = i === item.correctIndex;
                   return (
                     <button
@@ -680,7 +684,7 @@ function UnitTest({
                   {n + 1}. {q.prompt[locale]}
                 </p>
                 <div className="grid gap-2" role="group" aria-label={q.prompt[locale]}>
-                  {choiceOptions(q, locale).map((opt, i) => {
+                  {choiceOptions(q, locale).map(([i, opt]) => {
                     const isRight = i === q.correctIndex;
                     return (
                       <button

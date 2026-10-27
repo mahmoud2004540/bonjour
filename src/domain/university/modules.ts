@@ -170,7 +170,7 @@ const BASE_MODULES: UniModule[] = [
       fr: ["Raconter hier"],
       ar: ["احكِ عن الأمس"],
     },
-    relatedUnitIds: ["fr-a2-past-unit"],
+    relatedUnitIds: ["fr-a2-u01-retrouvailles"],
     blocks: [
       {
         heading: { en: "Pattern", fr: "Schéma", ar: "النمط" },
@@ -202,7 +202,7 @@ const BASE_MODULES: UniModule[] = [
       fr: ["Parler de demain"],
       ar: ["تحدّث عن الغد"],
     },
-    relatedUnitIds: ["fr-day-future"],
+    relatedUnitIds: ["fr-a2-u12-projets"],
     blocks: [
       {
         heading: { en: "Pattern", fr: "Schéma", ar: "النمط" },
@@ -234,7 +234,7 @@ const BASE_MODULES: UniModule[] = [
       fr: ["Vous pouvez répéter ?"],
       ar: ["Vous pouvez répéter ؟"],
     },
-    relatedUnitIds: ["fr-a2-phone-unit"],
+    relatedUnitIds: ["fr-a2-u07-telephone"],
     blocks: [
       {
         heading: { en: "Lines", fr: "Phrases", ar: "جمل" },
@@ -298,7 +298,7 @@ const BASE_MODULES: UniModule[] = [
       fr: ["vous avec inconnus"],
       ar: ["vous مع الغرباء"],
     },
-    relatedUnitIds: ["fr-day-bank", "fr-a1-u09-logement"],
+    relatedUnitIds: ["fr-a2-u11-demarches", "fr-a1-u09-logement"],
     blocks: [
       {
         heading: { en: "Politeness", fr: "Politesse", ar: "أدب" },

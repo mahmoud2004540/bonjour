@@ -69,9 +69,33 @@ vocabulary → grammar (tables, examples, common errors) → pronunciation → c
 self-check → real-life task (self-assessed) → unit test (70% to pass; answers revealed only after a
 pass). Explanations in English, French and Arabic.
 
-- Old A1 lesson links redirect to the replacing unit; completed old lessons carry over.
+- Old A1 and A2 lesson links redirect to the replacing unit; completed old lessons carry over.
 - Content tests (`tests/course.test.ts`) check translations, item validity and a list of common
   French errors in all model French.
+
+## A2 syllabus (Oct 2026)
+
+A complete A2 curriculum in the same format replaces the earlier A2 lessons
+(`src/domain/course/a2/`), 13 units:
+
+| # | Unit | Grammar focus |
+|---|------|---------------|
+| 1 | Retrouvailles | passé composé (avoir / être, agreement), déjà / jamais, il y a / depuis |
+| 2 | Souvenirs d'enfance | imparfait, avant / maintenant |
+| 3 | Le monde du travail | direct object pronouns, formal questions, savoir / connaître |
+| 4 | Shopping et mode | comparatives and superlatives, lui / leur |
+| 5 | En cuisine | pronoun en, imperative with pronouns |
+| 6 | En voyage | futur simple, pronoun y |
+| 7 | Au téléphone | polite conditional, proposing / accepting / refusing |
+| 8 | Un dîner au restaurant | relative pronouns qui / que / où, polite complaints, trop / assez |
+| 9 | Ville ou campagne ? | giving an opinion, ne… que, connectors |
+| 10 | Films, livres et écrans | adverbs in -ment, telling a story, double pronouns |
+| 11 | Démarches et imprévus | venir de, être en train de, formal email |
+| 12 | Projets et rêves | conditional for wishes, si + présent, pour + infinitive |
+| 13 | Bilan A2 | DELF A2 format review (four skills) |
+
+- Multiple-choice options are shown in a stable shuffled order per question, so the right
+  answer is not always in the same place.
 
 ## Accounts (Oct 2026)
 
@@ -85,7 +109,7 @@ pass). Explanations in English, French and Arabic.
 
 ## Remaining
 
-- A2–C2 syllabus in the same format (earlier lessons stay in place until then)
+- B1–C2 syllabus in the same format (earlier lessons stay in place until then)
 - Native-speaker recordings for dialogues (currently browser speech synthesis)
 - Visual regression snapshots (screenshot diffs) once the design stabilises
 

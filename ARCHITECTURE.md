@@ -14,8 +14,8 @@ Dashboard next action → Learn tasks → Self-evidence → Progress / Practice 
 
 ## Curriculum
 
-**Syllabus (A1 now, more levels later):** `src/domain/course/` — `types.ts` (CourseUnit model),
-`a1/` (one file per unit), `answers.ts` (answer checking), `registry.ts` (exposes units to the
+**Syllabus (A1 and A2 now, more levels later):** `src/domain/course/` — `types.ts` (CourseUnit model),
+`a1/`, `a2/` (one file per unit), `answers.ts` (answer checking), `registry.ts` (exposes units to the
 path as LessonUnits, legacy redirects, progress migration). Levels listed in `SYLLABUS_LEVELS`
 use syllabus units only. Rendered by `src/components/course/CourseUnitPlayer.tsx` on
 `/lesson/[unitId]`.

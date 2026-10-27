@@ -1,8 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { A1_COURSE } from "@/domain/course/a1";
-import { checkAnswer, orderTokens } from "@/domain/course/answers";
-import { LEGACY_A1_UNIT_GOALS, LEGACY_A1_UNIT_IDS } from "@/domain/course/legacy";
-import { getReplacementUnitId, migrateLegacyProgress } from "@/domain/course/registry";
+import { checkAnswer, optionOrder, orderTokens } from "@/domain/course/answers";
+import { LEGACY_UNIT_GOALS, LEGACY_UNIT_IDS } from "@/domain/course/legacy";
+import {
+  COURSE_UNITS,
+  SYLLABUS_LEVELS,
+  getCourseUnitsByLevel,
+  getReplacementUnitId,
+  migrateLegacyProgress,
+} from "@/domain/course/registry";
 import { unitGoalId, type ChoiceItem, type CourseUnit, type L10n } from "@/domain/course/types";
 import { getAllUnits, getExamTrackUnits } from "@/domain/lessons/registry";
 
@@ -44,9 +49,9 @@ function modelFrench(u: CourseUnit): string[] {
 const FORBIDDEN: [RegExp, string][] = [
   [/appell(ez|ons)\b/i, "appelez / appelons take one l"],
   [/\bje appelle\b/i, "je m'appelle"],
-  [/\bà le\b/i, "à le → au"],
-  [/\bà les\b/i, "à les → aux"],
-  [/\bde le\b/i, "de le → du"],
+  [/(?<!\p{L})à le(?!\p{L})/iu, "à le → au"],
+  [/(?<!\p{L})à les(?!\p{L})/iu, "à les → aux"],
+  [/(?<!\p{L})de le(?!\p{L})/iu, "de le → du"],
   [/\bj'ai allé/i, "aller takes être"],
   [/\bun kilo des\b/i, "quantity + de"],
   [/quatre-vingts-/i, "quatre-vingt- before a number"],
@@ -54,14 +59,18 @@ const FORBIDDEN: [RegExp, string][] = [
   [/\bje suis (\d+|vingt|trente) ans\b/i, "avoir for age"],
 ];
 
-describe("A1 syllabus content", () => {
-  it("has 13 units in order, ending with the DELF A1 review", () => {
-    expect(A1_COURSE.map((u) => u.order)).toEqual(Array.from({ length: 13 }, (_, i) => i + 1));
-    expect(A1_COURSE.at(-1)!.id).toContain("-exam-");
-  });
+describe("syllabus content", () => {
+  for (const level of SYLLABUS_LEVELS) {
+    it(`${level} has 13 units in order, ending with the DELF ${level} review`, () => {
+      const units = getCourseUnitsByLevel(level);
+      expect(units.map((u) => u.order)).toEqual(Array.from({ length: 13 }, (_, i) => i + 1));
+      expect(units.at(-1)!.id).toBe(`fr-${level.toLowerCase()}-exam-bilan`);
+      expect(units.every((u) => u.id.startsWith(`fr-${level.toLowerCase()}-`))).toBe(true);
+    });
+  }
 
   it("uses unique ids across all units and items", () => {
-    const ids = A1_COURSE.flatMap((u) => [
+    const ids = COURSE_UNITS.flatMap((u) => [
       u.id,
       ...u.comprehension.map((x) => x.id),
       ...u.practice.map((x) => x.id),
@@ -71,7 +80,7 @@ describe("A1 syllabus content", () => {
     expect(ids.length).toBe(new Set(ids).size);
   });
 
-  for (const u of A1_COURSE) {
+  for (const u of COURSE_UNITS) {
     describe(u.id, () => {
       it("has every explanation in en, fr and ar", () => {
         for (const [path, value] of l10nFields(u)) {
@@ -131,6 +140,23 @@ describe("A1 syllabus content", () => {
   }
 });
 
+describe("choice display order", () => {
+  it("is a stable permutation that spreads the right answer across positions", () => {
+    const items = COURSE_UNITS.flatMap((u) => [...u.comprehension, ...u.test, ...u.practice.filter((p) => p.kind === "choice")]);
+    let first = 0;
+    for (const q of items) {
+      if (q.kind !== "choice") continue;
+      const n = (q.optionsL10n?.fr ?? q.options ?? []).length;
+      const order = optionOrder(n, q.id);
+      expect([...order].sort()).toEqual(Array.from({ length: n }, (_, i) => i));
+      expect(optionOrder(n, q.id)).toEqual(order);
+      if (order[0] === q.correctIndex) first++;
+    }
+    // Uniform over 2–4 options would be roughly a third; anything near 1 means no real shuffle.
+    expect(first / items.length).toBeLessThan(0.5);
+  });
+});
+
 describe("answer checking", () => {
   it("accepts case, spacing, apostrophe style and final punctuation", () => {
     expect(checkAnswer("  JE M’APPELLE  Sara ", ["Je m'appelle Sara."])).toBe("correct");
@@ -148,23 +174,34 @@ describe("answer checking", () => {
 });
 
 describe("replacing the old A1 lessons", () => {
-  it("the path shows only syllabus units for A1", () => {
-    const a1 = getAllUnits().filter((u) => u.level === "A1").map((u) => u.id);
-    expect(a1).toEqual(A1_COURSE.map((u) => u.id));
+  it("the path shows only syllabus units for syllabus levels", () => {
+    for (const level of SYLLABUS_LEVELS) {
+      const ids = getAllUnits().filter((u) => u.level === level).map((u) => u.id);
+      expect(ids, level).toEqual(getCourseUnitsByLevel(level).map((u) => u.id));
+    }
   });
 
-  it("every old A1 lesson redirects to a syllabus unit", () => {
-    for (const id of LEGACY_A1_UNIT_IDS) expect(getReplacementUnitId(id), id).toBeDefined();
+  it("every replaced lesson redirects to a syllabus unit of the same level", () => {
+    for (const id of LEGACY_UNIT_IDS) {
+      const target = getReplacementUnitId(id);
+      expect(target, id).toBeDefined();
+    }
+    // Every replaced id is listed exactly once.
+    const replaced = COURSE_UNITS.flatMap((u) => u.replaces ?? []);
+    expect(new Set(replaced).size).toBe(replaced.length);
+    expect([...replaced].sort()).toEqual([...LEGACY_UNIT_IDS].sort());
   });
 
-  it("A1 still has an exam-track unit for readiness", () => {
-    expect(getExamTrackUnits("A1").map((u) => u.id)).toEqual(["fr-a1-exam-bilan"]);
+  it("each syllabus level has exactly one exam-track unit for readiness", () => {
+    for (const level of SYLLABUS_LEVELS) {
+      expect(getExamTrackUnits(level).map((u) => u.id)).toEqual([`fr-${level.toLowerCase()}-exam-bilan`]);
+    }
   });
 
   it("carries progress over only when every replaced lesson was completed", () => {
-    const cafe = A1_COURSE.find((u) => u.replaces?.includes("fr-a1-cafe-unit"))!;
-    const shopping = A1_COURSE.find((u) => u.replaces?.includes("fr-a1-courses-unit"))!;
-    const done = [...LEGACY_A1_UNIT_GOALS["fr-a1-cafe-unit"], ...LEGACY_A1_UNIT_GOALS["fr-a1-courses-unit"]];
+    const cafe = COURSE_UNITS.find((u) => u.replaces?.includes("fr-a1-cafe-unit"))!;
+    const shopping = COURSE_UNITS.find((u) => u.replaces?.includes("fr-a1-courses-unit"))!;
+    const done = [...LEGACY_UNIT_GOALS["fr-a1-cafe-unit"], ...LEGACY_UNIT_GOALS["fr-a1-courses-unit"]];
     const carried = migrateLegacyProgress(done);
     expect(carried).toContain(unitGoalId(cafe));
     // Shopping also replaces fr-a1-more-shopping, which was not completed.

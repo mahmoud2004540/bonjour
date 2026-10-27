@@ -7,10 +7,11 @@
 import type { LessonUnit } from "../lessons/types";
 import type { CourseUnit } from "./types";
 import { unitGoalId } from "./types";
-import { LEGACY_A1_UNIT_GOALS } from "./legacy";
+import { LEGACY_UNIT_GOALS } from "./legacy";
 import { A1_COURSE } from "./a1";
+import { A2_COURSE } from "./a2";
 
-export const COURSE_UNITS: CourseUnit[] = [...A1_COURSE];
+export const COURSE_UNITS: CourseUnit[] = [...A1_COURSE, ...A2_COURSE];
 
 /** Levels whose old lessons are fully replaced by the syllabus. */
 export const SYLLABUS_LEVELS = Array.from(new Set(COURSE_UNITS.map((u) => u.level)));
@@ -81,7 +82,7 @@ export function migrateLegacyProgress(completedGoals: string[]): string[] {
     const goal = unitGoalId(u);
     if (done.has(goal) || !u.replaces?.length) continue;
     const allOldDone = u.replaces.every((oldId) =>
-      (LEGACY_A1_UNIT_GOALS[oldId] ?? [oldId]).every((g) => done.has(g))
+      (LEGACY_UNIT_GOALS[oldId] ?? [oldId]).every((g) => done.has(g))
     );
     if (allOldDone) added.push(goal);
   }
